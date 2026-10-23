@@ -1,0 +1,7 @@
+{
+	"breakpoints": [
+		{ "id": "desktop", "label": "Desktop", "icon": "desktop" },
+		{ "id": "tablet", "label": "Tablet", "icon": "tablet", "maxWidth": 1024 },
+		{ "id": "mobile", "label": "Mobile", "icon": "mobile", "maxWidth": 767 }
+	]
+}

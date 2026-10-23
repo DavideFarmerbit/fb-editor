@@ -1,0 +1,79 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": false,
+		"useRootPaddingAwareAlignments": false,
+		"border": {
+			"color": false,
+			"radius": false,
+			"style": false,
+			"width": false
+		},
+		"color": {
+			"custom": false,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"duotone": [],
+			"gradients": [],
+			"link": false,
+			"palette": [
+				{ "slug": "base", "name": "Base", "color": "#ffffff" },
+				{ "slug": "contrast", "name": "Contrast", "color": "#111111" },
+				{ "slug": "accent", "name": "Accent", "color": "#3858e9" }
+			]
+		},
+		"shadow": {
+			"defaultPresets": false,
+			"presets": []
+		},
+		"spacing": {
+			"blockGap": false,
+			"customSpacingSize": false,
+			"defaultSpacingSizes": false,
+			"margin": false,
+			"padding": false,
+			"spacingSizes": [
+				{ "slug": "10", "name": "1", "size": "0.25rem" },
+				{ "slug": "20", "name": "2", "size": "0.5rem" },
+				{ "slug": "30", "name": "3", "size": "0.75rem" },
+				{ "slug": "40", "name": "4", "size": "1rem" },
+				{ "slug": "50", "name": "5", "size": "1.5rem" },
+				{ "slug": "60", "name": "6", "size": "2rem" },
+				{ "slug": "70", "name": "7", "size": "3rem" },
+				{ "slug": "80", "name": "8", "size": "4rem" },
+				{ "slug": "90", "name": "9", "size": "6rem" },
+				{ "slug": "100", "name": "10", "size": "8rem" }
+			]
+		},
+		"typography": {
+			"customFontSize": false,
+			"defaultFontSizes": false,
+			"dropCap": false,
+			"fluid": false,
+			"fontFamilies": [
+				{
+					"slug": "sans",
+					"name": "System sans",
+					"fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif"
+				}
+			],
+			"fontSizes": [],
+			"fontStyle": false,
+			"fontWeight": false,
+			"letterSpacing": false,
+			"lineHeight": false,
+			"textDecoration": false,
+			"textTransform": false,
+			"writingMode": false
+		}
+	},
+	"styles": {},
+	"templateParts": [
+		{ "name": "header", "title": "Header", "area": "header" },
+		{ "name": "footer", "title": "Footer", "area": "footer" }
+	]
+}

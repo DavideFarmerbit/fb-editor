@@ -1,0 +1,8 @@
+// Every dependency on WordPress internal class names lives here (and in adapter.js).
+// Verified against WordPress 7.1.3.
+
+// Flex container around the canvas (post + site editor).
+$canvas-container: ".editor-visual-editor";
+
+// ResizableBox wrapping the canvas iframe; core sets its width inline.
+$canvas: ".editor-resizable-editor";

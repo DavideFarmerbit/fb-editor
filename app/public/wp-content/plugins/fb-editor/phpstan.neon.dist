@@ -1,0 +1,7 @@
+parameters:
+	level: max
+	paths:
+		- fb-editor.php
+		- src/php
+	checkMissingCallableSignature: true
+	treatPhpDocTypesAsCertain: false

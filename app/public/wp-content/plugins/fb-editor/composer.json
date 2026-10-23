@@ -1,0 +1,30 @@
+{
+	"name": "farmerbit/fb-editor",
+	"description": "Breakpoint-aware block controls and editor tooling.",
+	"type": "wordpress-plugin",
+	"license": "proprietary",
+	"require": {
+		"php": ">=8.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"Fb\\": "src/php/"
+		}
+	},
+	"config": {
+		"sort-packages": true,
+		"optimize-autoloader": true,
+		"allow-plugins": {
+			"phpstan/extension-installer": true
+		}
+	},
+	"scripts": {
+		"analyse": "phpstan analyse --memory-limit=1G"
+	},
+	"require-dev": {
+		"phpstan/extension-installer": "^1.4",
+		"phpstan/phpstan": "^2.3",
+		"phpstan/phpstan-strict-rules": "^2.1",
+		"szepeviktor/phpstan-wordpress": "^2.0"
+	}
+}

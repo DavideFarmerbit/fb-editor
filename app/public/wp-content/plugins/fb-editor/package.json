@@ -1,0 +1,25 @@
+{
+	"name": "fb-editor",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"build": "wp-scripts build editor=./src/js/editor.ts",
+		"start": "wp-scripts start editor=./src/js/editor.ts",
+		"typecheck": "tsc",
+		"lint": "wp-scripts lint-js src/js"
+	},
+	"devDependencies": {
+		"@types/react": "^19.3.0",
+		"@wordpress/components": "^43.0.0",
+		"@wordpress/data": "^11.0.0",
+		"@wordpress/editor": "^16.0.0",
+		"@wordpress/element": "^10.0.0",
+		"@wordpress/i18n": "^7.0.0",
+		"@wordpress/plugins": "^8.0.0",
+		"@wordpress/scripts": "^37.0.0",
+		"typescript": "^6.0.3"
+	},
+	"dependencies": {
+		"@wordpress/icons": "^19.0.0"
+	}
+}
