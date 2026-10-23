@@ -7,6 +7,7 @@ namespace Fb\Output;
 use Fb\CoreBlocks\CleanupScope;
 use Fb\CoreBlocks\ManagedCoreBlock;
 use Fb\Hookable;
+use Fb\RequestContext;
 
 /**
  * Frontend only: replaces core's generated classes on managed core blocks.
@@ -32,10 +33,6 @@ final readonly class BlockMarkupCleaner implements Hookable
 
 	public function register(): void
 	{
-		if ( is_admin() || wp_is_serving_rest_request() ) {
-			return;
-		}
-
 		// `render_block_{name}` runs after the generic `render_block`, and core
 		// adds classes there too (e.g. paragraph's "wp-block-paragraph"), so
 		// hook it as late as possible.
@@ -54,7 +51,8 @@ final readonly class BlockMarkupCleaner implements Hookable
 	 */
 	private function clean( ManagedCoreBlock $managed, string $html, array $block ): string
 	{
-		if ( '' === trim( $html ) ) {
+		// The editor (server-side previews via REST) relies on core's classes.
+		if ( RequestContext::Frontend !== RequestContext::current() || '' === trim( $html ) ) {
 			return $html;
 		}
 

@@ -9,26 +9,27 @@ use Fb\CoreBlocks\ManagedCoreBlock;
 /**
  * Decides what happens to each core stylesheet on the frontend.
  *
- * - Core-wide noise (block library, global styles, block supports, emoji)
- *   is removed: fb prints its own tokens and block CSS.
+ * - Core-wide noise (block library, presets, emoji) is removed: fb prints
+ *   its own tokens, and core's layout rules itself (see TokenStylesheet).
  * - Stylesheets of core blocks fb manages are removed: their styling is ours.
- * - Every other core stylesheet is demoted into the `wp` layer, so it still
- *   works but can never beat fb or site CSS.
+ * - Every other core stylesheet, including per-instance block-supports CSS
+ *   (`wp-container-*` rules) unmanaged blocks rely on, is demoted into the
+ *   `wp` layer, so it still works but can never beat fb or site CSS.
  * - Non-core handles (other plugins) are left alone.
  */
-final readonly class CoreStylePolicy
+final readonly class FrontendStylePolicy implements StylePolicy
 {
 	private const array REMOVED_HANDLES = [
 		'wp-block-library',
 		'wp-block-library-theme',
 		'classic-theme-styles',
 		'global-styles',
-		'core-block-supports',
-		'core-block-supports-duotone',
 		'wp-emoji-styles',
 	];
 
 	private const array LAYERED_HANDLES = [
+		'core-block-supports',
+		'core-block-supports-duotone',
 		'wp-img-auto-sizes-contain',
 		'wp-block-template-skip-link',
 	];
