@@ -6,6 +6,7 @@ namespace Fb;
 
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Editor\EditorAssets;
+use Fb\Output\BlockMarkupCleaner;
 use Fb\Output\CoreStylePolicy;
 use Fb\Output\FrontendStyles;
 use Fb\Presets\PresetRepository;
@@ -28,6 +29,7 @@ final readonly class Plugin
 		$services = [
 			new EditorAssets( $this->paths, $breakpoints ),
 			new FrontendStyles( new CoreStylePolicy(), $presets ),
+			new BlockMarkupCleaner(),
 		];
 
 		foreach ( $services as $service ) {

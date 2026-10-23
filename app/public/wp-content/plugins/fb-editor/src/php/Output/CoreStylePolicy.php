@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Fb\Output;
 
+use Fb\CoreBlocks\ManagedCoreBlock;
+
 /**
  * Decides what happens to each core stylesheet on the frontend.
  *
@@ -31,20 +33,6 @@ final readonly class CoreStylePolicy
 		'wp-block-template-skip-link',
 	];
 
-	/**
-	 * Core blocks whose styling fb owns. Names without the `core/` prefix.
-	 */
-	private const array MANAGED_CORE_BLOCKS = [
-		'paragraph',
-		'post-content',
-		'post-excerpt',
-		'post-template',
-		'post-title',
-		'query',
-		'site-title',
-		'template-part',
-	];
-
 	public function decide( string $handle ): StyleAction
 	{
 		if ( in_array( $handle, self::REMOVED_HANDLES, true ) ) {
@@ -56,9 +44,7 @@ final readonly class CoreStylePolicy
 		}
 
 		if ( str_starts_with( $handle, 'wp-block-' ) ) {
-			$block = substr( $handle, strlen( 'wp-block-' ) );
-
-			return in_array( $block, self::MANAGED_CORE_BLOCKS, true ) ? StyleAction::Remove : StyleAction::Layer;
+			return null === ManagedCoreBlock::fromStyleHandle( $handle ) ? StyleAction::Layer : StyleAction::Remove;
 		}
 
 		return StyleAction::Keep;
