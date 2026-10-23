@@ -9,6 +9,7 @@ use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;
+use Fb\Presets\PresetRepository;
 use Fb\PluginPaths;
 
 /**
@@ -22,6 +23,7 @@ final readonly class EditorAssets implements Hookable
 		private PluginPaths $paths,
 		private BreakpointConfig $breakpoints,
 		private BlockRegistry $blocks,
+		private PresetRepository $presets,
 	) {
 	}
 
@@ -42,7 +44,8 @@ final readonly class EditorAssets implements Hookable
 
 		$settings = new EditorSettings(
 			$this->breakpoints->breakpoints(),
-			...array_map( static fn ( Block $block ): BlockDefinition => $block->definition(), $this->blocks->blocks )
+			$this->presets->all(),
+			array_map( static fn ( Block $block ): BlockDefinition => $block->definition(), $this->blocks->blocks )
 		);
 
 		wp_add_inline_script( self::HANDLE, 'window.fbEditorSettings = ' . wp_json_encode( $settings ) . ';', 'before' );

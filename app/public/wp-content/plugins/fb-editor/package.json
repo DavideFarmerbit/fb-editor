@@ -6,9 +6,11 @@
 		"build": "wp-scripts build editor=./src/js/editor.ts",
 		"start": "wp-scripts start editor=./src/js/editor.ts",
 		"typecheck": "tsc",
-		"lint": "wp-scripts lint-js src/js"
+		"lint": "wp-scripts lint-js src/js",
+		"test": "wp-scripts test-unit-js src/js"
 	},
 	"devDependencies": {
+		"@types/node": "^26.6.5",
 		"@types/react": "^19.3.0",
 		"@wordpress/block-editor": "^19.0.0",
 		"@wordpress/blocks": "^17.0.0",
@@ -19,7 +21,9 @@
 		"@wordpress/i18n": "^7.0.0",
 		"@wordpress/plugins": "^8.0.0",
 		"@wordpress/scripts": "^37.0.0",
-		"typescript": "^6.0.3"
+		"typescript": "^6.0.3",
+		"vite": "^8.3.5",
+		"vitest": "^5.0.5"
 	},
 	"dependencies": {
 		"@wordpress/icons": "^19.0.0"

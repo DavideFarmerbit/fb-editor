@@ -20,10 +20,10 @@ function readTag( fb: unknown ): ContainerTag {
 	return 'section';
 }
 
-function Edit( { attributes, blockType }: FbBlockEditProps ): ReactElement {
+function Edit( { attributes, definition }: FbBlockEditProps ): ReactElement {
 	const Tag = readTag( attributes.fb );
-	const blockProps = useBlockProps( { className: blockType.className } );
-	const innerBlocksProps = useInnerBlocksProps( { className: blockType.elementClass( 'inner' ) } );
+	const blockProps = useBlockProps( { className: definition.className } );
+	const innerBlocksProps = useInnerBlocksProps( { className: definition.elementClass( 'inner' ) } );
 
 	return (
 		<Tag { ...blockProps }>

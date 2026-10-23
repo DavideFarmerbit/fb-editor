@@ -11,6 +11,7 @@ use Fb\Values\AutoLength;
 use Fb\Values\BoxValue;
 use Fb\Values\CustomLength;
 use Fb\Values\Length;
+use Fb\Values\Lengths;
 use Fb\Values\PresetLength;
 use Fb\Values\Side;
 
@@ -48,33 +49,42 @@ final readonly class SpacingInput implements Input
 
 	public function parse( JsonValue $json ): BoxValue
 	{
-		$box = BoxValue::fromJson( $json );
+		if ( ! $json->isObject() ) {
+			throw new InvalidJson( "{$json->path}: expected an object" );
+		}
 
-		foreach ( Side::cases() as $side ) {
-			$length = $box->get( $side );
-			if ( null !== $length ) {
-				$this->validate( $length, "{$json->path}.{$side->value}" );
+		// Sides are validated one by one: an invalid side is dropped, the
+		// others survive.
+		$side = function ( Side $side ) use ( $json ): ?Length {
+			if ( ! $json->has( $side->value ) || $json->get( $side->value )->isNull() ) {
+				return null;
 			}
+			try {
+				$length = Lengths::fromJson( $json->get( $side->value ) );
+			} catch ( InvalidJson ) {
+				return null;
+			}
+
+			return $this->allows( $length ) ? $length : null;
+		};
+
+		$box = new BoxValue( $side( Side::Top ), $side( Side::Right ), $side( Side::Bottom ), $side( Side::Left ) );
+
+		if ( $box->isEmpty() ) {
+			throw new InvalidJson( "{$json->path}: no valid side" );
 		}
 
 		return $box;
 	}
 
-	/**
-	 * @throws InvalidJson
-	 */
-	private function validate( Length $length, string $path ): void
+	private function allows( Length $length ): bool
 	{
-		$valid = match ( true ) {
+		return match ( true ) {
 			$length instanceof AutoLength   => $this->allowAuto,
 			$length instanceof CustomLength => $this->allowNegative || ! $length->isNegative(),
 			$length instanceof PresetLength => PresetKind::Spacing === $length->preset,
 			default                         => false,
 		};
-
-		if ( ! $valid ) {
-			throw new InvalidJson( "{$path}: value not allowed by this spacing input" );
-		}
 	}
 
 	/**

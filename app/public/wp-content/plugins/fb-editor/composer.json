@@ -20,7 +20,8 @@
 	},
 	"scripts": {
 		"analyse": "phpstan analyse --memory-limit=1G",
-		"test": "phpunit"
+		"test": "phpunit",
+		"fixtures": "php tests/generate-fixtures.php"
 	},
 	"require-dev": {
 		"phpstan/extension-installer": "^1.4",

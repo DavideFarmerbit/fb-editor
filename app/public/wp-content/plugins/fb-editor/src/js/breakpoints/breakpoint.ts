@@ -2,6 +2,8 @@
  * Mirrors Fb\Breakpoints\* (PHP). Built only through `parseEditorSettings`.
  */
 
+import { InvalidJson, type JsonValue } from '../core/json';
+
 declare const breakpointIdBrand: unique symbol;
 
 /** Stable key responsive values are stored under. Never a pixel width. */
@@ -24,6 +26,11 @@ export class Breakpoint {
 
 	isBase(): boolean {
 		return this.maxWidth === null;
+	}
+
+	/** Same string as Fb\Breakpoints\Breakpoint::mediaQuery(). */
+	mediaQuery(): string | null {
+		return this.maxWidth === null ? null : `(max-width: ${ this.maxWidth }px)`;
 	}
 
 	/** Canvas width for the editor preview; null = full width. */
@@ -54,11 +61,35 @@ export class BreakpointList implements Iterable< Breakpoint > {
 		return this.items.length;
 	}
 
-	map< T >( callback: ( breakpoint: Breakpoint ) => T ): T[] {
+	map< T >( callback: ( breakpoint: Breakpoint, index: number ) => T ): T[] {
 		return this.items.map( callback );
 	}
 
 	[ Symbol.iterator ](): Iterator< Breakpoint > {
 		return this.items[ Symbol.iterator ]();
 	}
+}
+
+function parseIcon( value: string | null ): BreakpointIcon | null {
+	return Object.values( BreakpointIcon ).find( ( icon ) => icon === value ) ?? null;
+}
+
+/** Boundary for the JSON of Fb\Breakpoints\BreakpointList. */
+export function breakpointListFromJson( json: JsonValue ): BreakpointList {
+	const [ base, ...others ] = json.list().map(
+		( item ) =>
+			new Breakpoint(
+				item.get( 'id' ).string() as BreakpointId,
+				item.get( 'label' ).string(),
+				parseIcon( item.get( 'icon' ).nullable( ( icon ) => icon.string() ) ),
+				item.get( 'maxWidth' ).nullable( ( width ) => width.int() ),
+				item.get( 'previewWidth' ).nullable( ( width ) => width.int() )
+			)
+	);
+
+	if ( base === undefined || ! base.isBase() ) {
+		throw new InvalidJson( `${ json.path }: first entry must be the base` );
+	}
+
+	return new BreakpointList( base, others );
 }

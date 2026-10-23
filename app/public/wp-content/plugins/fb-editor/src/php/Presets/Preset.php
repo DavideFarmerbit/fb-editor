@@ -7,7 +7,7 @@ namespace Fb\Presets;
 /**
  * One theme.json preset, e.g. spacing "40" = 1rem.
  */
-final readonly class Preset
+final readonly class Preset implements \JsonSerializable
 {
 	public function __construct(
 		public PresetKind $kind,
@@ -28,5 +28,22 @@ final readonly class Preset
 	public function cssReference(): string
 	{
 		return 'var(' . $this->cssVariable() . ')';
+	}
+
+	/**
+	 * The editor gets the variable name precomputed: it never re-derives
+	 * core's kebab-casing.
+	 *
+	 * @return array{kind: string, slug: string, name: string, value: string, variable: string}
+	 */
+	public function jsonSerialize(): array
+	{
+		return [
+			'kind'     => $this->kind->value,
+			'slug'     => $this->slug,
+			'name'     => $this->name,
+			'value'    => $this->value,
+			'variable' => $this->cssVariable(),
+		];
 	}
 }

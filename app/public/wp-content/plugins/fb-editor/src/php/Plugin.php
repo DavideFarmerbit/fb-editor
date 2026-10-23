@@ -30,7 +30,8 @@ final readonly class Plugin
 	public function boot(): void
 	{
 		$breakpoints = new BreakpointConfig();
-		$tokens      = new TokenStylesheet( new PresetRepository() );
+		$presets     = new PresetRepository();
+		$tokens      = new TokenStylesheet( $presets );
 		$instances   = new InstanceStyleCollector( $breakpoints );
 		$blocks      = new BlockRegistry(
 			new BlockRenderer( $breakpoints, $instances ),
@@ -40,7 +41,7 @@ final readonly class Plugin
 		$services = [
 			new CoreDefaultsStripper(),
 			$blocks,
-			new EditorAssets( $this->paths, $breakpoints, $blocks ),
+			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets ),
 			new CanvasStyles( $tokens ),
 			new FrontendStyles( $tokens, $instances ),
 			new BlockMarkupCleaner(),

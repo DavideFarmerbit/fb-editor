@@ -9,13 +9,17 @@ final readonly class CustomLength implements Length
 	/** Sanity bound: anything larger is a typo, not a design. */
 	public const float MAX_ABS = 100000.0;
 
+	public float $value;
+
 	public function __construct(
-		public float $value,
+		float $value,
 		public Unit $unit,
 	) {
 		if ( ! is_finite( $value ) || abs( $value ) > self::MAX_ABS ) {
 			throw new \InvalidArgumentException( "Length {$value} is out of range." );
 		}
+		// -0 and 0 are the same length: one canonical form, one instance hash.
+		$this->value = 0.0 === $value ? 0.0 : $value;
 	}
 
 	public function isNegative(): bool

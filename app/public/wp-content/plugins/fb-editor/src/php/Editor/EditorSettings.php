@@ -6,6 +6,7 @@ namespace Fb\Editor;
 
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Breakpoints\BreakpointList;
+use Fb\Presets\Preset;
 
 /**
  * Everything the editor JS receives as `window.fbEditorSettings`.
@@ -13,21 +14,22 @@ use Fb\Breakpoints\BreakpointList;
  */
 final readonly class EditorSettings implements \JsonSerializable
 {
-	/** @var list<BlockDefinition> */
-	public array $blocks;
-
+	/**
+	 * @param list<Preset>          $presets
+	 * @param list<BlockDefinition> $blocks
+	 */
 	public function __construct(
 		public BreakpointList $breakpoints,
-		BlockDefinition ...$blocks,
+		public array $presets,
+		public array $blocks,
 	) {
-		$this->blocks = array_values( $blocks );
 	}
 
 	/**
-	 * @return array{breakpoints: BreakpointList, blocks: list<BlockDefinition>}
+	 * @return array{breakpoints: BreakpointList, presets: list<Preset>, blocks: list<BlockDefinition>}
 	 */
 	public function jsonSerialize(): array
 	{
-		return [ 'breakpoints' => $this->breakpoints, 'blocks' => $this->blocks ];
+		return [ 'breakpoints' => $this->breakpoints, 'presets' => $this->presets, 'blocks' => $this->blocks ];
 	}
 }
