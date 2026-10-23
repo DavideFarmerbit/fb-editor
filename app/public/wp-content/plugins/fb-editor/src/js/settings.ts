@@ -8,9 +8,21 @@ import {
 	BreakpointList,
 	type BreakpointId,
 } from './breakpoints/breakpoint';
+import { BlockType } from './blocks/block-type';
 
 export class EditorSettings {
-	constructor( public readonly breakpoints: BreakpointList ) {}
+	constructor(
+		public readonly breakpoints: BreakpointList,
+		public readonly blocks: readonly BlockType[]
+	) {}
+
+	block( name: string ): BlockType {
+		const block = this.blocks.find( ( candidate ) => candidate.name === name );
+		if ( block === undefined ) {
+			throw new InvalidSettings( `fbEditorSettings.blocks: no definition for "${ name }"` );
+		}
+		return block;
+	}
 }
 
 class InvalidSettings extends Error {}
@@ -58,10 +70,32 @@ function parseBreakpoint( value: unknown, path: string ): Breakpoint {
 	);
 }
 
+function parseBlockType( value: unknown, path: string ): BlockType {
+	if ( ! isRecord( value ) ) {
+		throw new InvalidSettings( `${ path }: expected an object` );
+	}
+	const elements = value.elements;
+	if ( ! Array.isArray( elements ) || ! elements.every( ( element ) => typeof element === 'string' ) ) {
+		throw new InvalidSettings( `${ path }.elements: expected a list of strings` );
+	}
+	return new BlockType(
+		readString( value, 'name', path ),
+		readString( value, 'title', path ),
+		readString( value, 'className', path ),
+		elements
+	);
+}
+
 export function parseEditorSettings( raw: unknown ): EditorSettings {
 	if ( ! isRecord( raw ) || ! Array.isArray( raw.breakpoints ) ) {
 		throw new InvalidSettings( 'fbEditorSettings.breakpoints: expected an array' );
 	}
+	if ( ! Array.isArray( raw.blocks ) ) {
+		throw new InvalidSettings( 'fbEditorSettings.blocks: expected an array' );
+	}
+	const blocks = raw.blocks.map( ( item: unknown, index: number ) =>
+		parseBlockType( item, `fbEditorSettings.blocks[${ index }]` )
+	);
 
 	const [ base, ...others ] = raw.breakpoints.map( ( item: unknown, index: number ) =>
 		parseBreakpoint( item, `fbEditorSettings.breakpoints[${ index }]` )
@@ -71,7 +105,7 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 		throw new InvalidSettings( 'fbEditorSettings.breakpoints: first entry must be the base' );
 	}
 
-	return new EditorSettings( new BreakpointList( base, others ) );
+	return new EditorSettings( new BreakpointList( base, others ), blocks );
 }
 
 export const settings: EditorSettings = parseEditorSettings( window.fbEditorSettings );

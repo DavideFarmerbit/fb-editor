@@ -89,6 +89,14 @@ final readonly class BlockValues implements \JsonSerializable
 		return [] === $this->values;
 	}
 
+	/**
+	 * Where static-scope values live.
+	 */
+	public function baseBreakpoint(): BreakpointId
+	{
+		return $this->breakpoints->base->id;
+	}
+
 	public function resolvedAt( BreakpointId $breakpoint ): ResolvedValues
 	{
 		$resolved = [];

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Fb;
 
+use Fb\Blocks\BlockRegistry;
+use Fb\Blocks\Library\Section\Section;
+use Fb\Blocks\Rendering\BlockRenderer;
+use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Editor\CanvasStyles;
 use Fb\Editor\EditorAssets;
@@ -27,12 +31,18 @@ final readonly class Plugin
 	{
 		$breakpoints = new BreakpointConfig();
 		$tokens      = new TokenStylesheet( new PresetRepository() );
+		$instances   = new InstanceStyleCollector( $breakpoints );
+		$blocks      = new BlockRegistry(
+			new BlockRenderer( $breakpoints, $instances ),
+			new Section(),
+		);
 
 		$services = [
 			new CoreDefaultsStripper(),
-			new EditorAssets( $this->paths, $breakpoints ),
+			$blocks,
+			new EditorAssets( $this->paths, $breakpoints, $blocks ),
 			new CanvasStyles( $tokens ),
-			new FrontendStyles( $tokens ),
+			new FrontendStyles( $tokens, $instances ),
 			new BlockMarkupCleaner(),
 		];
 

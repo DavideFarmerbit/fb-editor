@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Fb\Editor;
 
+use Fb\Blocks\Block;
+use Fb\Blocks\BlockRegistry;
+use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;
 use Fb\PluginPaths;
@@ -18,6 +21,7 @@ final readonly class EditorAssets implements Hookable
 	public function __construct(
 		private PluginPaths $paths,
 		private BreakpointConfig $breakpoints,
+		private BlockRegistry $blocks,
 	) {
 	}
 
@@ -36,11 +40,12 @@ final readonly class EditorAssets implements Hookable
 
 		wp_enqueue_script( self::HANDLE, $this->paths->url( 'build/editor.js' ), $asset->dependencies, $asset->version, true );
 
-		wp_add_inline_script(
-			self::HANDLE,
-			'window.fbEditorSettings = ' . wp_json_encode( new EditorSettings( $this->breakpoints->breakpoints() ) ) . ';',
-			'before'
+		$settings = new EditorSettings(
+			$this->breakpoints->breakpoints(),
+			...array_map( static fn ( Block $block ): BlockDefinition => $block->definition(), $this->blocks->blocks )
 		);
+
+		wp_add_inline_script( self::HANDLE, 'window.fbEditorSettings = ' . wp_json_encode( $settings ) . ';', 'before' );
 
 		if ( is_readable( $this->paths->path( 'build/editor.css' ) ) ) {
 			wp_enqueue_style( self::HANDLE, $this->paths->url( 'build/editor.css' ), [ 'wp-components' ], $asset->version );

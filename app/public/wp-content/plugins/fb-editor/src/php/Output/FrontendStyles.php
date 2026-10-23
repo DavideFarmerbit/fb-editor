@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Output;
 
+use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Hookable;
 use Fb\RequestContext;
 
@@ -19,6 +20,7 @@ final readonly class FrontendStyles implements Hookable
 
 	public function __construct(
 		private TokenStylesheet $tokens,
+		private InstanceStyleCollector $instances,
 	) {
 		$this->applier = new StylePolicyApplier( new FrontendStylePolicy() );
 	}
@@ -47,8 +49,10 @@ final readonly class FrontendStyles implements Hookable
 
 	private function enqueue(): void
 	{
+		// Block themes render the whole template before <head>, so every
+		// block instance on the page has been collected by now.
 		wp_register_style( self::HANDLE, false, [], null );
-		wp_add_inline_style( self::HANDLE, $this->tokens->css( withCoreStyles: true ) );
+		wp_add_inline_style( self::HANDLE, $this->tokens->css( withCoreStyles: true ) . $this->instances->css() );
 		wp_enqueue_style( self::HANDLE );
 	}
 
