@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Fb\Presets;
 
+use Fb\Adapter\WpInternals;
+
 /**
  * theme.json preset families we expose as CSS custom properties.
  */
@@ -15,6 +17,14 @@ enum PresetKind: string
 	case FontFamily = 'font-family';
 	case FontSize   = 'font-size';
 	case Shadow     = 'shadow';
+
+	/**
+	 * Same custom property name core uses, e.g. `--wp--preset--spacing--40`.
+	 */
+	public function variable( string $slug ): string
+	{
+		return '--wp--preset--' . $this->value . '--' . WpInternals::toKebabCase( $slug );
+	}
 
 	/**
 	 * Path under theme.json `settings`.

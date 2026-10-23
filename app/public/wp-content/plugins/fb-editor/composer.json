@@ -19,12 +19,19 @@
 		}
 	},
 	"scripts": {
-		"analyse": "phpstan analyse --memory-limit=1G"
+		"analyse": "phpstan analyse --memory-limit=1G",
+		"test": "phpunit"
 	},
 	"require-dev": {
 		"phpstan/extension-installer": "^1.4",
 		"phpstan/phpstan": "^2.3",
 		"phpstan/phpstan-strict-rules": "^2.1",
+		"phpunit/phpunit": "^13.4",
 		"szepeviktor/phpstan-wordpress": "^2.0"
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Fb\\Tests\\": "tests/"
+		}
 	}
 }

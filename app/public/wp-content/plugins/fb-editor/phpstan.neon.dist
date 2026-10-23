@@ -3,5 +3,6 @@ parameters:
 	paths:
 		- fb-editor.php
 		- src/php
+		- tests
 	checkMissingCallableSignature: true
 	treatPhpDocTypesAsCertain: false

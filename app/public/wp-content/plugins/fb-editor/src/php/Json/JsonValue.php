@@ -9,6 +9,9 @@ namespace Fb\Json;
  *
  * This is the boundary: raw JSON goes in, typed scalars and lists come out,
  * and any shape mismatch raises InvalidJson with the exact path.
+ *
+ * Accepts both `json_decode()` output (objects as stdClass) and data WordPress
+ * already decoded (block attributes: objects as string-keyed arrays).
  */
 final readonly class JsonValue
 {
@@ -32,9 +35,32 @@ final readonly class JsonValue
 		return new self( $value, $source );
 	}
 
+	/**
+	 * Wraps data that is already decoded (e.g. block attributes).
+	 */
+	public static function of( mixed $decoded, string $source ): self
+	{
+		return new self( $decoded, $source );
+	}
+
+	public function isNull(): bool
+	{
+		return null === $this->value;
+	}
+
+	public function isObject(): bool
+	{
+		return $this->value instanceof \stdClass
+			|| ( is_array( $this->value ) && ( [] === $this->value || ! array_is_list( $this->value ) ) );
+	}
+
 	public function has( string $key ): bool
 	{
-		return $this->value instanceof \stdClass && property_exists( $this->value, $key );
+		return match ( true ) {
+			$this->value instanceof \stdClass => property_exists( $this->value, $key ),
+			is_array( $this->value )          => array_key_exists( $key, $this->value ),
+			default                           => false,
+		};
 	}
 
 	/**
@@ -42,14 +68,37 @@ final readonly class JsonValue
 	 */
 	public function get( string $key ): self
 	{
-		if ( ! $this->value instanceof \stdClass ) {
+		if ( ! $this->isObject() ) {
 			throw new InvalidJson( "{$this->path}: expected an object" );
 		}
-		if ( ! property_exists( $this->value, $key ) ) {
+		if ( ! $this->has( $key ) ) {
 			throw new InvalidJson( "{$this->path}.{$key}: missing" );
 		}
 
-		return new self( $this->value->{$key}, "{$this->path}.{$key}" );
+		$child = $this->value instanceof \stdClass ? $this->value->{$key} : ( is_array( $this->value ) ? $this->value[ $key ] : null );
+
+		return new self( $child, "{$this->path}.{$key}" );
+	}
+
+	/**
+	 * Object members in document order.
+	 *
+	 * @return \Generator<string, self>
+	 * @throws InvalidJson
+	 */
+	public function properties(): \Generator
+	{
+		if ( ! $this->isObject() ) {
+			throw new InvalidJson( "{$this->path}: expected an object" );
+		}
+
+		/** @var iterable<mixed, mixed> $members */
+		$members = $this->value instanceof \stdClass ? get_object_vars( $this->value ) : $this->value;
+
+		foreach ( $members as $key => $child ) {
+			$name = is_int( $key ) ? (string) $key : ( is_string( $key ) ? $key : '' );
+			yield $name => new self( $child, "{$this->path}.{$name}" );
+		}
 	}
 
 	/**
@@ -74,6 +123,23 @@ final readonly class JsonValue
 		}
 
 		return $this->value;
+	}
+
+	/**
+	 * Any JSON number. Rejects NAN/INF.
+	 *
+	 * @throws InvalidJson
+	 */
+	public function float(): float
+	{
+		if ( ! is_int( $this->value ) && ! is_float( $this->value ) ) {
+			throw new InvalidJson( "{$this->path}: expected a number" );
+		}
+		if ( ! is_finite( (float) $this->value ) ) {
+			throw new InvalidJson( "{$this->path}: expected a finite number" );
+		}
+
+		return (float) $this->value;
 	}
 
 	/**

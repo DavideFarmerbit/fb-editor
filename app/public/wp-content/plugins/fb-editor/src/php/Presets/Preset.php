@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Fb\Presets;
 
-use Fb\Adapter\WpInternals;
-
 /**
  * One theme.json preset, e.g. spacing "40" = 1rem.
  */
@@ -24,7 +22,7 @@ final readonly class Preset
 	 */
 	public function cssVariable(): string
 	{
-		return '--wp--preset--' . $this->kind->value . '--' . WpInternals::toKebabCase( $this->slug );
+		return $this->kind->variable( $this->slug );
 	}
 
 	public function cssReference(): string
