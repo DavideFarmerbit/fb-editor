@@ -3,11 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"build": "wp-scripts build editor=./src/js/editor.ts",
-		"start": "wp-scripts start editor=./src/js/editor.ts",
+		"build": "wp-scripts build editor=./src/Editor/editor.ts",
+		"start": "wp-scripts start editor=./src/Editor/editor.ts",
 		"typecheck": "tsc",
-		"lint": "wp-scripts lint-js src/js",
-		"test": "wp-scripts test-unit-js src/js"
+		"lint": "wp-scripts lint-js src tests",
+		"test": "wp-scripts test-unit-js tests"
 	},
 	"devDependencies": {
 		"@types/node": "^26.6.5",

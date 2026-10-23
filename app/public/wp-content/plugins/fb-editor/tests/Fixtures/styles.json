@@ -1,0 +1,2316 @@
+{
+    "breakpoints": [
+        {
+            "id": "desktop",
+            "label": "Desktop",
+            "icon": "desktop",
+            "maxWidth": null,
+            "previewWidth": null,
+            "mediaQuery": null
+        },
+        {
+            "id": "tablet",
+            "label": "Tablet",
+            "icon": "tablet",
+            "maxWidth": 1024,
+            "previewWidth": null,
+            "mediaQuery": "(max-width: 1024px)"
+        },
+        {
+            "id": "mobile",
+            "label": "Mobile",
+            "icon": "mobile",
+            "maxWidth": 767,
+            "previewWidth": null,
+            "mediaQuery": "(max-width: 767px)"
+        }
+    ],
+    "presets": [
+        {
+            "kind": "spacing",
+            "slug": "10",
+            "variable": "--wp--preset--spacing--10"
+        },
+        {
+            "kind": "spacing",
+            "slug": "40",
+            "variable": "--wp--preset--spacing--40"
+        },
+        {
+            "kind": "spacing",
+            "slug": "50",
+            "variable": "--wp--preset--spacing--50"
+        },
+        {
+            "kind": "spacing",
+            "slug": "80",
+            "variable": "--wp--preset--spacing--80"
+        },
+        {
+            "kind": "spacing",
+            "slug": "2xl",
+            "variable": "--wp--preset--spacing--2-xl"
+        },
+        {
+            "kind": "spacing",
+            "slug": "xLarge",
+            "variable": "--wp--preset--spacing--x-large"
+        },
+        {
+            "kind": "spacing",
+            "slug": "x_small",
+            "variable": "--wp--preset--spacing--x-small"
+        }
+    ],
+    "cases": [
+        {
+            "name": "padding with presets and a mobile override",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "80"
+                        },
+                        "bottom": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "80"
+                        }
+                    },
+                    "mobile": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "50"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "80"
+                        },
+                        "bottom": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "80"
+                        }
+                    },
+                    "mobile": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "50"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case){padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80);}@media (max-width: 767px){:where(.fb-case){padding-top:var(--wp--preset--spacing--50);}}}"
+        },
+        {
+            "name": "tablet-only value",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "margin": {
+                    "tablet": {
+                        "left": {
+                            "kind": "auto"
+                        },
+                        "right": {
+                            "kind": "auto"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "margin": {
+                    "tablet": {
+                        "right": {
+                            "kind": "auto"
+                        },
+                        "left": {
+                            "kind": "auto"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{@media (max-width: 1024px){:where(.fb-case){margin-right:auto;margin-left:auto;}}}"
+        },
+        {
+            "name": "repeated values are not written twice",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 10,
+                            "unit": "px"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 10,
+                            "unit": "px"
+                        }
+                    },
+                    "tablet": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 10,
+                            "unit": "px"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 12,
+                            "unit": "px"
+                        }
+                    },
+                    "mobile": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 10,
+                            "unit": "px"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 10.0,
+                            "unit": "px"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 10.0,
+                            "unit": "px"
+                        }
+                    },
+                    "tablet": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 10.0,
+                            "unit": "px"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 12.0,
+                            "unit": "px"
+                        }
+                    },
+                    "mobile": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 10.0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case){padding-top:10px;padding-left:10px;}@media (max-width: 1024px){:where(.fb-case){padding-left:12px;}}}"
+        },
+        {
+            "name": "gap hidden where display is block",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "display": {
+                    "desktop": "flex",
+                    "mobile": "block"
+                },
+                "gap": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 1.5,
+                            "unit": "rem"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "display": {
+                    "desktop": "flex",
+                    "mobile": "block"
+                },
+                "gap": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 16.0,
+                            "unit": "px"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 1.5,
+                            "unit": "rem"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:flex;row-gap:16px;column-gap:1.5rem;}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:block;row-gap:revert-layer;column-gap:revert-layer;}}}"
+        },
+        {
+            "name": "gap hidden on tablet then visible again",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "display": {
+                    "desktop": "grid",
+                    "tablet": "block",
+                    "mobile": "flex"
+                },
+                "gap": {
+                    "desktop": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        },
+                        "left": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "display": {
+                    "desktop": "grid",
+                    "tablet": "block",
+                    "mobile": "flex"
+                },
+                "gap": {
+                    "desktop": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        },
+                        "left": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:grid;row-gap:var(--wp--preset--spacing--40);column-gap:var(--wp--preset--spacing--40);}@media (max-width: 1024px){:where(.fb-case>.fb-section__inner){display:block;row-gap:revert-layer;column-gap:revert-layer;}}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:flex;row-gap:var(--wp--preset--spacing--40);column-gap:var(--wp--preset--spacing--40);}}}"
+        },
+        {
+            "name": "gap never visible writes nothing",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "gap": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 8,
+                            "unit": "px"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "gap": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 8.0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            },
+            "css": ""
+        },
+        {
+            "name": "number formatting and negative margins",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "margin": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": -12.5,
+                            "unit": "px"
+                        },
+                        "right": {
+                            "kind": "custom",
+                            "value": 33.333329999999997,
+                            "unit": "%"
+                        },
+                        "bottom": {
+                            "kind": "custom",
+                            "value": 0,
+                            "unit": "rem"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 1.25,
+                            "unit": "vw"
+                        }
+                    },
+                    "mobile": {
+                        "bottom": {
+                            "kind": "custom",
+                            "value": -0.0,
+                            "unit": "em"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "margin": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": -12.5,
+                            "unit": "px"
+                        },
+                        "right": {
+                            "kind": "custom",
+                            "value": 33.333329999999997,
+                            "unit": "%"
+                        },
+                        "bottom": {
+                            "kind": "custom",
+                            "value": 0.0,
+                            "unit": "rem"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 1.25,
+                            "unit": "vw"
+                        }
+                    },
+                    "mobile": {
+                        "bottom": {
+                            "kind": "custom",
+                            "value": 0.0,
+                            "unit": "em"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case){margin-top:-12.5px;margin-right:33.3333%;margin-bottom:0;margin-left:1.25vw;}}"
+        },
+        {
+            "name": "kebab-cased preset slugs",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "2xl"
+                        },
+                        "right": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "xLarge"
+                        },
+                        "bottom": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "x_small"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "2xl"
+                        },
+                        "right": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "xLarge"
+                        },
+                        "bottom": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "x_small"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case){padding-top:var(--wp--preset--spacing--2-xl);padding-right:var(--wp--preset--spacing--x-large);padding-bottom:var(--wp--preset--spacing--x-small);}}"
+        },
+        {
+            "name": "invalid values are dropped one by one",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "custom",
+                            "value": -4,
+                            "unit": "px"
+                        },
+                        "left": {
+                            "kind": "custom",
+                            "value": 4,
+                            "unit": "px"
+                        }
+                    },
+                    "tablet": {
+                        "top": {
+                            "kind": "auto"
+                        }
+                    },
+                    "mobile": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 4,
+                            "unit": "pt"
+                        }
+                    },
+                    "phone": {
+                        "top": {
+                            "kind": "custom",
+                            "value": 1,
+                            "unit": "px"
+                        }
+                    }
+                },
+                "display": {
+                    "desktop": "table"
+                },
+                "unknown": {
+                    "desktop": "x"
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "padding": {
+                    "desktop": {
+                        "left": {
+                            "kind": "custom",
+                            "value": 4.0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case){padding-left:4px;}}"
+        },
+        {
+            "name": "static control without output",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "tag": "header"
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "tag": "header"
+            },
+            "css": ""
+        },
+        {
+            "name": "garbage attribute",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "padding": "nope",
+                "margin": {
+                    "desktop": "nope"
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {},
+            "css": ""
+        }
+    ]
+}

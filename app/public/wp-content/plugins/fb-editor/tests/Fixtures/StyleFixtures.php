@@ -21,7 +21,7 @@ use Fb\Styles\StyleCompiler;
  */
 final class StyleFixtures
 {
-	public const string FILE = __DIR__ . '/../fixtures/styles.json';
+	public const string FILE = __DIR__ . '/styles.json';
 
 	/** Spacing slugs the cases use, including ones that exercise kebab-casing. */
 	private const array SPACING_SLUGS = [ '10', '40', '50', '80', '2xl', 'xLarge', 'x_small' ];

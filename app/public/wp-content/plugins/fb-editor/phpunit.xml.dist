@@ -13,7 +13,7 @@
 	</testsuites>
 	<source>
 		<include>
-			<directory>src/php</directory>
+			<directory suffix=".php">src</directory>
 		</include>
 	</source>
 </phpunit>

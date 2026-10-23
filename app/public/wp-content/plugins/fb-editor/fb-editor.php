@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
-// PSR-4 for `Fb\` → src/php/. Composer is only needed for dev tooling.
+// PSR-4 for `Fb\` → src/. Composer is only needed for dev tooling.
 spl_autoload_register(
 	static function ( string $class ): void {
 		if ( ! str_starts_with( $class, 'Fb\\' ) ) {
 			return;
 		}
 
-		$file = __DIR__ . '/src/php/' . str_replace( '\\', '/', substr( $class, 3 ) ) . '.php';
+		$file = __DIR__ . '/src/' . str_replace( '\\', '/', substr( $class, 3 ) ) . '.php';
 
 		if ( is_readable( $file ) ) {
 			require $file;
