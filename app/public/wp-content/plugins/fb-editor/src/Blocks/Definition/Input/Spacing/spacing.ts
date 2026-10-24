@@ -3,11 +3,11 @@
  * shows, how rows read and write the four sides, and which mode fits a
  * value. Values are always stored per side; modes are presentation only.
  */
-import type { BreakpointId, BreakpointList } from '../../../Breakpoints/breakpoints';
-import { BoxValue, Side, SIDES } from '../../../Values/box';
-import type { Length } from '../../../Values/length';
-import type { Responsive } from '../../../Values/responsive';
-import { SpacingMode } from './inputs';
+import type { BreakpointId, BreakpointList } from '../../../../Breakpoints/breakpoints';
+import { BoxValue, Side, SIDES } from '../../../../Values/box';
+import type { Length } from '../../../../Values/length';
+import type { Responsive } from '../../../../Values/responsive';
+import { SpacingMode } from './spacing-input';
 
 export enum RowId {
 	All = 'all',

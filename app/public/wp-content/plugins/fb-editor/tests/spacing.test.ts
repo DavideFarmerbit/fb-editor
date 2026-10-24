@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { SpacingMode } from '../src/Blocks/Definition/Input/inputs';
-import { inferMode, rowsFor, rowValue, withRow } from '../src/Blocks/Definition/Input/spacing';
+import { SpacingMode } from '../src/Blocks/Definition/Input/Spacing/spacing-input';
+import { inferMode, rowsFor, rowValue, withRow } from '../src/Blocks/Definition/Input/Spacing/spacing';
 import { BoxValue, Side, SIDES } from '../src/Values/box';
 import { AutoLength, CustomLength, PresetLength, Unit } from '../src/Values/length';
 import { PresetKind } from '../src/Presets/presets';

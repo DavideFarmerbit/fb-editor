@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fb\Blocks\Definition\Input;
+namespace Fb\Blocks\Definition\Input\Spacing;
 
 use Fb\TypeScript\ExportToTypeScript;
 

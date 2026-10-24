@@ -17,13 +17,13 @@ import { __, sprintf } from '@wordpress/i18n';
 import { reset, settings as customIcon, sidesAll, sidesAxial, sidesHorizontal } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
-import { settings } from '../../../Editor/settings';
-import { controlKey, store } from '../../../Editor/store';
-import { PresetKind, type Preset } from '../../../Presets/presets';
-import { AutoLength, CustomLength, PresetLength, Unit, type Length } from '../../../Values/length';
-import type { ControlFieldProps } from '../../Inspector/control-field';
-import { Scope } from '../block-definition';
-import { SpacingMode, type SpacingInput } from './inputs';
+import { settings } from '../../../../Editor/settings';
+import { controlKey, store } from '../../../../Editor/store';
+import { PresetKind, type Preset } from '../../../../Presets/presets';
+import { AutoLength, CustomLength, PresetLength, Unit, type Length } from '../../../../Values/length';
+import type { ControlFieldProps } from '../../../Inspector/control-field';
+import { Scope } from '../../block-definition';
+import { SpacingMode, type SpacingInput } from './spacing-input';
 import { asBox, inferMode, RowId, rowsFor, rowSource, rowValue, withRow, type RowValue } from './spacing';
 import './spacing-control.scss';
 

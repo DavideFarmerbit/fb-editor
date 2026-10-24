@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Options;
 
-use Fb\Blocks\Definition\Input\LabeledOption;
+use Fb\Blocks\Definition\Input\Select\LabeledOption;
 
 /**
  * HTML elements a container block may render as.

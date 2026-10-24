@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Fixtures;
 
-use Fb\Blocks\Definition\Input\LabeledOption;
+use Fb\Blocks\Definition\Input\Select\LabeledOption;
 
 enum Tag: string implements LabeledOption
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Fb\Blocks\Definition\Condition;
 
 use Fb\Blocks\Definition\ControlId;
-use Fb\Blocks\Definition\Input\LabeledOption;
+use Fb\Blocks\Definition\Input\Select\LabeledOption;
 use Fb\Blocks\Values\ResolvedValues;
 use Fb\Values\KeywordValue;
 

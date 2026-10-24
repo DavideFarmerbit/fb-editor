@@ -4,7 +4,7 @@
  */
 import { createReduxStore, register } from '@wordpress/data';
 
-import type { SpacingMode } from '../Blocks/Definition/Input/inputs';
+import type { SpacingMode } from '../Blocks/Definition/Input/Spacing/spacing-input';
 import type { Breakpoint, BreakpointId, BreakpointList } from '../Breakpoints/breakpoints';
 import { settings } from './settings';
 

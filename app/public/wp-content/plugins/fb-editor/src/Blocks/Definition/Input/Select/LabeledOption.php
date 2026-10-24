@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fb\Blocks\Definition\Input;
+namespace Fb\Blocks\Definition\Input\Select;
 
 /**
  * Implemented by string-backed enums used as SelectInput options.

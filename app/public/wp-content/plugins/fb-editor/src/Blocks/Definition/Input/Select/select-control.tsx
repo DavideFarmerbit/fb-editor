@@ -7,10 +7,10 @@ import { SelectControl } from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
 import type { ReactElement } from 'react';
 
-import type { ControlFieldProps } from '../../Inspector/control-field';
-import { KeywordValue } from '../../../Values/keyword';
-import { Scope } from '../block-definition';
-import type { SelectInput } from './inputs';
+import type { ControlFieldProps } from '../../../Inspector/control-field';
+import { KeywordValue } from '../../../../Values/keyword';
+import { Scope } from '../../block-definition';
+import type { SelectInput } from './select-input';
 
 interface SelectFieldProps extends ControlFieldProps {
 	readonly input: SelectInput;

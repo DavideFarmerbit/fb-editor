@@ -7,9 +7,10 @@ import type { ReactElement } from 'react';
 import type { Breakpoint, BreakpointList } from '../../Breakpoints/breakpoints';
 import type { ResponsiveValue } from '../../Values/value';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
-import { SelectInput, SpacingInput } from '../Definition/Input/inputs';
-import { SelectField } from '../Definition/Input/select-control';
-import { SpacingField } from '../Definition/Input/spacing-control';
+import { SelectField } from '../Definition/Input/Select/select-control';
+import { SelectInput } from '../Definition/Input/Select/select-input';
+import { SpacingField } from '../Definition/Input/Spacing/spacing-control';
+import { SpacingInput } from '../Definition/Input/Spacing/spacing-input';
 import type { BlockValues } from '../Values/block-values';
 
 export interface ControlFieldProps {

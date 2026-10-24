@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fb\Blocks\Definition\Input;
+namespace Fb\Blocks\Definition\Input\Select;
 
+use Fb\Blocks\Definition\Input\Input;
 use Fb\Json\InvalidJson;
 use Fb\Json\JsonValue;
 use Fb\Values\KeywordValue;

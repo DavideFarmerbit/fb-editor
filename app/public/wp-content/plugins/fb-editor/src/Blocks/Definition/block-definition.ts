@@ -10,7 +10,8 @@ import type { BlockValues } from '../Values/block-values';
 import { conditionFromJson, type Condition } from './Condition/conditions';
 import { parseControlId, type ControlId } from './control-id';
 import { parseElementId, type ElementId } from './element-id';
-import { inputFromJson, SelectInput, type Input } from './Input/inputs';
+import { inputFromJson, type Input } from './Input/inputs';
+import { SelectInput } from './Input/Select/select-input';
 import { Scope } from './Scope.generated';
 
 export { Scope };
