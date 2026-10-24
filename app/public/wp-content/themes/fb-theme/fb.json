@@ -1,7 +1,10 @@
 {
 	"breakpoints": [
-		{ "id": "desktop", "label": "Desktop", "icon": "desktop" },
-		{ "id": "tablet", "label": "Tablet", "icon": "tablet", "maxWidth": 1024 },
-		{ "id": "mobile", "label": "Mobile", "icon": "mobile", "maxWidth": 767 }
+		{ "id": "xxl", "label": "XXL" },
+		{ "id": "xl", "label": "XL", "maxWidth": 1399 },
+		{ "id": "lg", "label": "LG", "maxWidth": 1199 },
+		{ "id": "md", "label": "MD", "maxWidth": 991 },
+		{ "id": "sm", "label": "SM", "maxWidth": 767 },
+		{ "id": "xs", "label": "XS", "maxWidth": 575 }
 	]
 }

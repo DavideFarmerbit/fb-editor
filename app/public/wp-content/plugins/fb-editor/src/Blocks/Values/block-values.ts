@@ -64,6 +64,18 @@ export class BlockValues {
 		return this.values.get( id ) ?? Responsive.empty();
 	}
 
+	/** Whether the control has a value at any breakpoint. */
+	has( id: ControlId ): boolean {
+		return ! this.get( id ).isEmpty();
+	}
+
+	/** A copy without any value for this control, at every breakpoint. */
+	withoutControl( control: Control ): BlockValues {
+		const values = new Map( this.values );
+		values.delete( control.id );
+		return new BlockValues( this.definition, this.breakpoints, values );
+	}
+
 	/**
 	 * A copy with one control's value set (or cleared, with null) at a
 	 * breakpoint. Static controls always write the base breakpoint. Values

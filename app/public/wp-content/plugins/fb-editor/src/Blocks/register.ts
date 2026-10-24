@@ -75,6 +75,7 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 			createElement( Inspector, {
 				definition,
 				values,
+				clientId: props.clientId,
 				onChange: ( next: BlockValues ) => props.setAttributes( { [ ATTRIBUTE ]: next.toAttribute() } ),
 			} )
 		),

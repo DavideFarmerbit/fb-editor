@@ -10,7 +10,7 @@
  * Every value goes through SpacingInput.allows(): the UI can't store what
  * PHP would drop.
  */
-import { Button, RangeControl, SelectControl, TextControl } from '@wordpress/components';
+import { Button, RangeControl, SelectControl, TextControl, VisuallyHidden } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
@@ -83,8 +83,9 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 
 	return (
 		<fieldset className="fb-spacing">
+			{ /* The control frame shows the visible label. */ }
+			<VisuallyHidden as="legend">{ control.label }</VisuallyHidden>
 			<div className="fb-spacing__header">
-				<legend className="fb-spacing__label">{ control.label }</legend>
 				{ input.modes.length > 1 && (
 					<div className="fb-spacing__modes">
 						{ input.modes.map( ( candidate ) => (

@@ -3,24 +3,24 @@
         {
             "id": "desktop",
             "label": "Desktop",
-            "icon": "desktop",
             "maxWidth": null,
+            "minWidth": 1025,
             "previewWidth": null,
             "mediaQuery": null
         },
         {
             "id": "tablet",
             "label": "Tablet",
-            "icon": "tablet",
             "maxWidth": 1024,
+            "minWidth": 768,
             "previewWidth": null,
             "mediaQuery": "(max-width: 1024px)"
         },
         {
             "id": "mobile",
             "label": "Mobile",
-            "icon": "mobile",
             "maxWidth": 767,
+            "minWidth": null,
             "previewWidth": null,
             "mediaQuery": "(max-width: 767px)"
         }

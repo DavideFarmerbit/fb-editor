@@ -8,12 +8,12 @@ namespace Fb\Breakpoints;
  * One breakpoint. The base breakpoint has no maxWidth (no media query);
  * every other one applies at `max-width: maxWidth px`.
  */
-final readonly class Breakpoint implements \JsonSerializable
+final readonly class Breakpoint
 {
 	public function __construct(
 		public BreakpointId $id,
+		/** Short label shown on the switcher, e.g. "LG". */
 		public string $label,
-		public ?BreakpointIcon $icon = null,
 		public ?int $maxWidth = null,
 		public ?int $previewWidth = null,
 	) {
@@ -33,22 +33,5 @@ final readonly class Breakpoint implements \JsonSerializable
 	public function mediaQuery(): ?string
 	{
 		return null === $this->maxWidth ? null : "(max-width: {$this->maxWidth}px)";
-	}
-
-	/**
-	 * The media query is sent ready-made: the editor never rebuilds it.
-	 *
-	 * @return array{id: BreakpointId, label: string, icon: ?string, maxWidth: ?int, previewWidth: ?int, mediaQuery: ?string}
-	 */
-	public function jsonSerialize(): array
-	{
-		return [
-			'id'           => $this->id,
-			'label'        => $this->label,
-			'icon'         => $this->icon?->value,
-			'maxWidth'     => $this->maxWidth,
-			'previewWidth' => $this->previewWidth,
-			'mediaQuery'   => $this->mediaQuery(),
-		];
 	}
 }

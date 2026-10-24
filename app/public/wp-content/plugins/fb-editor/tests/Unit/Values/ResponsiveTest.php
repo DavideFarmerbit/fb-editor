@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Unit\Values;
 
-use Fb\Breakpoints\BreakpointConfig;
 use Fb\Breakpoints\BreakpointId;
 use Fb\Json\JsonValue;
+use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Values\BoxValue;
 use Fb\Values\CustomLength;
 use Fb\Values\Responsive;
@@ -17,7 +17,7 @@ final class ResponsiveTest extends TestCase
 {
 	public function testBoxInheritsUnsetSidesFromLargerBreakpoints(): void
 	{
-		$breakpoints = BreakpointConfig::fallback();
+		$breakpoints = TestBreakpoints::list();
 		$px          = static fn ( int $n ): CustomLength => new CustomLength( $n, Unit::Px );
 
 		$padding = Responsive::base( $breakpoints, BoxValue::all( $px( 80 ) ) )
@@ -32,7 +32,7 @@ final class ResponsiveTest extends TestCase
 
 	public function testUnsetEverywhereResolvesToNull(): void
 	{
-		$breakpoints = BreakpointConfig::fallback();
+		$breakpoints = TestBreakpoints::list();
 		$value       = Responsive::empty()->with( new BreakpointId( 'mobile' ), BoxValue::all( new CustomLength( 1, Unit::Rem ) ) );
 
 		self::assertNull( $value->resolve( new BreakpointId( 'desktop' ), $breakpoints ) );
@@ -42,7 +42,7 @@ final class ResponsiveTest extends TestCase
 
 	public function testParsingDropsUnknownBreakpointsAndInvalidValues(): void
 	{
-		$breakpoints = BreakpointConfig::fallback();
+		$breakpoints = TestBreakpoints::list();
 		$json        = JsonValue::of(
 			[
 				'desktop' => [ 'top' => [ 'kind' => 'custom', 'value' => 10, 'unit' => 'px' ] ],

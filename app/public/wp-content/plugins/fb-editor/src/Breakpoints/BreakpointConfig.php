@@ -31,10 +31,15 @@ final class BreakpointConfig
 
 	public static function fallback(): BreakpointList
 	{
+		// Bootstrap's ranges, desktop-first: each id covers exactly
+		// Bootstrap's range of the same name (lg = 992–1199px…).
 		return new BreakpointList(
-			new Breakpoint( new BreakpointId( 'desktop' ), 'Desktop', BreakpointIcon::Desktop ),
-			new Breakpoint( new BreakpointId( 'tablet' ), 'Tablet', BreakpointIcon::Tablet, 1024 ),
-			new Breakpoint( new BreakpointId( 'mobile' ), 'Mobile', BreakpointIcon::Mobile, 767 ),
+			new Breakpoint( new BreakpointId( 'xxl' ), 'XXL' ),
+			new Breakpoint( new BreakpointId( 'xl' ), 'XL', 1399 ),
+			new Breakpoint( new BreakpointId( 'lg' ), 'LG', 1199 ),
+			new Breakpoint( new BreakpointId( 'md' ), 'MD', 991 ),
+			new Breakpoint( new BreakpointId( 'sm' ), 'SM', 767 ),
+			new Breakpoint( new BreakpointId( 'xs' ), 'XS', 575 ),
 		);
 	}
 
@@ -77,11 +82,9 @@ final class BreakpointConfig
 		$others = [];
 
 		foreach ( $root->get( 'breakpoints' )->list() as $item ) {
-			$icon       = $item->optionalString( 'icon' );
 			$breakpoint = new Breakpoint(
 				id: new BreakpointId( $item->get( 'id' )->string() ),
 				label: $item->get( 'label' )->string(),
-				icon: null === $icon ? null : BreakpointIcon::tryFrom( $icon ),
 				maxWidth: $item->optionalInt( 'maxWidth' ),
 				previewWidth: $item->optionalInt( 'previewWidth' ),
 			);

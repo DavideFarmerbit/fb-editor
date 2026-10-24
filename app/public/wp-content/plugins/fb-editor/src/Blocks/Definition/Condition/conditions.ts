@@ -1,7 +1,10 @@
 /**
  * Mirrors Fb\Blocks\Definition\Condition\*: show-only-if rules evaluated per
- * breakpoint against resolved values.
+ * breakpoint against resolved values. Each can also describe itself in
+ * words (labels from the definition) for "needs …" hints in the editor.
  */
+import { __, sprintf } from '@wordpress/i18n';
+
 import { InvalidJson, type JsonValue } from '../../../Json/json';
 import { KeywordValue } from '../../../Values/keyword';
 import type { ResponsiveValue } from '../../../Values/value';
@@ -12,14 +15,26 @@ export interface ResolvedValues {
 	get( id: ControlId ): ResponsiveValue | null;
 }
 
+/** Human labels for controls and their options (the block definition). */
+export interface ConditionLabels {
+	controlLabel( id: ControlId ): string;
+	optionLabel( id: ControlId, value: string ): string;
+}
+
 export interface Condition {
 	evaluate( values: ResolvedValues ): boolean;
 	references(): readonly ControlId[];
+	/** e.g. "Display: Flex or Grid". */
+	describe( labels: ConditionLabels ): string;
 }
 
 function keywordOf( values: ResolvedValues, id: ControlId ): string | null {
 	const value = values.get( id );
 	return value instanceof KeywordValue ? value.keyword : null;
+}
+
+function joinWith( parts: readonly string[], separator: string ): string {
+	return parts.join( ` ${ separator } ` );
 }
 
 export class Equals implements Condition {
@@ -34,6 +49,10 @@ export class Equals implements Condition {
 
 	references(): ControlId[] {
 		return [ this.control ];
+	}
+
+	describe( labels: ConditionLabels ): string {
+		return `${ labels.controlLabel( this.control ) }: ${ labels.optionLabel( this.control, this.value ) }`;
 	}
 }
 
@@ -51,6 +70,11 @@ export class In implements Condition {
 	references(): ControlId[] {
 		return [ this.control ];
 	}
+
+	describe( labels: ConditionLabels ): string {
+		const options = this.values.map( ( value ) => labels.optionLabel( this.control, value ) );
+		return `${ labels.controlLabel( this.control ) }: ${ joinWith( options, __( 'or', 'fb-editor' ) ) }`;
+	}
 }
 
 export class HasValue implements Condition {
@@ -62,6 +86,11 @@ export class HasValue implements Condition {
 
 	references(): ControlId[] {
 		return [ this.control ];
+	}
+
+	describe( labels: ConditionLabels ): string {
+		/* translators: %s: setting name */
+		return sprintf( __( '%s set', 'fb-editor' ), labels.controlLabel( this.control ) );
 	}
 }
 
@@ -75,6 +104,11 @@ export class Not implements Condition {
 	references(): readonly ControlId[] {
 		return this.condition.references();
 	}
+
+	describe( labels: ConditionLabels ): string {
+		/* translators: %s: a condition */
+		return sprintf( __( 'not (%s)', 'fb-editor' ), this.condition.describe( labels ) );
+	}
 }
 
 export class All implements Condition {
@@ -87,6 +121,13 @@ export class All implements Condition {
 	references(): ControlId[] {
 		return this.conditions.flatMap( ( condition ) => condition.references() );
 	}
+
+	describe( labels: ConditionLabels ): string {
+		return joinWith(
+			this.conditions.map( ( condition ) => condition.describe( labels ) ),
+			__( 'and', 'fb-editor' )
+		);
+	}
 }
 
 export class Any implements Condition {
@@ -98,6 +139,13 @@ export class Any implements Condition {
 
 	references(): ControlId[] {
 		return this.conditions.flatMap( ( condition ) => condition.references() );
+	}
+
+	describe( labels: ConditionLabels ): string {
+		return joinWith(
+			this.conditions.map( ( condition ) => condition.describe( labels ) ),
+			__( 'or', 'fb-editor' )
+		);
 	}
 }
 

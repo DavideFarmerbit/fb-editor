@@ -8,16 +8,12 @@
 
 .fb-spacing__header {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 8px;
+	justify-content: flex-end;
+	margin-bottom: 4px;
 }
 
-.fb-spacing__label {
-	padding: 0;
-	font-size: 11px;
-	font-weight: 500;
-	text-transform: uppercase;
+.fb-spacing__header:empty {
+	display: none;
 }
 
 .fb-spacing__modes {

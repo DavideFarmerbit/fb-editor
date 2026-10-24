@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Unit\Styles;
 
-use Fb\Breakpoints\BreakpointConfig;
 use Fb\Breakpoints\BreakpointId;
 use Fb\Breakpoints\BreakpointList;
 use Fb\Css\CssLayer;
@@ -18,6 +17,7 @@ use Fb\Styles\Selector;
 use Fb\Styles\StyleBinding;
 use Fb\Styles\StyleCompiler;
 use Fb\Styles\Visibility;
+use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Values\AutoLength;
 use Fb\Values\BoxValue;
 use Fb\Values\CustomLength;
@@ -38,7 +38,7 @@ final class StyleCompilerTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->breakpoints = BreakpointConfig::fallback();
+		$this->breakpoints = TestBreakpoints::list();
 		$this->compiler    = new StyleCompiler( $this->breakpoints );
 		$this->root        = Selector::forClass( 'fb-abc1234' );
 	}

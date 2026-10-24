@@ -71,10 +71,35 @@ final readonly class BreakpointList implements \IteratorAggregate, \Countable, \
 	}
 
 	/**
-	 * @return list<Breakpoint>
+	 * Smallest viewport width a breakpoint covers: one more than the next
+	 * smaller breakpoint's maxWidth; null for the smallest breakpoint.
+	 */
+	public function minWidth( Breakpoint $breakpoint ): ?int
+	{
+		$index = array_search( $breakpoint, $this->items, true );
+		$next  = false === $index ? null : ( $this->items[ $index + 1 ] ?? null );
+
+		return null === $next?->maxWidth ? null : $next->maxWidth + 1;
+	}
+
+	/**
+	 * What the editor receives. Everything derived (media query, covered
+	 * range) is computed here, never in JS.
+	 *
+	 * @return list<array{id: BreakpointId, label: string, maxWidth: ?int, minWidth: ?int, previewWidth: ?int, mediaQuery: ?string}>
 	 */
 	public function jsonSerialize(): array
 	{
-		return $this->items;
+		return array_map(
+			fn ( Breakpoint $breakpoint ): array => [
+				'id'           => $breakpoint->id,
+				'label'        => $breakpoint->label,
+				'maxWidth'     => $breakpoint->maxWidth,
+				'minWidth'     => $this->minWidth( $breakpoint ),
+				'previewWidth' => $breakpoint->previewWidth,
+				'mediaQuery'   => $breakpoint->mediaQuery(),
+			],
+			$this->items
+		);
 	}
 }

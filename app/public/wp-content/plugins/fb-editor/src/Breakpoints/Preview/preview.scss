@@ -17,3 +17,16 @@ body.fb-has-canvas-width {
 		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 	}
 }
+
+// Segmented switcher in the editor header.
+.fb-breakpoints {
+	display: flex;
+	gap: 2px;
+}
+
+.fb-breakpoints .fb-breakpoints__button {
+	min-width: 32px;
+	justify-content: center;
+	font-size: 11px;
+	font-weight: 600;
+}

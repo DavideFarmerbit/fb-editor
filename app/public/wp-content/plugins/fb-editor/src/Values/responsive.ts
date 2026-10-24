@@ -72,6 +72,11 @@ export class Responsive< T extends ResponsiveValue = ResponsiveValue > {
 		return this.values.size === 0;
 	}
 
+	/** Breakpoints with a value of their own, in breakpoint order. */
+	setAt( breakpoints: BreakpointList ): BreakpointId[] {
+		return breakpoints.filter( ( breakpoint ) => this.at( breakpoint.id ) !== null ).map( ( breakpoint ) => breakpoint.id );
+	}
+
 	/**
 	 * Unknown breakpoint ids and invalid values are dropped one by one.
 	 * Throws only when the container itself isn't an object.

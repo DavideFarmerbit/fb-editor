@@ -87,3 +87,9 @@ describe( 'Responsive.source', () => {
 		).toBeNull();
 	} );
 } );
+
+describe( 'condition hints', () => {
+	test( 'describe themselves with the definition labels', () => {
+		expect( control( 'gap' ).visibleWhen?.describe( section ) ).toBe( 'Display: Flex or Grid' );
+	} );
+} );

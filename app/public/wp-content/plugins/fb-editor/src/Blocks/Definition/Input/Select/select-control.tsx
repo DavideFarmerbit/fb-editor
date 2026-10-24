@@ -42,6 +42,7 @@ export function SelectField( { control, input, values, breakpoint, breakpoints, 
 			__next40pxDefaultSize
 			__nextHasNoMarginBottom
 			label={ control.label }
+			hideLabelFromVision
 			value={ own instanceof KeywordValue ? own.keyword : '' }
 			options={ [
 				{ value: '', label: unsetLabel },

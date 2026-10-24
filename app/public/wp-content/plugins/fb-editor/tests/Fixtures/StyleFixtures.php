@@ -7,7 +7,6 @@ namespace Fb\Tests\Fixtures;
 use Fb\Blocks\Library\Section\Section;
 use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\BlockValues;
-use Fb\Breakpoints\BreakpointConfig;
 use Fb\Css\CssLayer;
 use Fb\Presets\Preset;
 use Fb\Presets\PresetKind;
@@ -29,7 +28,7 @@ final class StyleFixtures
 
 	public static function json(): string
 	{
-		$breakpoints = BreakpointConfig::fallback();
+		$breakpoints = TestBreakpoints::list();
 		$compiler    = new StyleCompiler( $breakpoints );
 		$styles      = new BlockStyles( $breakpoints );
 

@@ -7,7 +7,7 @@ import { InvalidJson, type JsonValue } from '../../Json/json';
 import { outputFromJson, type StyleOutput } from '../../Styles/Output/outputs';
 import { KeywordValue } from '../../Values/keyword';
 import type { BlockValues } from '../Values/block-values';
-import { conditionFromJson, type Condition } from './Condition/conditions';
+import { conditionFromJson, type Condition, type ConditionLabels } from './Condition/conditions';
 import { parseControlId, type ControlId } from './control-id';
 import { parseElementId, type ElementId } from './element-id';
 import { inputFromJson, type Input } from './Input/inputs';
@@ -43,7 +43,7 @@ export class Element {
 	) {}
 }
 
-export class BlockDefinition {
+export class BlockDefinition implements ConditionLabels {
 	constructor(
 		/** e.g. "fb/section" */
 		public readonly name: string,
@@ -65,6 +65,20 @@ export class BlockDefinition {
 
 	control( id: ControlId ): Control | undefined {
 		return this.controls.find( ( control ) => control.id === id );
+	}
+
+	controlLabel( id: ControlId ): string {
+		return this.control( id )?.label ?? id;
+	}
+
+	optionLabel( id: ControlId, value: string ): string {
+		const input = this.control( id )?.input;
+		return input instanceof SelectInput ? input.options.find( ( option ) => option.value === value )?.label ?? value : value;
+	}
+
+	/** The panel a control is placed in (PHP guarantees exactly one). */
+	panelOf( id: ControlId ): Panel | undefined {
+		return this.layout.find( ( panel ) => panel.controls.includes( id ) );
 	}
 
 	/** Class of a declared element; throws for an unknown one. */

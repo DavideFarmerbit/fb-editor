@@ -7,12 +7,12 @@ namespace Fb\Tests\Unit\Blocks;
 use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\BlockValues;
 use Fb\Blocks\Values\InstanceClass;
-use Fb\Breakpoints\BreakpointConfig;
 use Fb\Breakpoints\BreakpointList;
 use Fb\Css\CssLayer;
 use Fb\Styles\Selector;
 use Fb\Styles\StyleCompiler;
 use Fb\Tests\Fixtures\SectionFixture;
+use Fb\Tests\Fixtures\TestBreakpoints;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -25,7 +25,7 @@ final class BlockValuesTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->breakpoints = BreakpointConfig::fallback();
+		$this->breakpoints = TestBreakpoints::list();
 	}
 
 	/**

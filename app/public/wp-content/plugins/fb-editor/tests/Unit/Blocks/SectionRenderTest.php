@@ -8,6 +8,7 @@ use Fb\Blocks\Library\Section\Section;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
+use Fb\Tests\Fixtures\TestBreakpoints;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,7 +21,7 @@ final class SectionRenderTest extends TestCase
 
 	protected function setUp(): void
 	{
-		add_filter( 'fb_breakpoints', BreakpointConfig::fallback( ... ) );
+		add_filter( 'fb_breakpoints', TestBreakpoints::list( ... ) );
 		$config          = new BreakpointConfig();
 		$this->collector = new InstanceStyleCollector( $config );
 		$this->renderer  = new BlockRenderer( $config, $this->collector );
