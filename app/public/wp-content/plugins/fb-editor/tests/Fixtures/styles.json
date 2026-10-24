@@ -74,6 +74,20 @@
             "name": "x_small",
             "value": "1rem",
             "variable": "--wp--preset--spacing--x-small"
+        },
+        {
+            "kind": "color",
+            "slug": "accent",
+            "name": "Accent",
+            "value": "#3858e9",
+            "variable": "--wp--preset--color--accent"
+        },
+        {
+            "kind": "color",
+            "slug": "x-dark",
+            "name": "Extra dark",
+            "value": "#111111",
+            "variable": "--wp--preset--color--x-dark"
         }
     ],
     "cases": [
@@ -186,6 +200,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -226,6 +300,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -234,7 +342,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -242,6 +358,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],
@@ -410,6 +533,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -450,6 +633,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -458,7 +675,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -466,6 +691,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],
@@ -612,6 +844,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -652,6 +944,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -660,7 +986,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -668,6 +1002,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],
@@ -1372,6 +1713,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -1412,6 +1813,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -1420,7 +1855,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -1428,6 +1871,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],
@@ -1616,6 +2066,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -1656,6 +2166,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -1664,7 +2208,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -1672,6 +2224,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],
@@ -1836,6 +2395,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -1876,6 +2495,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -1884,7 +2537,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -1892,6 +2553,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],
@@ -2066,6 +2734,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -2106,6 +2834,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -2114,7 +2876,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -2122,6 +2892,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],
@@ -2140,6 +2917,1594 @@
                 "tag": "header"
             },
             "css": ""
+        },
+        {
+            "name": "palette and custom colors",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "background": {
+                    "desktop": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "accent"
+                    },
+                    "mobile": {
+                        "kind": "custom",
+                        "value": "#FFAA00"
+                    }
+                },
+                "textColor": {
+                    "desktop": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "x-dark"
+                    },
+                    "tablet": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "x-dark"
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "background": {
+                    "desktop": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "accent"
+                    },
+                    "mobile": {
+                        "kind": "custom",
+                        "value": "#ffaa00"
+                    }
+                },
+                "textColor": {
+                    "desktop": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "x-dark"
+                    },
+                    "tablet": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "x-dark"
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case){background-color:var(--wp--preset--color--accent);color:var(--wp--preset--color--x-dark);}@media (max-width: 767px){:where(.fb-case){background-color:#ffaa00;}}}"
+        },
+        {
+            "name": "invalid colors are dropped",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "background": {
+                    "desktop": {
+                        "kind": "custom",
+                        "value": "red;}body{"
+                    },
+                    "tablet": {
+                        "kind": "preset",
+                        "preset": "spacing",
+                        "slug": "40"
+                    },
+                    "mobile": {
+                        "kind": "custom",
+                        "value": "#abc"
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "background": {
+                    "mobile": {
+                        "kind": "custom",
+                        "value": "#abc"
+                    }
+                }
+            },
+            "css": "@layer fb.instances{@media (max-width: 767px){:where(.fb-case){background-color:#abc;}}}"
+        },
+        {
+            "name": "single lengths",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "minHeight": {
+                    "desktop": {
+                        "kind": "custom",
+                        "value": 100,
+                        "unit": "vh"
+                    },
+                    "mobile": {
+                        "kind": "auto"
+                    }
+                },
+                "maxWidth": {
+                    "desktop": {
+                        "kind": "custom",
+                        "value": 72.5,
+                        "unit": "rem"
+                    },
+                    "tablet": {
+                        "kind": "preset",
+                        "preset": "spacing",
+                        "slug": "40"
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "maxWidth": {
+                    "desktop": {
+                        "kind": "custom",
+                        "value": 72.5,
+                        "unit": "rem"
+                    }
+                },
+                "minHeight": {
+                    "desktop": {
+                        "kind": "custom",
+                        "value": 100.0,
+                        "unit": "vh"
+                    }
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){max-width:72.5rem;}:where(.fb-case){min-height:100vh;}}"
+        },
+        {
+            "name": "wrap toggle only while display is flex",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "display": {
+                    "desktop": "flex",
+                    "mobile": "grid"
+                },
+                "wrap": {
+                    "desktop": true,
+                    "tablet": false
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "display": {
+                    "desktop": "flex",
+                    "mobile": "grid"
+                },
+                "wrap": {
+                    "desktop": true,
+                    "tablet": false
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:flex;flex-wrap:wrap;}@media (max-width: 1024px){:where(.fb-case>.fb-section__inner){flex-wrap:nowrap;}}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:grid;flex-wrap:revert-layer;}}}"
+        },
+        {
+            "name": "toggle rejects non-booleans",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner"
+                    }
+                ]
+            },
+            "attribute": {
+                "display": {
+                    "desktop": "flex"
+                },
+                "wrap": {
+                    "desktop": "yes",
+                    "tablet": 1,
+                    "mobile": false
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "display": {
+                    "desktop": "flex"
+                },
+                "wrap": {
+                    "mobile": false
+                }
+            },
+            "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:flex;}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){flex-wrap:nowrap;}}}"
         },
         {
             "name": "garbage attribute",
@@ -2250,6 +4615,66 @@
                         }
                     },
                     {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -2290,6 +4715,40 @@
                         "element": null,
                         "scope": "responsive",
                         "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
                     }
                 ],
                 "layout": [
@@ -2298,7 +4757,15 @@
                         "controls": [
                             "tag",
                             "display",
-                            "gap"
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
                         ]
                     },
                     {
@@ -2306,6 +4773,13 @@
                         "controls": [
                             "padding",
                             "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
                         ]
                     }
                 ],

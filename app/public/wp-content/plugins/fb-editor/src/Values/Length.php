@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Fb\Values;
 
 /**
- * A CSS length: PresetLength | CustomLength | AutoLength.
+ * A CSS length: PresetReference | CustomLength | AutoLength.
  *
  * Serialized with a `kind` tag, e.g.
  *   {"kind":"preset","preset":"spacing","slug":"40"}

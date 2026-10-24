@@ -1,7 +1,8 @@
-// Editor-only styles for the spacing control (spacing-control.tsx).
+// Editor-only styles for the spacing control (spacing-control.tsx). Rows
+// are length editors: see ../Length/length-control.scss.
 
 .fb-spacing {
-	margin: 0 0 16px;
+	margin: 0;
 	padding: 0;
 	border: 0;
 }
@@ -19,59 +20,4 @@
 .fb-spacing__modes {
 	display: flex;
 	gap: 2px;
-}
-
-.fb-spacing__row {
-	margin-bottom: 8px;
-
-	&.is-inherited .fb-spacing__scale,
-	&.is-inherited .fb-spacing__custom {
-		opacity: 0.55;
-	}
-}
-
-.fb-spacing__row-header {
-	display: flex;
-	align-items: center;
-	gap: 4px;
-	min-height: 24px;
-}
-
-.fb-spacing__row-label {
-	flex: 1;
-}
-
-.fb-spacing__status {
-	color: #757575;
-	font-size: 11px;
-}
-
-.fb-spacing__scale {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-
-	> :first-child {
-		flex: 1;
-	}
-}
-
-.fb-spacing__value {
-	min-width: 72px;
-	color: #757575;
-	font-size: 11px;
-	text-align: right;
-}
-
-.fb-spacing__custom {
-	display: flex;
-	gap: 4px;
-
-	> :first-child {
-		flex: 1;
-	}
-
-	> :last-child {
-		width: 72px;
-	}
 }

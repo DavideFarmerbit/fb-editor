@@ -143,6 +143,18 @@ final readonly class JsonValue
 	}
 
 	/**
+	 * @throws InvalidJson
+	 */
+	public function bool(): bool
+	{
+		if ( ! is_bool( $this->value ) ) {
+			throw new InvalidJson( "{$this->path}: expected a boolean" );
+		}
+
+		return $this->value;
+	}
+
+	/**
 	 * @return list<self>
 	 * @throws InvalidJson
 	 */

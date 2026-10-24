@@ -12,8 +12,11 @@ use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\Definition\ControlSet;
 use Fb\Blocks\Definition\ElementId;
+use Fb\Blocks\Definition\Input\Color\ColorInput;
+use Fb\Blocks\Definition\Input\Length\LengthInput;
 use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
+use Fb\Blocks\Definition\Input\Toggle\ToggleInput;
 use Fb\Blocks\Definition\Layout;
 use Fb\Blocks\Definition\Panel;
 use Fb\Blocks\Definition\Scope;
@@ -25,7 +28,9 @@ use Fb\Styles\Output\AxisOutput;
 use Fb\Styles\Output\BoxOutput;
 use Fb\Styles\Output\BoxProperty;
 use Fb\Styles\Output\PropertyOutput;
+use Fb\Styles\Output\ToggleOutput;
 use Fb\TypeScript\ExportToTypeScript;
+use Fb\Values\KeywordValue;
 
 /**
  * Layout container:
@@ -34,8 +39,9 @@ use Fb\TypeScript\ExportToTypeScript;
  *     <div class="fb-section__inner">…inner blocks…</div>
  *   </section>
  *
- * Padding/margin on the root; display and gap on the inner element, so the
- * root can hold a background while the inner lays out children.
+ * Box (padding, margin, min-height, colors) on the root; layout (display,
+ * gap, wrap, max-width) on the inner element, so the root can span the page
+ * with a background while the inner lays out and constrains children.
  */
 final class Section extends Block
 {
@@ -56,6 +62,16 @@ final class Section extends Block
 	#[ExportToTypeScript]
 	public const string MARGIN = 'margin';
 	#[ExportToTypeScript]
+	public const string WRAP = 'wrap';
+	#[ExportToTypeScript]
+	public const string MAX_WIDTH = 'maxWidth';
+	#[ExportToTypeScript]
+	public const string MIN_HEIGHT = 'minHeight';
+	#[ExportToTypeScript]
+	public const string BACKGROUND = 'background';
+	#[ExportToTypeScript]
+	public const string TEXT_COLOR = 'textColor';
+	#[ExportToTypeScript]
 	public const string INNER = 'inner';
 
 	private ControlId $tag;
@@ -63,6 +79,11 @@ final class Section extends Block
 	private ControlId $gap;
 	private ControlId $padding;
 	private ControlId $margin;
+	private ControlId $wrap;
+	private ControlId $maxWidth;
+	private ControlId $minHeight;
+	private ControlId $background;
+	private ControlId $textColor;
 	private ElementId $inner;
 
 	public function __construct()
@@ -71,8 +92,13 @@ final class Section extends Block
 		$this->display = new ControlId( self::DISPLAY );
 		$this->gap     = new ControlId( self::GAP );
 		$this->padding = new ControlId( self::PADDING );
-		$this->margin  = new ControlId( self::MARGIN );
-		$this->inner   = new ElementId( self::INNER );
+		$this->margin     = new ControlId( self::MARGIN );
+		$this->wrap       = new ControlId( self::WRAP );
+		$this->maxWidth   = new ControlId( self::MAX_WIDTH );
+		$this->minHeight  = new ControlId( self::MIN_HEIGHT );
+		$this->background = new ControlId( self::BACKGROUND );
+		$this->textColor  = new ControlId( self::TEXT_COLOR );
+		$this->inner      = new ElementId( self::INNER );
 	}
 
 	public function hasInnerBlocks(): bool
@@ -96,12 +122,26 @@ final class Section extends Block
 					$this->inner,
 					visibleWhen: new In( $this->display, Display::Flex, Display::Grid )
 				),
+				new Control(
+					$this->wrap,
+					__( 'Wrap', 'fb-editor' ),
+					new ToggleInput(),
+					new ToggleOutput( CssProperty::FlexWrap, new KeywordValue( 'wrap' ), new KeywordValue( 'nowrap' ) ),
+					$this->inner,
+					visibleWhen: new In( $this->display, Display::Flex )
+				),
+				new Control( $this->maxWidth, __( 'Content max width', 'fb-editor' ), new LengthInput(), new PropertyOutput( CssProperty::MaxWidth ), $this->inner ),
+				new Control( $this->minHeight, __( 'Min height', 'fb-editor' ), new LengthInput(), new PropertyOutput( CssProperty::MinHeight ) ),
 				new Control( $this->padding, __( 'Padding', 'fb-editor' ), SpacingInput::padding(), new BoxOutput( BoxProperty::Padding ) ),
 				new Control( $this->margin, __( 'Margin', 'fb-editor' ), SpacingInput::margin(), new BoxOutput( BoxProperty::Margin ) ),
+				new Control( $this->background, __( 'Background', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::BackgroundColor ) ),
+				new Control( $this->textColor, __( 'Text', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::Color ) ),
 			),
 			new Layout(
-				new Panel( __( 'Layout', 'fb-editor' ), $this->tag, $this->display, $this->gap ),
+				new Panel( __( 'Layout', 'fb-editor' ), $this->tag, $this->display, $this->gap, $this->wrap ),
+				new Panel( __( 'Size', 'fb-editor' ), $this->maxWidth, $this->minHeight ),
 				new Panel( __( 'Spacing', 'fb-editor' ), $this->padding, $this->margin ),
+				new Panel( __( 'Colors', 'fb-editor' ), $this->background, $this->textColor ),
 			),
 			[ $this->inner ],
 		);

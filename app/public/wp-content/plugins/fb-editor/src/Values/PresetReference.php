@@ -8,10 +8,11 @@ use Fb\Presets\PresetKind;
 use Fb\TypeScript\ExportToTypeScript;
 
 /**
- * Reference to a theme preset. Stored as a reference, so changing the
- * theme's scale updates every block using it.
+ * Reference to a theme preset (a spacing step, a palette color…). Stored as
+ * a reference, so changing the theme updates every block using it. Which
+ * preset kinds are acceptable is decided by the input.
  */
-final readonly class PresetLength implements Length
+final readonly class PresetReference implements Length, Color
 {
 	#[ExportToTypeScript( regExp: true )]
 	public const string SLUG_PATTERN = '^[A-Za-z0-9_-]+$';

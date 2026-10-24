@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { SpacingMode } from '../src/Blocks/Definition/Input/Spacing/spacing-input';
 import { inferMode, rowsFor, rowValue, withRow } from '../src/Blocks/Definition/Input/Spacing/spacing';
 import { BoxValue, Side, SIDES } from '../src/Values/box';
-import { AutoLength, CustomLength, PresetLength, Unit } from '../src/Values/length';
+import { AutoLength, CustomLength, PresetReference, Unit } from '../src/Values/length';
 import { PresetKind } from '../src/Presets/presets';
 
 const px = ( n: number ) => new CustomLength( n, Unit.Px );
@@ -38,7 +38,7 @@ describe( 'rows', () => {
 } );
 
 describe( 'inferMode', () => {
-	const preset = new PresetLength( PresetKind.Spacing, '40' );
+	const preset = new PresetReference( PresetKind.Spacing, '40' );
 
 	test.each( [
 		[ 'empty', null, SpacingMode.Linked ],

@@ -22,7 +22,7 @@ use Fb\Values\AutoLength;
 use Fb\Values\BoxValue;
 use Fb\Values\CustomLength;
 use Fb\Values\KeywordValue;
-use Fb\Values\PresetLength;
+use Fb\Values\PresetReference;
 use Fb\Values\Responsive;
 use Fb\Values\Unit;
 use PHPUnit\Framework\TestCase;
@@ -57,7 +57,7 @@ final class StyleCompilerTest extends TestCase
 	{
 		$css = $this->compiler->compile(
 			CssLayer::Instances,
-			new StyleBinding( $this->root, new BoxOutput( BoxProperty::Padding ), Responsive::base( $this->breakpoints, new BoxValue( top: new PresetLength( PresetKind::Spacing, '80' ) ) ) )
+			new StyleBinding( $this->root, new BoxOutput( BoxProperty::Padding ), Responsive::base( $this->breakpoints, new BoxValue( top: new PresetReference( PresetKind::Spacing, '80' ) ) ) )
 		);
 
 		self::assertSame( '@layer fb.instances{:where(.fb-abc1234){padding-top:var(--wp--preset--spacing--80);}}', $css );

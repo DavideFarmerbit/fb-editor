@@ -13,7 +13,7 @@ use Fb\Values\BoxValue;
 use Fb\Values\CustomLength;
 use Fb\Values\Length;
 use Fb\Values\Lengths;
-use Fb\Values\PresetLength;
+use Fb\Values\PresetReference;
 use Fb\Values\Side;
 
 /**
@@ -83,7 +83,7 @@ final readonly class SpacingInput implements Input
 		return match ( true ) {
 			$length instanceof AutoLength   => $this->allowAuto,
 			$length instanceof CustomLength => $this->allowNegative || ! $length->isNegative(),
-			$length instanceof PresetLength => PresetKind::Spacing === $length->preset,
+			$length instanceof PresetReference => PresetKind::Spacing === $length->preset,
 			default                         => false,
 		};
 	}

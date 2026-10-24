@@ -28,6 +28,9 @@ enum CssProperty: string
 	case Width         = 'width';
 	case MaxWidth      = 'max-width';
 	case MinHeight     = 'min-height';
+	case FlexWrap      = 'flex-wrap';
+	case Color         = 'color';
+	case BackgroundColor = 'background-color';
 
 	public static function padding( Side $side ): self
 	{

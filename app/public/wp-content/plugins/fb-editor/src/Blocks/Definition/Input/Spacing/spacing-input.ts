@@ -5,13 +5,16 @@
 import { InvalidJson, type JsonValue } from '../../../../Json/json';
 import { PresetKind } from '../../../../Presets/presets';
 import { BoxValue, Side } from '../../../../Values/box';
-import { AutoLength, CustomLength, lengthFromJson, PresetLength, type Length } from '../../../../Values/length';
+import { AutoLength, CustomLength, lengthFromJson, PresetReference, type Length } from '../../../../Values/length';
+import type { LengthRules } from '../Length/length-input';
 import { SpacingMode } from './SpacingMode.generated';
 
 export { SpacingMode };
 
-export class SpacingInput {
+export class SpacingInput implements LengthRules {
 	readonly kind = 'spacing';
+	/** Spacing always offers the theme's spacing scale. */
+	readonly scale = PresetKind.Spacing;
 
 	constructor(
 		public readonly allowAuto: boolean,
@@ -26,7 +29,7 @@ export class SpacingInput {
 		if ( length instanceof CustomLength ) {
 			return this.allowNegative || ! length.isNegative();
 		}
-		return length instanceof PresetLength && length.preset === PresetKind.Spacing;
+		return length instanceof PresetReference && length.preset === PresetKind.Spacing;
 	}
 
 	/** Invalid sides are dropped one by one; a box with no valid side is rejected. */

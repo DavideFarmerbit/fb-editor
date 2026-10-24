@@ -4,37 +4,13 @@
  */
 import { InvalidJson, type JsonValue } from '../Json/json';
 import { PresetKind } from '../Presets/PresetKind.generated';
-import type { Presets } from '../Presets/presets';
 import { formatCssNumber } from './css-number';
 import { MAX_ABS } from './CustomLength.generated';
-import { SLUG_PATTERN } from './PresetLength.generated';
+import { PresetReference } from './preset-reference';
 import { Unit } from './Unit.generated';
 import type { CssValue, ResponsiveValue } from './value';
 
-export { Unit };
-
-export class PresetLength implements CssValue, ResponsiveValue {
-	constructor(
-		public readonly preset: PresetKind,
-		public readonly slug: string
-	) {
-		if ( ! SLUG_PATTERN.test( slug ) ) {
-			throw new InvalidJson( `Invalid preset slug "${ slug }".` );
-		}
-	}
-
-	toCss( presets: Presets ): string {
-		return `var(${ presets.variable( this.preset, this.slug ) })`;
-	}
-
-	inheritFrom(): this {
-		return this;
-	}
-
-	toJSON(): { kind: 'preset'; preset: PresetKind; slug: string } {
-		return { kind: 'preset', preset: this.preset, slug: this.slug };
-	}
-}
+export { PresetReference, Unit };
 
 export class CustomLength implements CssValue, ResponsiveValue {
 	public readonly value: number;
@@ -82,13 +58,13 @@ export class AutoLength implements CssValue, ResponsiveValue {
 	}
 }
 
-export type Length = PresetLength | CustomLength | AutoLength;
+export type Length = PresetReference | CustomLength | AutoLength;
 
 export function lengthFromJson( json: JsonValue ): Length {
 	const kind = json.get( 'kind' ).string();
 	switch ( kind ) {
 		case 'preset':
-			return new PresetLength( json.get( 'preset' ).oneOf( PresetKind ), json.get( 'slug' ).string() );
+			return new PresetReference( json.get( 'preset' ).oneOf( PresetKind ), json.get( 'slug' ).string() );
 		case 'custom':
 			return new CustomLength( json.get( 'value' ).number(), json.get( 'unit' ).oneOf( Unit ) );
 		case 'auto':

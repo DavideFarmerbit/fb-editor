@@ -46,10 +46,14 @@ final class StyleFixtures
 		}
 
 		// Same JSON shape as the editor settings' presets.
-		$presets = array_map(
-			static fn ( string $slug ): Preset => new Preset( PresetKind::Spacing, $slug, $slug, '1rem' ),
-			self::SPACING_SLUGS
-		);
+		$presets = [
+			...array_map(
+				static fn ( string $slug ): Preset => new Preset( PresetKind::Spacing, $slug, $slug, '1rem' ),
+				self::SPACING_SLUGS
+			),
+			new Preset( PresetKind::Color, 'accent', 'Accent', '#3858e9' ),
+			new Preset( PresetKind::Color, 'x-dark', 'Extra dark', '#111111' ),
+		];
 
 		return (string) wp_json_encode(
 			[ 'breakpoints' => $breakpoints, 'presets' => $presets, 'cases' => $cases ],
@@ -118,6 +122,29 @@ final class StyleFixtures
 				'unknown' => [ 'desktop' => 'x' ],
 			] ),
 			new StyleCase( 'static control without output', $section, [ 'tag' => 'header' ] ),
+			new StyleCase( 'palette and custom colors', $section, [
+				'background' => [ 'desktop' => self::color( 'accent' ), 'mobile' => [ 'kind' => 'custom', 'value' => '#FFAA00' ] ],
+				'textColor'  => [ 'desktop' => self::color( 'x-dark' ), 'tablet' => self::color( 'x-dark' ) ],
+			] ),
+			new StyleCase( 'invalid colors are dropped', $section, [
+				'background' => [
+					'desktop' => [ 'kind' => 'custom', 'value' => 'red;}body{' ],
+					'tablet'  => [ 'kind' => 'preset', 'preset' => 'spacing', 'slug' => '40' ],
+					'mobile'  => [ 'kind' => 'custom', 'value' => '#abc' ],
+				],
+			] ),
+			new StyleCase( 'single lengths', $section, [
+				'minHeight' => [ 'desktop' => [ 'kind' => 'custom', 'value' => 100, 'unit' => 'vh' ], 'mobile' => [ 'kind' => 'auto' ] ],
+				'maxWidth'  => [ 'desktop' => [ 'kind' => 'custom', 'value' => 72.5, 'unit' => 'rem' ], 'tablet' => self::preset( '40' ) ],
+			] ),
+			new StyleCase( 'wrap toggle only while display is flex', $section, [
+				'display' => [ 'desktop' => 'flex', 'mobile' => 'grid' ],
+				'wrap'    => [ 'desktop' => true, 'tablet' => false ],
+			] ),
+			new StyleCase( 'toggle rejects non-booleans', $section, [
+				'display' => [ 'desktop' => 'flex' ],
+				'wrap'    => [ 'desktop' => 'yes', 'tablet' => 1, 'mobile' => false ],
+			] ),
 			new StyleCase( 'garbage attribute', $section, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
 		];
 	}
@@ -128,6 +155,14 @@ final class StyleFixtures
 	private static function preset( string $slug ): array
 	{
 		return [ 'kind' => 'preset', 'preset' => 'spacing', 'slug' => $slug ];
+	}
+
+	/**
+	 * @return array{kind: 'preset', preset: 'color', slug: string}
+	 */
+	private static function color( string $slug ): array
+	{
+		return [ 'kind' => 'preset', 'preset' => 'color', 'slug' => $slug ];
 	}
 
 	/**

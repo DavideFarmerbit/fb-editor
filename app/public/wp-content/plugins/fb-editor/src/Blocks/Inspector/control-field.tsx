@@ -7,10 +7,16 @@ import type { ReactElement } from 'react';
 import type { Breakpoint, BreakpointList } from '../../Breakpoints/breakpoints';
 import type { ResponsiveValue } from '../../Values/value';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
+import { ColorField } from '../Definition/Input/Color/color-control';
+import { ColorInput } from '../Definition/Input/Color/color-input';
+import { LengthField } from '../Definition/Input/Length/length-control';
+import { LengthInput } from '../Definition/Input/Length/length-input';
 import { SelectField } from '../Definition/Input/Select/select-control';
 import { SelectInput } from '../Definition/Input/Select/select-input';
 import { SpacingField } from '../Definition/Input/Spacing/spacing-control';
 import { SpacingInput } from '../Definition/Input/Spacing/spacing-input';
+import { ToggleField } from '../Definition/Input/Toggle/toggle-control';
+import { ToggleInput } from '../Definition/Input/Toggle/toggle-input';
 import type { BlockValues } from '../Values/block-values';
 
 export interface ControlFieldProps {
@@ -32,6 +38,15 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof SpacingInput ) {
 		return <SpacingField { ...props } input={ input } />;
+	}
+	if ( input instanceof LengthInput ) {
+		return <LengthField { ...props } input={ input } />;
+	}
+	if ( input instanceof ColorInput ) {
+		return <ColorField { ...props } input={ input } />;
+	}
+	if ( input instanceof ToggleInput ) {
+		return <ToggleField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

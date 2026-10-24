@@ -11,7 +11,7 @@ use Fb\Values\AutoLength;
 use Fb\Values\CssNumber;
 use Fb\Values\CustomLength;
 use Fb\Values\Lengths;
-use Fb\Values\PresetLength;
+use Fb\Values\PresetReference;
 use Fb\Values\Unit;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -46,14 +46,14 @@ final class LengthTest extends TestCase
 		self::assertSame( '50%', ( new CustomLength( 50, Unit::Percent ) )->toCss() );
 	}
 
-	public function testPresetLengthReferencesCoreVariable(): void
+	public function testPresetReferenceReferencesCoreVariable(): void
 	{
-		self::assertSame( 'var(--wp--preset--spacing--40)', ( new PresetLength( PresetKind::Spacing, '40' ) )->toCss() );
+		self::assertSame( 'var(--wp--preset--spacing--40)', ( new PresetReference( PresetKind::Spacing, '40' ) )->toCss() );
 	}
 
 	public function testRoundTripThroughJson(): void
 	{
-		foreach ( [ new PresetLength( PresetKind::Spacing, '80' ), new CustomLength( -12.5, Unit::Px ), new AutoLength() ] as $length ) {
+		foreach ( [ new PresetReference( PresetKind::Spacing, '80' ), new CustomLength( -12.5, Unit::Px ), new AutoLength() ] as $length ) {
 			$json = JsonValue::parse( (string) wp_json_encode( $length ), 'test' );
 			self::assertEquals( $length, Lengths::fromJson( $json ) );
 		}

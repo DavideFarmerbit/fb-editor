@@ -17,4 +17,7 @@ export enum CssProperty {
 	Width = 'width',
 	MaxWidth = 'max-width',
 	MinHeight = 'min-height',
+	FlexWrap = 'flex-wrap',
+	Color = 'color',
+	BackgroundColor = 'background-color',
 }

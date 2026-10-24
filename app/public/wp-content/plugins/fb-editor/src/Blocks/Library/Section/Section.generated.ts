@@ -14,4 +14,14 @@ export const PADDING = 'padding';
 
 export const MARGIN = 'margin';
 
+export const WRAP = 'wrap';
+
+export const MAX_WIDTH = 'maxWidth';
+
+export const MIN_HEIGHT = 'minHeight';
+
+export const BACKGROUND = 'background';
+
+export const TEXT_COLOR = 'textColor';
+
 export const INNER = 'inner';

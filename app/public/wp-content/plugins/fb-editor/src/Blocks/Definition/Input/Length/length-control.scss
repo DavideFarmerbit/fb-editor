@@ -1,0 +1,60 @@
+// Editor-only styles for the length editor (length-control.tsx).
+
+.fb-length {
+	margin-bottom: 8px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&.is-inherited .fb-length__scale,
+	&.is-inherited .fb-length__custom {
+		opacity: 0.55;
+	}
+}
+
+.fb-length__header {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	min-height: 24px;
+}
+
+.fb-length__label {
+	flex: 1;
+}
+
+.fb-length__status {
+	color: #757575;
+	font-size: 11px;
+}
+
+.fb-length__scale {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	> :first-child {
+		flex: 1;
+	}
+}
+
+.fb-length__value {
+	min-width: 72px;
+	color: #757575;
+	font-size: 11px;
+	text-align: right;
+}
+
+.fb-length__custom {
+	display: flex;
+	gap: 4px;
+
+	> :first-child {
+		flex: 1;
+	}
+
+	> :last-child {
+		width: 72px;
+	}
+}

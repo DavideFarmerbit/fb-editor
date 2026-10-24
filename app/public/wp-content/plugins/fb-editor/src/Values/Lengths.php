@@ -22,7 +22,7 @@ final class Lengths
 
 		try {
 			return match ( $kind ) {
-				'preset' => new PresetLength(
+				'preset' => new PresetReference(
 					PresetKind::tryFrom( $json->get( 'preset' )->string() ) ?? throw new InvalidJson( "{$json->path}.preset: unknown preset kind" ),
 					$json->get( 'slug' )->string(),
 				),

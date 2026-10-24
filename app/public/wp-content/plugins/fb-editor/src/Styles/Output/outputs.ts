@@ -2,7 +2,9 @@
  * Mirrors Fb\Styles\Output\*: declarative value → declarations mappings.
  */
 import { InvalidJson, type JsonValue } from '../../Json/json';
+import { BooleanValue } from '../../Values/boolean';
 import { BoxValue, SIDES } from '../../Values/box';
+import { KeywordValue } from '../../Values/keyword';
 import type { Presets } from '../../Presets/presets';
 import { isCssValue, type ResponsiveValue } from '../../Values/value';
 import { BoxProperty, boxLonghand, CssProperty, DeclarationSet } from '../css';
@@ -80,6 +82,26 @@ export class PropertyOutput implements StyleOutput {
 	}
 }
 
+/** BooleanValue → one keyword per state (e.g. flex-wrap: wrap / nowrap). */
+export class ToggleOutput implements StyleOutput {
+	constructor(
+		public readonly property: CssProperty,
+		public readonly on: KeywordValue,
+		public readonly off: KeywordValue
+	) {}
+
+	properties(): CssProperty[] {
+		return [ this.property ];
+	}
+
+	declarations( value: ResponsiveValue | null ): DeclarationSet {
+		if ( ! ( value instanceof BooleanValue ) ) {
+			return DeclarationSet.empty();
+		}
+		return DeclarationSet.empty().with( this.property, ( value.on ? this.on : this.off ).toCss() );
+	}
+}
+
 export function outputFromJson( json: JsonValue ): StyleOutput {
 	const kind = json.get( 'kind' ).string();
 	switch ( kind ) {
@@ -94,6 +116,12 @@ export function outputFromJson( json: JsonValue ): StyleOutput {
 			}
 			return new PropertyOutput( properties );
 		}
+		case 'toggle':
+			return new ToggleOutput(
+				json.get( 'property' ).oneOf( CssProperty ),
+				new KeywordValue( json.get( 'on' ).string() ),
+				new KeywordValue( json.get( 'off' ).string() )
+			);
 		default:
 			throw new InvalidJson( `${ json.path }.kind: unknown output kind "${ kind }"` );
 	}

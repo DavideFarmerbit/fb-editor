@@ -64,8 +64,8 @@
 	}
 
 	// The whole control is already greyed: don't fade inherited rows twice.
-	.fb-spacing__row.is-inherited .fb-spacing__scale,
-	.fb-spacing__row.is-inherited .fb-spacing__custom {
+	.fb-length.is-inherited .fb-length__scale,
+	.fb-length.is-inherited .fb-length__custom {
 		opacity: 1;
 	}
 }
