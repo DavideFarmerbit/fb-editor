@@ -185,15 +185,19 @@ interface ScaleSliderProps {
 	readonly onChange: ( length: Length ) => void;
 }
 
+/**
+ * Discrete slider over the scale, like core's spacing control: one mark
+ * per step draws the bar in sections. Never remounted while in use (that
+ * would cut drags short).
+ */
 function ScaleSlider( { label, shown, scale, onChange }: ScaleSliderProps ): ReactElement {
 	const index = shown instanceof PresetLength ? scale.findIndex( ( preset ) => preset.slug === shown.slug ) : -1;
 	const current = scale[ index ];
+	const marks = scale.map( ( _preset, step ) => ( { value: step } ) );
 
 	return (
 		<div className="fb-spacing__scale">
 			<RangeControl
-				// Remount when the selection changes: an unset value has no knob.
-				key={ index }
 				__next40pxDefaultSize
 				__nextHasNoMarginBottom
 				label={ label }
@@ -202,6 +206,9 @@ function ScaleSlider( { label, shown, scale, onChange }: ScaleSliderProps ): Rea
 				min={ 0 }
 				max={ scale.length - 1 }
 				step={ 1 }
+				marks={ marks }
+				initialPosition={ 0 }
+				// Omitted when nothing is set anywhere: the bar shows no selection.
 				{ ...( index === -1 ? {} : { value: index } ) }
 				renderTooltipContent={ ( value?: number | string | null ) => scale[ Number( value ?? 0 ) ]?.name ?? '' }
 				onChange={ ( value?: number ) => {
