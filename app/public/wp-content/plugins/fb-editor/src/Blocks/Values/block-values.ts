@@ -106,15 +106,34 @@ export class BlockValues {
 		return this.breakpoints.base.id;
 	}
 
-	resolvedAt( breakpoint: BreakpointId ): ResolvedValues {
+	/**
+	 * Mirrors BlockValues::resolvedAt(): with a fallback (the type's
+	 * defaults), controls this block leaves unset take the fallback's value.
+	 */
+	resolvedAt( breakpoint: BreakpointId, fallback: BlockValues | null = null ): ResolvedValues {
 		const resolved = new Map< string, ResponsiveValue >();
-		this.values.forEach( ( value, id ) => {
-			const at = value.resolve( breakpoint, this.breakpoints );
+		for ( const control of this.definition.controls ) {
+			const at =
+				this.get( control.id ).resolve( breakpoint, this.breakpoints ) ??
+				fallback?.get( control.id ).resolve( breakpoint, this.breakpoints ) ??
+				null;
 			if ( at !== null ) {
-				resolved.set( id, at );
+				resolved.set( control.id, at );
 			}
-		} );
+		}
 		return new ResolvedValueMap( resolved );
+	}
+
+	/** Mirrors BlockValues::overlay(): `over` wins per control and breakpoint. */
+	overlay( over: BlockValues ): BlockValues {
+		const values = new Map< string, Responsive >();
+		for ( const control of this.definition.controls ) {
+			const merged = this.get( control.id ).overlay( over.get( control.id ), this.breakpoints );
+			if ( ! merged.isEmpty() ) {
+				values.set( control.id, merged );
+			}
+		}
+		return new BlockValues( this.definition, this.breakpoints, values );
 	}
 
 	/** Plain JSON for setAttributes(): no class instances in the block store. */

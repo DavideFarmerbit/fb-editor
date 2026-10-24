@@ -34,14 +34,17 @@ final class StyleFixtures
 
 		$cases = [];
 		foreach ( self::cases() as $case ) {
-			$values  = BlockValues::fromAttribute( $case->attribute, $case->definition, $breakpoints );
-			$cases[] = [
-				'name'       => $case->name,
-				'definition' => $case->definition,
-				'attribute'  => $case->attribute,
-				'rootClass'  => StyleCase::ROOT_CLASS,
-				'values'     => $values,
-				'css'        => $compiler->compile( CssLayer::Instances, ...$styles->bindings( $case->definition, $values, Selector::forClass( StyleCase::ROOT_CLASS ) ) ),
+			$values   = BlockValues::fromAttribute( $case->attribute, $case->definition, $breakpoints );
+			$defaults = BlockValues::fromAttribute( $case->defaults, $case->definition, $breakpoints );
+			$cases[]  = [
+				'name'        => $case->name,
+				'definition'  => $case->definition,
+				'attribute'   => $case->attribute,
+				'defaults'    => (object) $case->defaults,
+				'rootClass'   => StyleCase::ROOT_CLASS,
+				'values'      => $values,
+				'defaultsCss' => $compiler->compile( CssLayer::Defaults, ...$styles->bindings( $case->definition, $defaults, Selector::forClass( $case->definition->name->cssClass() ) ) ),
+				'css'         => $compiler->compile( CssLayer::Instances, ...$styles->bindings( $case->definition, $values, Selector::forClass( StyleCase::ROOT_CLASS ), $defaults ) ),
 			];
 		}
 
@@ -145,6 +148,24 @@ final class StyleFixtures
 				'display' => [ 'desktop' => 'flex' ],
 				'wrap'    => [ 'desktop' => 'yes', 'tablet' => 1, 'mobile' => false ],
 			] ),
+			new StyleCase(
+				'type defaults with a breakpoint override',
+				$section,
+				[],
+				[ 'padding' => [ 'desktop' => [ 'top' => self::preset( '80' ) ], 'mobile' => [ 'top' => self::preset( '40' ) ] ] ]
+			),
+			new StyleCase(
+				'instance condition reads the default',
+				$fixture,
+				[ 'gap' => [ 'desktop' => [ 'top' => self::px( 12 ), 'left' => self::px( 12 ) ] ] ],
+				[ 'display' => [ 'desktop' => 'flex', 'mobile' => 'block' ] ]
+			),
+			new StyleCase(
+				'instance value beats the default condition',
+				$fixture,
+				[ 'display' => [ 'mobile' => 'grid' ], 'gap' => [ 'desktop' => [ 'top' => self::px( 12 ) ] ] ],
+				[ 'display' => [ 'desktop' => 'flex', 'mobile' => 'block' ] ]
+			),
 			new StyleCase( 'garbage attribute', $section, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
 		];
 	}

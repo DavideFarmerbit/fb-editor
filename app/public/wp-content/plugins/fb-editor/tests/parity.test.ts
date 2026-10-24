@@ -37,11 +37,15 @@ class ParityCase {
 	run(): void {
 		const definition = blockDefinitionFromJson( this.json.get( 'definition' ) );
 		const values = BlockValues.fromAttribute( this.json.get( 'attribute' ).decoded(), definition, breakpoints );
+		const defaults = BlockValues.fromAttribute( this.json.get( 'defaults' ).decoded(), definition, breakpoints );
 		const root = Selector.forClass( this.json.get( 'rootClass' ).string() );
 
 		// Compare values, not encodings (PHP writes 10.0, JS writes 10).
 		expect( JSON.parse( JSON.stringify( values ) ) ).toEqual( this.json.get( 'values' ).decoded() );
-		expect( compiler.compile( CssLayer.Instances, styles.bindings( definition, values, root ) ) ).toBe(
+		expect(
+			compiler.compile( CssLayer.Defaults, styles.bindings( definition, defaults, Selector.forClass( definition.className ) ) )
+		).toBe( this.json.get( 'defaultsCss' ).string() );
+		expect( compiler.compile( CssLayer.Instances, styles.bindings( definition, values, root, defaults ) ) ).toBe(
 			this.json.get( 'css' ).string()
 		);
 	}

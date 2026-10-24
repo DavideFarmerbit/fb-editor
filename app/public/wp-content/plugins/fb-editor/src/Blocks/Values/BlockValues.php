@@ -97,17 +97,41 @@ final readonly class BlockValues implements \JsonSerializable
 		return $this->breakpoints->base->id;
 	}
 
-	public function resolvedAt( BreakpointId $breakpoint ): ResolvedValues
+	/**
+	 * Every control's effective value at a breakpoint. With a fallback
+	 * (the block type's defaults), controls this block leaves unset at every
+	 * breakpoint up to here take the fallback's effective value.
+	 */
+	public function resolvedAt( BreakpointId $breakpoint, ?self $fallback = null ): ResolvedValues
 	{
 		$resolved = [];
-		foreach ( $this->values as $id => $value ) {
-			$at = $value->resolve( $breakpoint, $this->breakpoints );
+		foreach ( $this->definition->controls as $control ) {
+			$at = $this->get( $control->id )->resolve( $breakpoint, $this->breakpoints )
+				?? $fallback?->get( $control->id )->resolve( $breakpoint, $this->breakpoints );
 			if ( null !== $at ) {
-				$resolved[ $id ] = $at;
+				$resolved[ $control->id->value ] = $at;
 			}
 		}
 
 		return new ResolvedValues( $resolved );
+	}
+
+	/**
+	 * `$over` laid on top of these values: per control and breakpoint, its
+	 * value wins where it has one. Used to put saved defaults over the
+	 * theme's defaults.
+	 */
+	public function overlay( self $over ): self
+	{
+		$values = [];
+		foreach ( $this->definition->controls as $control ) {
+			$merged = $this->get( $control->id )->overlay( $over->get( $control->id ), $this->breakpoints );
+			if ( ! $merged->isEmpty() ) {
+				$values[ $control->id->value ] = $merged;
+			}
+		}
+
+		return new self( $this->definition, $this->breakpoints, $values );
 	}
 
 	/**

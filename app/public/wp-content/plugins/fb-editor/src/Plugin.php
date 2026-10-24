@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Fb;
 
 use Fb\Blocks\BlockRegistry;
+use Fb\Blocks\Defaults\BlockDefaultsPostType;
+use Fb\Blocks\Defaults\DefaultsRepository;
+use Fb\Blocks\Defaults\DefaultsStylesheet;
 use Fb\Blocks\Library\Section\Section;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
@@ -15,6 +18,7 @@ use Fb\Output\BlockMarkupCleaner;
 use Fb\Output\FrontendStyles;
 use Fb\Output\TokenStylesheet;
 use Fb\Presets\PresetRepository;
+use Fb\Theme\ThemeConfigFile;
 use Fb\ThemeJson\CoreDefaultsStripper;
 
 /**
@@ -29,10 +33,12 @@ final readonly class Plugin
 
 	public function boot(): void
 	{
-		$breakpoints = new BreakpointConfig();
+		$themeFile   = new ThemeConfigFile();
+		$breakpoints = new BreakpointConfig( $themeFile );
+		$defaults    = new DefaultsRepository( $themeFile, $breakpoints );
 		$presets     = new PresetRepository();
 		$tokens      = new TokenStylesheet( $presets );
-		$instances   = new InstanceStyleCollector( $breakpoints );
+		$instances   = new InstanceStyleCollector( $breakpoints, $defaults );
 		$blocks      = new BlockRegistry(
 			new BlockRenderer( $breakpoints, $instances ),
 			new Section(),
@@ -41,9 +47,10 @@ final readonly class Plugin
 		$services = [
 			new CoreDefaultsStripper(),
 			$blocks,
+			new BlockDefaultsPostType( $blocks, $breakpoints ),
 			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets ),
 			new CanvasStyles( $tokens ),
-			new FrontendStyles( $tokens, $instances ),
+			new FrontendStyles( $tokens, $instances, new DefaultsStylesheet( $defaults, $breakpoints ) ),
 			new BlockMarkupCleaner(),
 		];
 

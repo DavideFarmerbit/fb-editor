@@ -72,6 +72,18 @@ export class Responsive< T extends ResponsiveValue = ResponsiveValue > {
 		return this.values.size === 0;
 	}
 
+	/** Mirrors Responsive::overlay(): per breakpoint, `over`'s value where it has one. */
+	overlay< V extends ResponsiveValue >( over: Responsive< V >, breakpoints: BreakpointList ): Responsive< T | V > {
+		const values = new Map< string, T | V >();
+		for ( const breakpoint of breakpoints ) {
+			const value = over.at( breakpoint.id ) ?? this.at( breakpoint.id );
+			if ( value !== null ) {
+				values.set( breakpoint.id, value );
+			}
+		}
+		return new Responsive( values );
+	}
+
 	/** Breakpoints with a value of their own, in breakpoint order. */
 	setAt( breakpoints: BreakpointList ): BreakpointId[] {
 		return breakpoints.filter( ( breakpoint ) => this.at( breakpoint.id ) !== null ).map( ( breakpoint ) => breakpoint.id );

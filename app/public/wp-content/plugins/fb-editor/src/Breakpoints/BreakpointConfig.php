@@ -6,23 +6,26 @@ namespace Fb\Breakpoints;
 
 use Fb\Json\InvalidJson;
 use Fb\Json\JsonValue;
+use Fb\Theme\ThemeConfigFile;
 
 /**
  * Loads the breakpoint list.
  *
  * Source, in order of precedence:
  *   1. `fb_breakpoints` filter (receives and must return a BreakpointList)
- *   2. `fb.json` in the active (child) theme root
+ *   2. "breakpoints" in the theme's fb.json
  *   3. Built-in fallback
  *
- * A broken fb.json never breaks the site: it is reported with
- * _doing_it_wrong() and the fallback is used.
+ * Invalid breakpoints are reported and the fallback is used.
  */
 final class BreakpointConfig
 {
-	public const string FILE = 'fb.json';
-
 	private ?BreakpointList $list = null;
+
+	public function __construct(
+		private readonly ThemeConfigFile $file = new ThemeConfigFile(),
+	) {
+	}
 
 	public function breakpoints(): BreakpointList
 	{
@@ -59,16 +62,16 @@ final class BreakpointConfig
 
 	private function fromThemeFile(): ?BreakpointList
 	{
-		$file = get_theme_file_path( self::FILE );
+		$section = $this->file->section( 'breakpoints' );
 
-		if ( ! is_readable( $file ) ) {
+		if ( null === $section ) {
 			return null;
 		}
 
 		try {
-			return self::parse( JsonValue::parse( (string) file_get_contents( $file ), self::FILE ) );
+			return self::parse( $section );
 		} catch ( InvalidJson | \InvalidArgumentException $e ) {
-			_doing_it_wrong( __METHOD__, esc_html( $e->getMessage() ) . ' Falling back to default breakpoints.', '0.1.0' );
+			$this->file->report( $e->getMessage() . ' Falling back to default breakpoints.' );
 			return null;
 		}
 	}
@@ -76,12 +79,12 @@ final class BreakpointConfig
 	/**
 	 * @throws InvalidJson|\InvalidArgumentException
 	 */
-	public static function parse( JsonValue $root ): BreakpointList
+	public static function parse( JsonValue $breakpoints ): BreakpointList
 	{
 		$base   = null;
 		$others = [];
 
-		foreach ( $root->get( 'breakpoints' )->list() as $item ) {
+		foreach ( $breakpoints->list() as $item ) {
 			$breakpoint = new Breakpoint(
 				id: new BreakpointId( $item->get( 'id' )->string() ),
 				label: $item->get( 'label' )->string(),
@@ -99,7 +102,7 @@ final class BreakpointConfig
 		}
 
 		if ( null === $base ) {
-			throw new InvalidJson( "{$root->path}.breakpoints: one breakpoint must omit maxWidth (the base)." );
+			throw new InvalidJson( "{$breakpoints->path}: one breakpoint must omit maxWidth (the base)." );
 		}
 
 		return new BreakpointList( $base, ...$others );

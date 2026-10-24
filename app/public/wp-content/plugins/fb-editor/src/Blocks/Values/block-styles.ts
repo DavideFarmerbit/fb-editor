@@ -10,7 +10,11 @@ import type { BlockValues } from './block-values';
 export class BlockStyles {
 	constructor( private readonly breakpoints: BreakpointList ) {}
 
-	bindings( definition: BlockDefinition, values: BlockValues, root: Selector ): StyleBinding[] {
+	/**
+	 * `defaults`: the type's defaults, for conditions (an instance control's
+	 * condition reads the instance's value, else the default).
+	 */
+	bindings( definition: BlockDefinition, values: BlockValues, root: Selector, defaults: BlockValues | null = null ): StyleBinding[] {
 		const bindings: StyleBinding[] = [];
 
 		for ( const control of definition.controls ) {
@@ -22,7 +26,7 @@ export class BlockStyles {
 			const hidden: BreakpointId[] = [];
 			if ( control.visibleWhen !== null ) {
 				for ( const breakpoint of this.breakpoints ) {
-					if ( ! control.visibleWhen.evaluate( values.resolvedAt( breakpoint.id ) ) ) {
+					if ( ! control.visibleWhen.evaluate( values.resolvedAt( breakpoint.id, defaults ) ) ) {
 						hidden.push( breakpoint.id );
 					}
 				}

@@ -23,11 +23,13 @@ final readonly class BlockStyles
 	}
 
 	/**
-	 * @param Selector $root The selector the values apply to: the instance
-	 *     class for instance values, the block class for type defaults.
+	 * @param Selector         $root     The selector the values apply to: the
+	 *     instance class for instance values, the block class for defaults.
+	 * @param BlockValues|null $defaults The type's defaults, for conditions:
+	 *     a control's condition reads the instance's value, else the default.
 	 * @return list<StyleBinding>
 	 */
-	public function bindings( BlockDefinition $definition, BlockValues $values, Selector $root ): array
+	public function bindings( BlockDefinition $definition, BlockValues $values, Selector $root, ?BlockValues $defaults = null ): array
 	{
 		$bindings = [];
 
@@ -40,7 +42,7 @@ final readonly class BlockStyles
 			$hidden = [];
 			if ( null !== $control->visibleWhen ) {
 				foreach ( $this->breakpoints as $breakpoint ) {
-					if ( ! $control->visibleWhen->evaluate( $values->resolvedAt( $breakpoint->id ) ) ) {
+					if ( ! $control->visibleWhen->evaluate( $values->resolvedAt( $breakpoint->id, $defaults ) ) ) {
 						$hidden[] = $breakpoint->id;
 					}
 				}

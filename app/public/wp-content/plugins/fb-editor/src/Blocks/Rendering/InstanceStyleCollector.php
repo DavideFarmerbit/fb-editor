@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Rendering;
 
+use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\BlockValues;
@@ -27,6 +28,9 @@ final class InstanceStyleCollector
 	/** @var array<string, list<StyleBinding>> Keyed by instance class. */
 	private array $bindings = [];
 
+	/** @var array<string, BlockDefinition> Block types rendered, keyed by name. */
+	private array $definitions = [];
+
 	private ?StyleCompiler $compiler = null;
 	private ?BlockStyles $styles = null;
 
@@ -36,6 +40,7 @@ final class InstanceStyleCollector
 	 */
 	public function __construct(
 		private readonly BreakpointConfig $breakpoints,
+		private readonly DefaultsRepository $defaults,
 	) {
 	}
 
@@ -47,14 +52,27 @@ final class InstanceStyleCollector
 	{
 		$key = $instance->value;
 
+		$this->definitions[ (string) $definition->name ] = $definition;
+
 		if ( ! array_key_exists( $key, $this->bindings ) ) {
-			$bindings = $this->styles()->bindings( $definition, $values, Selector::forClass( $key ) );
+			// Conditions read the instance's value, else the type default.
+			$bindings = $this->styles()->bindings( $definition, $values, Selector::forClass( $key ), $this->defaults->for( $definition ) );
 			// Bindings whose values compile to nothing (e.g. hidden everywhere)
 			// don't justify a class.
 			$this->bindings[ $key ] = '' === $this->compiler()->compile( CssLayer::Instances, ...$bindings ) ? [] : $bindings;
 		}
 
 		return [] !== $this->bindings[ $key ];
+	}
+
+	/**
+	 * Block types rendered on the page so far (their defaults get printed).
+	 *
+	 * @return list<BlockDefinition>
+	 */
+	public function definitions(): array
+	{
+		return array_values( $this->definitions );
 	}
 
 	public function css(): string

@@ -16,11 +16,13 @@ final readonly class StyleCase
 
 	/**
 	 * @param array<string, mixed> $attribute Raw boundary data, on purpose.
+	 * @param array<string, mixed> $defaults  The block type's defaults, same shape.
 	 */
 	public function __construct(
 		public string $name,
 		public BlockDefinition $definition,
 		public array $attribute,
+		public array $defaults = [],
 	) {
 	}
 }

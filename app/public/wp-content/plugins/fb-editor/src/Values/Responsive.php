@@ -94,6 +94,26 @@ final readonly class Responsive implements \JsonSerializable
 	}
 
 	/**
+	 * Per breakpoint, `$over`'s value where it has one, else this one.
+	 *
+	 * @template V of ResponsiveValue
+	 * @param self<V> $over
+	 * @return self<T|V>
+	 */
+	public function overlay( self $over, BreakpointList $breakpoints ): self
+	{
+		$values = [];
+		foreach ( $breakpoints as $breakpoint ) {
+			$value = $over->at( $breakpoint->id ) ?? $this->at( $breakpoint->id );
+			if ( null !== $value ) {
+				$values[ $breakpoint->id->value ] = $value;
+			}
+		}
+
+		return new self( $values );
+	}
+
+	/**
 	 * @template V of ResponsiveValue
 	 * @param \Closure(JsonValue): V $parseValue
 	 * @return self<V>

@@ -43,6 +43,15 @@ final readonly class JsonValue
 		return new self( $decoded, $source );
 	}
 
+	/**
+	 * The raw decoded data, to hand to another boundary parser (e.g. a
+	 * defaults section to BlockValues). Never read fields from it directly.
+	 */
+	public function decoded(): mixed
+	{
+		return $this->value;
+	}
+
 	public function isNull(): bool
 	{
 		return null === $this->value;

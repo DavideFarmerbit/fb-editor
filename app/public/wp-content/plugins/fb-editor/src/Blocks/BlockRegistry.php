@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks;
 
+use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Hookable;
 use Fb\TypeScript\ExportToTypeScript;
@@ -29,6 +30,17 @@ final readonly class BlockRegistry implements Hookable
 		Block ...$blocks,
 	) {
 		$this->blocks = array_values( $blocks );
+	}
+
+	public function definition( string $name ): ?BlockDefinition
+	{
+		foreach ( $this->blocks as $block ) {
+			if ( (string) $block->definition()->name === $name ) {
+				return $block->definition();
+			}
+		}
+
+		return null;
 	}
 
 	public function register(): void
