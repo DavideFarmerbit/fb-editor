@@ -9,6 +9,7 @@ use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\BlockValues;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Css\CssLayer;
+use Fb\Presets\Preset;
 use Fb\Presets\PresetKind;
 use Fb\Styles\Selector;
 use Fb\Styles\StyleCompiler;
@@ -45,8 +46,9 @@ final class StyleFixtures
 			];
 		}
 
+		// Same JSON shape as the editor settings' presets.
 		$presets = array_map(
-			static fn ( string $slug ): array => [ 'kind' => PresetKind::Spacing->value, 'slug' => $slug, 'variable' => PresetKind::Spacing->variable( $slug ) ],
+			static fn ( string $slug ): Preset => new Preset( PresetKind::Spacing, $slug, $slug, '1rem' ),
 			self::SPACING_SLUGS
 		);
 

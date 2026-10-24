@@ -51,6 +51,7 @@ export function Inspector( { definition, values, onChange }: InspectorProps ): R
 						{ controls.map( ( control ) => (
 							<ControlField
 								key={ control.id }
+								definition={ definition }
 								control={ control }
 								values={ values }
 								breakpoint={ breakpoint }

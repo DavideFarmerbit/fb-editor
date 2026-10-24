@@ -1,11 +1,11 @@
 /**
  * Mirrors Fb\Values\CssValue and Fb\Values\ResponsiveValue.
  */
-import type { PresetVariables } from '../Presets/presets';
+import type { Presets } from '../Presets/presets';
 
 /** Renders to a safe CSS value. Presets need the variable lookup. */
 export interface CssValue {
-	toCss( presets: PresetVariables ): string;
+	toCss( presets: Presets ): string;
 }
 
 /** A value that can be set per breakpoint (desktop-first inheritance). */

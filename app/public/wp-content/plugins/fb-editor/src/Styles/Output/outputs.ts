@@ -3,7 +3,7 @@
  */
 import { InvalidJson, type JsonValue } from '../../Json/json';
 import { BoxValue, SIDES } from '../../Values/box';
-import type { PresetVariables } from '../../Presets/presets';
+import type { Presets } from '../../Presets/presets';
 import { isCssValue, type ResponsiveValue } from '../../Values/value';
 import { BoxProperty, boxLonghand, CssProperty, DeclarationSet } from '../css';
 
@@ -11,7 +11,7 @@ export interface StyleOutput {
 	/** Every property this output can write (used to revert it when hidden). */
 	properties(): readonly CssProperty[];
 	/** Declarations for a resolved value; wrong types and unset parts produce none. */
-	declarations( value: ResponsiveValue | null, presets: PresetVariables ): DeclarationSet;
+	declarations( value: ResponsiveValue | null, presets: Presets ): DeclarationSet;
 }
 
 export class BoxOutput implements StyleOutput {
@@ -21,7 +21,7 @@ export class BoxOutput implements StyleOutput {
 		return SIDES.map( ( side ) => boxLonghand( this.property, side ) );
 	}
 
-	declarations( value: ResponsiveValue | null, presets: PresetVariables ): DeclarationSet {
+	declarations( value: ResponsiveValue | null, presets: Presets ): DeclarationSet {
 		let declarations = DeclarationSet.empty();
 		if ( ! ( value instanceof BoxValue ) ) {
 			return declarations;
@@ -46,7 +46,7 @@ export class AxisOutput implements StyleOutput {
 		return [ this.block, this.inline ];
 	}
 
-	declarations( value: ResponsiveValue | null, presets: PresetVariables ): DeclarationSet {
+	declarations( value: ResponsiveValue | null, presets: Presets ): DeclarationSet {
 		let declarations = DeclarationSet.empty();
 		if ( ! ( value instanceof BoxValue ) ) {
 			return declarations;
@@ -68,7 +68,7 @@ export class PropertyOutput implements StyleOutput {
 		return this.targets;
 	}
 
-	declarations( value: ResponsiveValue | null, presets: PresetVariables ): DeclarationSet {
+	declarations( value: ResponsiveValue | null, presets: Presets ): DeclarationSet {
 		let declarations = DeclarationSet.empty();
 		if ( ! isCssValue( value ) ) {
 			return declarations;

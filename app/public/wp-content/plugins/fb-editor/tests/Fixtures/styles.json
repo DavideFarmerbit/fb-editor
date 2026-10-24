@@ -29,36 +29,50 @@
         {
             "kind": "spacing",
             "slug": "10",
+            "name": "10",
+            "value": "1rem",
             "variable": "--wp--preset--spacing--10"
         },
         {
             "kind": "spacing",
             "slug": "40",
+            "name": "40",
+            "value": "1rem",
             "variable": "--wp--preset--spacing--40"
         },
         {
             "kind": "spacing",
             "slug": "50",
+            "name": "50",
+            "value": "1rem",
             "variable": "--wp--preset--spacing--50"
         },
         {
             "kind": "spacing",
             "slug": "80",
+            "name": "80",
+            "value": "1rem",
             "variable": "--wp--preset--spacing--80"
         },
         {
             "kind": "spacing",
             "slug": "2xl",
+            "name": "2xl",
+            "value": "1rem",
             "variable": "--wp--preset--spacing--2-xl"
         },
         {
             "kind": "spacing",
             "slug": "xLarge",
+            "name": "xLarge",
+            "value": "1rem",
             "variable": "--wp--preset--spacing--x-large"
         },
         {
             "kind": "spacing",
             "slug": "x_small",
+            "name": "x_small",
+            "value": "1rem",
             "variable": "--wp--preset--spacing--x-small"
         }
     ],

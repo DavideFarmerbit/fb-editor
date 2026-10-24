@@ -3,7 +3,7 @@
  * Same algorithm, same output, byte for byte (checked by the parity suite).
  */
 import type { BreakpointId, BreakpointList } from '../Breakpoints/breakpoints';
-import type { PresetVariables } from '../Presets/presets';
+import type { Presets } from '../Presets/presets';
 import type { Responsive } from '../Values/responsive';
 import { CssLayer, DeclarationSet, REVERT, Selector, wrapInLayer } from './css';
 import type { StyleOutput } from './Output/outputs';
@@ -62,7 +62,7 @@ class RuleSet {
 export class StyleCompiler {
 	constructor(
 		private readonly breakpoints: BreakpointList,
-		private readonly presets: PresetVariables
+		private readonly presets: Presets
 	) {}
 
 	compile( layer: CssLayer, bindings: readonly StyleBinding[] ): string {

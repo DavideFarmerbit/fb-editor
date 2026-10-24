@@ -5,12 +5,12 @@
 import { breakpointListFromJson, type BreakpointList } from '../Breakpoints/breakpoints';
 import { blockDefinitionFromJson, type BlockDefinition } from '../Blocks/Definition/block-definition';
 import { InvalidJson, JsonValue } from '../Json/json';
-import { PresetVariable, PresetVariables } from '../Presets/presets';
+import { Preset, Presets } from '../Presets/presets';
 
 export class EditorSettings {
 	constructor(
 		public readonly breakpoints: BreakpointList,
-		public readonly presets: PresetVariables,
+		public readonly presets: Presets,
 		public readonly blocks: readonly BlockDefinition[]
 	) {}
 
@@ -34,7 +34,7 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 
 	return new EditorSettings(
 		breakpointListFromJson( json.get( 'breakpoints' ) ),
-		new PresetVariables( json.get( 'presets' ).list().map( PresetVariable.fromJson ) ),
+		new Presets( json.get( 'presets' ).list().map( Preset.fromJson ) ),
 		json.get( 'blocks' ).list().map( blockDefinitionFromJson )
 	);
 }

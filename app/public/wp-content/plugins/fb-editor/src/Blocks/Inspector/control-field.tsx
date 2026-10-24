@@ -2,17 +2,18 @@
  * The contract every control UI implements, and the dispatch from a
  * control's input to its UI. Each UI lives next to its PHP input class.
  */
-import { __ } from '@wordpress/i18n';
 import type { ReactElement } from 'react';
 
 import type { Breakpoint, BreakpointList } from '../../Breakpoints/breakpoints';
 import type { ResponsiveValue } from '../../Values/value';
-import type { Control } from '../Definition/block-definition';
+import type { BlockDefinition, Control } from '../Definition/block-definition';
 import { SelectInput, SpacingInput } from '../Definition/Input/inputs';
 import { SelectField } from '../Definition/Input/select-control';
+import { SpacingField } from '../Definition/Input/spacing-control';
 import type { BlockValues } from '../Values/block-values';
 
 export interface ControlFieldProps {
+	readonly definition: BlockDefinition;
 	readonly control: Control;
 	readonly values: BlockValues;
 	/** The breakpoint being edited (the top-bar selection). */
@@ -29,8 +30,7 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 		return <SelectField { ...props } input={ input } />;
 	}
 	if ( input instanceof SpacingInput ) {
-		// Spacing control lands in step 4c.
-		return <p className="fb-inspector__pending">{ props.control.label }: { __( 'spacing control coming soon', 'fb-editor' ) }</p>;
+		return <SpacingField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

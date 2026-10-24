@@ -4,7 +4,7 @@
  */
 import { InvalidJson, type JsonValue } from '../Json/json';
 import { PresetKind } from '../Presets/PresetKind.generated';
-import type { PresetVariables } from '../Presets/presets';
+import type { Presets } from '../Presets/presets';
 import { formatCssNumber } from './css-number';
 import { MAX_ABS } from './CustomLength.generated';
 import { SLUG_PATTERN } from './PresetLength.generated';
@@ -23,7 +23,7 @@ export class PresetLength implements CssValue, ResponsiveValue {
 		}
 	}
 
-	toCss( presets: PresetVariables ): string {
+	toCss( presets: Presets ): string {
 		return `var(${ presets.variable( this.preset, this.slug ) })`;
 	}
 

@@ -16,7 +16,7 @@ import { JsonValue } from '../src/Json/json';
 import { CssLayer, Selector } from '../src/Styles/css';
 import { StyleCompiler } from '../src/Styles/compiler';
 import { formatCssNumber } from '../src/Values/css-number';
-import { PresetVariable, PresetVariables } from '../src/Presets/presets';
+import { Preset, Presets } from '../src/Presets/presets';
 
 const fixtures = JsonValue.of(
 	JSON.parse( readFileSync( fileURLToPath( new URL( './Fixtures/styles.json', import.meta.url ) ), 'utf8' ) ) as unknown,
@@ -24,7 +24,7 @@ const fixtures = JsonValue.of(
 );
 
 const breakpoints = breakpointListFromJson( fixtures.get( 'breakpoints' ) );
-const presets = new PresetVariables( fixtures.get( 'presets' ).list().map( PresetVariable.fromJson ) );
+const presets = new Presets( fixtures.get( 'presets' ).list().map( Preset.fromJson ) );
 const compiler = new StyleCompiler( breakpoints, presets );
 const styles = new BlockStyles( breakpoints );
 
