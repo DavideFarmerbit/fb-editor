@@ -6,6 +6,7 @@ namespace Fb\Blocks\Rendering;
 
 use Fb\Blocks\Block;
 use Fb\Blocks\BlockRegistry;
+use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Values\BlockValues;
 use Fb\Blocks\Values\InstanceClass;
 use Fb\Breakpoints\BreakpointConfig;
@@ -20,6 +21,7 @@ final readonly class BlockRenderer
 	public function __construct(
 		private BreakpointConfig $breakpoints,
 		private InstanceStyleCollector $collector,
+		private DefaultsRepository $defaults,
 	) {
 	}
 
@@ -41,6 +43,6 @@ final readonly class BlockRenderer
 			$classes = $classes->with( ClassList::parse( $userClasses ) );
 		}
 
-		return $block->render( new RenderContext( $definition, $values, $classes, $content ) );
+		return $block->render( new RenderContext( $definition, $values, $this->defaults->for( $definition ), $classes, $content ) );
 	}
 }

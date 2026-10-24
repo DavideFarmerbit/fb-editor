@@ -6,6 +6,9 @@ namespace Fb\Editor;
 
 use Fb\Blocks\Block;
 use Fb\Blocks\BlockRegistry;
+use Fb\Blocks\Defaults\BlockDefaultsInfo;
+use Fb\Blocks\Defaults\BlockDefaultsPostType;
+use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;
@@ -24,6 +27,7 @@ final readonly class EditorAssets implements Hookable
 		private BreakpointConfig $breakpoints,
 		private BlockRegistry $blocks,
 		private PresetRepository $presets,
+		private DefaultsRepository $defaults,
 	) {
 	}
 
@@ -42,10 +46,20 @@ final readonly class EditorAssets implements Hookable
 
 		wp_enqueue_script( self::HANDLE, $this->paths->url( 'build/editor.js' ), $asset->dependencies, $asset->version, true );
 
+		$definitions = array_map( static fn ( Block $block ): BlockDefinition => $block->definition(), $this->blocks->blocks );
+
 		$settings = new EditorSettings(
 			$this->breakpoints->breakpoints(),
 			$this->presets->all(),
-			array_map( static fn ( Block $block ): BlockDefinition => $block->definition(), $this->blocks->blocks )
+			$definitions,
+			array_map(
+				fn ( BlockDefinition $definition ): BlockDefaultsInfo => new BlockDefaultsInfo(
+					$definition->name,
+					BlockDefaultsPostType::slug( $definition->name, get_stylesheet() ),
+					$this->defaults->theme( $definition )
+				),
+				$definitions
+			)
 		);
 
 		wp_add_inline_script( self::HANDLE, 'window.fbEditorSettings = ' . wp_json_encode( $settings ) . ';', 'before' );

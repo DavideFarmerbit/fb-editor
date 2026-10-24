@@ -10,16 +10,19 @@ import type { ReactElement } from 'react';
 
 import type { BlockDefinition, Control } from '../Definition/block-definition';
 import type { ResolvedValues } from '../Definition/Condition/conditions';
+import type { BlockValues } from '../Values/block-values';
 
 interface AddSettingProps {
 	readonly definition: BlockDefinition;
 	/** Controls not in the sidebar yet. */
 	readonly available: readonly Control[];
 	readonly resolved: ResolvedValues;
+	/** Controls with a type default are marked. */
+	readonly defaults: BlockValues;
 	readonly onAdd: ( control: Control ) => void;
 }
 
-export function AddSetting( { definition, available, resolved, onAdd }: AddSettingProps ): ReactElement | null {
+export function AddSetting( { definition, available, resolved, defaults, onAdd }: AddSettingProps ): ReactElement | null {
 	if ( available.length === 0 ) {
 		return null;
 	}
@@ -43,10 +46,13 @@ export function AddSetting( { definition, available, resolved, onAdd }: AddSetti
 						<MenuGroup key={ panel.label } label={ panel.label }>
 							{ controls.map( ( control ) => {
 								const blocked = control.visibleWhen !== null && ! control.visibleWhen.evaluate( resolved );
-								const info =
-									blocked && control.visibleWhen !== null
-										? /* translators: %s: the condition */ sprintf( __( 'Needs %s', 'fb-editor' ), control.visibleWhen.describe( definition ) )
-										: null;
+								let info: string | null = null;
+								if ( blocked && control.visibleWhen !== null ) {
+									/* translators: %s: the condition */
+									info = sprintf( __( 'Needs %s', 'fb-editor' ), control.visibleWhen.describe( definition ) );
+								} else if ( defaults.has( control.id ) ) {
+									info = __( 'Has default', 'fb-editor' );
+								}
 								return (
 									<MenuItem
 										key={ control.id }

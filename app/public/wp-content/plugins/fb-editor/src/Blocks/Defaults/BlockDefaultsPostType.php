@@ -15,7 +15,7 @@ use Fb\TypeScript\ExportToTypeScript;
  * Saved block type defaults: one hidden post per block type and theme.
  *
  * - title:   the block name ("fb/section")
- * - slug:    block + theme ("fb-section--fb-theme"), see slug()
+ * - slug:    block + theme ("fb-section__fb-theme"), see slug()
  * - content: the defaults, same JSON shape as a block's `fb` attribute
  *
  * Being posts, defaults get revisions, export/import and the editor's own
@@ -40,10 +40,13 @@ final readonly class BlockDefaultsPostType implements Hookable
 	/**
 	 * Defaults belong to a theme, like global styles: switching theme
 	 * doesn't carry over a design made for another one.
+	 *
+	 * "__" separates block and theme: sanitize_title() keeps underscores but
+	 * collapses "--", which would make "a-b" + "c" collide with "a" + "b-c".
 	 */
 	public static function slug( BlockName $block, string $stylesheet ): string
 	{
-		return sanitize_title( "{$block->cssClass()}--{$stylesheet}" );
+		return sanitize_title( "{$block->cssClass()}__{$stylesheet}" );
 	}
 
 	public function register(): void

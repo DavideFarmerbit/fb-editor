@@ -5,7 +5,7 @@
  */
 import { Button, RangeControl, SelectControl, TextControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { reset, settings as customIcon } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
@@ -13,7 +13,7 @@ import { settings } from '../../../../Editor/settings';
 import type { Preset } from '../../../../Presets/presets';
 import { AutoLength, CustomLength, PresetReference, Unit, type Length } from '../../../../Values/length';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
-import { Scope } from '../../block-definition';
+import { readControl } from '../../../Inspector/control-reading';
 import type { LengthInput, LengthRules } from './length-input';
 import './length-control.scss';
 
@@ -24,14 +24,15 @@ interface LengthRowProps {
 	readonly label: string;
 	readonly own: LengthReading;
 	readonly inherited: LengthReading;
-	readonly sourceLabel: string | null;
+	/** "Inherited from XL" / "From Section default" while not own. */
+	readonly status: string | null;
 	readonly rules: LengthRules;
 	readonly scale: readonly Preset[];
 	/** Null clears the row at this breakpoint. */
 	readonly onChange: ( length: Length | null ) => void;
 }
 
-export function LengthRow( { label, own, inherited, sourceLabel, rules, scale, onChange }: LengthRowProps ): ReactElement {
+export function LengthRow( { label, own, inherited, status: inheritedStatus, rules, scale, onChange }: LengthRowProps ): ReactElement {
 	const shown = own === 'mixed' ? null : own ?? ( inherited === 'mixed' ? null : inherited );
 	const [ custom, setCustom ] = useState( scale.length === 0 || shown instanceof CustomLength || shown instanceof AutoLength );
 	const isInherited = own === null && inherited !== null;
@@ -45,9 +46,8 @@ export function LengthRow( { label, own, inherited, sourceLabel, rules, scale, o
 	let status: string | null = null;
 	if ( own === 'mixed' || ( isInherited && inherited === 'mixed' ) ) {
 		status = __( 'Mixed', 'fb-editor' );
-	} else if ( isInherited && sourceLabel !== null ) {
-		/* translators: %s: breakpoint label */
-		status = sprintf( __( 'Inherited from %s', 'fb-editor' ), sourceLabel );
+	} else if ( isInherited ) {
+		status = inheritedStatus;
 	}
 
 	return (
@@ -196,21 +196,18 @@ interface LengthFieldProps extends ControlFieldProps {
 }
 
 /** Editor UI for LengthInput: one length row for the control. */
-export function LengthField( { control, input, values, breakpoint, breakpoints, onChange }: LengthFieldProps ): ReactElement {
-	const at = control.scope === Scope.Static ? breakpoints.base.id : breakpoint.id;
-	const responsive = values.get( control.id );
-	const own = asLength( responsive.at( at ) );
-	const resolved = asLength( responsive.resolve( at, breakpoints ) );
-	const source = own === null && resolved !== null ? breakpoints.get( responsive.source( at, breakpoints ) ?? at ) : undefined;
+export function LengthField( props: LengthFieldProps ): ReactElement {
+	const { control, input, onChange } = props;
+	const reading = readControl( props );
 
 	return (
 		<LengthRow
 			// Remount per breakpoint: local edit state must not leak across.
-			key={ at }
+			key={ reading.at }
 			label={ control.label }
-			own={ own }
-			inherited={ own === null ? resolved : null }
-			sourceLabel={ source?.label ?? null }
+			own={ asLength( reading.own ) }
+			inherited={ asLength( reading.inherited ) }
+			status={ reading.status }
 			rules={ input }
 			scale={ input.scale === null ? [] : settings.presets.ofKind( input.scale ) }
 			onChange={ onChange }

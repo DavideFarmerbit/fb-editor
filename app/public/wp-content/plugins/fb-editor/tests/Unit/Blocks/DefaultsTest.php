@@ -33,7 +33,10 @@ final class DefaultsTest extends TestCase
 		$this->section     = new Section();
 
 		// Sanitizing on save needs the post type hooks.
-		$registry = new BlockRegistry( new BlockRenderer( $this->breakpoints, new InstanceStyleCollector( $this->breakpoints, $this->repository() ) ), $this->section );
+		$registry = new BlockRegistry(
+			new BlockRenderer( $this->breakpoints, new InstanceStyleCollector( $this->breakpoints, $this->repository() ), $this->repository() ),
+			$this->section
+		);
 		( new BlockDefaultsPostType( $registry, $this->breakpoints ) )->register();
 		do_action( 'init' );
 	}
@@ -99,6 +102,16 @@ final class DefaultsTest extends TestCase
 		wp_set_current_user( 0 );
 		self::assertSame( 401, rest_do_request( new \WP_REST_Request( 'GET', $route ) )->get_status() );
 		self::assertSame( 401, rest_do_request( new \WP_REST_Request( 'GET', "{$route}/{$this->postId}" ) )->get_status() );
+	}
+
+	public function testRenderFallsBackToTheDefaultTag(): void
+	{
+		$this->save( '{"tag":"aside"}' );
+		$repository = $this->repository();
+		$renderer   = new BlockRenderer( $this->breakpoints, new InstanceStyleCollector( $this->breakpoints, $repository ), $repository );
+
+		self::assertStringStartsWith( '<aside class="fb-section', $renderer->render( $this->section, [], '' ) );
+		self::assertStringStartsWith( '<main class="fb-section', $renderer->render( $this->section, [ 'fb' => [ 'tag' => 'main' ] ], '' ) );
 	}
 
 	public function testNoBlocksOnThePageMeansNoDefaultsCss(): void

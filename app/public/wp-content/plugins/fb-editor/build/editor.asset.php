@@ -4,6 +4,7 @@
 		'wp-block-editor',
 		'wp-blocks',
 		'wp-components',
+		'wp-core-data',
 		'wp-data',
 		'wp-editor',
 		'wp-element',
@@ -11,5 +12,5 @@
 		'wp-plugins',
 		'wp-primitives'
 	),
-	'version' => '7de50ef87c5c09f7bae7'
+	'version' => 'e4f61539c04c0ed23269'
 );

@@ -93,3 +93,38 @@ describe( 'condition hints', () => {
 		expect( control( 'gap' ).visibleWhen?.describe( section ) ).toBe( 'Display: Flex or Grid' );
 	} );
 } );
+
+describe( 'defaults in the editor', () => {
+	const json = ( value: unknown ): unknown => JSON.parse( JSON.stringify( value ) ) as unknown;
+	const values = ( attribute: unknown ) => BlockValues.fromAttribute( attribute, section, breakpoints );
+
+	test( 'saved defaults overlay theme defaults per breakpoint', () => {
+		const theme = values( { display: { desktop: 'flex', mobile: 'block' } } );
+		const saved = values( { display: { mobile: 'grid' } } );
+		expect( json( theme.overlay( saved ) ) ).toEqual( { display: { desktop: 'flex', mobile: 'grid' } } );
+	} );
+
+	test( '"Make default" copies one control, every breakpoint, leaving the rest', () => {
+		const block = values( { display: { desktop: 'grid', tablet: 'flex' }, tag: 'aside' } );
+		const saved = values( { tag: 'header' } );
+		expect( json( saved.withControlFrom( control( 'display' ), block ) ) ).toEqual( {
+			tag: 'header',
+			display: { desktop: 'grid', tablet: 'flex' },
+		} );
+	} );
+
+	test( 'conditions read the block value, else the default', () => {
+		const defaults = values( { display: { desktop: 'flex', mobile: 'block' } } );
+		const gap = control( 'gap' ).visibleWhen;
+
+		expect( gap?.evaluate( values( {} ).resolvedAt( bp( 'desktop' ), defaults ) ) ).toBe( true );
+		expect( gap?.evaluate( values( {} ).resolvedAt( bp( 'mobile' ), defaults ) ) ).toBe( false );
+		expect( gap?.evaluate( values( { display: { mobile: 'grid' } } ).resolvedAt( bp( 'mobile' ), defaults ) ) ).toBe( true );
+	} );
+
+	test( 'the tag falls back to the default, then the input fallback', () => {
+		expect( section.option( values( {} ), 'tag', values( { tag: 'aside' } ) ) ).toBe( 'aside' );
+		expect( section.option( values( { tag: 'main' } ), 'tag', values( { tag: 'aside' } ) ) ).toBe( 'main' );
+		expect( section.option( values( {} ), 'tag', values( {} ) ) ).toBe( 'section' );
+	} );
+} );

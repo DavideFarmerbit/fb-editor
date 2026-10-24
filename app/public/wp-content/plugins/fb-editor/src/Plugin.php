@@ -40,7 +40,7 @@ final readonly class Plugin
 		$tokens      = new TokenStylesheet( $presets );
 		$instances   = new InstanceStyleCollector( $breakpoints, $defaults );
 		$blocks      = new BlockRegistry(
-			new BlockRenderer( $breakpoints, $instances ),
+			new BlockRenderer( $breakpoints, $instances, $defaults ),
 			new Section(),
 		);
 
@@ -48,7 +48,7 @@ final readonly class Plugin
 			new CoreDefaultsStripper(),
 			$blocks,
 			new BlockDefaultsPostType( $blocks, $breakpoints ),
-			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets ),
+			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets, $defaults ),
 			new CanvasStyles( $tokens ),
 			new FrontendStyles( $tokens, $instances, new DefaultsStylesheet( $defaults, $breakpoints ) ),
 			new BlockMarkupCleaner(),

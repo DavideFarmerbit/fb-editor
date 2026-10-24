@@ -22,6 +22,8 @@ final readonly class RenderContext
 	public function __construct(
 		public BlockDefinition $definition,
 		public BlockValues $values,
+		/** The block type's defaults: what unset values fall back to. */
+		public BlockValues $defaults,
 		/** Block class, instance class (if it has CSS), user classes. */
 		public ClassList $rootClasses,
 		/** Rendered inner blocks. Already HTML: output as is. */
@@ -40,9 +42,9 @@ final readonly class RenderContext
 	}
 
 	/**
-	 * The base value of a select control as its enum case (e.g. the tag),
-	 * or the input's fallback while nothing is chosen. Selects read by
-	 * render() must declare a fallback.
+	 * The base value of a select control as its enum case (e.g. the tag):
+	 * the block's own, else the type default, else the input's fallback.
+	 * Selects read by render() must declare a fallback.
 	 *
 	 * @template T of LabeledOption
 	 * @param class-string<T> $options Must be the control's option enum.
@@ -56,7 +58,8 @@ final readonly class RenderContext
 			throw new \LogicException( "{$this->definition->name}: \"{$id}\" is not a select over {$options}." );
 		}
 
-		$value  = $this->values->get( $id )->at( $this->values->baseBreakpoint() );
+		$base   = $this->values->baseBreakpoint();
+		$value  = $this->values->get( $id )->at( $base ) ?? $this->defaults->get( $id )->at( $base );
 		$chosen = $value instanceof KeywordValue ? $options::tryFrom( $value->keyword ) : null;
 
 		$fallback = $input->fallback instanceof $options ? $input->fallback : null;

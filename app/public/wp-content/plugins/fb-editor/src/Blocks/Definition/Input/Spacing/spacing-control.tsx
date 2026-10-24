@@ -19,6 +19,7 @@ import type { ReactElement } from 'react';
 import { settings } from '../../../../Editor/settings';
 import { controlKey, store } from '../../../../Editor/store';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
+import { fromDefault, inheritedFrom } from '../../../Inspector/control-reading';
 import { Scope } from '../../block-definition';
 import { LengthRow } from '../Length/length-control';
 import { SpacingMode, type SpacingInput } from './spacing-input';
@@ -66,11 +67,14 @@ interface SpacingFieldProps extends ControlFieldProps {
 }
 
 export function SpacingField( props: SpacingFieldProps ): ReactElement {
-	const { definition, control, input, values, breakpoint, breakpoints, onChange } = props;
+	const { definition, control, input, values, defaults, breakpoint, breakpoints, onChange } = props;
 	const at = control.scope === Scope.Static ? breakpoints.base.id : breakpoint.id;
 	const responsive = values.get( control.id );
 	const own = asBox( responsive.at( at ) );
-	const resolved = asBox( responsive.resolve( at, breakpoints ) );
+	// Per side: this block's value (own or from a larger breakpoint), else the type default.
+	const fromBlock = asBox( responsive.resolve( at, breakpoints ) );
+	const fromType = asBox( defaults.get( control.id ).resolve( at, breakpoints ) );
+	const resolved = fromBlock === null ? fromType : fromType === null ? fromBlock : fromBlock.inheritFrom( fromType );
 
 	const key = controlKey( definition.name, control.id );
 	const remembered = useSelect( ( select ) => select( store ).getSpacingMode( key ), [ key ] );
@@ -102,6 +106,13 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 			{ rowsFor( mode ).map( ( row ) => {
 				const ownRow = rowValue( own, row.sides );
 				const source = ownRow === null ? rowSource( responsive, row.sides, at, breakpoints ) : null;
+				const sourceBreakpoint = source === null ? undefined : breakpoints.get( source );
+				let status: string | null = null;
+				if ( sourceBreakpoint !== undefined ) {
+					status = inheritedFrom( sourceBreakpoint.label );
+				} else if ( rowValue( fromType, row.sides ) !== null ) {
+					status = fromDefault( definition.title );
+				}
 				return (
 					<LengthRow
 						// Remount per breakpoint: local edit state must not leak across.
@@ -109,7 +120,7 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 						label={ rowLabel( row.id ) }
 						own={ ownRow }
 						inherited={ ownRow === null ? rowValue( resolved, row.sides ) : null }
-						sourceLabel={ source === null ? null : breakpoints.get( source )?.label ?? null }
+						status={ status }
 						rules={ input }
 						scale={ scale }
 						onChange={ ( length ) => onChange( withRow( own, row.sides, length ) ) }

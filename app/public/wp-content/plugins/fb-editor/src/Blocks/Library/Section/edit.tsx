@@ -13,11 +13,11 @@ import type { ReactElement } from 'react';
 import { BlockEditor, type FbBlockEditProps } from '../../register';
 import { INNER, NAME, TAG } from './Section.generated';
 
-function Edit( { definition, values, rootProps }: FbBlockEditProps ): ReactElement {
+function Edit( { definition, values, defaults, rootProps }: FbBlockEditProps ): ReactElement {
 	const blockProps = useBlockProps( rootProps );
 	const innerBlocksProps = useInnerBlocksProps( { className: definition.elementClass( INNER ) } );
 
-	return createElement( definition.option( values, TAG ), blockProps, <div { ...innerBlocksProps } /> );
+	return createElement( definition.option( values, TAG, defaults ), blockProps, <div { ...innerBlocksProps } /> );
 }
 
 export const sectionEditor = new BlockEditor( NAME, Edit, () => <InnerBlocks.Content /> );

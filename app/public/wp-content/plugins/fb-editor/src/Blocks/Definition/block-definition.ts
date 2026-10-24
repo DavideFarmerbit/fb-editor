@@ -91,16 +91,18 @@ export class BlockDefinition implements ConditionLabels {
 	}
 
 	/**
-	 * Mirrors RenderContext::option(): the base value of a select control,
-	 * or its fallback while nothing is chosen. Throws if there is neither.
+	 * Mirrors RenderContext::option(): the base value of a select control:
+	 * the block's own, else the type default, else the input's fallback.
+	 * Throws if there is none of them.
 	 */
-	option( values: BlockValues, id: string ): string {
+	option( values: BlockValues, id: string, defaults: BlockValues | null = null ): string {
 		const control = this.controls.find( ( candidate ) => candidate.id === id );
 		if ( control === undefined || ! ( control.input instanceof SelectInput ) ) {
 			throw new InvalidJson( `${ this.name }: "${ id }" is not a select control` );
 		}
 
-		const value = values.get( control.id ).at( values.baseBreakpoint() );
+		const base = values.baseBreakpoint();
+		const value = values.get( control.id ).at( base ) ?? defaults?.get( control.id ).at( base ) ?? null;
 		const option = ( value instanceof KeywordValue ? value.keyword : null ) ?? control.input.fallback;
 		if ( option === null ) {
 			throw new InvalidJson( `${ this.name }: "${ id }" is read by the editor markup but has no fallback` );

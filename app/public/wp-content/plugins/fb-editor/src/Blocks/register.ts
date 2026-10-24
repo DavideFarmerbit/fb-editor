@@ -13,6 +13,8 @@ import type { ReactElement, RefCallback } from 'react';
 
 import { settings } from '../Editor/settings';
 import { ATTRIBUTE } from './BlockRegistry.generated';
+import { DefaultsStyles } from './Defaults/defaults-styles';
+import { useBlockDefaults } from './Defaults/use-block-defaults';
 import type { BlockDefinition } from './Definition/block-definition';
 import { NAMESPACE } from './Definition/BlockName.generated';
 import { Inspector } from './Inspector/inspector';
@@ -32,6 +34,8 @@ export interface FbBlockEditProps extends BlockEditProps< FbAttributes > {
 	readonly definition: BlockDefinition;
 	/** Sanitized through the definition: never read raw attributes. */
 	readonly values: BlockValues;
+	/** The type's defaults: what unset values fall back to. */
+	readonly defaults: BlockValues;
 	readonly rootProps: RootProps;
 }
 
@@ -63,6 +67,7 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 		() => BlockValues.fromAttribute( attribute, definition, settings.breakpoints ),
 		[ attribute, definition ]
 	);
+	const { defaults, save: saveDefaults } = useBlockDefaults( definition );
 	// Editor-only: never saved, so it can be anything unique.
 	const instanceClass = `fb-i-${ props.clientId }`;
 
@@ -75,15 +80,19 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 			createElement( Inspector, {
 				definition,
 				values,
+				defaults,
 				clientId: props.clientId,
 				onChange: ( next: BlockValues ) => props.setAttributes( { [ ATTRIBUTE ]: next.toAttribute() } ),
+				onChangeDefaults: saveDefaults,
 			} )
 		),
-		createElement( InstanceStyles, { definition, values, instanceClass, root } ),
+		createElement( DefaultsStyles, { definition, defaults: defaults.values, root } ),
+		createElement( InstanceStyles, { definition, values, defaults: defaults.values, instanceClass, root } ),
 		createElement( editor.edit, {
 			...props,
 			definition,
 			values,
+			defaults: defaults.values,
 			rootProps: { className: `${ definition.className } ${ instanceClass }`, ref: setRoot },
 		} )
 	);

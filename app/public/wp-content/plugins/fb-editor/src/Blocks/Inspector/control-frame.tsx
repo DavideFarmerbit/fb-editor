@@ -7,10 +7,10 @@
  *   breakpoint (it may still inherit: editing creates an override here);
  * - inactive, with the reason, where its show-only-if condition fails.
  */
-import { Button } from '@wordpress/components';
+import { Button, DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
 import { useDispatch } from '@wordpress/data';
 import { __, sprintf } from '@wordpress/i18n';
-import { trash } from '@wordpress/icons';
+import { moreVertical, trash } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
 import { describeBreakpoint } from '../../Breakpoints/Preview/preview';
@@ -22,10 +22,12 @@ interface ControlFrameProps extends ControlFieldProps {
 	/** Why the control is inactive at this breakpoint; null when active. */
 	readonly inactiveReason: string | null;
 	readonly onRemove: () => void;
+	/** Copies this control's values to the type default; null if not allowed. */
+	readonly onMakeDefault: ( () => void ) | null;
 }
 
 export function ControlFrame( props: ControlFrameProps ): ReactElement {
-	const { control, values, breakpoint, breakpoints, inactiveReason, onRemove } = props;
+	const { definition, control, values, breakpoint, breakpoints, inactiveReason, onRemove, onMakeDefault } = props;
 	const { setBreakpoint } = useDispatch( store );
 
 	const responsive = values.get( control.id );
@@ -67,13 +69,38 @@ export function ControlFrame( props: ControlFrameProps ): ReactElement {
 						);
 					} ) }
 				</span>
-				<Button
-					size="small"
-					icon={ trash }
-					label={ __( 'Remove setting', 'fb-editor' ) }
-					className="fb-control__remove"
-					onClick={ onRemove }
-				/>
+				<DropdownMenu
+					icon={ moreVertical }
+					label={ __( 'Setting options', 'fb-editor' ) }
+					toggleProps={ { size: 'small' } }
+					popoverProps={ { placement: 'bottom-end' } }
+				>
+					{ ( { onClose } ) => (
+						<MenuGroup>
+							{ onMakeDefault !== null && (
+								<MenuItem
+									info={ /* translators: %s: block type name */ sprintf( __( 'Every %s without its own value', 'fb-editor' ), definition.title ) }
+									onClick={ () => {
+										onMakeDefault();
+										onClose();
+									} }
+								>
+									{ /* translators: %s: block type name */ sprintf( __( 'Make %s default', 'fb-editor' ), definition.title ) }
+								</MenuItem>
+							) }
+							<MenuItem
+								icon={ trash }
+								isDestructive
+								onClick={ () => {
+									onRemove();
+									onClose();
+								} }
+							>
+								{ __( 'Remove setting', 'fb-editor' ) }
+							</MenuItem>
+						</MenuGroup>
+					) }
+				</DropdownMenu>
 			</div>
 			{ inactiveReason !== null && (
 				<p className="fb-control__inactive">

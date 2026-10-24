@@ -25,8 +25,9 @@ final class SectionRenderTest extends TestCase
 	{
 		add_filter( 'fb_breakpoints', TestBreakpoints::list( ... ) );
 		$config          = new BreakpointConfig();
-		$this->collector = new InstanceStyleCollector( $config, new DefaultsRepository( new ThemeConfigFile(), $config ) );
-		$this->renderer  = new BlockRenderer( $config, $this->collector );
+		$defaults        = new DefaultsRepository( new ThemeConfigFile(), $config );
+		$this->collector = new InstanceStyleCollector( $config, $defaults );
+		$this->renderer  = new BlockRenderer( $config, $this->collector, $defaults );
 	}
 
 	protected function tearDown(): void

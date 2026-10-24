@@ -23,6 +23,8 @@ export interface ControlFieldProps {
 	readonly definition: BlockDefinition;
 	readonly control: Control;
 	readonly values: BlockValues;
+	/** The block type's defaults: the last fallback of every control. */
+	readonly defaults: BlockValues;
 	/** The breakpoint being edited (the top-bar selection). */
 	readonly breakpoint: Breakpoint;
 	readonly breakpoints: BreakpointList;

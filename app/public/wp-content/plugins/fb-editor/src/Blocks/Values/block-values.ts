@@ -69,6 +69,21 @@ export class BlockValues {
 		return ! this.get( id ).isEmpty();
 	}
 
+	/**
+	 * A copy with this control's values (every breakpoint) taken from
+	 * `source`, e.g. a block's values copied into its type defaults.
+	 */
+	withControlFrom( control: Control, source: BlockValues ): BlockValues {
+		const values = new Map< string, Responsive >();
+		for ( const candidate of this.definition.controls ) {
+			const next = candidate.id === control.id ? source.get( control.id ) : this.values.get( candidate.id );
+			if ( next !== undefined && ! next.isEmpty() ) {
+				values.set( candidate.id, next );
+			}
+		}
+		return new BlockValues( this.definition, this.breakpoints, values );
+	}
+
 	/** A copy without any value for this control, at every breakpoint. */
 	withoutControl( control: Control ): BlockValues {
 		const values = new Map( this.values );

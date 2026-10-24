@@ -4,7 +4,7 @@
  * at this breakpoint: shows the inherited color with its source.
  */
 import { Button, ColorPicker, Dropdown } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { reset } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
@@ -13,7 +13,7 @@ import { PresetKind } from '../../../../Presets/presets';
 import { CustomColor, type Color } from '../../../../Values/color';
 import { PresetReference } from '../../../../Values/preset-reference';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
-import { Scope } from '../../block-definition';
+import { readControl } from '../../../Inspector/control-reading';
 import type { ColorInput } from './color-input';
 import './color-control.scss';
 
@@ -25,13 +25,11 @@ function asColor( value: unknown ): Color | null {
 	return value instanceof PresetReference || value instanceof CustomColor ? value : null;
 }
 
-export function ColorField( { control, input, values, breakpoint, breakpoints, onChange }: ColorFieldProps ): ReactElement {
-	const at = control.scope === Scope.Static ? breakpoints.base.id : breakpoint.id;
-	const responsive = values.get( control.id );
-	const own = asColor( responsive.at( at ) );
-	const resolved = asColor( responsive.resolve( at, breakpoints ) );
-	const shown = own ?? resolved;
-	const source = own === null && resolved !== null ? breakpoints.get( responsive.source( at, breakpoints ) ?? at ) : undefined;
+export function ColorField( props: ColorFieldProps ): ReactElement {
+	const { control, input, onChange } = props;
+	const reading = readControl( props );
+	const own = asColor( reading.own );
+	const shown = asColor( reading.shown );
 	const palette = settings.presets.ofKind( PresetKind.Color );
 
 	const emit = ( color: Color ): void => {
@@ -46,9 +44,7 @@ export function ColorField( { control, input, values, breakpoint, breakpoints, o
 	return (
 		<div className={ own === null && shown !== null ? 'fb-color is-inherited' : 'fb-color' }>
 			<div className="fb-color__header">
-				<span className="fb-color__status">
-					{ source !== undefined && /* translators: %s: breakpoint label */ sprintf( __( 'Inherited from %s', 'fb-editor' ), source.label ) }
-				</span>
+				<span className="fb-color__status">{ reading.status }</span>
 				{ own !== null && (
 					<Button size="small" icon={ reset } label={ __( 'Reset to inherited', 'fb-editor' ) } onClick={ () => onChange( null ) } />
 				) }
