@@ -2,22 +2,37 @@
  * Editor half of fb blocks. Everything about a block except its editor
  * markup comes from PHP: metadata via WordPress's server bootstrap (see
  * types/wordpress__blocks.d.ts), controls via the definition in settings.
+ *
+ * Every block's edit is wrapped: the wrapper parses values, renders the
+ * generated sidebar and injects live CSS, so blocks only write markup.
  */
+import { InspectorControls } from '@wordpress/block-editor';
 import { registerBlockType, type BlockEditProps } from '@wordpress/blocks';
-import type { ReactElement } from 'react';
+import { createElement, Fragment, useMemo, useState } from '@wordpress/element';
+import type { ReactElement, RefCallback } from 'react';
 
+import { settings } from '../Editor/settings';
+import { ATTRIBUTE } from './BlockRegistry.generated';
 import type { BlockDefinition } from './Definition/block-definition';
 import { NAMESPACE } from './Definition/BlockName.generated';
+import { Inspector } from './Inspector/inspector';
+import { InstanceStyles } from './Rendering/instance-styles';
 import { BlockValues } from './Values/block-values';
-import { ATTRIBUTE } from './BlockRegistry.generated';
-import { settings } from '../Editor/settings';
 
 export type FbAttributes = Record< string, unknown >;
+
+/** Props for the block root: pass to useBlockProps() as is. */
+export interface RootProps {
+	/** Block class + editor-only instance class (live CSS targets it). */
+	readonly className: string;
+	readonly ref: RefCallback< HTMLElement >;
+}
 
 export interface FbBlockEditProps extends BlockEditProps< FbAttributes > {
 	readonly definition: BlockDefinition;
 	/** Sanitized through the definition: never read raw attributes. */
 	readonly values: BlockValues;
+	readonly rootProps: RootProps;
 }
 
 /**
@@ -36,6 +51,43 @@ export class BlockEditor {
 	}
 }
 
+interface WrapperProps extends BlockEditProps< FbAttributes > {
+	readonly editor: BlockEditor;
+	readonly definition: BlockDefinition;
+}
+
+function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactElement {
+	const [ root, setRoot ] = useState< HTMLElement | null >( null );
+	const attribute = props.attributes[ ATTRIBUTE ];
+	const values = useMemo(
+		() => BlockValues.fromAttribute( attribute, definition, settings.breakpoints ),
+		[ attribute, definition ]
+	);
+	// Editor-only: never saved, so it can be anything unique.
+	const instanceClass = `fb-i-${ props.clientId }`;
+
+	return createElement(
+		Fragment,
+		null,
+		createElement(
+			InspectorControls,
+			null,
+			createElement( Inspector, {
+				definition,
+				values,
+				onChange: ( next: BlockValues ) => props.setAttributes( { [ ATTRIBUTE ]: next.toAttribute() } ),
+			} )
+		),
+		createElement( InstanceStyles, { definition, values, instanceClass, root } ),
+		createElement( editor.edit, {
+			...props,
+			definition,
+			values,
+			rootProps: { className: `${ definition.className } ${ instanceClass }`, ref: setRoot },
+		} )
+	);
+}
+
 /**
  * Registers every PHP-defined block with its editor markup. A block defined
  * in PHP without editor markup (or the reverse) is a bug: reported loudly.
@@ -50,12 +102,7 @@ export function registerBlocks( editors: readonly BlockEditor[] ): void {
 		}
 
 		registerBlockType< FbAttributes >( definition.name, {
-			edit: ( props ) =>
-				editor.edit( {
-					...props,
-					definition,
-					values: BlockValues.fromAttribute( props.attributes[ ATTRIBUTE ], definition, settings.breakpoints ),
-				} ),
+			edit: ( props ) => createElement( FbBlockEdit, { ...props, editor, definition } ),
 			save: editor.save,
 		} );
 	}

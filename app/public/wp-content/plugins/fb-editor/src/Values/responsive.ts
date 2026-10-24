@@ -49,6 +49,25 @@ export class Responsive< T extends ResponsiveValue = ResponsiveValue > {
 		return null;
 	}
 
+	/**
+	 * The nearest breakpoint, from this one up to the base, that has its own
+	 * value: where an inherited value comes from. Null if nothing is set.
+	 */
+	source( breakpoint: BreakpointId, breakpoints: BreakpointList ): BreakpointId | null {
+		let source: BreakpointId | null = null;
+
+		for ( const candidate of breakpoints ) {
+			if ( this.at( candidate.id ) !== null ) {
+				source = candidate.id;
+			}
+			if ( candidate.id === breakpoint ) {
+				return source;
+			}
+		}
+
+		return null;
+	}
+
 	isEmpty(): boolean {
 		return this.values.size === 0;
 	}

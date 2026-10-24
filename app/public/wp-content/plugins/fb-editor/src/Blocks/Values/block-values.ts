@@ -64,6 +64,27 @@ export class BlockValues {
 		return this.values.get( id ) ?? Responsive.empty();
 	}
 
+	/**
+	 * A copy with one control's value set (or cleared, with null) at a
+	 * breakpoint. Static controls always write the base breakpoint. Values
+	 * stay in definition order, the canonical order PHP also uses.
+	 */
+	with( control: Control, breakpoint: BreakpointId, value: ResponsiveValue | null ): BlockValues {
+		const at = control.scope === Scope.Static ? this.baseBreakpoint() : breakpoint;
+		const current = this.get( control.id );
+		const updated = value === null ? current.without( at ) : current.with( at, value );
+
+		const values = new Map< string, Responsive >();
+		for ( const candidate of this.definition.controls ) {
+			const next = candidate.id === control.id ? updated : this.values.get( candidate.id );
+			if ( next !== undefined && ! next.isEmpty() ) {
+				values.set( candidate.id, next );
+			}
+		}
+
+		return new BlockValues( this.definition, this.breakpoints, values );
+	}
+
 	isEmpty(): boolean {
 		return this.values.size === 0;
 	}
@@ -82,6 +103,11 @@ export class BlockValues {
 			}
 		} );
 		return new ResolvedValueMap( resolved );
+	}
+
+	/** Plain JSON for setAttributes(): no class instances in the block store. */
+	toAttribute(): unknown {
+		return JSON.parse( JSON.stringify( this ) ) as unknown;
 	}
 
 	/** Canonical form, as PHP serializes it: static values unwrapped. */
