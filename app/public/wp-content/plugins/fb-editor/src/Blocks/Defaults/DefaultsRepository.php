@@ -20,9 +20,14 @@ final class DefaultsRepository
 	/** @var array<string, BlockValues> Keyed by block name. */
 	private array $merged = [];
 
+	/**
+	 * @param string|null $stylesheet Theme whose saved defaults to read;
+	 *     defaults to the active theme.
+	 */
 	public function __construct(
 		private readonly ThemeConfigFile $file,
 		private readonly BreakpointConfig $breakpoints,
+		private readonly ?string $stylesheet = null,
 	) {
 	}
 
@@ -45,7 +50,7 @@ final class DefaultsRepository
 		$posts = get_posts(
 			[
 				'post_type'        => BlockDefaultsPostType::POST_TYPE,
-				'name'             => BlockDefaultsPostType::slug( $definition->name, get_stylesheet() ),
+				'name'             => BlockDefaultsPostType::slug( $definition->name, $this->stylesheet ?? get_stylesheet() ),
 				'post_status'      => 'publish',
 				'numberposts'      => 1,
 				'suppress_filters' => false,

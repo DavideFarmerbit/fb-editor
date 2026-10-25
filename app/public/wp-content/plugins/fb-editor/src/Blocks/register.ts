@@ -15,7 +15,8 @@ import { settings } from '../Editor/settings';
 import { ATTRIBUTE } from './BlockRegistry.generated';
 import { DefaultsStyles } from './Defaults/defaults-styles';
 import { useBlockDefaults } from './Defaults/use-block-defaults';
-import type { BlockDefinition } from './Definition/block-definition';
+import type { BlockDefinition, Control } from './Definition/block-definition';
+import { fromDefault } from './Inspector/control-reading';
 import { NAMESPACE } from './Definition/BlockName.generated';
 import { Inspector } from './Inspector/inspector';
 import { InstanceStyles } from './Rendering/instance-styles';
@@ -80,10 +81,12 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 			createElement( Inspector, {
 				definition,
 				values,
-				defaults,
-				clientId: props.clientId,
+				fallback: defaults.values,
+				fallbackStatus: fromDefault( definition.title ),
+				memoryKey: props.clientId,
+				listFallbackControls: false,
 				onChange: ( next: BlockValues ) => props.setAttributes( { [ ATTRIBUTE ]: next.toAttribute() } ),
-				onChangeDefaults: saveDefaults,
+				makeDefault: defaults.canEdit ? ( control: Control ) => saveDefaults( defaults.saved.withControlFrom( control, values ) ) : null,
 			} )
 		),
 		createElement( DefaultsStyles, { definition, defaults: defaults.values, root } ),

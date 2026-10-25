@@ -22,6 +22,9 @@ use PHPUnit\Framework\TestCase;
  */
 final class DefaultsTest extends TestCase
 {
+	/** A theme that doesn't exist: tests never meet real saved defaults. */
+	private const string THEME = 'fb-phpunit-theme';
+
 	private BreakpointConfig $breakpoints;
 	private Section $section;
 	private ?int $postId = null;
@@ -52,7 +55,7 @@ final class DefaultsTest extends TestCase
 
 	private function repository(): DefaultsRepository
 	{
-		return new DefaultsRepository( new ThemeConfigFile( dirname( __DIR__, 2 ) . '/Fixtures/fb-defaults.json' ), $this->breakpoints );
+		return new DefaultsRepository( new ThemeConfigFile( dirname( __DIR__, 2 ) . '/Fixtures/fb-defaults.json' ), $this->breakpoints, self::THEME );
 	}
 
 	private function save( string $content ): void
@@ -62,7 +65,7 @@ final class DefaultsTest extends TestCase
 				'post_type'    => BlockDefaultsPostType::POST_TYPE,
 				'post_status'  => 'publish',
 				'post_title'   => 'fb/section',
-				'post_name'    => BlockDefaultsPostType::slug( $this->section->definition()->name, get_stylesheet() ),
+				'post_name'    => BlockDefaultsPostType::slug( $this->section->definition()->name, self::THEME ),
 				'post_content' => wp_slash( $content ),
 			]
 		);

@@ -23,8 +23,9 @@ interface State {
 	/** Redux state must be plain data: keyed by ControlKey. */
 	readonly spacingModes: Readonly< Record< ControlKey, SpacingMode > >;
 	/**
-	 * Controls added from the sidebar's "Add setting" menu, per block
-	 * clientId. Keeps an added control visible while it's still empty.
+	 * Controls added from the "Add setting" menu, per memory key (a block's
+	 * clientId, or a block type in the defaults sidebar). Keeps an added
+	 * control visible while it's still empty.
 	 */
 	readonly addedControls: Readonly< Record< string, readonly string[] > >;
 }
@@ -42,13 +43,13 @@ interface SetSpacingModeAction {
 
 interface AddControlAction {
 	readonly type: 'ADD_CONTROL';
-	readonly clientId: string;
+	readonly key: string;
 	readonly controlId: string;
 }
 
 interface ForgetControlAction {
 	readonly type: 'FORGET_CONTROL';
-	readonly clientId: string;
+	readonly key: string;
 	readonly controlId: string;
 }
 
@@ -69,11 +70,11 @@ const actions = {
 	setSpacingMode( key: ControlKey, mode: SpacingMode ): SetSpacingModeAction {
 		return { type: 'SET_SPACING_MODE', key, mode };
 	},
-	addControl( clientId: string, controlId: string ): AddControlAction {
-		return { type: 'ADD_CONTROL', clientId, controlId };
+	addControl( key: string, controlId: string ): AddControlAction {
+		return { type: 'ADD_CONTROL', key, controlId };
 	},
-	forgetControl( clientId: string, controlId: string ): ForgetControlAction {
-		return { type: 'FORGET_CONTROL', clientId, controlId };
+	forgetControl( key: string, controlId: string ): ForgetControlAction {
+		return { type: 'FORGET_CONTROL', key, controlId };
 	},
 };
 
@@ -88,8 +89,8 @@ const selectors = {
 	getSpacingMode( state: State, key: ControlKey ): SpacingMode | null {
 		return state.spacingModes[ key ] ?? null;
 	},
-	getAddedControls( state: State, clientId: string ): readonly string[] {
-		return state.addedControls[ clientId ] ?? NONE;
+	getAddedControls( state: State, key: string ): readonly string[] {
+		return state.addedControls[ key ] ?? NONE;
 	},
 };
 
@@ -101,18 +102,18 @@ export const store = createReduxStore( 'fb/editor', {
 			case 'SET_SPACING_MODE':
 				return { ...state, spacingModes: { ...state.spacingModes, [ action.key ]: action.mode } };
 			case 'ADD_CONTROL': {
-				const added = state.addedControls[ action.clientId ] ?? NONE;
+				const added = state.addedControls[ action.key ] ?? NONE;
 				return added.includes( action.controlId )
 					? state
-					: { ...state, addedControls: { ...state.addedControls, [ action.clientId ]: [ ...added, action.controlId ] } };
+					: { ...state, addedControls: { ...state.addedControls, [ action.key ]: [ ...added, action.controlId ] } };
 			}
 			case 'FORGET_CONTROL': {
-				const added = state.addedControls[ action.clientId ] ?? NONE;
+				const added = state.addedControls[ action.key ] ?? NONE;
 				return {
 					...state,
 					addedControls: {
 						...state.addedControls,
-						[ action.clientId ]: added.filter( ( id ) => id !== action.controlId ),
+						[ action.key ]: added.filter( ( id ) => id !== action.controlId ),
 					},
 				};
 			}

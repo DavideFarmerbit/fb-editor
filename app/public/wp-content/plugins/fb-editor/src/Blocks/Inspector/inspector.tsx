@@ -1,8 +1,9 @@
 /**
- * The block sidebar, generated from the PHP definition. Starts empty: a
- * control shows once it has a value somewhere, or once it's added from the
- * "Add setting" menu (kept for the session even while empty). Panels show
- * only when they hold a shown control.
+ * Settings panels generated from the PHP definition, for a block (block
+ * sidebar) or a block type's defaults (Block defaults sidebar). Starts
+ * empty: a control shows once it has a value somewhere, or once it's added
+ * from the "Add setting" menu (kept for the session even while empty).
+ * Panels show only when they hold a shown control.
  */
 import { PanelBody } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
@@ -10,7 +11,6 @@ import type { ReactElement } from 'react';
 
 import { store } from '../../Editor/store';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
-import type { BlockDefaults } from '../Defaults/use-block-defaults';
 import type { BlockValues } from '../Values/block-values';
 import { AddSetting } from './add-setting';
 import { ControlFrame } from './control-frame';
@@ -18,28 +18,40 @@ import './inspector.scss';
 
 interface InspectorProps {
 	readonly definition: BlockDefinition;
+	/** What is edited: a block's values, or a block type's saved defaults. */
 	readonly values: BlockValues;
-	readonly defaults: BlockDefaults;
-	readonly clientId: string;
+	/** What unset values fall back to (and conditions read after `values`). */
+	readonly fallback: BlockValues;
+	/** e.g. "From Section default" / "From theme". */
+	readonly fallbackStatus: string;
+	/**
+	 * Keys the session memory of added controls: the block clientId, or a
+	 * block type when editing defaults.
+	 */
+	readonly memoryKey: string;
+	/** List controls that only have a fallback value too (defaults editing). */
+	readonly listFallbackControls: boolean;
 	readonly onChange: ( values: BlockValues ) => void;
-	/** Writes the type's saved defaults (an unsaved entity edit). */
-	readonly onChangeDefaults: ( saved: BlockValues ) => void;
+	/** Copies a control to the type default; null where not offered. */
+	readonly makeDefault: ( ( control: Control ) => void ) | null;
 }
 
-export function Inspector( { definition, values, defaults, clientId, onChange, onChangeDefaults }: InspectorProps ): ReactElement {
+export function Inspector( props: InspectorProps ): ReactElement {
+	const { definition, values, fallback, fallbackStatus, memoryKey, listFallbackControls, onChange, makeDefault } = props;
 	const { breakpoint, breakpoints, added } = useSelect(
 		( select ) => ( {
 			breakpoint: select( store ).getBreakpoint(),
 			breakpoints: select( store ).getBreakpoints(),
-			added: select( store ).getAddedControls( clientId ),
+			added: select( store ).getAddedControls( memoryKey ),
 		} ),
-		[ clientId ]
+		[ memoryKey ]
 	);
 	const { addControl, forgetControl } = useDispatch( store );
-	// Conditions read this block's value, else the type default (as in PHP).
-	const resolved = values.resolvedAt( breakpoint.id, defaults.values );
+	// Conditions read the edited value, else the fallback (as in PHP).
+	const resolved = values.resolvedAt( breakpoint.id, fallback );
 
-	const isShown = ( control: Control ): boolean => values.has( control.id ) || added.includes( control.id );
+	const isShown = ( control: Control ): boolean =>
+		values.has( control.id ) || added.includes( control.id ) || ( listFallbackControls && fallback.has( control.id ) );
 	const available = definition.controls.filter( ( control ) => ! isShown( control ) );
 
 	return (
@@ -49,8 +61,8 @@ export function Inspector( { definition, values, defaults, clientId, onChange, o
 					definition={ definition }
 					available={ available }
 					resolved={ resolved }
-					defaults={ defaults.values }
-					onAdd={ ( control ) => addControl( clientId, control.id ) }
+					defaults={ fallback }
+					onAdd={ ( control ) => addControl( memoryKey, control.id ) }
 				/>
 			</div>
 			{ definition.layout.map( ( panel ) => {
@@ -70,7 +82,8 @@ export function Inspector( { definition, values, defaults, clientId, onChange, o
 								definition={ definition }
 								control={ control }
 								values={ values }
-								defaults={ defaults.values }
+								fallback={ fallback }
+								fallbackStatus={ fallbackStatus }
 								breakpoint={ breakpoint }
 								breakpoints={ breakpoints }
 								inactiveReason={
@@ -81,18 +94,14 @@ export function Inspector( { definition, values, defaults, clientId, onChange, o
 								onChange={ ( value ) => {
 									// Editing keeps the control in the sidebar even if a
 									// reset later empties it.
-									addControl( clientId, control.id );
+									addControl( memoryKey, control.id );
 									onChange( values.with( control, breakpoint.id, value ) );
 								} }
 								onRemove={ () => {
-									forgetControl( clientId, control.id );
+									forgetControl( memoryKey, control.id );
 									onChange( values.withoutControl( control ) );
 								} }
-								onMakeDefault={
-									defaults.canEdit && values.has( control.id )
-										? () => onChangeDefaults( defaults.saved.withControlFrom( control, values ) )
-										: null
-								}
+								onMakeDefault={ makeDefault !== null && values.has( control.id ) ? () => makeDefault( control ) : null }
 							/>
 						) ) }
 					</PanelBody>

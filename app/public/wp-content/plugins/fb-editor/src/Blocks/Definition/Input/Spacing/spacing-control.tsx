@@ -19,7 +19,7 @@ import type { ReactElement } from 'react';
 import { settings } from '../../../../Editor/settings';
 import { controlKey, store } from '../../../../Editor/store';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
-import { fromDefault, inheritedFrom } from '../../../Inspector/control-reading';
+import { inheritedFrom } from '../../../Inspector/control-reading';
 import { Scope } from '../../block-definition';
 import { LengthRow } from '../Length/length-control';
 import { SpacingMode, type SpacingInput } from './spacing-input';
@@ -67,13 +67,13 @@ interface SpacingFieldProps extends ControlFieldProps {
 }
 
 export function SpacingField( props: SpacingFieldProps ): ReactElement {
-	const { definition, control, input, values, defaults, breakpoint, breakpoints, onChange } = props;
+	const { definition, control, input, values, fallback, fallbackStatus, breakpoint, breakpoints, onChange } = props;
 	const at = control.scope === Scope.Static ? breakpoints.base.id : breakpoint.id;
 	const responsive = values.get( control.id );
 	const own = asBox( responsive.at( at ) );
 	// Per side: this block's value (own or from a larger breakpoint), else the type default.
 	const fromBlock = asBox( responsive.resolve( at, breakpoints ) );
-	const fromType = asBox( defaults.get( control.id ).resolve( at, breakpoints ) );
+	const fromType = asBox( fallback.get( control.id ).resolve( at, breakpoints ) );
 	const resolved = fromBlock === null ? fromType : fromType === null ? fromBlock : fromBlock.inheritFrom( fromType );
 
 	const key = controlKey( definition.name, control.id );
@@ -111,7 +111,7 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 				if ( sourceBreakpoint !== undefined ) {
 					status = inheritedFrom( sourceBreakpoint.label );
 				} else if ( rowValue( fromType, row.sides ) !== null ) {
-					status = fromDefault( definition.title );
+					status = fallbackStatus;
 				}
 				return (
 					<LengthRow

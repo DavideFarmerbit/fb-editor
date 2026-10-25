@@ -1,0 +1,43 @@
+// Editor-only styles for the Block defaults sidebar (defaults-sidebar.tsx).
+
+.fb-defaults__intro,
+.fb-defaults__notice {
+	margin: 0;
+	padding: 16px;
+	color: #757575;
+}
+
+.fb-defaults .fb-defaults__item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	height: auto;
+	padding: 12px 16px;
+	border-top: 1px solid #e0e0e0;
+	text-align: left;
+}
+
+.fb-defaults__item-title {
+	flex: 1;
+	font-weight: 500;
+}
+
+.fb-defaults__item-count {
+	color: #757575;
+	font-size: 12px;
+}
+
+.fb-defaults__header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 16px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.fb-defaults__title {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 600;
+}

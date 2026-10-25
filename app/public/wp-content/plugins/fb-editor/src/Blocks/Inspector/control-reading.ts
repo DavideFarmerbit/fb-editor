@@ -2,7 +2,8 @@
  * What a control shows at the inspected breakpoint, in fallback order:
  *   1. its own value here,
  *   2. inherited from a larger breakpoint of this block,
- *   3. the block type's default.
+ *   3. the fallback (the type default for a block, the theme default for a
+ *      type default).
  * Every field reads through this, so the chain is the same everywhere.
  */
 import { __, sprintf } from '@wordpress/i18n';
@@ -41,7 +42,7 @@ export function fromDefault( blockTitle: string ): string {
 	return sprintf( __( 'From %s default', 'fb-editor' ), blockTitle );
 }
 
-export function readControl( { definition, control, values, defaults, breakpoint, breakpoints }: ControlFieldProps ): ControlReading {
+export function readControl( { control, values, fallback, fallbackStatus, breakpoint, breakpoints }: ControlFieldProps ): ControlReading {
 	const at = control.scope === Scope.Static ? breakpoints.base.id : breakpoint.id;
 	const responsive = values.get( control.id );
 
@@ -56,6 +57,6 @@ export function readControl( { definition, control, values, defaults, breakpoint
 		return new ControlReading( at, null, fromBlock, source === undefined ? null : inheritedFrom( source.label ) );
 	}
 
-	const fromType = defaults.get( control.id ).resolve( at, breakpoints );
-	return new ControlReading( at, null, fromType, fromType === null ? null : fromDefault( definition.title ) );
+	const fromFallback = fallback.get( control.id ).resolve( at, breakpoints );
+	return new ControlReading( at, null, fromFallback, fromFallback === null ? null : fallbackStatus );
 }

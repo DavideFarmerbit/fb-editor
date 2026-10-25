@@ -19,8 +19,10 @@ export class BlockDefaults {
 	constructor(
 		/** Theme + saved: what unset values fall back to. */
 		public readonly values: BlockValues,
-		/** Saved only: what "Make default" edits. */
+		/** Saved only: what "Make default" and the defaults sidebar edit. */
 		public readonly saved: BlockValues,
+		/** The theme's defaults (fb.json), read-only: what saved ones overlay. */
+		public readonly theme: BlockValues,
 		/** Whether the user may change defaults (edit_theme_options). */
 		public readonly canEdit: boolean
 	) {}
@@ -75,7 +77,7 @@ export function useBlockDefaults( definition: BlockDefinition ): { defaults: Blo
 
 	const defaults = useMemo( () => {
 		const saved = BlockValues.fromAttribute( parseSaved( content ), definition, settings.breakpoints );
-		return new BlockDefaults( info.theme.overlay( saved ), saved, canEdit );
+		return new BlockDefaults( info.theme.overlay( saved ), saved, info.theme, canEdit );
 	}, [ content, definition, info, canEdit ] );
 
 	const save = useCallback(

@@ -23,8 +23,13 @@ export interface ControlFieldProps {
 	readonly definition: BlockDefinition;
 	readonly control: Control;
 	readonly values: BlockValues;
-	/** The block type's defaults: the last fallback of every control. */
-	readonly defaults: BlockValues;
+	/**
+	 * The last fallback of every control: the type's defaults when editing
+	 * a block, the theme's defaults when editing type defaults.
+	 */
+	readonly fallback: BlockValues;
+	/** How a value from `fallback` is labelled, e.g. "From Section default". */
+	readonly fallbackStatus: string;
 	/** The breakpoint being edited (the top-bar selection). */
 	readonly breakpoint: Breakpoint;
 	readonly breakpoints: BreakpointList;
