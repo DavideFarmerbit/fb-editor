@@ -1,26 +1,14 @@
 // Editor-only styles for the color control (color-control.tsx).
 
-.fb-color__header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	min-height: 24px;
-}
-
-.fb-color__status {
-	color: #757575;
-	font-size: 11px;
-}
-
 .fb-color__swatches {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 8px;
+	gap: 4px;
 }
 
-.fb-color .fb-color__swatch {
-	width: 28px;
-	height: 28px;
+.fb-color__swatches .fb-color__swatch {
+	width: 24px;
+	height: 24px;
 	min-width: 0;
 	padding: 0;
 	border-radius: 50%;
@@ -36,8 +24,4 @@
 	&.is-custom:not([aria-pressed="true"]) {
 		background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
 	}
-}
-
-.fb-color.is-inherited .fb-color__swatches {
-	opacity: 0.55;
 }

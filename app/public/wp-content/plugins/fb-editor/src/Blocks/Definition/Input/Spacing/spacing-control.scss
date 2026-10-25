@@ -1,23 +1,8 @@
 // Editor-only styles for the spacing control (spacing-control.tsx). Rows
-// are length editors: see ../Length/length-control.scss.
+// use the shared .fb-row layout; the mode button lives in the frame header.
 
 .fb-spacing {
 	margin: 0;
 	padding: 0;
 	border: 0;
-}
-
-.fb-spacing__header {
-	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 4px;
-}
-
-.fb-spacing__header:empty {
-	display: none;
-}
-
-.fb-spacing__modes {
-	display: flex;
-	gap: 2px;
 }

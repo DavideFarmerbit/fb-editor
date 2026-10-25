@@ -1,7 +1,7 @@
 /**
- * Editor UI for SelectInput. Shows the value at the active breakpoint; when
- * unset there, shows what applies instead (inherited, the type default, or
- * the input's fallback) and offers to clear back to it.
+ * Editor UI for SelectInput, on one line. Unset here: the first option says
+ * what applies instead (inherited, the default, or the input's fallback),
+ * and choosing it clears the value.
  */
 import { SelectControl } from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
@@ -10,6 +10,7 @@ import type { ReactElement } from 'react';
 import { KeywordValue } from '../../../../Values/keyword';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
 import { readControl } from '../../../Inspector/control-reading';
+import { Row } from '../../../Inspector/row';
 import type { SelectInput } from './select-input';
 
 interface SelectFieldProps extends ControlFieldProps {
@@ -33,18 +34,19 @@ export function SelectField( props: SelectFieldProps ): ReactElement {
 	}
 
 	return (
-		<SelectControl
-			__next40pxDefaultSize
-			__nextHasNoMarginBottom
-			label={ control.label }
-			hideLabelFromVision
-			value={ reading.own instanceof KeywordValue ? reading.own.keyword : '' }
-			options={ [
-				{ value: '', label: unsetLabel },
-				...input.options.map( ( option ) => ( { value: option.value, label: option.label } ) ),
-			] }
-			onChange={ ( value: string ) => onChange( value === '' ? null : new KeywordValue( value ) ) }
-			{ ...( reading.status === null ? {} : { help: reading.status } ) }
-		/>
+		<Row status={ reading.status } inherited={ reading.own === null } onReset={ reading.own === null ? null : () => onChange( null ) }>
+			<SelectControl
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
+				label={ control.label }
+				hideLabelFromVision
+				value={ reading.own instanceof KeywordValue ? reading.own.keyword : '' }
+				options={ [
+					{ value: '', label: unsetLabel },
+					...input.options.map( ( option ) => ( { value: option.value, label: option.label } ) ),
+				] }
+				onChange={ ( value: string ) => onChange( value === '' ? null : new KeywordValue( value ) ) }
+			/>
+		</Row>
 	);
 }

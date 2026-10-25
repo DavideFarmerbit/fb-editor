@@ -1,25 +1,26 @@
 /**
  * Editor UI for SpacingInput:
- * - Linked / Axis / Sides mode buttons (only the modes the input allows;
- *   the pick is remembered per block type + control, in memory);
- * - per row: a slider over the theme's spacing scale, or a custom number +
- *   unit (and `auto` where allowed);
- * - an unset row shows the inherited value, greyed, with its source;
- * - a reset button clears the row at the active breakpoint.
+ * - mode buttons in the control's header line, for the modes the input
+ *   allows (all sides / vertical + horizontal / each side); the pick is
+ *   remembered per block type + control, in memory;
+ * - one line per row (icon = which sides): slider or custom value, custom
+ *   toggle, reset; per side, values fall back to larger breakpoints, then
+ *   to the fallback (type or theme default).
  *
  * Every value goes through SpacingInput.allows(): the UI can't store what
  * PHP would drop.
  */
-import { Button, VisuallyHidden } from '@wordpress/components';
+import { Button, Icon, VisuallyHidden } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { sidesAll, sidesAxial, sidesHorizontal } from '@wordpress/icons';
+import { sidesAll, sidesAxial, sidesBottom, sidesHorizontal, sidesLeft, sidesRight, sidesTop, sidesVertical } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
 import { settings } from '../../../../Editor/settings';
 import { controlKey, store } from '../../../../Editor/store';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
 import { inheritedFrom } from '../../../Inspector/control-reading';
+import { FrameActions } from '../../../Inspector/frame-actions';
 import { Scope } from '../../block-definition';
 import { LengthRow } from '../Length/length-control';
 import { SpacingMode, type SpacingInput } from './spacing-input';
@@ -43,10 +44,20 @@ function modeLabel( mode: SpacingMode ): string {
 	}
 }
 
+const ROW_ICONS: Record< RowId, ReactElement > = {
+	[ RowId.All ]: sidesAll,
+	[ RowId.Vertical ]: sidesVertical,
+	[ RowId.Horizontal ]: sidesHorizontal,
+	[ RowId.Top ]: sidesTop,
+	[ RowId.Right ]: sidesRight,
+	[ RowId.Bottom ]: sidesBottom,
+	[ RowId.Left ]: sidesLeft,
+};
+
 function rowLabel( row: RowId ): string {
 	switch ( row ) {
 		case RowId.All:
-			return __( 'All', 'fb-editor' );
+			return __( 'All sides', 'fb-editor' );
 		case RowId.Vertical:
 			return __( 'Vertical', 'fb-editor' );
 		case RowId.Horizontal:
@@ -71,10 +82,10 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 	const at = control.scope === Scope.Static ? breakpoints.base.id : breakpoint.id;
 	const responsive = values.get( control.id );
 	const own = asBox( responsive.at( at ) );
-	// Per side: this block's value (own or from a larger breakpoint), else the type default.
-	const fromBlock = asBox( responsive.resolve( at, breakpoints ) );
-	const fromType = asBox( fallback.get( control.id ).resolve( at, breakpoints ) );
-	const resolved = fromBlock === null ? fromType : fromType === null ? fromBlock : fromBlock.inheritFrom( fromType );
+	// Per side: this value (own or from a larger breakpoint), else the fallback.
+	const fromValues = asBox( responsive.resolve( at, breakpoints ) );
+	const fromFallback = asBox( fallback.get( control.id ).resolve( at, breakpoints ) );
+	const resolved = fromValues === null ? fromFallback : fromFallback === null ? fromValues : fromValues.inheritFrom( fromFallback );
 
 	const key = controlKey( definition.name, control.id );
 	const remembered = useSelect( ( select ) => select( store ).getSpacingMode( key ), [ key ] );
@@ -87,22 +98,20 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 		<fieldset className="fb-spacing">
 			{ /* The control frame shows the visible label. */ }
 			<VisuallyHidden as="legend">{ control.label }</VisuallyHidden>
-			<div className="fb-spacing__header">
-				{ input.modes.length > 1 && (
-					<div className="fb-spacing__modes">
-						{ input.modes.map( ( candidate ) => (
-							<Button
-								key={ candidate }
-								size="small"
-								icon={ MODE_ICONS[ candidate ] }
-								label={ modeLabel( candidate ) }
-								isPressed={ candidate === mode }
-								onClick={ () => setSpacingMode( key, candidate ) }
-							/>
-						) ) }
-					</div>
-				) }
-			</div>
+			{ input.modes.length > 1 && (
+				<FrameActions>
+					{ input.modes.map( ( candidate ) => (
+						<Button
+							key={ candidate }
+							size="small"
+							icon={ MODE_ICONS[ candidate ] }
+							label={ modeLabel( candidate ) }
+							isPressed={ candidate === mode }
+							onClick={ () => setSpacingMode( key, candidate ) }
+						/>
+					) ) }
+				</FrameActions>
+			) }
 			{ rowsFor( mode ).map( ( row ) => {
 				const ownRow = rowValue( own, row.sides );
 				const source = ownRow === null ? rowSource( responsive, row.sides, at, breakpoints ) : null;
@@ -110,7 +119,7 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 				let status: string | null = null;
 				if ( sourceBreakpoint !== undefined ) {
 					status = inheritedFrom( sourceBreakpoint.label );
-				} else if ( rowValue( fromType, row.sides ) !== null ) {
+				} else if ( rowValue( fromFallback, row.sides ) !== null ) {
 					status = fallbackStatus;
 				}
 				return (
@@ -118,6 +127,7 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 						// Remount per breakpoint: local edit state must not leak across.
 						key={ `${ at }/${ row.id }` }
 						label={ rowLabel( row.id ) }
+						{ ...( mode === SpacingMode.Linked ? {} : { icon: <Icon icon={ ROW_ICONS[ row.id ] } size={ 20 } /> } ) }
 						own={ ownRow }
 						inherited={ ownRow === null ? rowValue( resolved, row.sides ) : null }
 						status={ status }

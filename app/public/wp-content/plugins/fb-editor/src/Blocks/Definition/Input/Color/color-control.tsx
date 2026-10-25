@@ -1,11 +1,10 @@
 /**
- * Editor UI for ColorInput: the theme palette as swatches (stored as preset
- * references), plus a custom color picker when the input allows it. Unset
- * at this breakpoint: shows the inherited color with its source.
+ * Editor UI for ColorInput, on one line: the theme palette as swatches
+ * (stored as preset references), a custom color picker when the input
+ * allows it, and reset. Unset here: the color that applies is shown greyed.
  */
 import { Button, ColorPicker, Dropdown } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { reset } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
 import { settings } from '../../../../Editor/settings';
@@ -14,6 +13,7 @@ import { CustomColor, type Color } from '../../../../Values/color';
 import { PresetReference } from '../../../../Values/preset-reference';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
 import { readControl } from '../../../Inspector/control-reading';
+import { Row } from '../../../Inspector/row';
 import type { ColorInput } from './color-input';
 import './color-control.scss';
 
@@ -42,13 +42,7 @@ export function ColorField( props: ColorFieldProps ): ReactElement {
 	const custom = shown instanceof CustomColor ? shown : null;
 
 	return (
-		<div className={ own === null && shown !== null ? 'fb-color is-inherited' : 'fb-color' }>
-			<div className="fb-color__header">
-				<span className="fb-color__status">{ reading.status }</span>
-				{ own !== null && (
-					<Button size="small" icon={ reset } label={ __( 'Reset to inherited', 'fb-editor' ) } onClick={ () => onChange( null ) } />
-				) }
-			</div>
+		<Row status={ reading.status } inherited={ own === null && shown !== null } onReset={ own === null ? null : () => onChange( null ) }>
 			<div className="fb-color__swatches" role="listbox" aria-label={ control.label }>
 				{ palette.map( ( preset ) => (
 					<Button
@@ -93,6 +87,6 @@ export function ColorField( props: ColorFieldProps ): ReactElement {
 					/>
 				) }
 			</div>
-		</div>
+		</Row>
 	);
 }
