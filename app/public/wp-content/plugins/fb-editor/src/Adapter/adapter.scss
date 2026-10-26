@@ -6,3 +6,13 @@ $canvas-container: ".editor-visual-editor";
 
 // ResizableBox wrapping the canvas iframe; core sets its width inline.
 $canvas: ".editor-resizable-editor";
+
+// The iframe's own wrapper, inside $canvas. Core's popover layer (block
+// toolbar, insertion point, highlights) is also inside $canvas but NOT in
+// here: scaling only this keeps that layer at real size.
+$canvas-frame: ".block-editor-iframe__container";
+
+// Core's "cover" popovers (spacing visualizer, drop zones, highlights):
+// sized from the block's offsetWidth/Height read inside the iframe, so
+// unscaled (BlockPopoverCover → CoverContainer in block-editor.js).
+$cover-popover: ".block-editor-block-popover > .components-popover__content > div[style*='position: absolute']";

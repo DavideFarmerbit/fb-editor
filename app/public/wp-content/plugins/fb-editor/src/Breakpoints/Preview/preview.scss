@@ -1,27 +1,79 @@
 @use "../../Adapter/adapter" as *;
 
-// Editor-only CSS: `!important` is needed to beat core's inline width.
+// Editor-only CSS: `!important` is needed to beat core's inline sizes.
 body.fb-has-canvas-width {
+	// The area around the canvas. Its width must be the space available
+	// only, never grown by the canvas inside: core gives it `flex: 1 0 auto`
+	// + `min-width: auto`, so it would follow its content, while the canvas
+	// is sized from its measured width. Measure → resize → measure: React
+	// re-renders once per frame until it settles, and core's List View
+	// crashes on that ("Maximum update depth exceeded"). Basis 0 breaks the
+	// loop; whatever doesn't fit is scaled down, and clipped.
 	#{$canvas-container} {
-		padding: 24px;
-		overflow-x: auto;
+		flex-basis: 0 !important;
+		min-width: 0 !important;
+		overflow: hidden !important;
+		// Anchored to the top: scaled down, it would otherwise float
+		// mid-height. The padding is the frame margin (excluded from the
+		// measured space).
+		align-items: flex-start !important;
+		padding: 24px !important;
 	}
 
+	// Fits: the breakpoint's width, centered.
 	#{$canvas} {
 		width: var(--fb-canvas-width) !important;
 		max-width: none !important;
-		flex-shrink: 0;
-		// Auto margins center the canvas but collapse to 0 when it overflows,
-		// so a canvas wider than the screen scrolls instead of being clipped.
-		margin-inline: auto;
+		margin-inline: auto !important;
 		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+	}
+
+	// Height only once measured: 0 while waiting would hide the canvas.
+	&.fb-canvas-measured #{$canvas} {
+		height: var(--fb-canvas-height) !important;
+	}
+
+	// Doesn't fit: the box takes the scaled-down size; inside, the iframe's
+	// wrapper keeps the breakpoint's full size and is drawn smaller. The
+	// box isn't transformed: it holds core's popover layer, which must stay
+	// at real size to be placed right.
+	&.fb-canvas-scaled {
+		#{$canvas} {
+			width: calc(var(--fb-canvas-width) * var(--fb-canvas-scale)) !important;
+		}
+
+		#{$canvas-frame} {
+			// The box is a flex container: without this the wrapper would be
+			// squeezed to the box's width, and so would the iframe's viewport.
+			flex: none !important;
+			width: var(--fb-canvas-width) !important;
+			height: calc(var(--fb-canvas-height) / var(--fb-canvas-scale)) !important;
+			transform: scale(var(--fb-canvas-scale));
+			transform-origin: 0 0;
+		}
+
+		// Cover popovers are placed right (real-size layer) but sized from
+		// the unscaled block: scaled back from their placed corner.
+		#{$cover-popover} {
+			transform: scale(var(--fb-canvas-scale));
+			transform-origin: 0 0;
+		}
 	}
 }
 
 // Segmented switcher in the editor header.
 .fb-breakpoints {
 	display: flex;
+	align-items: center;
 	gap: 2px;
+}
+
+.fb-breakpoints__scale {
+	min-width: 36px;
+	color: #757575;
+	font-size: 11px;
+	font-variant-numeric: tabular-nums;
+	text-align: center;
 }
 
 .fb-breakpoints .fb-breakpoints__button {

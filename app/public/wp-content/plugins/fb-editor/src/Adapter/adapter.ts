@@ -29,3 +29,60 @@ export function canvasBlockElement( clientId: string ): HTMLElement | null {
 	const canvas = iframe?.contentDocument ?? document;
 	return canvas.querySelector< HTMLElement >( `[data-block="${ CSS.escape( clientId ) }"]` );
 }
+
+/**
+ * The flex container around the canvas (post and site editors); same class
+ * as `$canvas-container` in adapter.scss.
+ */
+const CANVAS_CONTAINER = '.editor-visual-editor';
+
+/** The space available to the canvas: the container's content box, in px. */
+export class CanvasSpace {
+	constructor(
+		public readonly width: number,
+		public readonly height: number
+	) {}
+
+	equals( other: CanvasSpace | null ): boolean {
+		return other !== null && other.width === this.width && other.height === this.height;
+	}
+}
+
+/**
+ * Calls `onSpace` with the space available to the canvas, rounded to whole
+ * pixels, now and whenever it changes. Core re-creates the container on
+ * some mode switches (browse ↔ edit, code editor): the old node stays
+ * around but stops resizing, so it's checked and re-attached. Returns a
+ * cleanup function.
+ */
+export function observeCanvasSpace( onSpace: ( space: CanvasSpace | null ) => void ): () => void {
+	let observed: Element | null = null;
+	const resizes = new ResizeObserver( ( entries ) => {
+		const box = entries[ 0 ]?.contentRect;
+		if ( box !== undefined ) {
+			onSpace( new CanvasSpace( Math.round( box.width ), Math.round( box.height ) ) );
+		}
+	} );
+
+	const attach = (): void => {
+		const current = document.querySelector( CANVAS_CONTAINER );
+		if ( current === observed ) {
+			return;
+		}
+		resizes.disconnect();
+		observed = current;
+		if ( current === null ) {
+			onSpace( null );
+			return;
+		}
+		resizes.observe( current );
+	};
+
+	attach();
+	const timer = window.setInterval( attach, 500 );
+
+	return () => {
+		window.clearInterval( timer );
+		resizes.disconnect();
+	};
+}
