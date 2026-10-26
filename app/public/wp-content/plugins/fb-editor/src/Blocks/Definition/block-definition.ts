@@ -6,7 +6,8 @@
 import { InvalidJson, type JsonValue } from '../../Json/json';
 import { outputFromJson, type StyleOutput } from '../../Styles/Output/outputs';
 import { KeywordValue } from '../../Values/keyword';
-import type { BlockValues } from '../Values/block-values';
+import { BlockState } from '../States/BlockState.generated';
+import type { StatefulValues } from '../Values/stateful-values';
 import { conditionFromJson, type Condition, type ConditionLabels } from './Condition/conditions';
 import { parseControlId, type ControlId } from './control-id';
 import { parseElementId, type ElementId } from './element-id';
@@ -26,6 +27,11 @@ export class Control {
 		public readonly scope: Scope,
 		public readonly visibleWhen: Condition | null
 	) {}
+
+	/** Mirrors Control::isStateful(): per-breakpoint controls that write CSS. */
+	isStateful(): boolean {
+		return this.scope === Scope.Responsive && this.output !== null;
+	}
 }
 
 export class Panel {
@@ -45,6 +51,16 @@ export class Element {
 	) {}
 }
 
+/** A state the block can be styled for, as PHP describes it. */
+export class StateInfo {
+	constructor(
+		public readonly id: BlockState,
+		public readonly label: string,
+		/** Appended to the root's selector, e.g. ":hover". */
+		public readonly pseudoClass: string
+	) {}
+}
+
 export class BlockDefinition implements ConditionLabels {
 	constructor(
 		/** e.g. "fb/section" */
@@ -56,7 +72,9 @@ export class BlockDefinition implements ConditionLabels {
 		public readonly className: string,
 		public readonly controls: readonly Control[],
 		public readonly layout: readonly Panel[],
-		public readonly elements: readonly Element[]
+		public readonly elements: readonly Element[],
+		/** In cascade order. */
+		public readonly states: readonly StateInfo[]
 	) {
 		for ( const control of controls ) {
 			for ( const reference of control.visibleWhen?.references() ?? [] ) {
@@ -108,14 +126,14 @@ export class BlockDefinition implements ConditionLabels {
 	 * the block's own, else the type default, else the input's fallback.
 	 * Throws if there is none of them.
 	 */
-	option( values: BlockValues, id: string, defaults: BlockValues | null = null ): string {
+	option( values: StatefulValues, id: string, defaults: StatefulValues | null = null ): string {
 		const control = this.controls.find( ( candidate ) => candidate.id === id );
 		if ( control === undefined || ! ( control.input instanceof SelectInput ) ) {
 			throw new InvalidJson( `${ this.name }: "${ id }" is not a select control` );
 		}
 
-		const base = values.baseBreakpoint();
-		const value = values.get( control.id ).at( base ) ?? defaults?.get( control.id ).at( base ) ?? null;
+		const base = values.base.baseBreakpoint();
+		const value = values.base.get( control.id ).at( base ) ?? defaults?.base.get( control.id ).at( base ) ?? null;
 		const option = ( value instanceof KeywordValue ? value.keyword : null ) ?? control.input.fallback;
 		if ( option === null ) {
 			throw new InvalidJson( `${ this.name }: "${ id }" is read by the editor markup but has no fallback` );
@@ -153,6 +171,10 @@ export function blockDefinitionFromJson( json: JsonValue ): BlockDefinition {
 			.map(
 				( element ) =>
 					new Element( parseElementId( element.get( 'id' ) ), element.get( 'className' ).string(), element.get( 'editorClassName' ).string() )
-			)
+			),
+		json
+			.get( 'states' )
+			.list()
+			.map( ( state ) => new StateInfo( state.get( 'id' ).oneOf( BlockState ), state.get( 'label' ).string(), state.get( 'pseudoClass' ).string() ) )
 	);
 }

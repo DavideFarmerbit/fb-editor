@@ -32,6 +32,16 @@ final readonly class Control implements \JsonSerializable
 	}
 
 	/**
+	 * Whether it can be set per state (hover…): only per-breakpoint
+	 * controls that write CSS. Markup-level settings (a tag) can't change
+	 * on hover.
+	 */
+	public function isStateful(): bool
+	{
+		return Scope::Responsive === $this->scope && null !== $this->output;
+	}
+
+	/**
 	 * @return array{id: ControlId, label: string, input: Input, output: ?StyleOutput, element: ?ElementId, scope: Scope, visibleWhen: ?Condition}
 	 */
 	public function jsonSerialize(): array

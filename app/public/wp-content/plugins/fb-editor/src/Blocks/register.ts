@@ -14,7 +14,7 @@ import { settings } from '../Editor/settings';
 import { FbBlockChrome, useFbBlock } from './block-chrome';
 import type { BlockDefinition } from './Definition/block-definition';
 import { NAMESPACE } from './Definition/BlockName.generated';
-import type { BlockValues } from './Values/block-values';
+import type { StatefulValues } from './Values/stateful-values';
 
 export type FbAttributes = Record< string, unknown >;
 
@@ -28,9 +28,9 @@ export interface RootProps {
 export interface FbBlockEditProps extends BlockEditProps< FbAttributes > {
 	readonly definition: BlockDefinition;
 	/** Sanitized through the definition: never read raw attributes. */
-	readonly values: BlockValues;
+	readonly values: StatefulValues;
 	/** The type's defaults: what unset values fall back to. */
-	readonly defaults: BlockValues;
+	readonly defaults: StatefulValues;
 	readonly rootProps: RootProps;
 }
 

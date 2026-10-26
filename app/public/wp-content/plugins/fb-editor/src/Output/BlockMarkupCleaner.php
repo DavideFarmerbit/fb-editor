@@ -6,7 +6,7 @@ namespace Fb\Output;
 
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
-use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\StatefulValues;
 use Fb\Blocks\Values\InstanceClass;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\CoreBlocks\CleanupScope;
@@ -112,7 +112,7 @@ final readonly class BlockMarkupCleaner implements Hookable
 
 		$attrs      = is_array( $block['attrs'] ?? null ) ? $block['attrs'] : [];
 		$definition = $coreBlock->definition();
-		$values     = BlockValues::fromAttribute( $attrs[ BlockRegistry::ATTRIBUTE ] ?? null, $definition, $this->breakpoints->breakpoints() );
+		$values     = StatefulValues::fromJson( $attrs[ BlockRegistry::ATTRIBUTE ] ?? null, $definition, $this->breakpoints->breakpoints() );
 		$instance   = InstanceClass::of( $values );
 
 		return $this->instances->add( $instance, $definition, $values ) ? $instance->value : null;

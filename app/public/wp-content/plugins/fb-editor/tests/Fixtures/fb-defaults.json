@@ -1,8 +1,10 @@
 {
 	"defaults": {
 		"fb/section": {
-			"padding": { "desktop": { "top": { "kind": "custom", "value": 40, "unit": "px" } }, "mobile": { "top": { "kind": "custom", "value": 16, "unit": "px" } } },
-			"display": { "desktop": "flex" }
+			"base": {
+				"padding": { "desktop": { "top": { "kind": "custom", "value": 40, "unit": "px" } }, "mobile": { "top": { "kind": "custom", "value": 16, "unit": "px" } } },
+				"display": { "desktop": "flex" }
+			}
 		}
 	}
 }

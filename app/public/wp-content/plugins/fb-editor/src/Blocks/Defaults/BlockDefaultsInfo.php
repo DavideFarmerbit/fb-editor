@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Fb\Blocks\Defaults;
 
 use Fb\Blocks\Definition\BlockName;
-use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\StatefulValues;
 
 /**
  * What the editor needs about one block type's defaults: the theme's
@@ -17,12 +17,12 @@ final readonly class BlockDefaultsInfo implements \JsonSerializable
 	public function __construct(
 		public BlockName $block,
 		public string $postSlug,
-		public BlockValues $theme,
+		public StatefulValues $theme,
 	) {
 	}
 
 	/**
-	 * @return array{block: BlockName, postSlug: string, theme: BlockValues}
+	 * @return array{block: BlockName, postSlug: string, theme: StatefulValues}
 	 */
 	public function jsonSerialize(): array
 	{

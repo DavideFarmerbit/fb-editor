@@ -18,7 +18,7 @@ final readonly class InstanceClass implements \Stringable
 	) {
 	}
 
-	public static function of( BlockValues $values ): self
+	public static function of( StatefulValues $values ): self
 	{
 		$json = (string) wp_json_encode( $values, JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION );
 		// 48 bits of sha1, base 36: well within float precision.

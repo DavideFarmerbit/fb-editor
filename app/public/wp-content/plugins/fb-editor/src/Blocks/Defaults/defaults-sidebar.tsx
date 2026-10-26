@@ -26,7 +26,7 @@ function screenPath( definition: BlockDefinition ): string {
 
 function BlockTypeItem( { definition }: { readonly definition: BlockDefinition } ): ReactElement {
 	const { defaults } = useBlockDefaults( definition );
-	const count = definition.controls.filter( ( control ) => defaults.values.has( control.id ) ).length;
+	const count = definition.controls.filter( ( control ) => defaults.values.base.has( control.id ) ).length;
 
 	return (
 		<Navigator.Button path={ screenPath( definition ) } className="fb-defaults__item">
@@ -53,12 +53,12 @@ function BlockTypeDefaults( { definition }: { readonly definition: BlockDefiniti
 			{ defaults.canEdit ? (
 				<Inspector
 					definition={ definition }
-					values={ defaults.saved }
-					fallback={ defaults.theme }
+					values={ defaults.saved.base }
+					fallback={ defaults.theme.base }
 					fallbackStatus={ __( 'From theme', 'fb-editor' ) }
 					memoryKey={ `defaults/${ definition.name }` }
 					listFallbackControls
-					onChange={ save }
+					onChange={ ( base ) => save( defaults.saved.withBase( base ) ) }
 					makeDefault={ null }
 				/>
 			) : (

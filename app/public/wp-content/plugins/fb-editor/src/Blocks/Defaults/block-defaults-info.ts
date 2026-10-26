@@ -2,7 +2,7 @@
  * Mirrors Fb\Blocks\Defaults\BlockDefaultsInfo: one block type's theme
  * defaults (read-only) and the slug of its saved-defaults post.
  */
-import type { BlockValues } from '../Values/block-values';
+import type { StatefulValues } from '../Values/stateful-values';
 
 export class BlockDefaultsInfo {
 	constructor(
@@ -10,6 +10,6 @@ export class BlockDefaultsInfo {
 		public readonly block: string,
 		/** Slug of the fb_block_default post for the active theme, from PHP. */
 		public readonly postSlug: string,
-		public readonly theme: BlockValues
+		public readonly theme: StatefulValues
 	) {}
 }

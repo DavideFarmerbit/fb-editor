@@ -62,7 +62,10 @@ final class CoreBlockRenderTest extends TestCase
 	{
 		$block = [
 			'attrs' => [
-				'fb'        => [ 'fontWeight' => [ 'desktop' => '700' ] ],
+				'fb'        => [
+					'base'   => [ 'fontWeight' => [ 'desktop' => '700' ] ],
+					'states' => [ 'hover' => [ 'fontWeight' => [ 'desktop' => '800' ] ] ],
+				],
 				'className' => 'is-style-outline cta',
 			],
 		];
@@ -77,7 +80,11 @@ final class CoreBlockRenderTest extends TestCase
 		self::assertMatchesRegularExpression( '#^<div class="fb-button (fb-[0-9a-z]{7}) cta"><a class="fb-button__link" href="\#">Go</a></div>$#', $html );
 		self::assertSame( 1, preg_match( '#fb-button (fb-[0-9a-z]{7})#', $html, $match ) );
 		$instance = $match[1] ?? '';
-		self::assertSame( "@layer fb.instances{:where(.{$instance}>.fb-button__link){font-weight:700;}}", $this->collector->css() );
+		self::assertSame(
+			"@layer fb.instances{:where(.{$instance}>.fb-button__link){font-weight:700;}}"
+			. "@layer fb.states.instances{:where(.{$instance}:hover>.fb-button__link){font-weight:800;}}",
+			$this->collector->css()
+		);
 	}
 
 	public function testBaseStylesUseCoreElementClassesInTheEditor(): void

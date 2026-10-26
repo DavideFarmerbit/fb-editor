@@ -16,8 +16,9 @@ use Fb\Values\Responsive;
 use Fb\Values\ResponsiveValue;
 
 /**
- * The values of one block instance, parsed from its `fb` attribute through
- * each control's input. Unknown controls and invalid values are dropped.
+ * One set of control values (a block's base look, or one of its states),
+ * parsed through each control's input. Unknown controls and invalid values
+ * are dropped. See StatefulValues for the whole `fb` attribute.
  *
  * Static-scope controls are held as a base-only Responsive, so everything
  * downstream treats both scopes the same way.
@@ -34,8 +35,13 @@ final readonly class BlockValues implements \JsonSerializable
 	) {
 	}
 
+	public static function empty( BlockDefinition $definition, BreakpointList $breakpoints ): self
+	{
+		return new self( $definition, $breakpoints, [] );
+	}
+
 	/**
-	 * @param mixed $attribute The decoded `fb` block attribute.
+	 * @param mixed $attribute A decoded `{controlId: value}` object.
 	 */
 	public static function fromAttribute( mixed $attribute, BlockDefinition $definition, BreakpointList $breakpoints ): self
 	{
@@ -98,22 +104,26 @@ final readonly class BlockValues implements \JsonSerializable
 	}
 
 	/**
-	 * Every control's effective value at a breakpoint. With a fallback
-	 * (the block type's defaults), controls this block leaves unset at every
-	 * breakpoint up to here take the fallback's effective value.
+	 * Only the controls that can be set per state (see Control::isStateful()).
 	 */
-	public function resolvedAt( BreakpointId $breakpoint, ?self $fallback = null ): ResolvedValues
+	public function onlyStateful(): self
 	{
-		$resolved = [];
+		$values = [];
 		foreach ( $this->definition->controls as $control ) {
-			$at = $this->get( $control->id )->resolve( $breakpoint, $this->breakpoints )
-				?? $fallback?->get( $control->id )->resolve( $breakpoint, $this->breakpoints );
-			if ( null !== $at ) {
-				$resolved[ $control->id->value ] = $at;
+			if ( $control->isStateful() && isset( $this->values[ $control->id->value ] ) ) {
+				$values[ $control->id->value ] = $this->values[ $control->id->value ];
 			}
 		}
 
-		return new ResolvedValues( $resolved );
+		return new self( $this->definition, $this->breakpoints, $values );
+	}
+
+	/**
+	 * Where values are resolved: the breakpoints they are keyed by.
+	 */
+	public function breakpoints(): BreakpointList
+	{
+		return $this->breakpoints;
 	}
 
 	/**

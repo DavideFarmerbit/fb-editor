@@ -73,18 +73,18 @@ final class DefaultsTest extends TestCase
 
 	public function testSavedContentIsSanitizedThroughTheDefinition(): void
 	{
-		$this->save( '{"padding":{"desktop":{"top":{"kind":"custom","value":-5,"unit":"px"},"left":{"kind":"auto"},"right":{"kind":"custom","value":8,"unit":"px"}}},"evil":"<script>"}' );
+		$this->save( '{"base":{"padding":{"desktop":{"top":{"kind":"custom","value":-5,"unit":"px"},"left":{"kind":"auto"},"right":{"kind":"custom","value":8,"unit":"px"}}},"evil":"<script>"},"evil":1}' );
 
-		self::assertSame( '{"padding":{"desktop":{"right":{"kind":"custom","value":8.0,"unit":"px"}}}}', get_post_field( 'post_content', $this->postId ) );
+		self::assertSame( '{"base":{"padding":{"desktop":{"right":{"kind":"custom","value":8.0,"unit":"px"}}}}}', get_post_field( 'post_content', $this->postId ) );
 	}
 
 	public function testSavedDefaultsOverlayTheThemeDefaults(): void
 	{
-		$this->save( '{"padding":{"mobile":{"top":{"kind":"custom","value":24,"unit":"px"}}}}' );
+		$this->save( '{"base":{"padding":{"mobile":{"top":{"kind":"custom","value":24,"unit":"px"}}}}}' );
 
 		self::assertSame(
 			// Theme desktop + saved mobile (beats theme mobile) + theme display.
-			'{"display":{"desktop":"flex"},"padding":{"desktop":{"top":{"kind":"custom","value":40.0,"unit":"px"}},"mobile":{"top":{"kind":"custom","value":24.0,"unit":"px"}}}}',
+			'{"base":{"display":{"desktop":"flex"},"padding":{"desktop":{"top":{"kind":"custom","value":40.0,"unit":"px"}},"mobile":{"top":{"kind":"custom","value":24.0,"unit":"px"}}}}}',
 			wp_json_encode( $this->repository()->for( $this->section->definition() ), JSON_PRESERVE_ZERO_FRACTION )
 		);
 	}
@@ -109,12 +109,12 @@ final class DefaultsTest extends TestCase
 
 	public function testRenderFallsBackToTheDefaultTag(): void
 	{
-		$this->save( '{"tag":"aside"}' );
+		$this->save( '{"base":{"tag":"aside"}}' );
 		$repository = $this->repository();
 		$renderer   = new BlockRenderer( $this->breakpoints, new InstanceStyleCollector( $this->breakpoints, $repository ), $repository );
 
 		self::assertStringStartsWith( '<aside class="fb-section', $renderer->render( $this->section, [], '' ) );
-		self::assertStringStartsWith( '<main class="fb-section', $renderer->render( $this->section, [ 'fb' => [ 'tag' => 'main' ] ], '' ) );
+		self::assertStringStartsWith( '<main class="fb-section', $renderer->render( $this->section, [ 'fb' => [ 'base' => [ 'tag' => 'main' ] ] ], '' ) );
 	}
 
 	public function testNoBlocksOnThePageMeansNoDefaultsCss(): void

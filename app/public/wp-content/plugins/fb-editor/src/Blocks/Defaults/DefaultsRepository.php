@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Fb\Blocks\Defaults;
 
 use Fb\Blocks\Definition\BlockDefinition;
-use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\StatefulValues;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Theme\ThemeConfigFile;
 
@@ -17,7 +17,7 @@ use Fb\Theme\ThemeConfigFile;
  */
 final class DefaultsRepository
 {
-	/** @var array<string, BlockValues> Keyed by block name. */
+	/** @var array<string, StatefulValues> Keyed by block name. */
 	private array $merged = [];
 
 	/**
@@ -31,21 +31,21 @@ final class DefaultsRepository
 	) {
 	}
 
-	public function for( BlockDefinition $definition ): BlockValues
+	public function for( BlockDefinition $definition ): StatefulValues
 	{
 		return $this->merged[ (string) $definition->name ] ??= $this->theme( $definition )->overlay( $this->saved( $definition ) );
 	}
 
-	public function theme( BlockDefinition $definition ): BlockValues
+	public function theme( BlockDefinition $definition ): StatefulValues
 	{
 		$section = $this->file->section( 'defaults' );
 		$name    = (string) $definition->name;
 		$json    = null !== $section && $section->isObject() && $section->has( $name ) ? $section->get( $name ) : null;
 
-		return BlockValues::fromAttribute( $json?->decoded(), $definition, $this->breakpoints->breakpoints() );
+		return StatefulValues::fromJson( $json?->decoded(), $definition, $this->breakpoints->breakpoints() );
 	}
 
-	public function saved( BlockDefinition $definition ): BlockValues
+	public function saved( BlockDefinition $definition ): StatefulValues
 	{
 		$posts = get_posts(
 			[
@@ -58,7 +58,7 @@ final class DefaultsRepository
 		);
 		$post = $posts[0] ?? null;
 
-		return BlockValues::fromAttribute(
+		return StatefulValues::fromJson(
 			$post instanceof \WP_Post ? json_decode( $post->post_content ) : null,
 			$definition,
 			$this->breakpoints->breakpoints()

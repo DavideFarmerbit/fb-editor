@@ -7,7 +7,7 @@ namespace Fb\Blocks\Rendering;
 use Fb\Blocks\Block;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\DefaultsRepository;
-use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\StatefulValues;
 use Fb\Blocks\Values\InstanceClass;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Output\ClassList;
@@ -31,7 +31,7 @@ final readonly class BlockRenderer
 	public function render( Block $block, array $attributes, string $content ): string
 	{
 		$definition = $block->definition();
-		$values     = BlockValues::fromAttribute( $attributes[ BlockRegistry::ATTRIBUTE ] ?? null, $definition, $this->breakpoints->breakpoints() );
+		$values     = StatefulValues::fromJson( $attributes[ BlockRegistry::ATTRIBUTE ] ?? null, $definition, $this->breakpoints->breakpoints() );
 		$instance   = InstanceClass::of( $values );
 
 		$classes = new ClassList( $definition->name->cssClass() );

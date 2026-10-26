@@ -5,23 +5,36 @@ import type { BreakpointId, BreakpointList } from '../../Breakpoints/breakpoints
 import type { BlockDefinition } from '../Definition/block-definition';
 import type { Selector } from '../../Styles/css';
 import { StyleBinding, Visibility } from '../../Styles/compiler';
+import { BlockBindings } from './block-bindings';
 import type { BlockValues } from './block-values';
+import type { BlockState } from '../States/BlockState.generated';
+import type { StatefulValues } from './stateful-values';
+import type { ValueChain } from './value-chain';
 
 export class BlockStyles {
-	constructor( private readonly breakpoints: BreakpointList ) {}
+	constructor(
+		private readonly breakpoints: BreakpointList,
+		/** In the editor, core blocks' elements keep core's classes. */
+		private readonly editor = false
+	) {}
 
 	/**
-	 * `defaults`: the type's defaults, for conditions (an instance control's
-	 * condition reads the instance's value, else the default).
+	 * Mirrors BlockStyles::forSource(): every look of one source. `weaker`:
+	 * sources below it (a block's type defaults), for conditions.
 	 */
-	bindings(
-		definition: BlockDefinition,
-		values: BlockValues,
-		root: Selector,
-		defaults: BlockValues | null = null,
-		/** In the editor, core blocks' elements keep core's classes. */
-		editor = false
-	): StyleBinding[] {
+	forSource( definition: BlockDefinition, values: StatefulValues, root: Selector, ...weaker: StatefulValues[] ): BlockBindings {
+		const states = new Map< BlockState, readonly StyleBinding[] >();
+		for ( const state of definition.states ) {
+			const bindings = this.bindings( definition, values.state( state.id ), root.withPseudoClass( state.pseudoClass ), values.chain( state.id, ...weaker ) );
+			if ( bindings.length > 0 ) {
+				states.set( state.id, bindings );
+			}
+		}
+		return new BlockBindings( this.bindings( definition, values.base, root, values.chain( null, ...weaker ) ), states );
+	}
+
+	/** `context`: what conditions read (starting with `values`). */
+	bindings( definition: BlockDefinition, values: BlockValues, root: Selector, context: ValueChain ): StyleBinding[] {
 		const bindings: StyleBinding[] = [];
 
 		for ( const control of definition.controls ) {
@@ -33,7 +46,7 @@ export class BlockStyles {
 			const hidden: BreakpointId[] = [];
 			if ( control.visibleWhen !== null ) {
 				for ( const breakpoint of this.breakpoints ) {
-					if ( ! control.visibleWhen.evaluate( values.resolvedAt( breakpoint.id, defaults ) ) ) {
+					if ( ! control.visibleWhen.evaluate( context.resolvedAt( breakpoint.id ) ) ) {
 						hidden.push( breakpoint.id );
 					}
 				}
@@ -43,7 +56,7 @@ export class BlockStyles {
 				new StyleBinding(
 					control.element === null
 						? root
-						: root.child( editor ? definition.editorElementClass( control.element ) : definition.elementClass( control.element ) ),
+						: root.child( this.editor ? definition.editorElementClass( control.element ) : definition.elementClass( control.element ) ),
 					control.output,
 					value,
 					Visibility.hiddenAt( hidden )

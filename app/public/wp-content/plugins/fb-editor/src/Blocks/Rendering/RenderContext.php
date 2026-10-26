@@ -9,7 +9,7 @@ use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\Definition\ElementId;
 use Fb\Blocks\Definition\Input\Select\LabeledOption;
 use Fb\Blocks\Definition\Input\Select\SelectInput;
-use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\StatefulValues;
 use Fb\Output\ClassList;
 use Fb\Values\KeywordValue;
 
@@ -21,9 +21,9 @@ final readonly class RenderContext
 {
 	public function __construct(
 		public BlockDefinition $definition,
-		public BlockValues $values,
+		public StatefulValues $values,
 		/** The block type's defaults: what unset values fall back to. */
-		public BlockValues $defaults,
+		public StatefulValues $defaults,
 		/** Block class, instance class (if it has CSS), user classes. */
 		public ClassList $rootClasses,
 		/** Rendered inner blocks. Already HTML: output as is. */
@@ -58,8 +58,8 @@ final readonly class RenderContext
 			throw new \LogicException( "{$this->definition->name}: \"{$id}\" is not a select over {$options}." );
 		}
 
-		$base   = $this->values->baseBreakpoint();
-		$value  = $this->values->get( $id )->at( $base ) ?? $this->defaults->get( $id )->at( $base );
+		$base   = $this->values->base->baseBreakpoint();
+		$value  = $this->values->base->get( $id )->at( $base ) ?? $this->defaults->base->get( $id )->at( $base );
 		$chosen = $value instanceof KeywordValue ? $options::tryFrom( $value->keyword ) : null;
 
 		$fallback = $input->fallback instanceof $options ? $input->fallback : null;

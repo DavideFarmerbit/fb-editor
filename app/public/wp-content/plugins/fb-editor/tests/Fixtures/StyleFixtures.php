@@ -7,7 +7,7 @@ namespace Fb\Tests\Fixtures;
 use Fb\Blocks\Library\Section\Section;
 use Fb\CoreBlocks\Library\Button\Button;
 use Fb\Blocks\Values\BlockStyles;
-use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\StatefulValues;
 use Fb\Css\CssLayer;
 use Fb\Presets\Preset;
 use Fb\Presets\PresetKind;
@@ -35,17 +35,17 @@ final class StyleFixtures
 
 		$cases = [];
 		foreach ( self::cases() as $case ) {
-			$values   = BlockValues::fromAttribute( $case->attribute, $case->definition, $breakpoints );
-			$defaults = BlockValues::fromAttribute( $case->defaults, $case->definition, $breakpoints );
+			$values   = StatefulValues::fromJson( $case->attribute(), $case->definition, $breakpoints );
+			$defaults = StatefulValues::fromJson( $case->defaultsAttribute(), $case->definition, $breakpoints );
 			$cases[]  = [
 				'name'        => $case->name,
 				'definition'  => $case->definition,
-				'attribute'   => $case->attribute,
-				'defaults'    => (object) $case->defaults,
+				'attribute'   => $case->attribute(),
+				'defaults'    => $case->defaultsAttribute(),
 				'rootClass'   => StyleCase::ROOT_CLASS,
 				'values'      => $values,
-				'defaultsCss' => $compiler->compile( CssLayer::Defaults, ...$styles->bindings( $case->definition, $defaults, Selector::forClass( $case->definition->name->cssClass() ) ) ),
-				'css'         => $compiler->compile( CssLayer::Instances, ...$styles->bindings( $case->definition, $values, Selector::forClass( StyleCase::ROOT_CLASS ), $defaults ) ),
+				'defaultsCss' => $styles->forSource( $case->definition, $defaults, Selector::forClass( $case->definition->name->cssClass() ) )->css( $compiler, CssLayer::Defaults ),
+				'css'         => $styles->forSource( $case->definition, $values, Selector::forClass( StyleCase::ROOT_CLASS ), $defaults )->css( $compiler, CssLayer::Instances ),
 			];
 		}
 
@@ -178,6 +178,31 @@ final class StyleFixtures
 				],
 				[ 'padding' => [ 'desktop' => [ 'top' => self::preset( '40' ), 'bottom' => self::preset( '40' ) ] ] ]
 			),
+			new StyleCase(
+				'states over the base look, in cascade order',
+				$button,
+				[ 'background' => [ 'desktop' => self::color( 'accent' ) ] ],
+				[ 'fontWeight' => [ 'desktop' => '400' ] ],
+				[
+					'active' => [ 'background' => [ 'desktop' => self::color( 'x-dark' ) ] ],
+					'hover'  => [ 'background' => [ 'desktop' => [ 'kind' => 'custom', 'value' => '#222222' ] ], 'fontWeight' => [ 'mobile' => '700' ] ],
+					'focus'  => [ 'padding' => [ 'tablet' => [ 'top' => self::px( 2 ) ] ] ],
+				],
+				[ 'hover' => [ 'fontWeight' => [ 'desktop' => '600' ] ] ]
+			),
+			new StyleCase(
+				'state conditions read state, then base, then defaults',
+				$fixture,
+				[ 'display' => [ 'tablet' => 'block' ] ],
+				[ 'display' => [ 'desktop' => 'flex' ] ],
+				[
+					'hover'  => [ 'display' => [ 'mobile' => 'grid' ], 'gap' => [ 'desktop' => [ 'top' => self::px( 4 ) ] ] ],
+					'focus'  => [ 'display' => [ 'desktop' => 'grid' ] ],
+					'active' => [ 'tag' => 'div', 'gap' => [ 'tablet' => [ 'left' => self::px( 9 ) ] ] ],
+				],
+				[ 'active' => [ 'display' => [ 'tablet' => 'grid' ] ] ]
+			),
+			new StyleCase( 'garbage states', $section, [], [], [ 'hover' => 'nope', 'focus' => [ 'padding' => 'x' ] ] ),
 			new StyleCase( 'garbage attribute', $section, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
 		];
 	}

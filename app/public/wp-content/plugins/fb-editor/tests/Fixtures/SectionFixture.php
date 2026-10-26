@@ -16,6 +16,7 @@ use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
 use Fb\Blocks\Definition\Layout;
 use Fb\Blocks\Definition\Panel;
 use Fb\Blocks\Definition\Scope;
+use Fb\Blocks\States\BlockState;
 use Fb\Styles\CssProperty;
 use Fb\Styles\Output\AxisOutput;
 use Fb\Styles\Output\BoxOutput;
@@ -24,7 +25,8 @@ use Fb\Styles\Output\PropertyOutput;
 
 /**
  * A section-like block: static tag, responsive display, padding on the
- * root, and a gap on its inner element shown only for flex/grid.
+ * root, and a gap on its inner element shown only for flex/grid. Supports
+ * hover and active (declared out of order on purpose), not focus.
  */
 final class SectionFixture
 {
@@ -50,6 +52,7 @@ final class SectionFixture
 				new Panel( 'Spacing', $padding ),
 			),
 			[ $inner ],
+			[ BlockState::Active, BlockState::Hover ],
 		);
 	}
 }

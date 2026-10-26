@@ -35,6 +35,17 @@ final readonly class StyleCompiler
 
 	public function compile( CssLayer $layer, StyleBinding ...$bindings ): string
 	{
+		$css = $this->rules( ...$bindings );
+
+		return '' === $css ? '' : $layer->wrap( $css );
+	}
+
+	/**
+	 * The rules alone, not wrapped in a layer: for callers putting several
+	 * groups in one layer, in order (the states).
+	 */
+	public function rules( StyleBinding ...$bindings ): string
+	{
 		/** @var list<RuleSet> $byBreakpoint Same order as $this->breakpoints. */
 		$byBreakpoint = [];
 		foreach ( $this->breakpoints as $ignored ) {
@@ -55,7 +66,7 @@ final readonly class StyleCompiler
 			$css  .= null === $query ? $rules->toCss() : "@media {$query}{{$rules->toCss()}}";
 		}
 
-		return '' === $css ? '' : $layer->wrap( $css );
+		return $css;
 	}
 
 	/**

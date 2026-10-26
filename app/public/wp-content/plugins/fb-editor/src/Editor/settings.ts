@@ -5,7 +5,7 @@
 import { breakpointListFromJson, type BreakpointList } from '../Breakpoints/breakpoints';
 import { BlockDefaultsInfo } from '../Blocks/Defaults/block-defaults-info';
 import { blockDefinitionFromJson, type BlockDefinition } from '../Blocks/Definition/block-definition';
-import { BlockValues } from '../Blocks/Values/block-values';
+import { StatefulValues } from '../Blocks/Values/stateful-values';
 import { InvalidJson, JsonValue } from '../Json/json';
 import { Preset, Presets } from '../Presets/presets';
 
@@ -58,7 +58,7 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 			return new BlockDefaultsInfo(
 				name,
 				item.get( 'postSlug' ).string(),
-				BlockValues.fromAttribute( item.get( 'theme' ).decoded(), definition, breakpoints )
+				StatefulValues.fromJson( item.get( 'theme' ).decoded(), definition, breakpoints )
 			);
 		} );
 

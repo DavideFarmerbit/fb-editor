@@ -12,16 +12,16 @@ import { CssLayer, Selector } from '../../Styles/css';
 import { StyleCompiler } from '../../Styles/compiler';
 import type { BlockDefinition } from '../Definition/block-definition';
 import { BlockStyles } from '../Values/block-styles';
-import type { BlockValues } from '../Values/block-values';
+import type { StatefulValues } from '../Values/stateful-values';
 
 const compiler = new StyleCompiler( settings.breakpoints, settings.presets );
-const blockStyles = new BlockStyles( settings.breakpoints );
+const blockStyles = new BlockStyles( settings.breakpoints, true );
 
 interface InstanceStylesProps {
 	readonly definition: BlockDefinition;
-	readonly values: BlockValues;
+	readonly values: StatefulValues;
 	/** The type's defaults: conditions fall back to them, like in PHP. */
-	readonly defaults: BlockValues;
+	readonly defaults: StatefulValues;
 	/** Editor-only instance class on the block root. */
 	readonly instanceClass: string;
 	/** The block root, once mounted: tells us which document to write to. */
@@ -30,7 +30,7 @@ interface InstanceStylesProps {
 
 export function InstanceStyles( { definition, values, defaults, instanceClass, root }: InstanceStylesProps ): ReactElement | null {
 	const css = useMemo(
-		() => compiler.compile( CssLayer.Instances, blockStyles.bindings( definition, values, Selector.forClass( instanceClass ), defaults, true ) ),
+		() => blockStyles.forSource( definition, values, Selector.forClass( instanceClass ), defaults ).css( compiler, CssLayer.Instances ),
 		[ definition, values, defaults, instanceClass ]
 	);
 

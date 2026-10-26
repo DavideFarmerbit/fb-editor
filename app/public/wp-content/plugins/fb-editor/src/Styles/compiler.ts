@@ -66,6 +66,12 @@ export class StyleCompiler {
 	) {}
 
 	compile( layer: CssLayer, bindings: readonly StyleBinding[] ): string {
+		const css = this.rules( bindings );
+		return css === '' ? '' : wrapInLayer( layer, css );
+	}
+
+	/** The rules alone, not wrapped in a layer (mirrors StyleCompiler::rules()). */
+	rules( bindings: readonly StyleBinding[] ): string {
 		const byBreakpoint = this.breakpoints.map( () => new RuleSet() );
 
 		for ( const binding of bindings ) {
@@ -82,7 +88,7 @@ export class StyleCompiler {
 			css += query === null ? rules.toCss() : `@media ${ query }{${ rules.toCss() }}`;
 		} );
 
-		return css === '' ? '' : wrapInLayer( layer, css );
+		return css;
 	}
 
 	private compileBinding( binding: StyleBinding, byBreakpoint: readonly RuleSet[] ): void {

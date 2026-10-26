@@ -15,16 +15,16 @@ import type { BlockDefinition, Control } from './Definition/block-definition';
 import { fromDefault } from './Inspector/control-reading';
 import { Inspector } from './Inspector/inspector';
 import { InstanceStyles } from './Rendering/instance-styles';
-import { BlockValues } from './Values/block-values';
+import { StatefulValues } from './Values/stateful-values';
 
 export class FbBlockState {
 	constructor(
-		public readonly values: BlockValues,
+		public readonly values: StatefulValues,
 		public readonly defaults: BlockDefaults,
 		/** Editor-only class on the block root; never saved. */
 		public readonly instanceClass: string,
-		public readonly setValues: ( values: BlockValues ) => void,
-		public readonly saveDefaults: ( saved: BlockValues ) => void
+		public readonly setValues: ( values: StatefulValues ) => void,
+		public readonly saveDefaults: ( saved: StatefulValues ) => void
 	) {}
 }
 
@@ -43,7 +43,7 @@ export function useFbBlock(
 	clientId: string
 ): FbBlockState {
 	const attribute = attributes[ ATTRIBUTE ];
-	const values = useMemo( () => BlockValues.fromAttribute( attribute, definition, settings.breakpoints ), [ attribute, definition ] );
+	const values = useMemo( () => StatefulValues.fromJson( attribute, definition, settings.breakpoints ), [ attribute, definition ] );
 	const { defaults, save } = useBlockDefaults( definition );
 
 	return new FbBlockState(
@@ -71,14 +71,17 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 			<InspectorControls>
 				<Inspector
 					definition={ definition }
-					values={ values }
-					fallback={ defaults.values }
+					values={ values.base }
+					fallback={ defaults.values.base }
 					fallbackStatus={ fromDefault( definition.title ) }
 					memoryKey={ clientId }
 					listFallbackControls={ false }
-					onChange={ state.setValues }
+					onChange={ ( base ) => state.setValues( values.withBase( base ) ) }
 					makeDefault={
-						defaults.canEdit ? ( control: Control ) => state.saveDefaults( defaults.saved.withControlFrom( control, values ) ) : null
+						defaults.canEdit
+							? ( control: Control ) =>
+									state.saveDefaults( defaults.saved.withBase( defaults.saved.base.withControlFrom( control, values.base ) ) )
+							: null
 					}
 				/>
 			</InspectorControls>

@@ -1,7 +1,8 @@
 /**
- * Mirrors Fb\Blocks\Values\BlockValues and ResolvedValues: the values of one
- * block instance, parsed from its `fb` attribute through each control's
- * input. Unknown controls and invalid values are dropped.
+ * Mirrors Fb\Blocks\Values\BlockValues and ResolvedValues: one set of
+ * control values (a block's base look, or one of its states), parsed through
+ * each control's input. Unknown controls and invalid values are dropped.
+ * See StatefulValues for the whole `fb` attribute.
  */
 import type { BreakpointId, BreakpointList } from '../../Breakpoints/breakpoints';
 import type { ResolvedValues } from '../Definition/Condition/conditions';
@@ -11,7 +12,7 @@ import { InvalidJson, JsonValue } from '../../Json/json';
 import { Responsive } from '../../Values/responsive';
 import type { ResponsiveValue } from '../../Values/value';
 
-class ResolvedValueMap implements ResolvedValues {
+export class ResolvedValueMap implements ResolvedValues {
 	constructor( private readonly values: ReadonlyMap< string, ResponsiveValue > ) {}
 
 	get( id: ControlId ): ResponsiveValue | null {
@@ -22,9 +23,13 @@ class ResolvedValueMap implements ResolvedValues {
 export class BlockValues {
 	private constructor(
 		private readonly definition: BlockDefinition,
-		private readonly breakpoints: BreakpointList,
+		private readonly breakpointList: BreakpointList,
 		private readonly values: ReadonlyMap< string, Responsive >
 	) {}
+
+	static empty( definition: BlockDefinition, breakpoints: BreakpointList ): BlockValues {
+		return new BlockValues( definition, breakpoints, new Map() );
+	}
 
 	static fromAttribute( attribute: unknown, definition: BlockDefinition, breakpoints: BreakpointList ): BlockValues {
 		const json = JsonValue.of( attribute, 'fb' );
@@ -81,14 +86,14 @@ export class BlockValues {
 				values.set( candidate.id, next );
 			}
 		}
-		return new BlockValues( this.definition, this.breakpoints, values );
+		return new BlockValues( this.definition, this.breakpointList, values );
 	}
 
 	/** A copy without any value for this control, at every breakpoint. */
 	withoutControl( control: Control ): BlockValues {
 		const values = new Map( this.values );
 		values.delete( control.id );
-		return new BlockValues( this.definition, this.breakpoints, values );
+		return new BlockValues( this.definition, this.breakpointList, values );
 	}
 
 	/**
@@ -109,7 +114,7 @@ export class BlockValues {
 			}
 		}
 
-		return new BlockValues( this.definition, this.breakpoints, values );
+		return new BlockValues( this.definition, this.breakpointList, values );
 	}
 
 	isEmpty(): boolean {
@@ -118,37 +123,36 @@ export class BlockValues {
 
 	/** Where static-scope values live (mirrors BlockValues::baseBreakpoint()). */
 	baseBreakpoint(): BreakpointId {
-		return this.breakpoints.base.id;
+		return this.breakpointList.base.id;
 	}
 
-	/**
-	 * Mirrors BlockValues::resolvedAt(): with a fallback (the type's
-	 * defaults), controls this block leaves unset take the fallback's value.
-	 */
-	resolvedAt( breakpoint: BreakpointId, fallback: BlockValues | null = null ): ResolvedValues {
-		const resolved = new Map< string, ResponsiveValue >();
+	/** Mirrors BlockValues::onlyStateful(). */
+	onlyStateful(): BlockValues {
+		const values = new Map< string, Responsive >();
 		for ( const control of this.definition.controls ) {
-			const at =
-				this.get( control.id ).resolve( breakpoint, this.breakpoints ) ??
-				fallback?.get( control.id ).resolve( breakpoint, this.breakpoints ) ??
-				null;
-			if ( at !== null ) {
-				resolved.set( control.id, at );
+			const value = this.values.get( control.id );
+			if ( control.isStateful() && value !== undefined ) {
+				values.set( control.id, value );
 			}
 		}
-		return new ResolvedValueMap( resolved );
+		return new BlockValues( this.definition, this.breakpointList, values );
+	}
+
+	/** Where values are resolved: the breakpoints they are keyed by. */
+	breakpoints(): BreakpointList {
+		return this.breakpointList;
 	}
 
 	/** Mirrors BlockValues::overlay(): `over` wins per control and breakpoint. */
 	overlay( over: BlockValues ): BlockValues {
 		const values = new Map< string, Responsive >();
 		for ( const control of this.definition.controls ) {
-			const merged = this.get( control.id ).overlay( over.get( control.id ), this.breakpoints );
+			const merged = this.get( control.id ).overlay( over.get( control.id ), this.breakpointList );
 			if ( ! merged.isEmpty() ) {
 				values.set( control.id, merged );
 			}
 		}
-		return new BlockValues( this.definition, this.breakpoints, values );
+		return new BlockValues( this.definition, this.breakpointList, values );
 	}
 
 	/** Plain JSON for setAttributes(): no class instances in the block store. */
@@ -161,7 +165,7 @@ export class BlockValues {
 		const json: Record< string, unknown > = {};
 		this.values.forEach( ( value, id ) => {
 			const control = this.definition.control( id as ControlId );
-			json[ id ] = control?.scope === Scope.Static ? value.at( this.breakpoints.base.id ) : value;
+			json[ id ] = control?.scope === Scope.Static ? value.at( this.breakpointList.base.id ) : value;
 		} );
 		return json;
 	}

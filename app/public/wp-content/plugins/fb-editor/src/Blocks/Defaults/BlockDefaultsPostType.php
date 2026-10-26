@@ -6,7 +6,7 @@ namespace Fb\Blocks\Defaults;
 
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Definition\BlockName;
-use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\StatefulValues;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;
 use Fb\TypeScript\ExportToTypeScript;
@@ -101,7 +101,7 @@ final readonly class BlockDefaultsPostType implements Hookable
 		// Undecodable or unknown block → stored as "no defaults".
 		$values = null === $definition
 			? null
-			: BlockValues::fromAttribute( json_decode( $content ), $definition, $this->breakpoints->breakpoints() );
+			: StatefulValues::fromJson( json_decode( $content ), $definition, $this->breakpoints->breakpoints() );
 
 		$data['post_content'] = wp_slash( null === $values ? '{}' : (string) wp_json_encode( $values, JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION ) );
 

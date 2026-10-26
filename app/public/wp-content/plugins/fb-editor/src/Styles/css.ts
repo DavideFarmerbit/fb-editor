@@ -9,12 +9,24 @@ import type { Side } from '../Values/box';
 import { CssProperty } from './CssProperty.generated';
 import { BoxProperty } from './Output/BoxProperty.generated';
 import { REVERT } from './DeclarationSet.generated';
-import { CLASS_PATTERN } from './Selector.generated';
+import { CLASS_PATTERN, PSEUDO_CLASS_PATTERN } from './Selector.generated';
 
 export { BoxProperty, CssLayer, CssProperty };
 
 export function wrapInLayer( layer: CssLayer, css: string ): string {
 	return `@layer ${ layer }{${ css }}`;
+}
+
+/** Mirrors CssLayer::states(): where a base layer's state styles go. */
+export function statesLayer( layer: CssLayer ): CssLayer {
+	switch ( layer ) {
+		case CssLayer.Defaults:
+			return CssLayer.StateDefaults;
+		case CssLayer.Instances:
+			return CssLayer.StateInstances;
+		default:
+			throw new Error( `No state layer for ${ layer }.` );
+	}
 }
 
 /**
@@ -69,18 +81,34 @@ export class DeclarationSet {
 
 /** Zero-specificity selector; elements are direct children of the root. */
 export class Selector {
-	private constructor( private readonly path: readonly string[] ) {}
+	private constructor(
+		/** Built only from validated parts. */
+		private readonly inner: string,
+		/** Still just the root class (+ pseudo-classes): no child yet. */
+		private readonly isRoot = true
+	) {}
 
 	static forClass( className: string ): Selector {
-		return new Selector( [ Selector.valid( className ) ] );
+		return new Selector( `.${ Selector.valid( className ) }` );
+	}
+
+	/** The root, only while it matches this pseudo-class (a state). */
+	withPseudoClass( pseudoClass: string ): Selector {
+		if ( ! this.isRoot ) {
+			throw new Error( 'Pseudo-classes go on the root, before any child.' );
+		}
+		if ( ! PSEUDO_CLASS_PATTERN.test( pseudoClass ) ) {
+			throw new InvalidJson( `Invalid pseudo-class "${ pseudoClass }".` );
+		}
+		return new Selector( this.inner + pseudoClass );
 	}
 
 	child( className: string ): Selector {
-		return new Selector( [ ...this.path, Selector.valid( className ) ] );
+		return new Selector( `${ this.inner }>.${ Selector.valid( className ) }`, false );
 	}
 
 	toString(): string {
-		return `:where(.${ this.path.join( '>.' ) })`;
+		return `:where(${ this.inner })`;
 	}
 
 	private static valid( className: string ): string {

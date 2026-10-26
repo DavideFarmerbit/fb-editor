@@ -25,6 +25,13 @@ enum CssLayer: string
 	case Defaults = 'fb.defaults';
 	/** Per-block-instance values. */
 	case Instances = 'fb.instances';
+	/**
+	 * State styles (hover…) sit above every base layer: any state beats any
+	 * base look, e.g. a default hover background beats a block's own
+	 * background while hovered.
+	 */
+	case StateDefaults = 'fb.states.defaults';
+	case StateInstances = 'fb.states.instances';
 
 	/**
 	 * Establishes the order. Must precede (or accompany) the first fb layer.
@@ -32,6 +39,16 @@ enum CssLayer: string
 	public static function orderStatement(): string
 	{
 		return '@layer ' . implode( ',', array_map( static fn ( self $layer ): string => $layer->value, self::cases() ) ) . ';';
+	}
+
+	/** Where this base layer's state styles go. */
+	public function states(): self
+	{
+		return match ( $this ) {
+			self::Defaults  => self::StateDefaults,
+			self::Instances => self::StateInstances,
+			default         => throw new \LogicException( "No state layer for {$this->value}." ),
+		};
 	}
 
 	public function wrap( string $css ): string

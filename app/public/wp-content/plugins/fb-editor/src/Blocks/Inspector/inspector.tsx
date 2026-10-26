@@ -12,6 +12,7 @@ import type { ReactElement } from 'react';
 import { store } from '../../Editor/store';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
 import type { BlockValues } from '../Values/block-values';
+import { ValueChain } from '../Values/value-chain';
 import { AddSetting } from './add-setting';
 import { ControlFrame } from './control-frame';
 import './inspector.scss';
@@ -48,7 +49,7 @@ export function Inspector( props: InspectorProps ): ReactElement {
 	);
 	const { addControl, forgetControl } = useDispatch( store );
 	// Conditions read the edited value, else the fallback (as in PHP).
-	const resolved = values.resolvedAt( breakpoint.id, fallback );
+	const resolved = new ValueChain( definition, values, fallback ).resolvedAt( breakpoint.id );
 
 	const isShown = ( control: Control ): boolean =>
 		values.has( control.id ) || added.includes( control.id ) || ( listFallbackControls && fallback.has( control.id ) );

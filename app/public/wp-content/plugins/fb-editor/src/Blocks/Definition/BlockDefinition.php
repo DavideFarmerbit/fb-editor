@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Definition;
 
+use Fb\Blocks\States\BlockState;
+
 /**
  * Everything the system needs to know about a block type: its controls,
  * their sidebar layout and its named elements.
@@ -20,8 +22,12 @@ final readonly class BlockDefinition implements \JsonSerializable
 	/** @var list<Element> */
 	public array $elements;
 
+	/** @var list<BlockState> In cascade order. */
+	public array $states;
+
 	/**
 	 * @param list<ElementId|Element> $elements Plain ids: same class in the editor.
+	 * @param list<BlockState>        $states   States it can be styled for.
 	 */
 	public function __construct(
 		public BlockName $name,
@@ -29,12 +35,19 @@ final readonly class BlockDefinition implements \JsonSerializable
 		public ControlSet $controls,
 		public Layout $layout,
 		array $elements = [],
+		array $states = [],
 	) {
 		$this->elements = array_map(
 			static fn ( ElementId|Element $element ): Element => $element instanceof Element ? $element : new Element( $element ),
 			$elements
 		);
+		$this->states   = BlockState::ordered( $states );
 		$this->validate();
+	}
+
+	public function supports( BlockState $state ): bool
+	{
+		return in_array( $state, $this->states, true );
 	}
 
 	public function element( ElementId $id ): ?Element
@@ -97,7 +110,7 @@ final readonly class BlockDefinition implements \JsonSerializable
 	 *
 	 * Class names are computed here, so the editor never re-derives them.
 	 *
-	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>}
+	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string}>}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -115,6 +128,10 @@ final readonly class BlockDefinition implements \JsonSerializable
 					'editorClassName' => $element->editorClass ?? $this->name->elementClass( $element->id ),
 				],
 				$this->elements
+			),
+			'states'    => array_map(
+				static fn ( BlockState $state ): array => [ 'id' => $state, 'label' => $state->label(), 'pseudoClass' => $state->pseudoClass() ],
+				$this->states
 			),
 		];
 	}

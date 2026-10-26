@@ -10,6 +10,8 @@ import { describe, expect, test } from 'vitest';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import type { ControlId } from '../src/Blocks/Definition/control-id';
 import { BlockValues } from '../src/Blocks/Values/block-values';
+import { StatefulValues } from '../src/Blocks/Values/stateful-values';
+import { ValueChain } from '../src/Blocks/Values/value-chain';
 import { breakpointListFromJson, type BreakpointId } from '../src/Breakpoints/breakpoints';
 import { JsonValue } from '../src/Json/json';
 import { KeywordValue } from '../src/Values/keyword';
@@ -20,17 +22,20 @@ const fixtures = JsonValue.of(
 );
 const breakpoints = breakpointListFromJson( fixtures.get( 'breakpoints' ) );
 
-/** The real fb/section definition, as PHP exports it. */
-const section = blockDefinitionFromJson(
-	fixtures
-		.get( 'cases' )
-		.list()
-		.map( ( json ) => json.get( 'definition' ) )
-		.find( ( json ) => json.get( 'name' ).string() === 'fb/section' ) ??
-		( () => {
-			throw new Error( 'no fb/section case in fixtures' );
-		} )()
-);
+/** A real definition, as PHP exports it (the first case using it). */
+const definition = ( name: string ) =>
+	blockDefinitionFromJson(
+		fixtures
+			.get( 'cases' )
+			.list()
+			.map( ( json ) => json.get( 'definition' ) )
+			.find( ( json ) => json.get( 'name' ).string() === name ) ??
+			( () => {
+				throw new Error( `no ${ name } case in fixtures` );
+			} )()
+	);
+
+const section = definition( 'fb/section' );
 
 const control = ( id: string ) => {
 	const found = section.control( id as ControlId );
@@ -117,14 +122,29 @@ describe( 'defaults in the editor', () => {
 		const defaults = values( { display: { desktop: 'flex', mobile: 'block' } } );
 		const gap = control( 'gap' ).visibleWhen;
 
-		expect( gap?.evaluate( values( {} ).resolvedAt( bp( 'desktop' ), defaults ) ) ).toBe( true );
-		expect( gap?.evaluate( values( {} ).resolvedAt( bp( 'mobile' ), defaults ) ) ).toBe( false );
-		expect( gap?.evaluate( values( { display: { mobile: 'grid' } } ).resolvedAt( bp( 'mobile' ), defaults ) ) ).toBe( true );
+		const chain = ( own: BlockValues ) => new ValueChain( section, own, defaults );
+
+		expect( gap?.evaluate( chain( values( {} ) ).resolvedAt( bp( 'desktop' ) ) ) ).toBe( true );
+		expect( gap?.evaluate( chain( values( {} ) ).resolvedAt( bp( 'mobile' ) ) ) ).toBe( false );
+		expect( gap?.evaluate( chain( values( { display: { mobile: 'grid' } } ) ).resolvedAt( bp( 'mobile' ) ) ) ).toBe( true );
 	} );
 
 	test( 'the tag falls back to the default, then the input fallback', () => {
-		expect( section.option( values( {} ), 'tag', values( { tag: 'aside' } ) ) ).toBe( 'aside' );
-		expect( section.option( values( { tag: 'main' } ), 'tag', values( { tag: 'aside' } ) ) ).toBe( 'main' );
-		expect( section.option( values( {} ), 'tag', values( {} ) ) ).toBe( 'section' );
+		const base = ( attribute: unknown ) => StatefulValues.fromJson( { base: attribute }, section, breakpoints );
+
+		expect( section.option( base( {} ), 'tag', base( { tag: 'aside' } ) ) ).toBe( 'aside' );
+		expect( section.option( base( { tag: 'main' } ), 'tag', base( { tag: 'aside' } ) ) ).toBe( 'main' );
+		expect( section.option( base( {} ), 'tag', base( {} ) ) ).toBe( 'section' );
+	} );
+
+	test( 'editing the base look keeps the states', () => {
+		const button = definition( 'core/button' );
+		const weight = ( value: string ) => ( { fontWeight: { desktop: value } } );
+		const current = StatefulValues.fromJson( { base: weight( '400' ), states: { hover: weight( '700' ) } }, button, breakpoints );
+
+		expect( json( current.withBase( BlockValues.fromAttribute( weight( '500' ), button, breakpoints ) ) ) ).toEqual( {
+			base: weight( '500' ),
+			states: { hover: weight( '700' ) },
+		} );
 	} );
 } );

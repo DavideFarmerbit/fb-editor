@@ -48,8 +48,10 @@ final class SectionRenderTest extends TestCase
 	{
 		$attributes = [
 			'fb'        => [
-				'tag'     => 'header',
-				'padding' => [ 'desktop' => [ 'top' => [ 'kind' => 'custom', 'value' => 8, 'unit' => 'px' ] ] ],
+				'base' => [
+					'tag'     => 'header',
+					'padding' => [ 'desktop' => [ 'top' => [ 'kind' => 'custom', 'value' => 8, 'unit' => 'px' ] ] ],
+				],
 			],
 			'className' => 'hero "><script>',
 		];
@@ -67,7 +69,7 @@ final class SectionRenderTest extends TestCase
 
 	public function testIdenticalInstancesAreCompiledOnce(): void
 	{
-		$attributes = [ 'fb' => [ 'margin' => [ 'desktop' => [ 'left' => [ 'kind' => 'auto' ] ] ] ] ];
+		$attributes = [ 'fb' => [ 'base' => [ 'margin' => [ 'desktop' => [ 'left' => [ 'kind' => 'auto' ] ] ] ] ] ];
 
 		$this->renderer->render( new Section(), $attributes, '' );
 		$this->renderer->render( new Section(), $attributes, '' );
@@ -79,7 +81,7 @@ final class SectionRenderTest extends TestCase
 	{
 		self::assertStringStartsWith(
 			'<section class="fb-section">',
-			$this->renderer->render( new Section(), [ 'fb' => [ 'tag' => 'script' ] ], '' )
+			$this->renderer->render( new Section(), [ 'fb' => [ 'base' => [ 'tag' => 'script' ] ] ], '' )
 		);
 	}
 }

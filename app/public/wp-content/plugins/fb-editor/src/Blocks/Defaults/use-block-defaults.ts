@@ -10,7 +10,7 @@ import { useCallback, useMemo } from '@wordpress/element';
 
 import { settings } from '../../Editor/settings';
 import type { BlockDefinition } from '../Definition/block-definition';
-import { BlockValues } from '../Values/block-values';
+import { StatefulValues } from '../Values/stateful-values';
 import { POST_TYPE } from './BlockDefaultsPostType.generated';
 
 const KIND = 'postType';
@@ -18,11 +18,11 @@ const KIND = 'postType';
 export class BlockDefaults {
 	constructor(
 		/** Theme + saved: what unset values fall back to. */
-		public readonly values: BlockValues,
+		public readonly values: StatefulValues,
 		/** Saved only: what "Make default" and the defaults sidebar edit. */
-		public readonly saved: BlockValues,
+		public readonly saved: StatefulValues,
 		/** The theme's defaults (fb.json), read-only: what saved ones overlay. */
-		public readonly theme: BlockValues,
+		public readonly theme: StatefulValues,
 		/** Whether the user may change defaults (edit_theme_options). */
 		public readonly canEdit: boolean
 	) {}
@@ -54,7 +54,7 @@ function recordId( record: unknown ): number | null {
 	return typeof record === 'object' && record !== null && 'id' in record && typeof record.id === 'number' ? record.id : null;
 }
 
-export function useBlockDefaults( definition: BlockDefinition ): { defaults: BlockDefaults; save: ( saved: BlockValues ) => void } {
+export function useBlockDefaults( definition: BlockDefinition ): { defaults: BlockDefaults; save: ( saved: StatefulValues ) => void } {
 	const info = settings.defaultsFor( definition );
 
 	const { id, content, canEdit } = useSelect(
@@ -76,12 +76,12 @@ export function useBlockDefaults( definition: BlockDefinition ): { defaults: Blo
 	const { editEntityRecord, saveEntityRecord } = useDispatch( coreStore );
 
 	const defaults = useMemo( () => {
-		const saved = BlockValues.fromAttribute( parseSaved( content ), definition, settings.breakpoints );
+		const saved = StatefulValues.fromJson( parseSaved( content ), definition, settings.breakpoints );
 		return new BlockDefaults( info.theme.overlay( saved ), saved, info.theme, canEdit );
 	}, [ content, definition, info, canEdit ] );
 
 	const save = useCallback(
-		( saved: BlockValues ): void => {
+		( saved: StatefulValues ): void => {
 			const edits = { content: JSON.stringify( saved.toAttribute() ) };
 			if ( id !== null ) {
 				void editEntityRecord( KIND, POST_TYPE, id, edits );

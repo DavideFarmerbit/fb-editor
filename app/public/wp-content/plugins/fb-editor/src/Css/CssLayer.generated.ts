@@ -8,4 +8,6 @@ export enum CssLayer {
 	Base = 'fb.base',
 	Defaults = 'fb.defaults',
 	Instances = 'fb.instances',
+	StateDefaults = 'fb.states.defaults',
+	StateInstances = 'fb.states.instances',
 }

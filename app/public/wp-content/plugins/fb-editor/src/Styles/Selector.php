@@ -19,9 +19,15 @@ final readonly class Selector implements \Stringable
 	#[ExportToTypeScript( regExp: true )]
 	public const string CLASS_PATTERN = '^-?[_a-zA-Z][_a-zA-Z0-9-]*$';
 
+	/** Pseudo-classes a root may carry (state selectors, e.g. ":hover"). */
+	#[ExportToTypeScript( regExp: true )]
+	public const string PSEUDO_CLASS_PATTERN = '^:[a-z][a-z(),:-]*$';
+
 	private function __construct(
 		/** Inner selector, built only from validated parts. */
 		private string $inner,
+		/** Still just the root class (+ pseudo-classes): no child yet. */
+		private bool $isRoot = true,
 	) {
 	}
 
@@ -30,10 +36,23 @@ final readonly class Selector implements \Stringable
 		return new self( '.' . self::validClass( $className ) );
 	}
 
+	/** The root, only while it matches this pseudo-class (a state). */
+	public function withPseudoClass( string $pseudoClass ): self
+	{
+		if ( ! $this->isRoot ) {
+			throw new \LogicException( 'Pseudo-classes go on the root, before any child.' );
+		}
+		if ( 1 !== preg_match( '/' . self::PSEUDO_CLASS_PATTERN . '/', $pseudoClass ) ) {
+			throw new \InvalidArgumentException( "Invalid pseudo-class \"{$pseudoClass}\"." );
+		}
+
+		return new self( $this->inner . $pseudoClass );
+	}
+
 	/** A direct child with this class. */
 	public function child( string $className ): self
 	{
-		return new self( "{$this->inner}>." . self::validClass( $className ) );
+		return new self( "{$this->inner}>." . self::validClass( $className ), false );
 	}
 
 	/** Any descendant of this HTML tag. */
@@ -43,7 +62,7 @@ final readonly class Selector implements \Stringable
 			throw new \InvalidArgumentException( "Invalid tag name \"{$tag}\"." );
 		}
 
-		return new self( "{$this->inner} {$tag}" );
+		return new self( "{$this->inner} {$tag}", false );
 	}
 
 	public function __toString(): string

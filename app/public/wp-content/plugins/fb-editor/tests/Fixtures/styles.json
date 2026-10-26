@@ -375,27 +375,30 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "80"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "80"
+                            },
+                            "bottom": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "80"
+                            }
                         },
-                        "bottom": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "80"
-                        }
-                    },
-                    "mobile": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "50"
+                        "mobile": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "50"
+                            }
                         }
                     }
                 }
@@ -403,24 +406,26 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "80"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "80"
+                            },
+                            "bottom": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "80"
+                            }
                         },
-                        "bottom": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "80"
-                        }
-                    },
-                    "mobile": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "50"
+                        "mobile": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "50"
+                            }
                         }
                     }
                 }
@@ -712,16 +717,19 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "margin": {
-                    "tablet": {
-                        "left": {
-                            "kind": "auto"
-                        },
-                        "right": {
-                            "kind": "auto"
+                "base": {
+                    "margin": {
+                        "tablet": {
+                            "left": {
+                                "kind": "auto"
+                            },
+                            "right": {
+                                "kind": "auto"
+                            }
                         }
                     }
                 }
@@ -729,13 +737,15 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "margin": {
-                    "tablet": {
-                        "right": {
-                            "kind": "auto"
-                        },
-                        "left": {
-                            "kind": "auto"
+                "base": {
+                    "margin": {
+                        "tablet": {
+                            "right": {
+                                "kind": "auto"
+                            },
+                            "left": {
+                                "kind": "auto"
+                            }
                         }
                     }
                 }
@@ -1027,39 +1037,42 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 10,
-                            "unit": "px"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 10,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 10,
+                                "unit": "px"
+                            }
                         },
-                        "left": {
-                            "kind": "custom",
-                            "value": 10,
-                            "unit": "px"
-                        }
-                    },
-                    "tablet": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 10,
-                            "unit": "px"
+                        "tablet": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 10,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 12,
+                                "unit": "px"
+                            }
                         },
-                        "left": {
-                            "kind": "custom",
-                            "value": 12,
-                            "unit": "px"
-                        }
-                    },
-                    "mobile": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 10,
-                            "unit": "px"
+                        "mobile": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 10,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
@@ -1067,36 +1080,38 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 10.0,
-                            "unit": "px"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 10.0,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 10.0,
+                                "unit": "px"
+                            }
                         },
-                        "left": {
-                            "kind": "custom",
-                            "value": 10.0,
-                            "unit": "px"
-                        }
-                    },
-                    "tablet": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 10.0,
-                            "unit": "px"
+                        "tablet": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 10.0,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 12.0,
+                                "unit": "px"
+                            }
                         },
-                        "left": {
-                            "kind": "custom",
-                            "value": 12.0,
-                            "unit": "px"
-                        }
-                    },
-                    "mobile": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 10.0,
-                            "unit": "px"
+                        "mobile": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 10.0,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
@@ -1237,24 +1252,38 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
                 ]
             },
             "attribute": {
-                "display": {
-                    "desktop": "flex",
-                    "mobile": "block"
-                },
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 16,
-                            "unit": "px"
-                        },
-                        "left": {
-                            "kind": "custom",
-                            "value": 1.5,
-                            "unit": "rem"
+                "base": {
+                    "display": {
+                        "desktop": "flex",
+                        "mobile": "block"
+                    },
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 16,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 1.5,
+                                "unit": "rem"
+                            }
                         }
                     }
                 }
@@ -1262,21 +1291,23 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "display": {
-                    "desktop": "flex",
-                    "mobile": "block"
-                },
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 16.0,
-                            "unit": "px"
-                        },
-                        "left": {
-                            "kind": "custom",
-                            "value": 1.5,
-                            "unit": "rem"
+                "base": {
+                    "display": {
+                        "desktop": "flex",
+                        "mobile": "block"
+                    },
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 16.0,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 1.5,
+                                "unit": "rem"
+                            }
                         }
                     }
                 }
@@ -1417,25 +1448,39 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
                 ]
             },
             "attribute": {
-                "display": {
-                    "desktop": "grid",
-                    "tablet": "block",
-                    "mobile": "flex"
-                },
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "40"
-                        },
-                        "left": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "40"
+                "base": {
+                    "display": {
+                        "desktop": "grid",
+                        "tablet": "block",
+                        "mobile": "flex"
+                    },
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "40"
+                            },
+                            "left": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "40"
+                            }
                         }
                     }
                 }
@@ -1443,22 +1488,24 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "display": {
-                    "desktop": "grid",
-                    "tablet": "block",
-                    "mobile": "flex"
-                },
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "40"
-                        },
-                        "left": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "40"
+                "base": {
+                    "display": {
+                        "desktop": "grid",
+                        "tablet": "block",
+                        "mobile": "flex"
+                    },
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "40"
+                            },
+                            "left": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "40"
+                            }
                         }
                     }
                 }
@@ -1599,15 +1646,29 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
                 ]
             },
             "attribute": {
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 8,
-                            "unit": "px"
+                "base": {
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 8,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
@@ -1615,12 +1676,14 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 8.0,
-                            "unit": "px"
+                "base": {
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 8.0,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
@@ -1912,37 +1975,40 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "margin": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": -12.5,
-                            "unit": "px"
+                "base": {
+                    "margin": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": -12.5,
+                                "unit": "px"
+                            },
+                            "right": {
+                                "kind": "custom",
+                                "value": 33.333329999999997,
+                                "unit": "%"
+                            },
+                            "bottom": {
+                                "kind": "custom",
+                                "value": 0,
+                                "unit": "rem"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 1.25,
+                                "unit": "vw"
+                            }
                         },
-                        "right": {
-                            "kind": "custom",
-                            "value": 33.333329999999997,
-                            "unit": "%"
-                        },
-                        "bottom": {
-                            "kind": "custom",
-                            "value": 0,
-                            "unit": "rem"
-                        },
-                        "left": {
-                            "kind": "custom",
-                            "value": 1.25,
-                            "unit": "vw"
-                        }
-                    },
-                    "mobile": {
-                        "bottom": {
-                            "kind": "custom",
-                            "value": -0.0,
-                            "unit": "em"
+                        "mobile": {
+                            "bottom": {
+                                "kind": "custom",
+                                "value": -0.0,
+                                "unit": "em"
+                            }
                         }
                     }
                 }
@@ -1950,34 +2016,36 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "margin": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": -12.5,
-                            "unit": "px"
+                "base": {
+                    "margin": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": -12.5,
+                                "unit": "px"
+                            },
+                            "right": {
+                                "kind": "custom",
+                                "value": 33.333329999999997,
+                                "unit": "%"
+                            },
+                            "bottom": {
+                                "kind": "custom",
+                                "value": 0.0,
+                                "unit": "rem"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 1.25,
+                                "unit": "vw"
+                            }
                         },
-                        "right": {
-                            "kind": "custom",
-                            "value": 33.333329999999997,
-                            "unit": "%"
-                        },
-                        "bottom": {
-                            "kind": "custom",
-                            "value": 0.0,
-                            "unit": "rem"
-                        },
-                        "left": {
-                            "kind": "custom",
-                            "value": 1.25,
-                            "unit": "vw"
-                        }
-                    },
-                    "mobile": {
-                        "bottom": {
-                            "kind": "custom",
-                            "value": 0.0,
-                            "unit": "em"
+                        "mobile": {
+                            "bottom": {
+                                "kind": "custom",
+                                "value": 0.0,
+                                "unit": "em"
+                            }
                         }
                     }
                 }
@@ -2269,25 +2337,28 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "2xl"
-                        },
-                        "right": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "xLarge"
-                        },
-                        "bottom": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "x_small"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "2xl"
+                            },
+                            "right": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "xLarge"
+                            },
+                            "bottom": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "x_small"
+                            }
                         }
                     }
                 }
@@ -2295,22 +2366,24 @@
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "2xl"
-                        },
-                        "right": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "xLarge"
-                        },
-                        "bottom": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "x_small"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "2xl"
+                            },
+                            "right": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "xLarge"
+                            },
+                            "bottom": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "x_small"
+                            }
                         }
                     }
                 }
@@ -2602,58 +2675,63 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": -4,
-                            "unit": "px"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": -4,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 4,
+                                "unit": "px"
+                            }
                         },
-                        "left": {
-                            "kind": "custom",
-                            "value": 4,
-                            "unit": "px"
+                        "tablet": {
+                            "top": {
+                                "kind": "auto"
+                            }
+                        },
+                        "mobile": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 4,
+                                "unit": "pt"
+                            }
+                        },
+                        "phone": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 1,
+                                "unit": "px"
+                            }
                         }
                     },
-                    "tablet": {
-                        "top": {
-                            "kind": "auto"
-                        }
+                    "display": {
+                        "desktop": "table"
                     },
-                    "mobile": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 4,
-                            "unit": "pt"
-                        }
-                    },
-                    "phone": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 1,
-                            "unit": "px"
-                        }
+                    "unknown": {
+                        "desktop": "x"
                     }
-                },
-                "display": {
-                    "desktop": "table"
-                },
-                "unknown": {
-                    "desktop": "x"
                 }
             },
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "padding": {
-                    "desktop": {
-                        "left": {
-                            "kind": "custom",
-                            "value": 4.0,
-                            "unit": "px"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "left": {
+                                "kind": "custom",
+                                "value": 4.0,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
@@ -2945,15 +3023,20 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "tag": "header"
+                "base": {
+                    "tag": "header"
+                }
             },
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "tag": "header"
+                "base": {
+                    "tag": "header"
+                }
             },
             "defaultsCss": "",
             "css": ""
@@ -3242,57 +3325,62 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "background": {
-                    "desktop": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "accent"
+                "base": {
+                    "background": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "accent"
+                        },
+                        "mobile": {
+                            "kind": "custom",
+                            "value": "#FFAA00"
+                        }
                     },
-                    "mobile": {
-                        "kind": "custom",
-                        "value": "#FFAA00"
-                    }
-                },
-                "textColor": {
-                    "desktop": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "x-dark"
-                    },
-                    "tablet": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "x-dark"
+                    "textColor": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "x-dark"
+                        },
+                        "tablet": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "x-dark"
+                        }
                     }
                 }
             },
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "background": {
-                    "desktop": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "accent"
+                "base": {
+                    "background": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "accent"
+                        },
+                        "mobile": {
+                            "kind": "custom",
+                            "value": "#ffaa00"
+                        }
                     },
-                    "mobile": {
-                        "kind": "custom",
-                        "value": "#ffaa00"
-                    }
-                },
-                "textColor": {
-                    "desktop": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "x-dark"
-                    },
-                    "tablet": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "x-dark"
+                    "textColor": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "x-dark"
+                        },
+                        "tablet": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "x-dark"
+                        }
                     }
                 }
             },
@@ -3583,32 +3671,37 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "background": {
-                    "desktop": {
-                        "kind": "custom",
-                        "value": "red;}body{"
-                    },
-                    "tablet": {
-                        "kind": "preset",
-                        "preset": "spacing",
-                        "slug": "40"
-                    },
-                    "mobile": {
-                        "kind": "custom",
-                        "value": "#abc"
+                "base": {
+                    "background": {
+                        "desktop": {
+                            "kind": "custom",
+                            "value": "red;}body{"
+                        },
+                        "tablet": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        },
+                        "mobile": {
+                            "kind": "custom",
+                            "value": "#abc"
+                        }
                     }
                 }
             },
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "background": {
-                    "mobile": {
-                        "kind": "custom",
-                        "value": "#abc"
+                "base": {
+                    "background": {
+                        "mobile": {
+                            "kind": "custom",
+                            "value": "#abc"
+                        }
                     }
                 }
             },
@@ -3899,47 +3992,52 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "minHeight": {
-                    "desktop": {
-                        "kind": "custom",
-                        "value": 100,
-                        "unit": "vh"
+                "base": {
+                    "minHeight": {
+                        "desktop": {
+                            "kind": "custom",
+                            "value": 100,
+                            "unit": "vh"
+                        },
+                        "mobile": {
+                            "kind": "auto"
+                        }
                     },
-                    "mobile": {
-                        "kind": "auto"
-                    }
-                },
-                "maxWidth": {
-                    "desktop": {
-                        "kind": "custom",
-                        "value": 72.5,
-                        "unit": "rem"
-                    },
-                    "tablet": {
-                        "kind": "preset",
-                        "preset": "spacing",
-                        "slug": "40"
+                    "maxWidth": {
+                        "desktop": {
+                            "kind": "custom",
+                            "value": 72.5,
+                            "unit": "rem"
+                        },
+                        "tablet": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        }
                     }
                 }
             },
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "maxWidth": {
-                    "desktop": {
-                        "kind": "custom",
-                        "value": 72.5,
-                        "unit": "rem"
-                    }
-                },
-                "minHeight": {
-                    "desktop": {
-                        "kind": "custom",
-                        "value": 100.0,
-                        "unit": "vh"
+                "base": {
+                    "maxWidth": {
+                        "desktop": {
+                            "kind": "custom",
+                            "value": 72.5,
+                            "unit": "rem"
+                        }
+                    },
+                    "minHeight": {
+                        "desktop": {
+                            "kind": "custom",
+                            "value": 100.0,
+                            "unit": "vh"
+                        }
                     }
                 }
             },
@@ -4230,28 +4328,33 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "display": {
-                    "desktop": "flex",
-                    "mobile": "grid"
-                },
-                "wrap": {
-                    "desktop": true,
-                    "tablet": false
+                "base": {
+                    "display": {
+                        "desktop": "flex",
+                        "mobile": "grid"
+                    },
+                    "wrap": {
+                        "desktop": true,
+                        "tablet": false
+                    }
                 }
             },
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "display": {
-                    "desktop": "flex",
-                    "mobile": "grid"
-                },
-                "wrap": {
-                    "desktop": true,
-                    "tablet": false
+                "base": {
+                    "display": {
+                        "desktop": "flex",
+                        "mobile": "grid"
+                    },
+                    "wrap": {
+                        "desktop": true,
+                        "tablet": false
+                    }
                 }
             },
             "defaultsCss": "",
@@ -4541,26 +4644,31 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "display": {
-                    "desktop": "flex"
-                },
-                "wrap": {
-                    "desktop": "yes",
-                    "tablet": 1,
-                    "mobile": false
+                "base": {
+                    "display": {
+                        "desktop": "flex"
+                    },
+                    "wrap": {
+                        "desktop": "yes",
+                        "tablet": 1,
+                        "mobile": false
+                    }
                 }
             },
             "defaults": {},
             "rootClass": "fb-case",
             "values": {
-                "display": {
-                    "desktop": "flex"
-                },
-                "wrap": {
-                    "mobile": false
+                "base": {
+                    "display": {
+                        "desktop": "flex"
+                    },
+                    "wrap": {
+                        "mobile": false
+                    }
                 }
             },
             "defaultsCss": "",
@@ -4850,23 +4958,26 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
-            "attribute": [],
+            "attribute": {},
             "defaults": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "80"
-                        }
-                    },
-                    "mobile": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "40"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "80"
+                            }
+                        },
+                        "mobile": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "40"
+                            }
                         }
                     }
                 }
@@ -5009,43 +5120,61 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
                 ]
             },
             "attribute": {
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 12,
-                            "unit": "px"
-                        },
-                        "left": {
-                            "kind": "custom",
-                            "value": 12,
-                            "unit": "px"
+                "base": {
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 12,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 12,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
             },
             "defaults": {
-                "display": {
-                    "desktop": "flex",
-                    "mobile": "block"
+                "base": {
+                    "display": {
+                        "desktop": "flex",
+                        "mobile": "block"
+                    }
                 }
             },
             "rootClass": "fb-case",
             "values": {
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 12.0,
-                            "unit": "px"
-                        },
-                        "left": {
-                            "kind": "custom",
-                            "value": 12.0,
-                            "unit": "px"
+                "base": {
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 12.0,
+                                "unit": "px"
+                            },
+                            "left": {
+                                "kind": "custom",
+                                "value": 12.0,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
@@ -5186,39 +5315,57 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
                 ]
             },
             "attribute": {
-                "display": {
-                    "mobile": "grid"
-                },
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 12,
-                            "unit": "px"
+                "base": {
+                    "display": {
+                        "mobile": "grid"
+                    },
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 12,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
             },
             "defaults": {
-                "display": {
-                    "desktop": "flex",
-                    "mobile": "block"
+                "base": {
+                    "display": {
+                        "desktop": "flex",
+                        "mobile": "block"
+                    }
                 }
             },
             "rootClass": "fb-case",
             "values": {
-                "display": {
-                    "mobile": "grid"
-                },
-                "gap": {
-                    "desktop": {
-                        "top": {
-                            "kind": "custom",
-                            "value": 12.0,
-                            "unit": "px"
+                "base": {
+                    "display": {
+                        "mobile": "grid"
+                    },
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 12.0,
+                                "unit": "px"
+                            }
                         }
                     }
                 }
@@ -5380,67 +5527,909 @@
                         "className": "fb-button__link",
                         "editorClassName": "wp-block-button__link"
                     }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
                 ]
             },
             "attribute": {
-                "background": {
-                    "desktop": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "accent"
-                    }
-                },
-                "fontWeight": {
-                    "desktop": "700",
-                    "mobile": "400"
-                },
-                "fontSize": {
-                    "desktop": {
-                        "kind": "custom",
-                        "value": 1.125,
-                        "unit": "rem"
+                "base": {
+                    "background": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "accent"
+                        }
+                    },
+                    "fontWeight": {
+                        "desktop": "700",
+                        "mobile": "400"
+                    },
+                    "fontSize": {
+                        "desktop": {
+                            "kind": "custom",
+                            "value": 1.125,
+                            "unit": "rem"
+                        }
                     }
                 }
             },
             "defaults": {
-                "padding": {
-                    "desktop": {
-                        "top": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "40"
-                        },
-                        "bottom": {
-                            "kind": "preset",
-                            "preset": "spacing",
-                            "slug": "40"
+                "base": {
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "40"
+                            },
+                            "bottom": {
+                                "kind": "preset",
+                                "preset": "spacing",
+                                "slug": "40"
+                            }
                         }
                     }
                 }
             },
             "rootClass": "fb-case",
             "values": {
-                "background": {
-                    "desktop": {
-                        "kind": "preset",
-                        "preset": "color",
-                        "slug": "accent"
+                "base": {
+                    "background": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "accent"
+                        }
+                    },
+                    "fontSize": {
+                        "desktop": {
+                            "kind": "custom",
+                            "value": 1.125,
+                            "unit": "rem"
+                        }
+                    },
+                    "fontWeight": {
+                        "desktop": "700",
+                        "mobile": "400"
                     }
-                },
-                "fontSize": {
-                    "desktop": {
-                        "kind": "custom",
-                        "value": 1.125,
-                        "unit": "rem"
-                    }
-                },
-                "fontWeight": {
-                    "desktop": "700",
-                    "mobile": "400"
                 }
             },
             "defaultsCss": "@layer fb.defaults{:where(.fb-button>.fb-button__link){padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);}}",
             "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-color:var(--wp--preset--color--accent);font-size:1.125rem;font-weight:700;}@media (max-width: 767px){:where(.fb-case>.fb-button__link){font-weight:400;}}}"
+        },
+        {
+            "name": "states over the base look, in cascade order",
+            "definition": {
+                "name": "core/button",
+                "title": "Button",
+                "isCore": true,
+                "className": "fb-button",
+                "controls": [
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "fontSize",
+                        "label": "Font size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": "font-size"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "fontWeight",
+                        "label": "Font weight",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "300",
+                                    "label": "Light"
+                                },
+                                {
+                                    "value": "400",
+                                    "label": "Regular"
+                                },
+                                {
+                                    "value": "500",
+                                    "label": "Medium"
+                                },
+                                {
+                                    "value": "600",
+                                    "label": "Semibold"
+                                },
+                                {
+                                    "value": "700",
+                                    "label": "Bold"
+                                },
+                                {
+                                    "value": "800",
+                                    "label": "Extra bold"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-weight"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    },
+                    {
+                        "label": "Typography",
+                        "controls": [
+                            "fontSize",
+                            "fontWeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "link",
+                        "className": "fb-button__link",
+                        "editorClassName": "wp-block-button__link"
+                    }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
+                ]
+            },
+            "attribute": {
+                "base": {
+                    "background": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "accent"
+                        }
+                    }
+                },
+                "states": {
+                    "active": {
+                        "background": {
+                            "desktop": {
+                                "kind": "preset",
+                                "preset": "color",
+                                "slug": "x-dark"
+                            }
+                        }
+                    },
+                    "hover": {
+                        "background": {
+                            "desktop": {
+                                "kind": "custom",
+                                "value": "#222222"
+                            }
+                        },
+                        "fontWeight": {
+                            "mobile": "700"
+                        }
+                    },
+                    "focus": {
+                        "padding": {
+                            "tablet": {
+                                "top": {
+                                    "kind": "custom",
+                                    "value": 2,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "defaults": {
+                "base": {
+                    "fontWeight": {
+                        "desktop": "400"
+                    }
+                },
+                "states": {
+                    "hover": {
+                        "fontWeight": {
+                            "desktop": "600"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "base": {
+                    "background": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "accent"
+                        }
+                    }
+                },
+                "states": {
+                    "hover": {
+                        "background": {
+                            "desktop": {
+                                "kind": "custom",
+                                "value": "#222222"
+                            }
+                        },
+                        "fontWeight": {
+                            "mobile": "700"
+                        }
+                    },
+                    "focus": {
+                        "padding": {
+                            "tablet": {
+                                "top": {
+                                    "kind": "custom",
+                                    "value": 2.0,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    },
+                    "active": {
+                        "background": {
+                            "desktop": {
+                                "kind": "preset",
+                                "preset": "color",
+                                "slug": "x-dark"
+                            }
+                        }
+                    }
+                }
+            },
+            "defaultsCss": "@layer fb.defaults{:where(.fb-button>.fb-button__link){font-weight:400;}}@layer fb.states.defaults{:where(.fb-button:hover>.fb-button__link){font-weight:600;}}",
+            "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-color:var(--wp--preset--color--accent);}}@layer fb.states.instances{:where(.fb-case:hover>.fb-button__link){background-color:#222222;}@media (max-width: 767px){:where(.fb-case:hover>.fb-button__link){font-weight:700;}}@media (max-width: 1024px){:where(.fb-case:is(:focus-visible,:has(:focus-visible))>.fb-button__link){padding-top:2px;}}:where(.fb-case:active>.fb-button__link){background-color:var(--wp--preset--color--x-dark);}}"
+        },
+        {
+            "name": "state conditions read state, then base, then defaults",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "isCore": false,
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
+                    }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active"
+                    }
+                ]
+            },
+            "attribute": {
+                "base": {
+                    "display": {
+                        "tablet": "block"
+                    }
+                },
+                "states": {
+                    "hover": {
+                        "display": {
+                            "mobile": "grid"
+                        },
+                        "gap": {
+                            "desktop": {
+                                "top": {
+                                    "kind": "custom",
+                                    "value": 4,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    },
+                    "focus": {
+                        "display": {
+                            "desktop": "grid"
+                        }
+                    },
+                    "active": {
+                        "tag": "div",
+                        "gap": {
+                            "tablet": {
+                                "left": {
+                                    "kind": "custom",
+                                    "value": 9,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "defaults": {
+                "base": {
+                    "display": {
+                        "desktop": "flex"
+                    }
+                },
+                "states": {
+                    "active": {
+                        "display": {
+                            "tablet": "grid"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "base": {
+                    "display": {
+                        "tablet": "block"
+                    }
+                },
+                "states": {
+                    "hover": {
+                        "display": {
+                            "mobile": "grid"
+                        },
+                        "gap": {
+                            "desktop": {
+                                "top": {
+                                    "kind": "custom",
+                                    "value": 4.0,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    },
+                    "active": {
+                        "gap": {
+                            "tablet": {
+                                "left": {
+                                    "kind": "custom",
+                                    "value": 9.0,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "defaultsCss": "@layer fb.defaults{:where(.fb-section>.fb-section__inner){display:flex;}}@layer fb.states.defaults{@media (max-width: 1024px){:where(.fb-section:active>.fb-section__inner){display:grid;}}}",
+            "css": "@layer fb.instances{@media (max-width: 1024px){:where(.fb-case>.fb-section__inner){display:block;}}}@layer fb.states.instances{:where(.fb-case:hover>.fb-section__inner){row-gap:4px;}@media (max-width: 1024px){:where(.fb-case:hover>.fb-section__inner){row-gap:revert-layer;}}@media (max-width: 767px){:where(.fb-case:hover>.fb-section__inner){display:grid;row-gap:4px;}}@media (max-width: 1024px){:where(.fb-case:active>.fb-section__inner){column-gap:9px;}}}"
+        },
+        {
+            "name": "garbage states",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "isCore": false,
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "section"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Content max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "margin"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap",
+                            "wrap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "maxWidth",
+                            "minHeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
+                    }
+                ],
+                "states": []
+            },
+            "attribute": {
+                "states": {
+                    "hover": "nope",
+                    "focus": {
+                        "padding": "x"
+                    }
+                }
+            },
+            "defaults": {},
+            "rootClass": "fb-case",
+            "values": {},
+            "defaultsCss": "",
+            "css": ""
         },
         {
             "name": "garbage attribute",
@@ -5726,12 +6715,15 @@
                         "className": "fb-section__inner",
                         "editorClassName": "fb-section__inner"
                     }
-                ]
+                ],
+                "states": []
             },
             "attribute": {
-                "padding": "nope",
-                "margin": {
-                    "desktop": "nope"
+                "base": {
+                    "padding": "nope",
+                    "margin": {
+                        "desktop": "nope"
+                    }
                 }
             },
             "defaults": {},
