@@ -12,8 +12,10 @@ use Fb\Breakpoints\BreakpointConfig;
 use Fb\CoreBlocks\BaseStylesheet;
 use Fb\CoreBlocks\Library\Button\Button;
 use Fb\CoreBlocks\Library\Paragraph\Paragraph;
+use Fb\Blocks\Variants\VariantsStylesheet;
 use Fb\Output\BlockMarkupCleaner;
 use Fb\Tests\Fixtures\TestBreakpoints;
+use Fb\Tests\Fixtures\TestRendering;
 use Fb\Theme\ThemeConfigFile;
 use PHPUnit\Framework\TestCase;
 
@@ -25,6 +27,7 @@ final class CoreBlockRenderTest extends TestCase
 	private const array HOOKS = [ 'render_block_core/button', 'render_block_core/paragraph' ];
 
 	private InstanceStyleCollector $collector;
+	private TestRendering $rendering;
 
 	protected function setUp(): void
 	{
@@ -34,11 +37,10 @@ final class CoreBlockRenderTest extends TestCase
 			remove_all_filters( $hook );
 		}
 
-		$config          = new BreakpointConfig();
-		$defaults        = new DefaultsRepository( new ThemeConfigFile(), $config, 'fb-phpunit-theme' );
-		$this->collector = new InstanceStyleCollector( $config, $defaults );
-		$registry        = new BlockRegistry( new BlockRenderer( $config, $this->collector, $defaults ), [], [ new Paragraph(), new Button() ] );
-		( new BlockMarkupCleaner( $registry, $config, $this->collector ) )->register();
+		$this->rendering = new TestRendering( new BreakpointConfig(), dirname( __DIR__, 2 ) . '/Fixtures/fb-variants.json' );
+		$this->collector = $this->rendering->collector;
+		$registry        = new BlockRegistry( $this->rendering->renderer, [], [ new Paragraph(), new Button() ] );
+		( new BlockMarkupCleaner( $registry, $this->rendering->styler ) )->register();
 	}
 
 	protected function tearDown(): void
@@ -85,6 +87,36 @@ final class CoreBlockRenderTest extends TestCase
 			. "@layer fb.states.instances{:where(.{$instance}:hover>.fb-button__link){font-weight:800;}}",
 			$this->collector->css()
 		);
+	}
+
+	public function testVariantAddsItsClassAndItsCss(): void
+	{
+		$html = apply_filters(
+			'render_block_core/button',
+			'<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#">Go</a></div>',
+			[ 'attrs' => [ 'fb' => [ 'variant' => 'primary' ] ] ]
+		);
+
+		// Nothing of its own: no instance class.
+		self::assertSame( '<div class="fb-button fb-button--primary"><a class="fb-button__link" href="#">Go</a></div>', $html );
+		self::assertSame( '', $this->collector->css() );
+		self::assertSame(
+			'@layer fb.variants{:where(.fb-button--primary>.fb-button__link){font-weight:600;}}'
+			. '@layer fb.states.variants{:where(.fb-button--primary:hover>.fb-button__link){font-weight:800;}}',
+			( new VariantsStylesheet( $this->rendering->defaults, new BreakpointConfig() ) )->css( $this->collector->variants() )
+		);
+	}
+
+	public function testUnknownVariantIsIgnored(): void
+	{
+		$html = apply_filters(
+			'render_block_core/button',
+			'<div class="wp-block-button"><a class="wp-block-button__link" href="#">Go</a></div>',
+			[ 'attrs' => [ 'fb' => [ 'variant' => 'gone' ] ] ]
+		);
+
+		self::assertSame( '<div class="fb-button"><a class="fb-button__link" href="#">Go</a></div>', $html );
+		self::assertSame( [], $this->collector->variants() );
 	}
 
 	public function testBaseStylesUseCoreElementClassesInTheEditor(): void

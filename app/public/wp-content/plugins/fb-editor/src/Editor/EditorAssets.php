@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Fb\Editor;
 
 use Fb\Blocks\BlockRegistry;
-use Fb\Blocks\Defaults\BlockDefaultsInfo;
-use Fb\Blocks\Defaults\BlockDefaultsPostType;
 use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Definition\BlockDefinition;
+use Fb\Blocks\Storage\BlockDesignInfo;
+use Fb\Blocks\Storage\ThemeDesignPostType;
+use Fb\Blocks\Variants\VariantsRepository;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;
 use Fb\Presets\PresetRepository;
@@ -27,6 +28,7 @@ final readonly class EditorAssets implements Hookable
 		private BlockRegistry $blocks,
 		private PresetRepository $presets,
 		private DefaultsRepository $defaults,
+		private VariantsRepository $variants,
 	) {
 	}
 
@@ -52,10 +54,11 @@ final readonly class EditorAssets implements Hookable
 			$this->presets->all(),
 			$definitions,
 			array_map(
-				fn ( BlockDefinition $definition ): BlockDefaultsInfo => new BlockDefaultsInfo(
+				fn ( BlockDefinition $definition ): BlockDesignInfo => new BlockDesignInfo(
 					$definition->name,
-					BlockDefaultsPostType::slug( $definition->name, get_stylesheet() ),
-					$this->defaults->theme( $definition )
+					ThemeDesignPostType::slug( $definition->name, get_stylesheet() ),
+					$this->defaults->theme( $definition ),
+					$this->variants->theme( $definition )
 				),
 				$definitions
 			)

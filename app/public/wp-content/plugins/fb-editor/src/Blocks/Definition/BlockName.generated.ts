@@ -3,3 +3,5 @@
  */
 
 export const NAMESPACE = 'fb';
+
+export const VARIANT_SEPARATOR = '--';

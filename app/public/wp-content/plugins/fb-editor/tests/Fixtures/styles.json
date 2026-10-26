@@ -405,6 +405,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "padding": {
@@ -430,7 +431,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case){padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80);}@media (max-width: 767px){:where(.fb-case){padding-top:var(--wp--preset--spacing--50);}}}"
         },
         {
@@ -736,6 +739,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "margin": {
@@ -750,7 +754,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{@media (max-width: 1024px){:where(.fb-case){margin-right:auto;margin-left:auto;}}}"
         },
         {
@@ -1079,6 +1085,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "padding": {
@@ -1116,7 +1123,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case){padding-top:10px;padding-left:10px;}@media (max-width: 1024px){:where(.fb-case){padding-left:12px;}}}"
         },
         {
@@ -1294,6 +1303,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "display": {
@@ -1316,7 +1326,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:flex;row-gap:16px;column-gap:1.5rem;}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:block;row-gap:revert-layer;column-gap:revert-layer;}}}"
         },
         {
@@ -1495,6 +1507,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "display": {
@@ -1518,7 +1531,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:grid;row-gap:var(--wp--preset--spacing--40);column-gap:var(--wp--preset--spacing--40);}@media (max-width: 1024px){:where(.fb-case>.fb-section__inner){display:block;row-gap:revert-layer;column-gap:revert-layer;}}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:flex;row-gap:var(--wp--preset--spacing--40);column-gap:var(--wp--preset--spacing--40);}}}"
         },
         {
@@ -1687,6 +1702,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "gap": {
@@ -1700,7 +1716,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": ""
         },
         {
@@ -2027,6 +2045,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "margin": {
@@ -2062,7 +2081,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case){margin-top:-12.5px;margin-right:33.3333%;margin-bottom:0;margin-left:1.25vw;}}"
         },
         {
@@ -2377,6 +2398,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "padding": {
@@ -2400,7 +2422,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case){padding-top:var(--wp--preset--spacing--2-xl);padding-right:var(--wp--preset--spacing--x-large);padding-bottom:var(--wp--preset--spacing--x-small);}}"
         },
         {
@@ -2735,6 +2759,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "padding": {
@@ -2748,7 +2773,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case){padding-left:4px;}}"
         },
         {
@@ -3045,12 +3072,15 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "tag": "header"
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": ""
         },
         {
@@ -3369,6 +3399,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "background": {
@@ -3396,7 +3427,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case){background-color:var(--wp--preset--color--accent);color:var(--wp--preset--color--x-dark);}@media (max-width: 767px){:where(.fb-case){background-color:#ffaa00;}}}"
         },
         {
@@ -3707,6 +3740,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "background": {
@@ -3717,7 +3751,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{@media (max-width: 767px){:where(.fb-case){background-color:#abc;}}}"
         },
         {
@@ -4035,6 +4071,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "maxWidth": {
@@ -4053,7 +4090,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){max-width:72.5rem;}:where(.fb-case){min-height:100vh;}}"
         },
         {
@@ -4357,6 +4396,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "display": {
@@ -4369,7 +4409,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:flex;flex-wrap:wrap;}@media (max-width: 1024px){:where(.fb-case>.fb-section__inner){flex-wrap:nowrap;}}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:grid;flex-wrap:revert-layer;}}}"
         },
         {
@@ -4673,6 +4715,7 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "display": {
@@ -4683,7 +4726,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){display:flex;}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){flex-wrap:nowrap;}}}"
         },
         {
@@ -4995,8 +5040,11 @@
                 }
             },
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {},
+            "variant": null,
             "defaultsCss": "@layer fb.defaults{:where(.fb-section){padding-top:var(--wp--preset--spacing--80);}@media (max-width: 767px){:where(.fb-section){padding-top:var(--wp--preset--spacing--40);}}}",
+            "variantCss": "",
             "css": ""
         },
         {
@@ -5177,6 +5225,7 @@
                 }
             },
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "gap": {
@@ -5195,7 +5244,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "@layer fb.defaults{:where(.fb-section>.fb-section__inner){display:flex;}@media (max-width: 767px){:where(.fb-section>.fb-section__inner){display:block;}}}",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){row-gap:12px;column-gap:12px;}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){row-gap:revert-layer;column-gap:revert-layer;}}}"
         },
         {
@@ -5374,6 +5425,7 @@
                 }
             },
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "display": {
@@ -5390,7 +5442,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "@layer fb.defaults{:where(.fb-section>.fb-section__inner){display:flex;}@media (max-width: 767px){:where(.fb-section>.fb-section__inner){display:block;}}}",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){row-gap:12px;}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:grid;}}}"
         },
         {
@@ -5613,6 +5667,7 @@
                 }
             },
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "background": {
@@ -5635,7 +5690,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "@layer fb.defaults{:where(.fb-button>.fb-button__link){padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);}}",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-color:var(--wp--preset--color--accent);font-size:1.125rem;font-weight:700;}@media (max-width: 767px){:where(.fb-case>.fb-button__link){font-weight:400;}}}"
         },
         {
@@ -5876,6 +5933,7 @@
                 }
             },
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "background": {
@@ -5920,7 +5978,9 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "@layer fb.defaults{:where(.fb-button>.fb-button__link){font-weight:400;}}@layer fb.states.defaults{:where(.fb-button:hover>.fb-button__link){font-weight:600;}}",
+            "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-color:var(--wp--preset--color--accent);}}@layer fb.states.instances{:where(.fb-case:hover>.fb-button__link){background-color:#222222;}@media (max-width: 767px){:where(.fb-case:hover>.fb-button__link){font-weight:700;}}@media (max-width: 1024px){:where(.fb-case:is(:focus-visible,:has(:focus-visible))>.fb-button__link){padding-top:2px;}}:where(.fb-case:active>.fb-button__link){background-color:var(--wp--preset--color--x-dark);}}"
         },
         {
@@ -6129,6 +6189,7 @@
                 }
             },
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {
                 "base": {
                     "display": {
@@ -6163,8 +6224,260 @@
                     }
                 }
             },
+            "variant": null,
             "defaultsCss": "@layer fb.defaults{:where(.fb-section>.fb-section__inner){display:flex;}}@layer fb.states.defaults{@media (max-width: 1024px){:where(.fb-section:active>.fb-section__inner){display:grid;}}}",
+            "variantCss": "",
             "css": "@layer fb.instances{@media (max-width: 1024px){:where(.fb-case>.fb-section__inner){display:block;}}}@layer fb.states.instances{:where(.fb-case:hover>.fb-section__inner){row-gap:4px;}@media (max-width: 1024px){:where(.fb-case:hover>.fb-section__inner){row-gap:revert-layer;}}@media (max-width: 767px){:where(.fb-case:hover>.fb-section__inner){display:grid;row-gap:4px;}}@media (max-width: 1024px){:where(.fb-case:active>.fb-section__inner){column-gap:9px;}}}"
+        },
+        {
+            "name": "variant between the defaults and the block",
+            "definition": {
+                "name": "fb/section",
+                "title": "Section",
+                "isCore": false,
+                "className": "fb-section",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ]
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": "inner",
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        }
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "inner",
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
+                    }
+                ],
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "active",
+                        "label": "Active",
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
+                    }
+                ]
+            },
+            "attribute": {
+                "base": {
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 8,
+                                "unit": "px"
+                            }
+                        }
+                    }
+                },
+                "states": {
+                    "hover": {
+                        "gap": {
+                            "desktop": {
+                                "top": {
+                                    "kind": "custom",
+                                    "value": 2,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "defaults": {
+                "base": {
+                    "display": {
+                        "desktop": "flex"
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
+            "values": {
+                "base": {
+                    "gap": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 8.0,
+                                "unit": "px"
+                            }
+                        }
+                    }
+                },
+                "states": {
+                    "hover": {
+                        "gap": {
+                            "desktop": {
+                                "top": {
+                                    "kind": "custom",
+                                    "value": 2.0,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "variant": {
+                "base": {
+                    "display": {
+                        "tablet": "block"
+                    },
+                    "padding": {
+                        "desktop": {
+                            "top": {
+                                "kind": "custom",
+                                "value": 20,
+                                "unit": "px"
+                            }
+                        }
+                    }
+                },
+                "states": {
+                    "hover": {
+                        "display": {
+                            "desktop": "grid"
+                        }
+                    },
+                    "focus": {
+                        "padding": {
+                            "desktop": {
+                                "top": {
+                                    "kind": "custom",
+                                    "value": 1,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "defaultsCss": "@layer fb.defaults{:where(.fb-section>.fb-section__inner){display:flex;}}",
+            "variantCss": "@layer fb.variants{:where(.fb-case-variant){padding-top:20px;}@media (max-width: 1024px){:where(.fb-case-variant>.fb-section__inner){display:block;}}}@layer fb.states.variants{:where(.fb-case-variant:hover>.fb-section__inner){display:grid;}}",
+            "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){row-gap:8px;}@media (max-width: 1024px){:where(.fb-case>.fb-section__inner){row-gap:revert-layer;}}}@layer fb.states.instances{:where(.fb-case:hover>.fb-section__inner){row-gap:2px;}}"
         },
         {
             "name": "garbage states",
@@ -6463,8 +6776,11 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {},
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": ""
         },
         {
@@ -6764,8 +7080,11 @@
             },
             "defaults": {},
             "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
             "values": {},
+            "variant": null,
             "defaultsCss": "",
+            "variantCss": "",
             "css": ""
         }
     ]

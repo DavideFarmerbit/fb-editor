@@ -20,18 +20,18 @@ const blockStyles = new BlockStyles( settings.breakpoints, true );
 interface InstanceStylesProps {
 	readonly definition: BlockDefinition;
 	readonly values: StatefulValues;
-	/** The type's defaults: conditions fall back to them, like in PHP. */
-	readonly defaults: StatefulValues;
+	/** Its variant's values and the type's defaults: conditions fall back to them, like in PHP. */
+	readonly weaker: readonly StatefulValues[];
 	/** Editor-only instance class on the block root. */
 	readonly instanceClass: string;
 	/** The block root, once mounted: tells us which document to write to. */
 	readonly root: HTMLElement | null;
 }
 
-export function InstanceStyles( { definition, values, defaults, instanceClass, root }: InstanceStylesProps ): ReactElement | null {
+export function InstanceStyles( { definition, values, weaker, instanceClass, root }: InstanceStylesProps ): ReactElement | null {
 	const css = useMemo(
-		() => blockStyles.forSource( definition, values, Selector.forClass( instanceClass ), defaults ).css( compiler, CssLayer.Instances ),
-		[ definition, values, defaults, instanceClass ]
+		() => blockStyles.forSource( definition, values, Selector.forClass( instanceClass ), ...weaker ).css( compiler, CssLayer.Instances ),
+		[ definition, values, weaker, instanceClass ]
 	);
 
 	if ( root === null || css === '' ) {

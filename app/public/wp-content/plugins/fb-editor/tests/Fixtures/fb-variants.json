@@ -1,0 +1,17 @@
+{
+	"variants": {
+		"core/button": [
+			{
+				"slug": "primary",
+				"name": "Primary",
+				"values": {
+					"base": { "fontWeight": { "desktop": "600" } },
+					"states": { "hover": { "fontWeight": { "desktop": "800" } } }
+				}
+			},
+			{ "slug": "Not A Slug", "name": "Dropped" },
+			{ "slug": "primary", "name": "Duplicate, dropped" },
+			{ "slug": "ghost", "name": "  " }
+		]
+	}
+}

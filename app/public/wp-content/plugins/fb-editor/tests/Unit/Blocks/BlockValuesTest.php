@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Fb\Tests\Unit\Blocks;
 
 use Fb\Blocks\States\BlockState;
+use Fb\Blocks\Values\BlockAttribute;
 use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\InstanceClass;
 use Fb\Blocks\Values\StatefulValues;
+use Fb\Blocks\Variants\VariantSlug;
 use Fb\Breakpoints\BreakpointList;
 use Fb\Css\CssLayer;
 use Fb\Styles\Selector;
@@ -42,9 +44,14 @@ final class BlockValuesTest extends TestCase
 		return $this->values( [ 'base' => $base ] );
 	}
 
+	private static function instance( StatefulValues $values, ?string $variant = null ): InstanceClass
+	{
+		return InstanceClass::of( new BlockAttribute( null === $variant ? null : new VariantSlug( $variant ), $values ) );
+	}
+
 	private function css( StatefulValues $values, StatefulValues ...$weaker ): string
 	{
-		$root = Selector::forClass( (string) InstanceClass::of( $values ) );
+		$root = Selector::forClass( (string) self::instance( $values ) );
 
 		return ( new BlockStyles( $this->breakpoints ) )
 			->forSource( SectionFixture::definition(), $values, $root, ...$weaker )
@@ -114,16 +121,18 @@ final class BlockValuesTest extends TestCase
 
 	public function testInstanceClassDependsOnlyOnSanitizedValues(): void
 	{
-		$a = InstanceClass::of( $this->base( [ 'tag' => 'div', 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ] ] ) );
+		$a = self::instance( $this->base( [ 'tag' => 'div', 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ] ] ) );
 		// Different key order + junk that gets dropped: same canonical values.
-		$b = InstanceClass::of( $this->base( [ 'junk' => 1, 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ], 'tag' => 'div' ] ) );
-		$c = InstanceClass::of( $this->base( [ 'tag' => 'div', 'padding' => [ 'desktop' => [ 'top' => self::px( 11 ) ] ] ] ) );
-		$d = InstanceClass::of( $this->values( [ 'base' => [ 'tag' => 'div' ], 'states' => [ 'hover' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ] ] ] ] ) );
+		$b = self::instance( $this->base( [ 'junk' => 1, 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ], 'tag' => 'div' ] ) );
+		$c = self::instance( $this->base( [ 'tag' => 'div', 'padding' => [ 'desktop' => [ 'top' => self::px( 11 ) ] ] ] ) );
+		$d = self::instance( $this->values( [ 'base' => [ 'tag' => 'div' ], 'states' => [ 'hover' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ] ] ] ] ) );
 
 		self::assertMatchesRegularExpression( '/^fb-[0-9a-z]{7}$/', (string) $a );
 		self::assertSame( (string) $a, (string) $b );
 		self::assertNotSame( (string) $a, (string) $c );
 		self::assertNotSame( (string) $a, (string) $d );
+		// The variant changes what conditions see: it's part of the hash.
+		self::assertNotSame( (string) $a, (string) self::instance( $this->base( [ 'tag' => 'div', 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ] ] ), 'primary' ) );
 	}
 
 	public function testConditionHidesGapWhereDisplayIsNotFlexOrGrid(): void
@@ -135,7 +144,7 @@ final class BlockValuesTest extends TestCase
 				'padding' => [ 'desktop' => [ 'top' => self::px( 40 ), 'bottom' => self::px( 40 ) ], 'mobile' => [ 'top' => self::px( 20 ) ] ],
 			]
 		);
-		$class = (string) InstanceClass::of( $values );
+		$class = (string) self::instance( $values );
 
 		self::assertSame(
 			'@layer fb.instances{'
@@ -160,7 +169,7 @@ final class BlockValuesTest extends TestCase
 				],
 			]
 		);
-		$class = (string) InstanceClass::of( $values );
+		$class = (string) self::instance( $values );
 
 		self::assertSame(
 			"@layer fb.instances{:where(.{$class}){padding-top:8px;}}"
@@ -189,7 +198,7 @@ final class BlockValuesTest extends TestCase
 			]
 		);
 		$defaults = $this->base( [ 'display' => [ 'desktop' => 'flex' ] ] );
-		$class    = (string) InstanceClass::of( $values );
+		$class    = (string) self::instance( $values );
 
 		self::assertSame(
 			"@layer fb.instances{@media (max-width: 1024px){:where(.{$class}>.fb-section__inner){display:block;}}}"

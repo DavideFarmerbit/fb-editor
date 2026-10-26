@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fb\Blocks\Defaults;
+namespace Fb\Blocks\Storage;
 
 /**
- * REST controller for block defaults: reading requires the same capability
- * as editing (edit_theme_options), like core's global styles endpoint. The
- * stock posts controller would let anyone read published defaults.
+ * REST controller for the theme's design posts (block defaults, variants):
+ * reading requires the same capability as editing (edit_theme_options),
+ * like core's global styles endpoint. The stock posts controller would let
+ * anyone read published ones.
  */
-final class BlockDefaultsController extends \WP_REST_Posts_Controller
+final class ThemeDesignController extends \WP_REST_Posts_Controller
 {
 	/**
 	 * @param \WP_REST_Request $request
@@ -36,7 +37,7 @@ final class BlockDefaultsController extends \WP_REST_Posts_Controller
 	{
 		return new \WP_Error(
 			'rest_forbidden',
-			__( 'Sorry, you are not allowed to view block defaults.', 'fb-editor' ),
+			__( 'Sorry, you are not allowed to view this.', 'fb-editor' ),
 			[ 'status' => rest_authorization_required_code() ]
 		);
 	}

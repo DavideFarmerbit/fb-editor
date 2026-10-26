@@ -10,6 +10,7 @@ use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Tests\Fixtures\TestBreakpoints;
+use Fb\Tests\Fixtures\TestRendering;
 use Fb\Theme\ThemeConfigFile;
 use PHPUnit\Framework\TestCase;
 
@@ -24,10 +25,9 @@ final class SectionRenderTest extends TestCase
 	protected function setUp(): void
 	{
 		add_filter( 'fb_breakpoints', TestBreakpoints::list( ... ) );
-		$config          = new BreakpointConfig();
-		$defaults        = new DefaultsRepository( new ThemeConfigFile(), $config );
-		$this->collector = new InstanceStyleCollector( $config, $defaults );
-		$this->renderer  = new BlockRenderer( $config, $this->collector, $defaults );
+		$rendering       = new TestRendering( new BreakpointConfig() );
+		$this->collector = $rendering->collector;
+		$this->renderer  = $rendering->renderer;
 	}
 
 	protected function tearDown(): void

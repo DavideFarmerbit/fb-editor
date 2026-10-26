@@ -3,9 +3,10 @@
  * unknown JSON in, typed objects out. Anything malformed throws.
  */
 import { breakpointListFromJson, type BreakpointList } from '../Breakpoints/breakpoints';
-import { BlockDefaultsInfo } from '../Blocks/Defaults/block-defaults-info';
+import { BlockDesignInfo } from '../Blocks/Storage/block-design-info';
 import { blockDefinitionFromJson, type BlockDefinition } from '../Blocks/Definition/block-definition';
 import { StatefulValues } from '../Blocks/Values/stateful-values';
+import { VariantSet } from '../Blocks/Variants/variant-set';
 import { InvalidJson, JsonValue } from '../Json/json';
 import { Preset, Presets } from '../Presets/presets';
 
@@ -14,13 +15,13 @@ export class EditorSettings {
 		public readonly breakpoints: BreakpointList,
 		public readonly presets: Presets,
 		public readonly blocks: readonly BlockDefinition[],
-		private readonly defaults: readonly BlockDefaultsInfo[]
+		private readonly designs: readonly BlockDesignInfo[]
 	) {}
 
-	defaultsFor( definition: BlockDefinition ): BlockDefaultsInfo {
-		const info = this.defaults.find( ( candidate ) => candidate.block === definition.name );
+	designFor( definition: BlockDefinition ): BlockDesignInfo {
+		const info = this.designs.find( ( candidate ) => candidate.block === definition.name );
 		if ( info === undefined ) {
-			throw new InvalidJson( `fbEditorSettings.defaults: none for "${ definition.name }"` );
+			throw new InvalidJson( `fbEditorSettings.designs: none for "${ definition.name }"` );
 		}
 		return info;
 	}
@@ -46,8 +47,8 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 	const breakpoints = breakpointListFromJson( json.get( 'breakpoints' ) );
 	const blocks = json.get( 'blocks' ).list().map( blockDefinitionFromJson );
 
-	const defaults = json
-		.get( 'defaults' )
+	const designs = json
+		.get( 'designs' )
 		.list()
 		.map( ( item ) => {
 			const name = item.get( 'block' ).string();
@@ -55,14 +56,15 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 			if ( definition === undefined ) {
 				throw new InvalidJson( `${ item.path }.block: no definition for "${ name }"` );
 			}
-			return new BlockDefaultsInfo(
+			return new BlockDesignInfo(
 				name,
 				item.get( 'postSlug' ).string(),
-				StatefulValues.fromJson( item.get( 'theme' ).decoded(), definition, breakpoints )
+				StatefulValues.fromJson( item.get( 'themeDefaults' ).decoded(), definition, breakpoints ),
+				VariantSet.fromJson( item.get( 'themeVariants' ).decoded(), definition, breakpoints )
 			);
 		} );
 
-	return new EditorSettings( breakpoints, new Presets( json.get( 'presets' ).list().map( Preset.fromJson ) ), blocks, defaults );
+	return new EditorSettings( breakpoints, new Presets( json.get( 'presets' ).list().map( Preset.fromJson ) ), blocks, designs );
 }
 
 export const settings: EditorSettings = parseEditorSettings( window.fbEditorSettings );

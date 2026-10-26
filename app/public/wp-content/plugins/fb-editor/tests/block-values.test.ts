@@ -132,9 +132,10 @@ describe( 'defaults in the editor', () => {
 	test( 'the tag falls back to the default, then the input fallback', () => {
 		const base = ( attribute: unknown ) => StatefulValues.fromJson( { base: attribute }, section, breakpoints );
 
-		expect( section.option( base( {} ), 'tag', base( { tag: 'aside' } ) ) ).toBe( 'aside' );
-		expect( section.option( base( { tag: 'main' } ), 'tag', base( { tag: 'aside' } ) ) ).toBe( 'main' );
-		expect( section.option( base( {} ), 'tag', base( {} ) ) ).toBe( 'section' );
+		expect( section.option( 'tag', base( {} ), null, base( { tag: 'aside' } ) ) ).toBe( 'aside' );
+		expect( section.option( 'tag', base( {} ), base( { tag: 'header' } ), base( { tag: 'aside' } ) ) ).toBe( 'header' );
+		expect( section.option( 'tag', base( { tag: 'main' } ), base( { tag: 'header' } ), base( { tag: 'aside' } ) ) ).toBe( 'main' );
+		expect( section.option( 'tag', base( {} ), null, base( {} ) ) ).toBe( 'section' );
 	} );
 
 	test( 'editing the base look keeps the states', () => {

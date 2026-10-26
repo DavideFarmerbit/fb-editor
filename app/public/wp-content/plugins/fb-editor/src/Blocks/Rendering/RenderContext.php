@@ -22,9 +22,11 @@ final readonly class RenderContext
 	public function __construct(
 		public BlockDefinition $definition,
 		public StatefulValues $values,
-		/** The block type's defaults: what unset values fall back to. */
+		/** The variant the block uses, if any: what unset values fall back to first. */
+		public ?StatefulValues $variant,
+		/** The block type's defaults: what unset values fall back to last. */
 		public StatefulValues $defaults,
-		/** Block class, instance class (if it has CSS), user classes. */
+		/** Block class, variant class, instance class (if it has CSS), user classes. */
 		public ClassList $rootClasses,
 		/** Rendered inner blocks. Already HTML: output as is. */
 		public string $content,
@@ -43,7 +45,8 @@ final readonly class RenderContext
 
 	/**
 	 * The base value of a select control as its enum case (e.g. the tag):
-	 * the block's own, else the type default, else the input's fallback.
+	 * the block's own, else its variant's, else the type default, else the
+	 * input's fallback.
 	 * Selects read by render() must declare a fallback.
 	 *
 	 * @template T of LabeledOption
@@ -59,7 +62,9 @@ final readonly class RenderContext
 		}
 
 		$base   = $this->values->base->baseBreakpoint();
-		$value  = $this->values->base->get( $id )->at( $base ) ?? $this->defaults->base->get( $id )->at( $base );
+		$value  = $this->values->base->get( $id )->at( $base )
+			?? $this->variant?->base->get( $id )->at( $base )
+			?? $this->defaults->base->get( $id )->at( $base );
 		$chosen = $value instanceof KeywordValue ? $options::tryFrom( $value->keyword ) : null;
 
 		$fallback = $input->fallback instanceof $options ? $input->fallback : null;

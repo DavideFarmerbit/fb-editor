@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Definition;
 
+use Fb\Blocks\Variants\VariantSlug;
 use Fb\TypeScript\ExportToTypeScript;
 
 /**
@@ -17,6 +18,10 @@ final readonly class BlockName implements \JsonSerializable, \Stringable
 	public const string NAMESPACE = 'fb';
 
 	public const string CORE_NAMESPACE = 'core';
+
+	/** Between the block class and a variant slug: "fb-button--primary". */
+	#[ExportToTypeScript]
+	public const string VARIANT_SEPARATOR = '--';
 
 	public function __construct(
 		public string $name,
@@ -43,6 +48,11 @@ final readonly class BlockName implements \JsonSerializable, \Stringable
 	public function cssClass(): string
 	{
 		return self::NAMESPACE . '-' . $this->name;
+	}
+
+	public function variantClass( VariantSlug $variant ): string
+	{
+		return $this->cssClass() . self::VARIANT_SEPARATOR . $variant->value;
 	}
 
 	public function elementClass( ElementId $element ): string

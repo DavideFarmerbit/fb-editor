@@ -37,15 +37,20 @@ final class StyleFixtures
 		foreach ( self::cases() as $case ) {
 			$values   = StatefulValues::fromJson( $case->attribute(), $case->definition, $breakpoints );
 			$defaults = StatefulValues::fromJson( $case->defaultsAttribute(), $case->definition, $breakpoints );
+			$variant  = null === $case->variant ? null : StatefulValues::fromJson( $case->variant, $case->definition, $breakpoints );
+			$weaker   = null === $variant ? [ $defaults ] : [ $variant, $defaults ];
 			$cases[]  = [
 				'name'        => $case->name,
 				'definition'  => $case->definition,
 				'attribute'   => $case->attribute(),
 				'defaults'    => $case->defaultsAttribute(),
 				'rootClass'   => StyleCase::ROOT_CLASS,
+				'variantClass' => StyleCase::VARIANT_CLASS,
 				'values'      => $values,
+				'variant'     => null === $case->variant ? null : (object) $case->variant,
 				'defaultsCss' => $styles->forSource( $case->definition, $defaults, Selector::forClass( $case->definition->name->cssClass() ) )->css( $compiler, CssLayer::Defaults ),
-				'css'         => $styles->forSource( $case->definition, $values, Selector::forClass( StyleCase::ROOT_CLASS ), $defaults )->css( $compiler, CssLayer::Instances ),
+				'variantCss'  => null === $variant ? '' : $styles->forSource( $case->definition, $variant, Selector::forClass( StyleCase::VARIANT_CLASS ), $defaults )->css( $compiler, CssLayer::Variants ),
+				'css'         => $styles->forSource( $case->definition, $values, Selector::forClass( StyleCase::ROOT_CLASS ), ...$weaker )->css( $compiler, CssLayer::Instances ),
 			];
 		}
 
@@ -201,6 +206,18 @@ final class StyleFixtures
 					'active' => [ 'tag' => 'div', 'gap' => [ 'tablet' => [ 'left' => self::px( 9 ) ] ] ],
 				],
 				[ 'active' => [ 'display' => [ 'tablet' => 'grid' ] ] ]
+			),
+			new StyleCase(
+				'variant between the defaults and the block',
+				$fixture,
+				[ 'gap' => [ 'desktop' => [ 'top' => self::px( 8 ) ] ] ],
+				[ 'display' => [ 'desktop' => 'flex' ] ],
+				[ 'hover' => [ 'gap' => [ 'desktop' => [ 'top' => self::px( 2 ) ] ] ] ],
+				[],
+				[
+					'base'   => [ 'display' => [ 'tablet' => 'block' ], 'padding' => [ 'desktop' => [ 'top' => self::px( 20 ) ] ] ],
+					'states' => [ 'hover' => [ 'display' => [ 'desktop' => 'grid' ] ], 'focus' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 1 ) ] ] ] ],
+				]
 			),
 			new StyleCase( 'garbage states', $section, [], [], [ 'hover' => 'nope', 'focus' => [ 'padding' => 'x' ] ] ),
 			new StyleCase( 'garbage attribute', $section, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),

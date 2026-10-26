@@ -14,7 +14,7 @@ import { addFilter } from '@wordpress/hooks';
 import type { ComponentType, ReactElement } from 'react';
 
 import { canvasBlockElement } from '../Adapter/adapter';
-import { editorInstanceClass, FbBlockChrome, useFbBlock, usePreviewClass } from '../Blocks/block-chrome';
+import { editorInstanceClass, FbBlockChrome, useFbBlock, usePreviewClass, useVariantOf, variantClass } from '../Blocks/block-chrome';
 import { ATTRIBUTE, ATTRIBUTE_TYPE } from '../Blocks/BlockRegistry.generated';
 import type { BlockDefinition } from '../Blocks/Definition/block-definition';
 import { settings } from '../Editor/settings';
@@ -78,7 +78,8 @@ addFilter(
 );
 
 /**
- * Same classes as the frontend root, plus the editor-only instance class
+ * Same classes as the frontend root (block, variant), plus the editor-only
+ * instance class
  * and, while a state is inspected, its preview class.
  */
 function CoreBlockListBlock( {
@@ -87,7 +88,10 @@ function CoreBlockListBlock( {
 	...props
 }: CoreBlockProps & { readonly definition: BlockDefinition; readonly BlockListBlock: ComponentType< CoreBlockProps > } ): ReactElement {
 	const preview = usePreviewClass( definition, props.clientId, props.isSelected === true );
-	const className = [ props.className, definition.className, editorInstanceClass( props.clientId ), preview ].filter( Boolean ).join( ' ' );
+	const variant = useVariantOf( definition, props.attributes[ ATTRIBUTE ] );
+	const className = [ props.className, definition.className, variantClass( definition, variant ), editorInstanceClass( props.clientId ), preview ]
+		.filter( Boolean )
+		.join( ' ' );
 	return <BlockListBlock { ...props } className={ className } />;
 }
 

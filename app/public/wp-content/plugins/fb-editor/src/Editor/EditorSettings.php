@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Editor;
 
-use Fb\Blocks\Defaults\BlockDefaultsInfo;
+use Fb\Blocks\Storage\BlockDesignInfo;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Breakpoints\BreakpointList;
 use Fb\Presets\Preset;
@@ -18,18 +18,18 @@ final readonly class EditorSettings implements \JsonSerializable
 	/**
 	 * @param list<Preset>            $presets
 	 * @param list<BlockDefinition>   $blocks
-	 * @param list<BlockDefaultsInfo> $defaults
+	 * @param list<BlockDesignInfo>   $designs
 	 */
 	public function __construct(
 		public BreakpointList $breakpoints,
 		public array $presets,
 		public array $blocks,
-		public array $defaults,
+		public array $designs,
 	) {
 	}
 
 	/**
-	 * @return array{breakpoints: BreakpointList, presets: list<Preset>, blocks: list<BlockDefinition>, defaults: list<BlockDefaultsInfo>}
+	 * @return array{breakpoints: BreakpointList, presets: list<Preset>, blocks: list<BlockDefinition>, designs: list<BlockDesignInfo>}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -37,7 +37,7 @@ final readonly class EditorSettings implements \JsonSerializable
 			'breakpoints' => $this->breakpoints,
 			'presets'     => $this->presets,
 			'blocks'      => $this->blocks,
-			'defaults'    => $this->defaults,
+			'designs'     => $this->designs,
 		];
 	}
 }

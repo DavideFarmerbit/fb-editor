@@ -15,11 +15,15 @@ final readonly class StyleCase
 {
 	public const string ROOT_CLASS = 'fb-case';
 
+	/** The class the case's variant (if any) is compiled on. */
+	public const string VARIANT_CLASS = 'fb-case-variant';
+
 	/**
 	 * @param array<string, mixed> $base          Raw boundary data, on purpose.
 	 * @param array<string, mixed> $defaults      The type defaults' base look.
 	 * @param array<string, mixed> $states        Raw state looks, keyed by state.
 	 * @param array<string, mixed> $defaultStates The type defaults' state looks.
+	 * @param array<string, mixed>|null $variant  A variant's raw values (base + states) the block uses.
 	 */
 	public function __construct(
 		public string $name,
@@ -28,6 +32,7 @@ final readonly class StyleCase
 		public array $defaults = [],
 		public array $states = [],
 		public array $defaultStates = [],
+		public ?array $variant = null,
 	) {
 	}
 

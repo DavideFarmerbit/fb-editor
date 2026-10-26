@@ -13,6 +13,7 @@ use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Tests\Fixtures\TestBreakpoints;
+use Fb\Tests\Fixtures\TestRendering;
 use Fb\Theme\ThemeConfigFile;
 use PHPUnit\Framework\TestCase;
 
@@ -36,10 +37,7 @@ final class DefaultsTest extends TestCase
 		$this->section     = new Section();
 
 		// Sanitizing on save needs the post type hooks.
-		$registry = new BlockRegistry(
-			new BlockRenderer( $this->breakpoints, new InstanceStyleCollector( $this->breakpoints, $this->repository() ), $this->repository() ),
-			[ $this->section ]
-		);
+		$registry = new BlockRegistry( $this->rendering()->renderer, [ $this->section ] );
 		( new BlockDefaultsPostType( $registry, $this->breakpoints ) )->register();
 		do_action( 'init' );
 	}
@@ -53,9 +51,14 @@ final class DefaultsTest extends TestCase
 		remove_all_filters( 'wp_insert_post_data' );
 	}
 
+	private function rendering(): TestRendering
+	{
+		return new TestRendering( $this->breakpoints, dirname( __DIR__, 2 ) . '/Fixtures/fb-defaults.json' );
+	}
+
 	private function repository(): DefaultsRepository
 	{
-		return new DefaultsRepository( new ThemeConfigFile( dirname( __DIR__, 2 ) . '/Fixtures/fb-defaults.json' ), $this->breakpoints, self::THEME );
+		return $this->rendering()->defaults;
 	}
 
 	private function save( string $content ): void
@@ -110,8 +113,7 @@ final class DefaultsTest extends TestCase
 	public function testRenderFallsBackToTheDefaultTag(): void
 	{
 		$this->save( '{"base":{"tag":"aside"}}' );
-		$repository = $this->repository();
-		$renderer   = new BlockRenderer( $this->breakpoints, new InstanceStyleCollector( $this->breakpoints, $repository ), $repository );
+		$renderer = $this->rendering()->renderer;
 
 		self::assertStringStartsWith( '<aside class="fb-section', $renderer->render( $this->section, [], '' ) );
 		self::assertStringStartsWith( '<main class="fb-section', $renderer->render( $this->section, [ 'fb' => [ 'base' => [ 'tag' => 'main' ] ] ], '' ) );

@@ -7,6 +7,8 @@ import { InvalidJson, type JsonValue } from '../../Json/json';
 import { outputFromJson, type StyleOutput } from '../../Styles/Output/outputs';
 import { KeywordValue } from '../../Values/keyword';
 import { BlockState } from '../States/BlockState.generated';
+import type { VariantSlug } from '../Variants/variant-set';
+import { VARIANT_SEPARATOR } from './BlockName.generated';
 import type { StatefulValues } from '../Values/stateful-values';
 import { conditionFromJson, type Condition, type ConditionLabels } from './Condition/conditions';
 import { parseControlId, type ControlId } from './control-id';
@@ -107,6 +109,11 @@ export class BlockDefinition implements ConditionLabels {
 		return this.layout.find( ( panel ) => panel.controls.includes( id ) );
 	}
 
+	/** Mirrors BlockName::variantClass(): "fb-button--primary". */
+	variantClass( slug: VariantSlug ): string {
+		return `${ this.className }${ VARIANT_SEPARATOR }${ slug }`;
+	}
+
 	/** Frontend class of a declared element; throws for an unknown one. */
 	elementClass( id: string ): string {
 		return this.element( id ).className;
@@ -126,18 +133,21 @@ export class BlockDefinition implements ConditionLabels {
 	}
 
 	/**
-	 * Mirrors RenderContext::option(): the base value of a select control:
-	 * the block's own, else the type default, else the input's fallback.
+	 * Mirrors RenderContext::option(): the base value of a select control
+	 * from the first source that has one (the block's own, its variant's,
+	 * the type default's; null sources skipped), else the input's fallback.
 	 * Throws if there is none of them.
 	 */
-	option( values: StatefulValues, id: string, defaults: StatefulValues | null = null ): string {
+	option( id: string, ...sources: ( StatefulValues | null )[] ): string {
 		const control = this.controls.find( ( candidate ) => candidate.id === id );
 		if ( control === undefined || ! ( control.input instanceof SelectInput ) ) {
 			throw new InvalidJson( `${ this.name }: "${ id }" is not a select control` );
 		}
 
-		const base = values.base.baseBreakpoint();
-		const value = values.base.get( control.id ).at( base ) ?? defaults?.base.get( control.id ).at( base ) ?? null;
+		let value = null;
+		for ( const source of sources ) {
+			value ??= source?.base.get( control.id ).at( source.base.baseBreakpoint() ) ?? null;
+		}
 		const option = ( value instanceof KeywordValue ? value.keyword : null ) ?? control.input.fallback;
 		if ( option === null ) {
 			throw new InvalidJson( `${ this.name }: "${ id }" is read by the editor markup but has no fallback` );

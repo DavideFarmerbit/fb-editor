@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fb\Blocks\Defaults;
 
 use Fb\Blocks\Definition\BlockDefinition;
+use Fb\Blocks\Storage\ThemeDesignPostType;
 use Fb\Blocks\Values\StatefulValues;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Theme\ThemeConfigFile;
@@ -47,19 +48,8 @@ final class DefaultsRepository
 
 	public function saved( BlockDefinition $definition ): StatefulValues
 	{
-		$posts = get_posts(
-			[
-				'post_type'        => BlockDefaultsPostType::POST_TYPE,
-				'name'             => BlockDefaultsPostType::slug( $definition->name, $this->stylesheet ?? get_stylesheet() ),
-				'post_status'      => 'publish',
-				'numberposts'      => 1,
-				'suppress_filters' => false,
-			]
-		);
-		$post = $posts[0] ?? null;
-
 		return StatefulValues::fromJson(
-			$post instanceof \WP_Post ? json_decode( $post->post_content ) : null,
+			ThemeDesignPostType::savedContent( BlockDefaultsPostType::POST_TYPE, $definition->name, $this->stylesheet ?? get_stylesheet() ),
 			$definition,
 			$this->breakpoints->breakpoints()
 		);

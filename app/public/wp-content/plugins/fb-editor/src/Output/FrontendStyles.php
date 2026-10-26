@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fb\Output;
 
 use Fb\Blocks\Defaults\DefaultsStylesheet;
+use Fb\Blocks\Variants\VariantsStylesheet;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Blocks\BlockRegistry;
 use Fb\CoreBlocks\BaseStylesheet;
@@ -25,6 +26,7 @@ final readonly class FrontendStyles implements Hookable
 		private TokenStylesheet $tokens,
 		private InstanceStyleCollector $instances,
 		private DefaultsStylesheet $defaults,
+		private VariantsStylesheet $variants,
 		private BlockRegistry $blocks,
 	) {
 		$this->applier = new StylePolicyApplier( new FrontendStylePolicy() );
@@ -62,6 +64,7 @@ final readonly class FrontendStyles implements Hookable
 			$this->tokens->css( withCoreStyles: true )
 				. ( new BaseStylesheet() )->css( $this->blocks->coreBlocks, editor: false )
 				. $this->defaults->css( $this->instances->definitions() )
+				. $this->variants->css( $this->instances->variants() )
 				. $this->instances->css()
 		);
 		wp_enqueue_style( self::HANDLE );

@@ -7,20 +7,16 @@ namespace Fb\Blocks\Rendering;
 use Fb\Blocks\Block;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\DefaultsRepository;
-use Fb\Blocks\Values\StatefulValues;
-use Fb\Blocks\Values\InstanceClass;
-use Fb\Breakpoints\BreakpointConfig;
 use Fb\Output\ClassList;
 
 /**
- * Bridge from WordPress's render callback to Block::render(): parses the
- * raw attributes (the boundary), registers instance CSS, builds the context.
+ * Bridge from WordPress's render callback to Block::render(): styles the
+ * block from its raw attributes (the boundary) and builds the context.
  */
 final readonly class BlockRenderer
 {
 	public function __construct(
-		private BreakpointConfig $breakpoints,
-		private InstanceStyleCollector $collector,
+		private BlockStyler $styler,
 		private DefaultsRepository $defaults,
 	) {
 	}
@@ -31,18 +27,16 @@ final readonly class BlockRenderer
 	public function render( Block $block, array $attributes, string $content ): string
 	{
 		$definition = $block->definition();
-		$values     = StatefulValues::fromJson( $attributes[ BlockRegistry::ATTRIBUTE ] ?? null, $definition, $this->breakpoints->breakpoints() );
-		$instance   = InstanceClass::of( $values );
+		$styled     = $this->styler->style( $definition, $attributes[ BlockRegistry::ATTRIBUTE ] ?? null );
 
-		$classes = new ClassList( $definition->name->cssClass() );
-		if ( $this->collector->add( $instance, $definition, $values ) ) {
-			$classes = $classes->with( new ClassList( $instance->value ) );
-		}
+		$classes     = $styled->classes;
 		$userClasses = $attributes['className'] ?? null;
 		if ( is_string( $userClasses ) ) {
 			$classes = $classes->with( ClassList::parse( $userClasses ) );
 		}
 
-		return $block->render( new RenderContext( $definition, $values, $this->defaults->for( $definition ), $classes, $content ) );
+		return $block->render(
+			new RenderContext( $definition, $styled->attribute->values, $styled->variant?->values, $this->defaults->for( $definition ), $classes, $content )
+		);
 	}
 }

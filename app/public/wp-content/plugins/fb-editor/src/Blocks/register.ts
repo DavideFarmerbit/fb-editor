@@ -11,7 +11,7 @@ import { createElement, Fragment, useState } from '@wordpress/element';
 import type { ReactElement, RefCallback } from 'react';
 
 import { settings } from '../Editor/settings';
-import { FbBlockChrome, useFbBlock, usePreviewClass } from './block-chrome';
+import { FbBlockChrome, useFbBlock, usePreviewClass, variantClass } from './block-chrome';
 import type { BlockDefinition } from './Definition/block-definition';
 import { NAMESPACE } from './Definition/BlockName.generated';
 import type { StatefulValues } from './Values/stateful-values';
@@ -29,8 +29,10 @@ export interface FbBlockEditProps extends BlockEditProps< FbAttributes > {
 	readonly definition: BlockDefinition;
 	/** Sanitized through the definition: never read raw attributes. */
 	readonly values: StatefulValues;
-	/** The type's defaults: what unset values fall back to. */
+	/** The type's defaults: what unset values fall back to last. */
 	readonly defaults: StatefulValues;
+	/** The variant's values, if it uses one: what unset values fall back to first. */
+	readonly variant: StatefulValues | null;
 	readonly rootProps: RootProps;
 }
 
@@ -69,7 +71,11 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 			definition,
 			values: state.values,
 			defaults: state.defaults.values,
-			rootProps: { className: [ definition.className, state.instanceClass, preview ].filter( Boolean ).join( ' ' ), ref: setRoot },
+			variant: state.variant?.values ?? null,
+			rootProps: {
+				className: [ definition.className, variantClass( definition, state.variant ), state.instanceClass, preview ].filter( Boolean ).join( ' ' ),
+				ref: setRoot,
+			},
 		} )
 	);
 }

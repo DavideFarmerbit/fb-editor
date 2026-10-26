@@ -38,6 +38,9 @@ class ParityCase {
 		const definition = blockDefinitionFromJson( this.json.get( 'definition' ) );
 		const values = StatefulValues.fromJson( this.json.get( 'attribute' ).decoded(), definition, breakpoints );
 		const defaults = StatefulValues.fromJson( this.json.get( 'defaults' ).decoded(), definition, breakpoints );
+		const variantJson = this.json.get( 'variant' );
+		const variant = variantJson.isNull() ? null : StatefulValues.fromJson( variantJson.decoded(), definition, breakpoints );
+		const weaker = variant === null ? [ defaults ] : [ variant, defaults ];
 		const root = Selector.forClass( this.json.get( 'rootClass' ).string() );
 
 		// Compare values, not encodings (PHP writes 10.0, JS writes 10).
@@ -45,7 +48,12 @@ class ParityCase {
 		expect( styles.forSource( definition, defaults, Selector.forClass( definition.className ) ).css( compiler, CssLayer.Defaults ) ).toBe(
 			this.json.get( 'defaultsCss' ).string()
 		);
-		expect( styles.forSource( definition, values, root, defaults ).css( compiler, CssLayer.Instances ) ).toBe( this.json.get( 'css' ).string() );
+		expect(
+			variant === null
+				? ''
+				: styles.forSource( definition, variant, Selector.forClass( this.json.get( 'variantClass' ).string() ), defaults ).css( compiler, CssLayer.Variants )
+		).toBe( this.json.get( 'variantCss' ).string() );
+		expect( styles.forSource( definition, values, root, ...weaker ).css( compiler, CssLayer.Instances ) ).toBe( this.json.get( 'css' ).string() );
 	}
 }
 

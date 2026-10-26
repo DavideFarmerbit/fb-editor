@@ -23,6 +23,8 @@ enum CssLayer: string
 	case Base = 'fb.base';
 	/** Per-block-type defaults. */
 	case Defaults = 'fb.defaults';
+	/** Named looks of a block type, used by blocks that pick them. */
+	case Variants = 'fb.variants';
 	/** Per-block-instance values. */
 	case Instances = 'fb.instances';
 	/**
@@ -31,6 +33,7 @@ enum CssLayer: string
 	 * background while hovered.
 	 */
 	case StateDefaults = 'fb.states.defaults';
+	case StateVariants = 'fb.states.variants';
 	case StateInstances = 'fb.states.instances';
 
 	/**
@@ -46,6 +49,7 @@ enum CssLayer: string
 	{
 		return match ( $this ) {
 			self::Defaults  => self::StateDefaults,
+			self::Variants  => self::StateVariants,
 			self::Instances => self::StateInstances,
 			default         => throw new \LogicException( "No state layer for {$this->value}." ),
 		};

@@ -22,6 +22,8 @@ export function statesLayer( layer: CssLayer ): CssLayer {
 	switch ( layer ) {
 		case CssLayer.Defaults:
 			return CssLayer.StateDefaults;
+		case CssLayer.Variants:
+			return CssLayer.StateVariants;
 		case CssLayer.Instances:
 			return CssLayer.StateInstances;
 		default:
