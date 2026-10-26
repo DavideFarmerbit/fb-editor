@@ -18,7 +18,8 @@ export class Breakpoint {
 		public readonly maxWidth: number | null,
 		/** Smallest width this breakpoint covers; null for the smallest one. */
 		public readonly minWidth: number | null,
-		public readonly previewWidth: number | null,
+		/** Fixed editor canvas width for this breakpoint, computed by PHP. */
+		public readonly previewWidth: number,
 		/** Computed by Fb\Breakpoints\Breakpoint::mediaQuery(); null for the base. */
 		public readonly mediaQuery: string | null
 	) {}
@@ -27,10 +28,6 @@ export class Breakpoint {
 		return this.maxWidth === null;
 	}
 
-	/** Canvas width for the editor preview; null = full width. */
-	canvasWidth(): number | null {
-		return this.previewWidth ?? this.maxWidth;
-	}
 }
 
 /**
@@ -79,7 +76,7 @@ export function breakpointListFromJson( json: JsonValue ): BreakpointList {
 				item.get( 'label' ).string(),
 				width( 'maxWidth', item ),
 				width( 'minWidth', item ),
-				width( 'previewWidth', item ),
+				item.get( 'previewWidth' ).int(),
 				item.get( 'mediaQuery' ).nullable( ( query ) => query.string() )
 			)
 	);

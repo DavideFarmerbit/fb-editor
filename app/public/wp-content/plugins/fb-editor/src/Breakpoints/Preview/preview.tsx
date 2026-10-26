@@ -15,16 +15,14 @@ import { store } from '../../Editor/store';
 import type { Breakpoint } from '../breakpoints';
 import './preview.scss';
 
-function useCanvasWidth( width: number | null ): void {
+/**
+ * Fixes the canvas to the breakpoint's preview width, for every breakpoint
+ * (the base too): media queries inside it must never depend on how wide
+ * the editor window happens to be.
+ */
+function useCanvasWidth( width: number ): void {
 	useEffect( () => {
 		const { body } = document;
-
-		if ( width === null ) {
-			body.classList.remove( 'fb-has-canvas-width' );
-			body.style.removeProperty( '--fb-canvas-width' );
-			return;
-		}
-
 		body.classList.add( 'fb-has-canvas-width' );
 		body.style.setProperty( '--fb-canvas-width', `${ width }px` );
 	}, [ width ] );
@@ -62,7 +60,7 @@ export default function BreakpointPreview(): ReactElement | null {
 	const { setBreakpoint } = useDispatch( store );
 	const { setDeviceType } = useDispatch( editorStore );
 
-	useCanvasWidth( current.canvasWidth() );
+	useCanvasWidth( current.previewWidth );
 
 	if ( breakpoints.size < 2 ) {
 		return null;

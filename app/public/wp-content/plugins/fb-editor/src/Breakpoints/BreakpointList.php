@@ -15,6 +15,12 @@ namespace Fb\Breakpoints;
  */
 final readonly class BreakpointList implements \IteratorAggregate, \Countable, \JsonSerializable
 {
+	/**
+	 * Preview width of the smallest breakpoint when it sets none: it has
+	 * no minimum width to fall back to. A common phone width.
+	 */
+	public const int SMALLEST_PREVIEW_WIDTH = 375;
+
 	/** @var list<Breakpoint> */
 	private array $items;
 
@@ -44,6 +50,14 @@ final readonly class BreakpointList implements \IteratorAggregate, \Countable, \
 		usort( $others, static fn ( Breakpoint $a, Breakpoint $b ): int => $b->maxWidth <=> $a->maxWidth );
 
 		$this->items = [ $base, ...$others ];
+
+		foreach ( $this->items as $breakpoint ) {
+			$width = $this->previewWidth( $breakpoint );
+			$min   = $this->minWidth( $breakpoint );
+			if ( ( null !== $min && $width < $min ) || ( null !== $breakpoint->maxWidth && $width > $breakpoint->maxWidth ) ) {
+				throw new \InvalidArgumentException( "Breakpoint \"{$breakpoint->id}\": previewWidth {$width} is outside its own range." );
+			}
+		}
 	}
 
 	public function get( BreakpointId $id ): ?Breakpoint
@@ -83,10 +97,23 @@ final readonly class BreakpointList implements \IteratorAggregate, \Countable, \
 	}
 
 	/**
+	 * The editor canvas width while previewing a breakpoint: always fixed,
+	 * so the window size never decides which media queries apply. Its own
+	 * previewWidth, else the smallest width it covers, else (the smallest
+	 * breakpoint) SMALLEST_PREVIEW_WIDTH, capped to its maxWidth.
+	 */
+	public function previewWidth( Breakpoint $breakpoint ): int
+	{
+		return $breakpoint->previewWidth
+			?? $this->minWidth( $breakpoint )
+			?? min( self::SMALLEST_PREVIEW_WIDTH, $breakpoint->maxWidth ?? self::SMALLEST_PREVIEW_WIDTH );
+	}
+
+	/**
 	 * What the editor receives. Everything derived (media query, covered
 	 * range) is computed here, never in JS.
 	 *
-	 * @return list<array{id: BreakpointId, label: string, maxWidth: ?int, minWidth: ?int, previewWidth: ?int, mediaQuery: ?string}>
+	 * @return list<array{id: BreakpointId, label: string, maxWidth: ?int, minWidth: ?int, previewWidth: int, mediaQuery: ?string}>
 	 */
 	public function jsonSerialize(): array
 	{
@@ -96,7 +123,7 @@ final readonly class BreakpointList implements \IteratorAggregate, \Countable, \
 				'label'        => $breakpoint->label,
 				'maxWidth'     => $breakpoint->maxWidth,
 				'minWidth'     => $this->minWidth( $breakpoint ),
-				'previewWidth' => $breakpoint->previewWidth,
+				'previewWidth' => $this->previewWidth( $breakpoint ),
 				'mediaQuery'   => $breakpoint->mediaQuery(),
 			],
 			$this->items

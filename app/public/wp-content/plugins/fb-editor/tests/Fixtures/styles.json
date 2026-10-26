@@ -5,7 +5,7 @@
             "label": "Desktop",
             "maxWidth": null,
             "minWidth": 1025,
-            "previewWidth": null,
+            "previewWidth": 1025,
             "mediaQuery": null
         },
         {
@@ -13,7 +13,7 @@
             "label": "Tablet",
             "maxWidth": 1024,
             "minWidth": 768,
-            "previewWidth": null,
+            "previewWidth": 768,
             "mediaQuery": "(max-width: 1024px)"
         },
         {
@@ -21,7 +21,7 @@
             "label": "Mobile",
             "maxWidth": 767,
             "minWidth": null,
-            "previewWidth": null,
+            "previewWidth": 375,
             "mediaQuery": "(max-width: 767px)"
         }
     ],
