@@ -12,6 +12,7 @@ use Fb\Blocks\Library\Section\Section;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
+use Fb\CoreBlocks\CoreBlockRestrictions;
 use Fb\Editor\CanvasStyles;
 use Fb\Editor\EditorAssets;
 use Fb\Output\BlockMarkupCleaner;
@@ -52,6 +53,7 @@ final readonly class Plugin
 			new CanvasStyles( $tokens ),
 			new FrontendStyles( $tokens, $instances, new DefaultsStylesheet( $defaults, $breakpoints ) ),
 			new BlockMarkupCleaner(),
+			new CoreBlockRestrictions( $blocks ),
 		];
 
 		foreach ( $services as $service ) {
