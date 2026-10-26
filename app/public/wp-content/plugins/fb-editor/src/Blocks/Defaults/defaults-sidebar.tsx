@@ -16,6 +16,7 @@ import { settings } from '../../Editor/settings';
 import type { BlockDefinition } from '../Definition/block-definition';
 import { WeakerSource } from '../Inspector/fallbacks';
 import { StatefulInspector } from '../Inspector/stateful-inspector';
+import { VariantsManager } from '../Variants/variants-manager';
 import { useBlockDefaults } from './use-block-defaults';
 import './defaults-sidebar.scss';
 
@@ -55,15 +56,18 @@ function BlockTypeDefaults( { definition }: { readonly definition: BlockDefiniti
 				<h2 className="fb-defaults__title">{ definition.title }</h2>
 			</div>
 			{ defaults.canEdit ? (
-				<StatefulInspector
-					definition={ definition }
-					values={ defaults.saved }
-					weaker={ [ new WeakerSource( defaults.theme, __( 'From theme', 'fb-editor' ) ) ] }
-					listFallbackControls
-					memoryKey={ `defaults/${ definition.name }` }
-					onChange={ save }
-					makeDefault={ null }
-				/>
+				<>
+					<StatefulInspector
+						definition={ definition }
+						values={ defaults.saved }
+						weaker={ [ new WeakerSource( defaults.theme, __( 'From theme', 'fb-editor' ) ) ] }
+						listFallbackControls
+						memoryKey={ `defaults/${ definition.name }` }
+						onChange={ save }
+						makeDefault={ null }
+					/>
+					<VariantsManager definition={ definition } />
+				</>
 			) : (
 				<p className="fb-defaults__notice">{ __( 'You are not allowed to change block defaults.', 'fb-editor' ) }</p>
 			) }

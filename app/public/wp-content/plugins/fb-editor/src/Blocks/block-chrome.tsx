@@ -24,7 +24,8 @@ import { InstanceStyles } from './Rendering/instance-styles';
 import { BlockAttribute } from './Values/block-attribute';
 import type { StatefulValues } from './Values/stateful-values';
 import { useBlockVariants, type BlockVariants } from './Variants/use-block-variants';
-import type { Variant, VariantSlug } from './Variants/variant-set';
+import type { Variant, VariantSet, VariantSlug } from './Variants/variant-set';
+import { VariantPicker } from './Variants/variant-picker';
 import { VariantStyles } from './Variants/variant-styles';
 
 export class FbBlockState {
@@ -37,7 +38,9 @@ export class FbBlockState {
 		/** Editor-only class on the block root; never saved. */
 		public readonly instanceClass: string,
 		public readonly setAttribute: ( attribute: BlockAttribute ) => void,
-		public readonly saveDefaults: ( saved: StatefulValues ) => void
+		public readonly saveDefaults: ( saved: StatefulValues ) => void,
+		/** Replaces the type's saved variants (an unsaved entity edit). */
+		public readonly saveVariants: ( saved: VariantSet ) => void
 	) {}
 
 	/** The block's own values. */
@@ -106,7 +109,7 @@ export function useFbBlock(
 	const raw = attributes[ ATTRIBUTE ];
 	const attribute = useMemo( () => BlockAttribute.fromJson( raw, definition, settings.breakpoints ), [ raw, definition ] );
 	const { defaults, save } = useBlockDefaults( definition );
-	const { variants } = useBlockVariants( definition );
+	const { variants, save: saveVariants } = useBlockVariants( definition );
 
 	return new FbBlockState(
 		attribute,
@@ -115,7 +118,8 @@ export function useFbBlock(
 		variants,
 		editorInstanceClass( clientId ),
 		( next ) => setAttributes( { [ ATTRIBUTE ]: next.toAttribute() } ),
-		save
+		save,
+		saveVariants
 	);
 }
 
@@ -134,6 +138,7 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 	return (
 		<>
 			<InspectorControls>
+				<VariantPicker definition={ definition } state={ state } />
 				<StatefulInspector
 					definition={ definition }
 					values={ values }

@@ -24,8 +24,37 @@ export class Variant {
 		public readonly values: StatefulValues
 	) {}
 
+	withName( name: string ): Variant {
+		return new Variant( this.slug, name, this.values );
+	}
+
+	withValues( values: StatefulValues ): Variant {
+		return new Variant( this.slug, this.name, values );
+	}
+
 	toJSON(): Record< string, unknown > {
 		return { slug: this.slug, name: this.name, values: this.values };
+	}
+}
+
+/**
+ * A new, unused slug from a name: "Big & Bold" → "big-bold", then
+ * "big-bold-2"… when taken.
+ */
+export function slugFromName( name: string, taken: VariantSet ): VariantSlug {
+	const base =
+		name
+			.normalize( 'NFKD' )
+			// "é" → "e" + accent: drop the accent.
+			.replace( /[\u0300-\u036f]/g, '' )
+			.toLowerCase()
+			.replace( /[^a-z0-9]+/g, '-' )
+			.replace( /^-+|-+$/g, '' ) || 'variant';
+	for ( let index = 1; ; index++ ) {
+		const slug = parseVariantSlug( index === 1 ? base : `${ base }-${ index }` );
+		if ( slug !== null && taken.get( slug ) === null ) {
+			return slug;
+		}
 	}
 }
 
@@ -74,6 +103,17 @@ export class VariantSet {
 			return saved === null ? variant : new Variant( variant.slug, saved.name, variant.values.overlay( saved.values ) );
 		} );
 		return new VariantSet( [ ...variants, ...over.variants.filter( ( variant ) => this.get( variant.slug ) === null ) ] );
+	}
+
+	/** A copy with this variant added, or replacing the one with its slug. */
+	with( variant: Variant ): VariantSet {
+		return this.get( variant.slug ) === null
+			? new VariantSet( [ ...this.variants, variant ] )
+			: new VariantSet( this.variants.map( ( candidate ) => ( candidate.slug === variant.slug ? variant : candidate ) ) );
+	}
+
+	without( slug: VariantSlug ): VariantSet {
+		return new VariantSet( this.variants.filter( ( variant ) => variant.slug !== slug ) );
 	}
 
 	/** Plain JSON for post content. */
