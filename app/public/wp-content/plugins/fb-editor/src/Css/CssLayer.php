@@ -19,6 +19,8 @@ enum CssLayer: string
 	case Wp = 'wp';
 	/** Design tokens (preset custom properties). */
 	case Tokens = 'fb.tokens';
+	/** Functional base CSS of managed core blocks (images never overflow…). */
+	case Base = 'fb.base';
 	/** Per-block-type defaults. */
 	case Defaults = 'fb.defaults';
 	/** Per-block-instance values. */

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fb\Tests\Fixtures;
 
 use Fb\Blocks\Library\Section\Section;
+use Fb\CoreBlocks\Library\Button\Button;
 use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\BlockValues;
 use Fb\Css\CssLayer;
@@ -71,6 +72,7 @@ final class StyleFixtures
 	{
 		$fixture = SectionFixture::definition();
 		$section = ( new Section() )->definition();
+		$button  = ( new Button() )->definition();
 
 		return [
 			new StyleCase( 'padding with presets and a mobile override', $section, [
@@ -165,6 +167,16 @@ final class StyleFixtures
 				$fixture,
 				[ 'display' => [ 'mobile' => 'grid' ], 'gap' => [ 'desktop' => [ 'top' => self::px( 12 ) ] ] ],
 				[ 'display' => [ 'desktop' => 'flex', 'mobile' => 'block' ] ]
+			),
+			new StyleCase(
+				'core block styling a child element',
+				$button,
+				[
+					'background' => [ 'desktop' => self::color( 'accent' ) ],
+					'fontWeight' => [ 'desktop' => '700', 'mobile' => '400' ],
+					'fontSize'   => [ 'desktop' => [ 'kind' => 'custom', 'value' => 1.125, 'unit' => 'rem' ] ],
+				],
+				[ 'padding' => [ 'desktop' => [ 'top' => self::preset( '40' ), 'bottom' => self::preset( '40' ) ] ] ]
 			),
 			new StyleCase( 'garbage attribute', $section, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
 		];

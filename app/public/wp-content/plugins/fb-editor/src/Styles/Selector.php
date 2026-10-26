@@ -11,34 +11,44 @@ use Fb\TypeScript\ExportToTypeScript;
  *   :where(.fb-k3x9q)  or  :where(.fb-k3x9q>.fb-section__inner)
  *
  * Elements are direct children of the block root, so a nested block of the
- * same type never matches its parent's element rules.
+ * same type never matches its parent's element rules. Base styles may also
+ * target a descendant tag (`:where(.fb-image img)`).
  */
 final readonly class Selector implements \Stringable
 {
 	#[ExportToTypeScript( regExp: true )]
 	public const string CLASS_PATTERN = '^-?[_a-zA-Z][_a-zA-Z0-9-]*$';
 
-	/**
-	 * @param list<string> $path Class names, each a direct child of the previous.
-	 */
 	private function __construct(
-		private array $path,
+		/** Inner selector, built only from validated parts. */
+		private string $inner,
 	) {
 	}
 
 	public static function forClass( string $className ): self
 	{
-		return new self( [ self::validClass( $className ) ] );
+		return new self( '.' . self::validClass( $className ) );
 	}
 
+	/** A direct child with this class. */
 	public function child( string $className ): self
 	{
-		return new self( [ ...$this->path, self::validClass( $className ) ] );
+		return new self( "{$this->inner}>." . self::validClass( $className ) );
+	}
+
+	/** Any descendant of this HTML tag. */
+	public function descendantTag( string $tag ): self
+	{
+		if ( 1 !== preg_match( '/^[a-z][a-z0-9]*$/', $tag ) ) {
+			throw new \InvalidArgumentException( "Invalid tag name \"{$tag}\"." );
+		}
+
+		return new self( "{$this->inner} {$tag}" );
 	}
 
 	public function __toString(): string
 	{
-		return ':where(.' . implode( '>.', $this->path ) . ')';
+		return ":where({$this->inner})";
 	}
 
 	private static function validClass( string $className ): string

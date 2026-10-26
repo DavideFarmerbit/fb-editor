@@ -5,6 +5,7 @@
 export enum CssLayer {
 	Wp = 'wp',
 	Tokens = 'fb.tokens',
+	Base = 'fb.base',
 	Defaults = 'fb.defaults',
 	Instances = 'fb.instances',
 }

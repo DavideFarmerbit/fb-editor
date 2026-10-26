@@ -14,6 +14,11 @@ namespace Fb\CoreBlocks;
 enum ManagedCoreBlock: string
 {
 	case Paragraph    = 'core/paragraph';
+	case Heading      = 'core/heading';
+	case List         = 'core/list';
+	case Image        = 'core/image';
+	case Buttons      = 'core/buttons';
+	case Button       = 'core/button';
 	case PostContent  = 'core/post-content';
 	case PostExcerpt  = 'core/post-excerpt';
 	case PostTemplate = 'core/post-template';
@@ -51,10 +56,15 @@ enum ManagedCoreBlock: string
 	{
 		return match ( $this ) {
 			self::Paragraph,
+			self::Heading,
+			self::Image,
+			self::Button,
 			self::PostExcerpt,
 			self::PostTitle,
 			self::SiteTitle    => CleanupScope::Subtree,
 			self::PostTemplate => CleanupScope::RootAndPostItems,
+			self::List,
+			self::Buttons,
 			self::PostContent,
 			self::Query,
 			self::TemplatePart => CleanupScope::Root,

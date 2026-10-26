@@ -11,6 +11,8 @@ import { ColorField } from '../Definition/Input/Color/color-control';
 import { ColorInput } from '../Definition/Input/Color/color-input';
 import { LengthField } from '../Definition/Input/Length/length-control';
 import { LengthInput } from '../Definition/Input/Length/length-input';
+import { PresetField } from '../Definition/Input/Preset/preset-control';
+import { PresetInput } from '../Definition/Input/Preset/preset-input';
 import { SelectField } from '../Definition/Input/Select/select-control';
 import { SelectInput } from '../Definition/Input/Select/select-input';
 import { SpacingField } from '../Definition/Input/Spacing/spacing-control';
@@ -54,6 +56,9 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof ToggleInput ) {
 		return <ToggleField { ...props } input={ input } />;
+	}
+	if ( input instanceof PresetInput ) {
+		return <PresetField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

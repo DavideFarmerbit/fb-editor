@@ -20,4 +20,12 @@ export enum CssProperty {
 	FlexWrap = 'flex-wrap',
 	Color = 'color',
 	BackgroundColor = 'background-color',
+	FontSize = 'font-size',
+	FontFamily = 'font-family',
+	FontWeight = 'font-weight',
+	TextAlign = 'text-align',
+	JustifyContent = 'justify-content',
+	Height = 'height',
+	VerticalAlign = 'vertical-align',
+	TextDecoration = 'text-decoration',
 }

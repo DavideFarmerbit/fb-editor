@@ -3,3 +3,5 @@
  */
 
 export const ATTRIBUTE = 'fb';
+
+export const ATTRIBUTE_TYPE = 'object';

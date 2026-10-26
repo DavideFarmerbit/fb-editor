@@ -14,7 +14,14 @@ export class BlockStyles {
 	 * `defaults`: the type's defaults, for conditions (an instance control's
 	 * condition reads the instance's value, else the default).
 	 */
-	bindings( definition: BlockDefinition, values: BlockValues, root: Selector, defaults: BlockValues | null = null ): StyleBinding[] {
+	bindings(
+		definition: BlockDefinition,
+		values: BlockValues,
+		root: Selector,
+		defaults: BlockValues | null = null,
+		/** In the editor, core blocks' elements keep core's classes. */
+		editor = false
+	): StyleBinding[] {
 		const bindings: StyleBinding[] = [];
 
 		for ( const control of definition.controls ) {
@@ -34,7 +41,9 @@ export class BlockStyles {
 
 			bindings.push(
 				new StyleBinding(
-					control.element === null ? root : root.child( definition.elementClass( control.element ) ),
+					control.element === null
+						? root
+						: root.child( editor ? definition.editorElementClass( control.element ) : definition.elementClass( control.element ) ),
 					control.output,
 					value,
 					Visibility.hiddenAt( hidden )

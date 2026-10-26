@@ -96,6 +96,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -371,7 +372,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -431,6 +433,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -706,7 +709,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -744,6 +748,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -1019,7 +1024,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -1103,6 +1109,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -1227,7 +1234,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -1281,6 +1289,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -1405,7 +1414,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -1461,6 +1471,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -1585,7 +1596,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -1621,6 +1633,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -1896,7 +1909,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -1976,6 +1990,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -2251,7 +2266,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -2307,6 +2323,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -2582,7 +2599,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -2648,6 +2666,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -2923,7 +2942,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -2943,6 +2963,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -3218,7 +3239,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -3282,6 +3304,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -3557,7 +3580,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -3596,6 +3620,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -3871,7 +3896,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -3925,6 +3951,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -4200,7 +4227,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -4234,6 +4262,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -4509,7 +4538,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -4541,6 +4571,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -4816,7 +4847,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -4849,6 +4881,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -4973,7 +5006,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -5024,6 +5058,7 @@
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -5148,7 +5183,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },
@@ -5191,10 +5227,227 @@
             "css": "@layer fb.instances{:where(.fb-case>.fb-section__inner){row-gap:12px;}@media (max-width: 767px){:where(.fb-case>.fb-section__inner){display:grid;}}}"
         },
         {
+            "name": "core block styling a child element",
+            "definition": {
+                "name": "core/button",
+                "title": "Button",
+                "isCore": true,
+                "className": "fb-button",
+                "controls": [
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "fontSize",
+                        "label": "Font size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": "font-size"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "fontWeight",
+                        "label": "Font weight",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "300",
+                                    "label": "Light"
+                                },
+                                {
+                                    "value": "400",
+                                    "label": "Regular"
+                                },
+                                {
+                                    "value": "500",
+                                    "label": "Medium"
+                                },
+                                {
+                                    "value": "600",
+                                    "label": "Semibold"
+                                },
+                                {
+                                    "value": "700",
+                                    "label": "Bold"
+                                },
+                                {
+                                    "value": "800",
+                                    "label": "Extra bold"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-weight"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ]
+                        },
+                        "output": {
+                            "kind": "box",
+                            "property": "padding"
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "textColor"
+                        ]
+                    },
+                    {
+                        "label": "Typography",
+                        "controls": [
+                            "fontSize",
+                            "fontWeight"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "link",
+                        "className": "fb-button__link",
+                        "editorClassName": "wp-block-button__link"
+                    }
+                ]
+            },
+            "attribute": {
+                "background": {
+                    "desktop": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "accent"
+                    }
+                },
+                "fontWeight": {
+                    "desktop": "700",
+                    "mobile": "400"
+                },
+                "fontSize": {
+                    "desktop": {
+                        "kind": "custom",
+                        "value": 1.125,
+                        "unit": "rem"
+                    }
+                }
+            },
+            "defaults": {
+                "padding": {
+                    "desktop": {
+                        "top": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        },
+                        "bottom": {
+                            "kind": "preset",
+                            "preset": "spacing",
+                            "slug": "40"
+                        }
+                    }
+                }
+            },
+            "rootClass": "fb-case",
+            "values": {
+                "background": {
+                    "desktop": {
+                        "kind": "preset",
+                        "preset": "color",
+                        "slug": "accent"
+                    }
+                },
+                "fontSize": {
+                    "desktop": {
+                        "kind": "custom",
+                        "value": 1.125,
+                        "unit": "rem"
+                    }
+                },
+                "fontWeight": {
+                    "desktop": "700",
+                    "mobile": "400"
+                }
+            },
+            "defaultsCss": "@layer fb.defaults{:where(.fb-button>.fb-button__link){padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);}}",
+            "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-color:var(--wp--preset--color--accent);font-size:1.125rem;font-weight:700;}@media (max-width: 767px){:where(.fb-case>.fb-button__link){font-weight:400;}}}"
+        },
+        {
             "name": "garbage attribute",
             "definition": {
                 "name": "fb/section",
                 "title": "Section",
+                "isCore": false,
                 "className": "fb-section",
                 "controls": [
                     {
@@ -5470,7 +5723,8 @@
                 "elements": [
                     {
                         "id": "inner",
-                        "className": "fb-section__inner"
+                        "className": "fb-section__inner",
+                        "editorClassName": "fb-section__inner"
                     }
                 ]
             },

@@ -39,7 +39,9 @@ export class Element {
 	constructor(
 		public readonly id: ElementId,
 		/** e.g. "fb-section__inner", computed by PHP. */
-		public readonly className: string
+		public readonly className: string,
+		/** The class in the editor: core blocks keep core's ("wp-block-button__link"). */
+		public readonly editorClassName: string
 	) {}
 }
 
@@ -48,6 +50,8 @@ export class BlockDefinition implements ConditionLabels {
 		/** e.g. "fb/section" */
 		public readonly name: string,
 		public readonly title: string,
+		/** A core block fb manages (core renders it; fb adds controls). */
+		public readonly isCore: boolean,
 		/** e.g. "fb-section" */
 		public readonly className: string,
 		public readonly controls: readonly Control[],
@@ -81,13 +85,22 @@ export class BlockDefinition implements ConditionLabels {
 		return this.layout.find( ( panel ) => panel.controls.includes( id ) );
 	}
 
-	/** Class of a declared element; throws for an unknown one. */
+	/** Frontend class of a declared element; throws for an unknown one. */
 	elementClass( id: string ): string {
+		return this.element( id ).className;
+	}
+
+	/** Editor class of a declared element (differs for core blocks). */
+	editorElementClass( id: string ): string {
+		return this.element( id ).editorClassName;
+	}
+
+	private element( id: string ): Element {
 		const element = this.elements.find( ( candidate ) => candidate.id === id );
 		if ( element === undefined ) {
 			throw new InvalidJson( `${ this.name }: no element "${ id }"` );
 		}
-		return element.className;
+		return element;
 	}
 
 	/**
@@ -127,6 +140,7 @@ export function blockDefinitionFromJson( json: JsonValue ): BlockDefinition {
 	return new BlockDefinition(
 		json.get( 'name' ).string(),
 		json.get( 'title' ).string(),
+		json.get( 'isCore' ).boolean(),
 		json.get( 'className' ).string(),
 		json.get( 'controls' ).list().map( controlFromJson ),
 		json
@@ -136,6 +150,9 @@ export function blockDefinitionFromJson( json: JsonValue ): BlockDefinition {
 		json
 			.get( 'elements' )
 			.list()
-			.map( ( element ) => new Element( parseElementId( element.get( 'id' ) ), element.get( 'className' ).string() ) )
+			.map(
+				( element ) =>
+					new Element( parseElementId( element.get( 'id' ) ), element.get( 'className' ).string(), element.get( 'editorClassName' ).string() )
+			)
 	);
 }

@@ -30,7 +30,7 @@ interface InstanceStylesProps {
 
 export function InstanceStyles( { definition, values, defaults, instanceClass, root }: InstanceStylesProps ): ReactElement | null {
 	const css = useMemo(
-		() => compiler.compile( CssLayer.Instances, blockStyles.bindings( definition, values, Selector.forClass( instanceClass ), defaults ) ),
+		() => compiler.compile( CssLayer.Instances, blockStyles.bindings( definition, values, Selector.forClass( instanceClass ), defaults, true ) ),
 		[ definition, values, defaults, instanceClass ]
 	);
 

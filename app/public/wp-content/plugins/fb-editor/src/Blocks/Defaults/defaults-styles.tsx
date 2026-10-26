@@ -25,7 +25,7 @@ interface DefaultsStylesProps {
 
 export function DefaultsStyles( { definition, defaults, root }: DefaultsStylesProps ): null {
 	const css = useMemo(
-		() => compiler.compile( CssLayer.Defaults, blockStyles.bindings( definition, defaults, Selector.forClass( definition.className ) ) ),
+		() => compiler.compile( CssLayer.Defaults, blockStyles.bindings( definition, defaults, Selector.forClass( definition.className ), null, true ) ),
 		[ definition, defaults ]
 	);
 

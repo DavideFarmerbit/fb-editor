@@ -6,6 +6,8 @@ namespace Fb\Output;
 
 use Fb\Blocks\Defaults\DefaultsStylesheet;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
+use Fb\Blocks\BlockRegistry;
+use Fb\CoreBlocks\BaseStylesheet;
 use Fb\Hookable;
 use Fb\RequestContext;
 
@@ -23,6 +25,7 @@ final readonly class FrontendStyles implements Hookable
 		private TokenStylesheet $tokens,
 		private InstanceStyleCollector $instances,
 		private DefaultsStylesheet $defaults,
+		private BlockRegistry $blocks,
 	) {
 		$this->applier = new StylePolicyApplier( new FrontendStylePolicy() );
 	}
@@ -57,6 +60,7 @@ final readonly class FrontendStyles implements Hookable
 		wp_add_inline_style(
 			self::HANDLE,
 			$this->tokens->css( withCoreStyles: true )
+				. ( new BaseStylesheet() )->css( $this->blocks->coreBlocks, editor: false )
 				. $this->defaults->css( $this->instances->definitions() )
 				. $this->instances->css()
 		);

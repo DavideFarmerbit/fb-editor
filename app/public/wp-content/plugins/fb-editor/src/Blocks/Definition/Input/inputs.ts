@@ -6,11 +6,12 @@
 import { InvalidJson, type JsonValue } from '../../../Json/json';
 import { ColorInput } from './Color/color-input';
 import { LengthInput } from './Length/length-input';
+import { PresetInput } from './Preset/preset-input';
 import { SelectInput } from './Select/select-input';
 import { SpacingInput } from './Spacing/spacing-input';
 import { ToggleInput } from './Toggle/toggle-input';
 
-export type Input = SpacingInput | SelectInput | ColorInput | LengthInput | ToggleInput;
+export type Input = SpacingInput | SelectInput | ColorInput | LengthInput | ToggleInput | PresetInput;
 
 export function inputFromJson( json: JsonValue ): Input {
 	const kind = json.get( 'kind' ).string();
@@ -25,6 +26,8 @@ export function inputFromJson( json: JsonValue ): Input {
 			return LengthInput.fromJson( json );
 		case 'toggle':
 			return ToggleInput.fromJson();
+		case 'preset':
+			return PresetInput.fromJson( json );
 		default:
 			throw new InvalidJson( `${ json.path }.kind: unknown input kind "${ kind }"` );
 	}

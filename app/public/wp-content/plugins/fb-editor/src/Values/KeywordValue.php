@@ -14,7 +14,8 @@ use Fb\TypeScript\ExportToTypeScript;
 final readonly class KeywordValue implements CssValue, ResponsiveValue
 {
 	#[ExportToTypeScript( regExp: true )]
-	public const string PATTERN = '^[a-z][a-z0-9-]*$';
+	/** Letters, digits and dashes: "flex", "space-between", "700". */
+	public const string PATTERN = '^[a-z0-9][a-z0-9-]*$';
 
 	public function __construct(
 		public string $keyword,

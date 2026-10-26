@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Fb\Editor;
 
-use Fb\Blocks\Block;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\BlockDefaultsInfo;
 use Fb\Blocks\Defaults\BlockDefaultsPostType;
@@ -46,7 +45,7 @@ final readonly class EditorAssets implements Hookable
 
 		wp_enqueue_script( self::HANDLE, $this->paths->url( 'build/editor.js' ), $asset->dependencies, $asset->version, true );
 
-		$definitions = array_map( static fn ( Block $block ): BlockDefinition => $block->definition(), $this->blocks->blocks );
+		$definitions = $this->blocks->definitions();
 
 		$settings = new EditorSettings(
 			$this->breakpoints->breakpoints(),

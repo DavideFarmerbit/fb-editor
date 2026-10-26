@@ -6,21 +6,15 @@
  * Every block's edit is wrapped: the wrapper parses values, renders the
  * generated sidebar and injects live CSS, so blocks only write markup.
  */
-import { InspectorControls } from '@wordpress/block-editor';
 import { registerBlockType, type BlockEditProps } from '@wordpress/blocks';
-import { createElement, Fragment, useMemo, useState } from '@wordpress/element';
+import { createElement, Fragment, useState } from '@wordpress/element';
 import type { ReactElement, RefCallback } from 'react';
 
 import { settings } from '../Editor/settings';
-import { ATTRIBUTE } from './BlockRegistry.generated';
-import { DefaultsStyles } from './Defaults/defaults-styles';
-import { useBlockDefaults } from './Defaults/use-block-defaults';
-import type { BlockDefinition, Control } from './Definition/block-definition';
-import { fromDefault } from './Inspector/control-reading';
+import { FbBlockChrome, useFbBlock } from './block-chrome';
+import type { BlockDefinition } from './Definition/block-definition';
 import { NAMESPACE } from './Definition/BlockName.generated';
-import { Inspector } from './Inspector/inspector';
-import { InstanceStyles } from './Rendering/instance-styles';
-import { BlockValues } from './Values/block-values';
+import type { BlockValues } from './Values/block-values';
 
 export type FbAttributes = Record< string, unknown >;
 
@@ -63,40 +57,18 @@ interface WrapperProps extends BlockEditProps< FbAttributes > {
 
 function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactElement {
 	const [ root, setRoot ] = useState< HTMLElement | null >( null );
-	const attribute = props.attributes[ ATTRIBUTE ];
-	const values = useMemo(
-		() => BlockValues.fromAttribute( attribute, definition, settings.breakpoints ),
-		[ attribute, definition ]
-	);
-	const { defaults, save: saveDefaults } = useBlockDefaults( definition );
-	// Editor-only: never saved, so it can be anything unique.
-	const instanceClass = `fb-i-${ props.clientId }`;
+	const state = useFbBlock( definition, props.attributes, props.setAttributes, props.clientId );
 
 	return createElement(
 		Fragment,
 		null,
-		createElement(
-			InspectorControls,
-			null,
-			createElement( Inspector, {
-				definition,
-				values,
-				fallback: defaults.values,
-				fallbackStatus: fromDefault( definition.title ),
-				memoryKey: props.clientId,
-				listFallbackControls: false,
-				onChange: ( next: BlockValues ) => props.setAttributes( { [ ATTRIBUTE ]: next.toAttribute() } ),
-				makeDefault: defaults.canEdit ? ( control: Control ) => saveDefaults( defaults.saved.withControlFrom( control, values ) ) : null,
-			} )
-		),
-		createElement( DefaultsStyles, { definition, defaults: defaults.values, root } ),
-		createElement( InstanceStyles, { definition, values, defaults: defaults.values, instanceClass, root } ),
+		createElement( FbBlockChrome, { definition, state, clientId: props.clientId, root } ),
 		createElement( editor.edit, {
 			...props,
 			definition,
-			values,
-			defaults: defaults.values,
-			rootProps: { className: `${ definition.className } ${ instanceClass }`, ref: setRoot },
+			values: state.values,
+			defaults: state.defaults.values,
+			rootProps: { className: `${ definition.className } ${ state.instanceClass }`, ref: setRoot },
 		} )
 	);
 }
@@ -106,7 +78,7 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
  * in PHP without editor markup (or the reverse) is a bug: reported loudly.
  */
 export function registerBlocks( editors: readonly BlockEditor[] ): void {
-	for ( const definition of settings.blocks ) {
+	for ( const definition of settings.blocks.filter( ( candidate ) => ! candidate.isCore ) ) {
 		const editor = editors.find( ( candidate ) => candidate.fullName() === definition.name );
 		if ( editor === undefined ) {
 			// eslint-disable-next-line no-console

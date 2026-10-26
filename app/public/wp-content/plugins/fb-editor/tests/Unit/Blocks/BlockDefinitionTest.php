@@ -88,8 +88,8 @@ final class BlockDefinitionTest extends TestCase
 		$definition = SectionFixture::definition();
 		$encode     = static fn ( mixed $value ): string => (string) wp_json_encode( $value, JSON_UNESCAPED_SLASHES );
 
-		self::assertStringStartsWith( '{"name":"fb/section","title":"Section","className":"fb-section",', $encode( $definition ) );
-		self::assertStringEndsWith( ',"elements":[{"id":"inner","className":"fb-section__inner"}]}', $encode( $definition ) );
+		self::assertStringStartsWith( '{"name":"fb/section","title":"Section","isCore":false,"className":"fb-section",', $encode( $definition ) );
+		self::assertStringEndsWith( ',"elements":[{"id":"inner","className":"fb-section__inner","editorClassName":"fb-section__inner"}]}', $encode( $definition ) );
 		self::assertSame(
 			'{"id":"gap","label":"Gap",'
 			. '"input":{"kind":"spacing","allowAuto":false,"allowNegative":false,"modes":["linked","axis"]},'

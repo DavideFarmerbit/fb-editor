@@ -38,7 +38,7 @@ final class DefaultsTest extends TestCase
 		// Sanitizing on save needs the post type hooks.
 		$registry = new BlockRegistry(
 			new BlockRenderer( $this->breakpoints, new InstanceStyleCollector( $this->breakpoints, $this->repository() ), $this->repository() ),
-			$this->section
+			[ $this->section ]
 		);
 		( new BlockDefaultsPostType( $registry, $this->breakpoints ) )->register();
 		do_action( 'init' );

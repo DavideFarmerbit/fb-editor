@@ -31,6 +31,14 @@ enum CssProperty: string
 	case FlexWrap      = 'flex-wrap';
 	case Color         = 'color';
 	case BackgroundColor = 'background-color';
+	case FontSize      = 'font-size';
+	case FontFamily    = 'font-family';
+	case FontWeight    = 'font-weight';
+	case TextAlign     = 'text-align';
+	case JustifyContent = 'justify-content';
+	case Height        = 'height';
+	case VerticalAlign = 'vertical-align';
+	case TextDecoration = 'text-decoration';
 
 	public static function padding( Side $side ): self
 	{

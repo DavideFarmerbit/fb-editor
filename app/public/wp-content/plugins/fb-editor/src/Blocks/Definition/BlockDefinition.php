@@ -17,11 +17,11 @@ namespace Fb\Blocks\Definition;
  */
 final readonly class BlockDefinition implements \JsonSerializable
 {
-	/** @var list<ElementId> */
+	/** @var list<Element> */
 	public array $elements;
 
 	/**
-	 * @param list<ElementId> $elements
+	 * @param list<ElementId|Element> $elements Plain ids: same class in the editor.
 	 */
 	public function __construct(
 		public BlockName $name,
@@ -30,14 +30,28 @@ final readonly class BlockDefinition implements \JsonSerializable
 		public Layout $layout,
 		array $elements = [],
 	) {
-		$this->elements = $elements;
+		$this->elements = array_map(
+			static fn ( ElementId|Element $element ): Element => $element instanceof Element ? $element : new Element( $element ),
+			$elements
+		);
 		$this->validate();
+	}
+
+	public function element( ElementId $id ): ?Element
+	{
+		foreach ( $this->elements as $element ) {
+			if ( $element->id->equals( $id ) ) {
+				return $element;
+			}
+		}
+
+		return null;
 	}
 
 	public function hasElement( ElementId $id ): bool
 	{
 		foreach ( $this->elements as $element ) {
-			if ( $element->equals( $id ) ) {
+			if ( $element->id->equals( $id ) ) {
 				return true;
 			}
 		}
@@ -83,18 +97,23 @@ final readonly class BlockDefinition implements \JsonSerializable
 	 *
 	 * Class names are computed here, so the editor never re-derives them.
 	 *
-	 * @return array{name: BlockName, title: string, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string}>}
+	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>}
 	 */
 	public function jsonSerialize(): array
 	{
 		return [
 			'name'      => $this->name,
 			'title'     => $this->title,
+			'isCore'    => $this->name->isCore(),
 			'className' => $this->name->cssClass(),
 			'controls'  => $this->controls,
 			'layout'    => $this->layout,
 			'elements'  => array_map(
-				fn ( ElementId $element ): array => [ 'id' => $element, 'className' => $this->name->elementClass( $element ) ],
+				fn ( Element $element ): array => [
+					'id'              => $element->id,
+					'className'       => $this->name->elementClass( $element->id ),
+					'editorClassName' => $element->editorClass ?? $this->name->elementClass( $element->id ),
+				],
 				$this->elements
 			),
 		];

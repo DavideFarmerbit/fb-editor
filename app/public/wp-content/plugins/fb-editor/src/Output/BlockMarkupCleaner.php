@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Fb\Output;
 
+use Fb\Blocks\BlockRegistry;
+use Fb\Blocks\Rendering\InstanceStyleCollector;
+use Fb\Blocks\Values\BlockValues;
+use Fb\Blocks\Values\InstanceClass;
+use Fb\Breakpoints\BreakpointConfig;
 use Fb\CoreBlocks\CleanupScope;
 use Fb\CoreBlocks\ManagedCoreBlock;
 use Fb\Hookable;
@@ -16,7 +21,8 @@ use Fb\RequestContext;
  *   → <h2 class="fb-post-title my-class">
  *
  * Classes the user typed into the block ("Additional CSS class") are kept.
- * Other attributes (id, aria-*, href…) are never touched.
+ * Other attributes (id, aria-*, href…) are never touched. Core blocks with
+ * fb controls also get their instance class, and their CSS is collected.
  */
 final readonly class BlockMarkupCleaner implements Hookable
 {
@@ -25,11 +31,19 @@ final readonly class BlockMarkupCleaner implements Hookable
 		'wp-block-',
 		'wp-container-',
 		'wp-elements-',
+		'wp-element-',
 		'is-layout-',
 		'is-style-',
 		'has-',
 		'align',
 	];
+
+	public function __construct(
+		private BlockRegistry $blocks,
+		private BreakpointConfig $breakpoints,
+		private InstanceStyleCollector $instances,
+	) {
+	}
 
 	public function register(): void
 	{
@@ -66,7 +80,12 @@ final readonly class BlockMarkupCleaner implements Hookable
 		// Only treat the first tag as the wrapper if it's really this block's
 		// (static blocks saved without wrapper markup don't have one).
 		if ( self::classes( $processor )->contains( $managed->coreClass() ) ) {
-			self::setClasses( $processor, ( new ClassList( $managed->fbClass() ) )->with( $userClasses ) );
+			$classes = new ClassList( $managed->fbClass() );
+			$instance = $this->instanceClass( $managed, $block );
+			if ( null !== $instance ) {
+				$classes = $classes->with( new ClassList( $instance ) );
+			}
+			self::setClasses( $processor, $classes->with( $userClasses ) );
 		}
 
 		match ( $managed->cleanupScope() ) {
@@ -76,6 +95,27 @@ final readonly class BlockMarkupCleaner implements Hookable
 		};
 
 		return $processor->get_updated_html();
+	}
+
+	/**
+	 * For core blocks fb has controls for: registers the instance's CSS and
+	 * returns its class, or null when its values produce no CSS.
+	 *
+	 * @param array<mixed> $block
+	 */
+	private function instanceClass( ManagedCoreBlock $managed, array $block ): ?string
+	{
+		$coreBlock = $this->blocks->coreBlock( $managed );
+		if ( null === $coreBlock ) {
+			return null;
+		}
+
+		$attrs      = is_array( $block['attrs'] ?? null ) ? $block['attrs'] : [];
+		$definition = $coreBlock->definition();
+		$values     = BlockValues::fromAttribute( $attrs[ BlockRegistry::ATTRIBUTE ] ?? null, $definition, $this->breakpoints->breakpoints() );
+		$instance   = InstanceClass::of( $values );
+
+		return $this->instances->add( $instance, $definition, $values ) ? $instance->value : null;
 	}
 
 	/**

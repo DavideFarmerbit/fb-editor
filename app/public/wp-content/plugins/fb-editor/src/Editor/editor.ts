@@ -2,6 +2,7 @@ import { registerPlugin } from '@wordpress/plugins';
 
 // First: core blocks register on domReady and must see this filter.
 import '../CoreBlocks/core-block-restrictions';
+import '../CoreBlocks/core-block-controls';
 
 import './store';
 import '../Blocks/blocks';

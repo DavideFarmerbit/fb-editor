@@ -13,6 +13,12 @@ use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\CoreBlocks\CoreBlockRestrictions;
+use Fb\CoreBlocks\Library\Button\Button;
+use Fb\CoreBlocks\Library\Buttons\Buttons;
+use Fb\CoreBlocks\Library\Heading\Heading;
+use Fb\CoreBlocks\Library\Image\Image;
+use Fb\CoreBlocks\Library\ListBlock\ListBlock;
+use Fb\CoreBlocks\Library\Paragraph\Paragraph;
 use Fb\Editor\CanvasStyles;
 use Fb\Editor\EditorAssets;
 use Fb\Output\BlockMarkupCleaner;
@@ -42,7 +48,8 @@ final readonly class Plugin
 		$instances   = new InstanceStyleCollector( $breakpoints, $defaults );
 		$blocks      = new BlockRegistry(
 			new BlockRenderer( $breakpoints, $instances, $defaults ),
-			new Section(),
+			[ new Section() ],
+			[ new Paragraph(), new Heading(), new ListBlock(), new Image(), new Buttons(), new Button() ],
 		);
 
 		$services = [
@@ -50,9 +57,9 @@ final readonly class Plugin
 			$blocks,
 			new BlockDefaultsPostType( $blocks, $breakpoints ),
 			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets, $defaults ),
-			new CanvasStyles( $tokens ),
-			new FrontendStyles( $tokens, $instances, new DefaultsStylesheet( $defaults, $breakpoints ) ),
-			new BlockMarkupCleaner(),
+			new CanvasStyles( $tokens, $blocks ),
+			new FrontendStyles( $tokens, $instances, new DefaultsStylesheet( $defaults, $breakpoints ), $blocks ),
+			new BlockMarkupCleaner( $blocks, $breakpoints, $instances ),
 			new CoreBlockRestrictions( $blocks ),
 		];
 
