@@ -36,6 +36,8 @@ final readonly class FrontendStylePolicy implements StylePolicy
 
 	public function decide( string $handle ): StyleAction
 	{
+		// The frontend loads block CSS per block (never the bundle), so the
+		// library handle is only common CSS: removed above.
 		if ( in_array( $handle, self::REMOVED_HANDLES, true ) ) {
 			return StyleAction::Remove;
 		}

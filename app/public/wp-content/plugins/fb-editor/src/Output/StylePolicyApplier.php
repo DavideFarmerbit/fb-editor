@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fb\Output;
 
 use Fb\Adapter\WpInternals;
+use Fb\CoreBlocks\CoreBlockStylesheets;
 use Fb\Css\CssLayer;
 
 /**
@@ -46,9 +47,9 @@ final class StylePolicyApplier
 			}
 
 			match ( $this->policy->decide( $handle ) ) {
-				StyleAction::Remove => $this->remove( $styles, $handle ),
-				StyleAction::Layer  => $this->layerInlineStyles( $handle ),
-				StyleAction::Keep   => null,
+				StyleAction::Remove                     => $this->remove( $styles, $handle ),
+				StyleAction::Layer, StyleAction::Unbundle => $this->layerInlineStyles( $handle ),
+				StyleAction::Keep                       => null,
 			};
 		}
 
@@ -84,23 +85,37 @@ final class StylePolicyApplier
 
 	/**
 	 * A stylesheet still loaded from a file can't be wrapped in place:
-	 * swap the <link> for an `@import … layer(wp)`.
+	 * swap the <link> for an `@import … layer(wp)`. An unbundled library
+	 * becomes one import per kept block stylesheet.
 	 */
 	private function layerLinkedStylesheet( string $tag, string $handle, string $href ): string
 	{
-		if (
-			spl_object_id( wp_styles() ) !== $this->boundStyles
-			|| StyleAction::Layer !== $this->policy->decide( $handle )
-			|| ! WpInternals::styleHasSource( $handle )
-		) {
+		if ( spl_object_id( wp_styles() ) !== $this->boundStyles ) {
 			return $tag;
 		}
 
-		return sprintf(
-			'<style id="%s-css">@import url("%s") layer(%s);</style>' . "\n",
-			esc_attr( $handle ),
-			esc_url( $href ),
-			CssLayer::Wp->value
-		);
+		$src = WpInternals::styleSource( $handle );
+
+		return match ( null === $src ? StyleAction::Keep : $this->policy->decide( $handle ) ) {
+			StyleAction::Layer    => self::imports( $handle, [ $href ] ),
+			// Not the bundle (e.g. common CSS alone): the frontend drops it.
+			StyleAction::Unbundle => null !== $src && WpInternals::isBundledBlockLibrary( $src )
+				? self::imports( $handle, ( new CoreBlockStylesheets() )->unmanagedUrls() )
+				: '',
+			default               => $tag,
+		};
+	}
+
+	/**
+	 * @param list<string> $urls
+	 */
+	private static function imports( string $handle, array $urls ): string
+	{
+		$imports = '';
+		foreach ( $urls as $url ) {
+			$imports .= sprintf( '@import url("%s") layer(%s);', esc_url( $url ), CssLayer::Wp->value );
+		}
+
+		return sprintf( '<style id="%s-css">%s</style>' . "\n", esc_attr( $handle ), $imports );
 	}
 }

@@ -43,13 +43,32 @@ final class WpInternals
 	}
 
 	/**
-	 * Whether a registered style still loads from a file (core inlines small
-	 * block stylesheets at `wp_head`/`wp_footer` priority 1 and clears src).
+	 * The file a registered style loads from, if any.
 	 */
-	public static function styleHasSource( string $handle ): bool
+	public static function styleSource( string $handle ): ?string
 	{
 		$style = wp_styles()->query( $handle, 'registered' );
 
-		return $style instanceof \_WP_Dependency && is_string( $style->src ) && '' !== $style->src;
+		return $style instanceof \_WP_Dependency && is_string( $style->src ) && '' !== $style->src ? $style->src : null;
+	}
+
+	/**
+	 * Whether a style source is core's bundled block library (every core
+	 * block's CSS), rather than its common CSS alone.
+	 */
+	public static function isBundledBlockLibrary( string $src ): bool
+	{
+		return 1 === preg_match( '#/css/dist/block-library/style(-rtl)?(\.min)?\.css#', $src );
+	}
+
+	/**
+	 * URL of a core block's own stylesheet, as core registers it when
+	 * loading block CSS separately: wp-includes/blocks/<slug>/style.css.
+	 */
+	public static function coreBlockStylesheetUrl( string $slug ): ?string
+	{
+		$file = 'blocks/' . $slug . '/style' . ( is_rtl() ? '-rtl' : '' ) . wp_scripts_get_suffix() . '.css';
+
+		return is_readable( ABSPATH . WPINC . '/' . $file ) ? includes_url( $file ) : null;
 	}
 }

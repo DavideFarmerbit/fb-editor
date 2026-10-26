@@ -32,9 +32,13 @@ final readonly class CanvasStylePolicy implements StylePolicy
 			return StyleAction::Keep;
 		}
 
+		// In wp-admin it bundles every core block's CSS, managed ones included
+		// (button padding, radius…): keep only what the frontend would load.
+		if ( 'wp-block-library' === $handle ) {
+			return StyleAction::Unbundle;
+		}
+
 		if ( str_starts_with( $handle, 'wp-block-' ) ) {
-			// wp-block-library (common block CSS) is a dependency of
-			// wp-edit-blocks, and editor content may still rely on it: demote.
 			return null === ManagedCoreBlock::fromStyleHandle( $handle ) ? StyleAction::Layer : StyleAction::Remove;
 		}
 

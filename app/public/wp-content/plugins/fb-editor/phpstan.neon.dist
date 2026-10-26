@@ -4,5 +4,7 @@ parameters:
 		- fb-editor.php
 		- src
 		- tests
+	bootstrapFiles:
+		- tests/phpstan-bootstrap.php
 	checkMissingCallableSignature: true
 	treatPhpDocTypesAsCertain: false
