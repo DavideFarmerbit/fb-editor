@@ -5,6 +5,7 @@
 import { createReduxStore, register } from '@wordpress/data';
 
 import type { SpacingMode } from '../Blocks/Definition/Input/Spacing/spacing-input';
+import type { BlockState } from '../Blocks/States/BlockState.generated';
 import type { Breakpoint, BreakpointId, BreakpointList } from '../Breakpoints/breakpoints';
 import { settings } from './settings';
 
@@ -28,6 +29,11 @@ interface State {
 	 * control visible while it's still empty.
 	 */
 	readonly addedControls: Readonly< Record< string, readonly string[] > >;
+	/**
+	 * The state being edited, per memory key (absent: the base look). A
+	 * selected block in a state also previews it on the canvas.
+	 */
+	readonly inspectedStates: Readonly< Record< string, BlockState > >;
 }
 
 interface SetBreakpointAction {
@@ -53,7 +59,13 @@ interface ForgetControlAction {
 	readonly controlId: string;
 }
 
-type Action = SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction;
+interface InspectStateAction {
+	readonly type: 'INSPECT_STATE';
+	readonly key: string;
+	readonly state: BlockState | null;
+}
+
+type Action = SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction;
 
 const NONE: readonly string[] = [];
 
@@ -61,6 +73,7 @@ const DEFAULT_STATE: State = {
 	breakpoint: settings.breakpoints.base.id,
 	spacingModes: {},
 	addedControls: {},
+	inspectedStates: {},
 };
 
 const actions = {
@@ -75,6 +88,10 @@ const actions = {
 	},
 	forgetControl( key: string, controlId: string ): ForgetControlAction {
 		return { type: 'FORGET_CONTROL', key, controlId };
+	},
+	/** null: back to the base look. */
+	inspectState( key: string, state: BlockState | null ): InspectStateAction {
+		return { type: 'INSPECT_STATE', key, state };
 	},
 };
 
@@ -92,6 +109,9 @@ const selectors = {
 	getAddedControls( state: State, key: string ): readonly string[] {
 		return state.addedControls[ key ] ?? NONE;
 	},
+	getInspectedState( state: State, key: string ): BlockState | null {
+		return state.inspectedStates[ key ] ?? null;
+	},
 };
 
 export const store = createReduxStore( 'fb/editor', {
@@ -106,6 +126,10 @@ export const store = createReduxStore( 'fb/editor', {
 				return added.includes( action.controlId )
 					? state
 					: { ...state, addedControls: { ...state.addedControls, [ action.key ]: [ ...added, action.controlId ] } };
+			}
+			case 'INSPECT_STATE': {
+				const { [ action.key ]: _previous, ...others } = state.inspectedStates;
+				return { ...state, inspectedStates: action.state === null ? others : { ...others, [ action.key ]: action.state } };
 			}
 			case 'FORGET_CONTROL': {
 				const added = state.addedControls[ action.key ] ?? NONE;

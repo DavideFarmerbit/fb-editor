@@ -1,9 +1,9 @@
 /**
- * Settings panels generated from the PHP definition, for a block (block
- * sidebar) or a block type's defaults (Block defaults sidebar). Starts
- * empty: a control shows once it has a value somewhere, or once it's added
- * from the "Add setting" menu (kept for the session even while empty).
- * Panels show only when they hold a shown control.
+ * Settings panels generated from the PHP definition, for one look (base or
+ * a state) of a block or of a block type's defaults. Starts empty: a
+ * control shows once it has a value in this look, or once it's added from
+ * the "Add setting" menu (kept for the session even while empty). Panels
+ * show only when they hold a shown control.
  */
 import { PanelBody } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
@@ -15,30 +15,36 @@ import type { BlockValues } from '../Values/block-values';
 import { ValueChain } from '../Values/value-chain';
 import { AddSetting } from './add-setting';
 import { ControlFrame } from './control-frame';
+import type { Fallbacks } from './fallbacks';
 import './inspector.scss';
 
 interface InspectorProps {
 	readonly definition: BlockDefinition;
-	/** What is edited: a block's values, or a block type's saved defaults. */
+	/** What is edited: one look of a block, or of a type's saved defaults. */
 	readonly values: BlockValues;
 	/** What unset values fall back to (and conditions read after `values`). */
-	readonly fallback: BlockValues;
-	/** e.g. "From Section default" / "From theme". */
-	readonly fallbackStatus: string;
+	readonly fallbacks: Fallbacks;
+	/**
+	 * The same look one level down (the type default for a block, the
+	 * theme's for saved defaults): its controls are marked in the menu.
+	 */
+	readonly fallbackLook: BlockValues;
+	/** Also list controls that only `fallbackLook` sets (defaults editing). */
+	readonly listFallbackControls: boolean;
+	/** Only controls that can vary per state (editing a state). */
+	readonly statefulOnly: boolean;
 	/**
 	 * Keys the session memory of added controls: the block clientId, or a
-	 * block type when editing defaults.
+	 * block type when editing defaults, plus the look.
 	 */
 	readonly memoryKey: string;
-	/** List controls that only have a fallback value too (defaults editing). */
-	readonly listFallbackControls: boolean;
 	readonly onChange: ( values: BlockValues ) => void;
 	/** Copies a control to the type default; null where not offered. */
 	readonly makeDefault: ( ( control: Control ) => void ) | null;
 }
 
 export function Inspector( props: InspectorProps ): ReactElement {
-	const { definition, values, fallback, fallbackStatus, memoryKey, listFallbackControls, onChange, makeDefault } = props;
+	const { definition, values, fallbacks, fallbackLook, listFallbackControls, statefulOnly, memoryKey, onChange, makeDefault } = props;
 	const { breakpoint, breakpoints, added } = useSelect(
 		( select ) => ( {
 			breakpoint: select( store ).getBreakpoint(),
@@ -48,12 +54,13 @@ export function Inspector( props: InspectorProps ): ReactElement {
 		[ memoryKey ]
 	);
 	const { addControl, forgetControl } = useDispatch( store );
-	// Conditions read the edited value, else the fallback (as in PHP).
-	const resolved = new ValueChain( definition, values, fallback ).resolvedAt( breakpoint.id );
+	// Conditions read the edited value, then the fallbacks (as the CSS does).
+	const resolved = new ValueChain( definition, values, ...fallbacks.values() ).resolvedAt( breakpoint.id );
 
+	const controls = definition.controls.filter( ( control ) => ! statefulOnly || control.isStateful() );
 	const isShown = ( control: Control ): boolean =>
-		values.has( control.id ) || added.includes( control.id ) || ( listFallbackControls && fallback.has( control.id ) );
-	const available = definition.controls.filter( ( control ) => ! isShown( control ) );
+		values.has( control.id ) || added.includes( control.id ) || ( listFallbackControls && fallbackLook.has( control.id ) );
+	const available = controls.filter( ( control ) => ! isShown( control ) );
 
 	return (
 		<div className="fb-inspector">
@@ -62,29 +69,28 @@ export function Inspector( props: InspectorProps ): ReactElement {
 					definition={ definition }
 					available={ available }
 					resolved={ resolved }
-					defaults={ fallback }
+					defaults={ fallbackLook }
 					onAdd={ ( control ) => addControl( memoryKey, control.id ) }
 				/>
 			</div>
 			{ definition.layout.map( ( panel ) => {
-				const controls = panel.controls
-					.map( ( id ) => definition.control( id ) )
+				const shown = panel.controls
+					.map( ( id ) => controls.find( ( control ) => control.id === id ) )
 					.filter( ( control ): control is Control => control !== undefined && isShown( control ) );
 
-				if ( controls.length === 0 ) {
+				if ( shown.length === 0 ) {
 					return null;
 				}
 
 				return (
 					<PanelBody key={ panel.label } title={ panel.label }>
-						{ controls.map( ( control ) => (
+						{ shown.map( ( control ) => (
 							<ControlFrame
 								key={ control.id }
 								definition={ definition }
 								control={ control }
 								values={ values }
-								fallback={ fallback }
-								fallbackStatus={ fallbackStatus }
+								fallbacks={ fallbacks }
 								breakpoint={ breakpoint }
 								breakpoints={ breakpoints }
 								inactiveReason={

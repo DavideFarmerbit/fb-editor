@@ -14,7 +14,8 @@ import type { ReactElement } from 'react';
 
 import { settings } from '../../Editor/settings';
 import type { BlockDefinition } from '../Definition/block-definition';
-import { Inspector } from '../Inspector/inspector';
+import { WeakerSource } from '../Inspector/fallbacks';
+import { StatefulInspector } from '../Inspector/stateful-inspector';
 import { useBlockDefaults } from './use-block-defaults';
 import './defaults-sidebar.scss';
 
@@ -26,7 +27,10 @@ function screenPath( definition: BlockDefinition ): string {
 
 function BlockTypeItem( { definition }: { readonly definition: BlockDefinition } ): ReactElement {
 	const { defaults } = useBlockDefaults( definition );
-	const count = definition.controls.filter( ( control ) => defaults.values.base.has( control.id ) ).length;
+	// Every set control, in every look.
+	const count = [ null, ...definition.states.map( ( state ) => state.id ) ]
+		.map( ( look ) => defaults.values.look( look ) )
+		.reduce( ( total, look ) => total + definition.controls.filter( ( control ) => look.has( control.id ) ).length, 0 );
 
 	return (
 		<Navigator.Button path={ screenPath( definition ) } className="fb-defaults__item">
@@ -51,14 +55,13 @@ function BlockTypeDefaults( { definition }: { readonly definition: BlockDefiniti
 				<h2 className="fb-defaults__title">{ definition.title }</h2>
 			</div>
 			{ defaults.canEdit ? (
-				<Inspector
+				<StatefulInspector
 					definition={ definition }
-					values={ defaults.saved.base }
-					fallback={ defaults.theme.base }
-					fallbackStatus={ __( 'From theme', 'fb-editor' ) }
-					memoryKey={ `defaults/${ definition.name }` }
+					values={ defaults.saved }
+					weaker={ [ new WeakerSource( defaults.theme, __( 'From theme', 'fb-editor' ) ) ] }
 					listFallbackControls
-					onChange={ ( base ) => save( defaults.saved.withBase( base ) ) }
+					memoryKey={ `defaults/${ definition.name }` }
+					onChange={ save }
 					makeDefault={ null }
 				/>
 			) : (

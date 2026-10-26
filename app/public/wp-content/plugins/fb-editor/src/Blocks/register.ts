@@ -11,7 +11,7 @@ import { createElement, Fragment, useState } from '@wordpress/element';
 import type { ReactElement, RefCallback } from 'react';
 
 import { settings } from '../Editor/settings';
-import { FbBlockChrome, useFbBlock } from './block-chrome';
+import { FbBlockChrome, useFbBlock, usePreviewClass } from './block-chrome';
 import type { BlockDefinition } from './Definition/block-definition';
 import { NAMESPACE } from './Definition/BlockName.generated';
 import type { StatefulValues } from './Values/stateful-values';
@@ -58,6 +58,7 @@ interface WrapperProps extends BlockEditProps< FbAttributes > {
 function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactElement {
 	const [ root, setRoot ] = useState< HTMLElement | null >( null );
 	const state = useFbBlock( definition, props.attributes, props.setAttributes, props.clientId );
+	const preview = usePreviewClass( definition, props.clientId, props.isSelected );
 
 	return createElement(
 		Fragment,
@@ -68,7 +69,7 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 			definition,
 			values: state.values,
 			defaults: state.defaults.values,
-			rootProps: { className: `${ definition.className } ${ state.instanceClass }`, ref: setRoot },
+			rootProps: { className: [ definition.className, state.instanceClass, preview ].filter( Boolean ).join( ' ' ), ref: setRoot },
 		} )
 	);
 }

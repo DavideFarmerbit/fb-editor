@@ -110,7 +110,7 @@ final readonly class BlockDefinition implements \JsonSerializable
 	 *
 	 * Class names are computed here, so the editor never re-derives them.
 	 *
-	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string}>}
+	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string, editorPseudoClass: string, previewClass: string}>}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -130,7 +130,13 @@ final readonly class BlockDefinition implements \JsonSerializable
 				$this->elements
 			),
 			'states'    => array_map(
-				static fn ( BlockState $state ): array => [ 'id' => $state, 'label' => $state->label(), 'pseudoClass' => $state->pseudoClass() ],
+				static fn ( BlockState $state ): array => [
+					'id'                => $state,
+					'label'             => $state->label(),
+					'pseudoClass'       => $state->pseudoClass(),
+					'editorPseudoClass' => $state->editorPseudoClass(),
+					'previewClass'      => $state->previewClass(),
+				],
 				$this->states
 			),
 		];

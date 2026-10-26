@@ -25,7 +25,7 @@ export class BlockStyles {
 	forSource( definition: BlockDefinition, values: StatefulValues, root: Selector, ...weaker: StatefulValues[] ): BlockBindings {
 		const states = new Map< BlockState, readonly StyleBinding[] >();
 		for ( const state of definition.states ) {
-			const bindings = this.bindings( definition, values.state( state.id ), root.withPseudoClass( state.pseudoClass ), values.chain( state.id, ...weaker ) );
+			const bindings = this.bindings( definition, values.state( state.id ), root.withPseudoClass( this.editor ? state.editorPseudoClass : state.pseudoClass ), values.chain( state.id, ...weaker ) );
 			if ( bindings.length > 0 ) {
 				states.set( state.id, bindings );
 			}

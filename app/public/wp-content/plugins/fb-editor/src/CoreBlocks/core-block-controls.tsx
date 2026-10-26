@@ -14,7 +14,7 @@ import { addFilter } from '@wordpress/hooks';
 import type { ComponentType, ReactElement } from 'react';
 
 import { canvasBlockElement } from '../Adapter/adapter';
-import { editorInstanceClass, FbBlockChrome, useFbBlock } from '../Blocks/block-chrome';
+import { editorInstanceClass, FbBlockChrome, useFbBlock, usePreviewClass } from '../Blocks/block-chrome';
 import { ATTRIBUTE, ATTRIBUTE_TYPE } from '../Blocks/BlockRegistry.generated';
 import type { BlockDefinition } from '../Blocks/Definition/block-definition';
 import { settings } from '../Editor/settings';
@@ -41,6 +41,7 @@ interface CoreBlockProps {
 	readonly attributes: Readonly< Record< string, unknown > >;
 	readonly setAttributes: ( attributes: Record< string, unknown > ) => void;
 	readonly className?: string;
+	readonly isSelected?: boolean;
 }
 
 /** The block's wrapper in the canvas, found once it's mounted. */
@@ -76,6 +77,20 @@ addFilter(
 	)
 );
 
+/**
+ * Same classes as the frontend root, plus the editor-only instance class
+ * and, while a state is inspected, its preview class.
+ */
+function CoreBlockListBlock( {
+	definition,
+	BlockListBlock,
+	...props
+}: CoreBlockProps & { readonly definition: BlockDefinition; readonly BlockListBlock: ComponentType< CoreBlockProps > } ): ReactElement {
+	const preview = usePreviewClass( definition, props.clientId, props.isSelected === true );
+	const className = [ props.className, definition.className, editorInstanceClass( props.clientId ), preview ].filter( Boolean ).join( ' ' );
+	return <BlockListBlock { ...props } className={ className } />;
+}
+
 addFilter(
 	'editor.BlockListBlock',
 	'fb/core-block-classes',
@@ -86,9 +101,7 @@ addFilter(
 				if ( definition === undefined ) {
 					return <BlockListBlock { ...props } />;
 				}
-				// Same classes as the frontend root, plus the editor-only instance class.
-				const className = [ props.className, definition.className, editorInstanceClass( props.clientId ) ].filter( Boolean ).join( ' ' );
-				return <BlockListBlock { ...props } className={ className } />;
+				return <CoreBlockListBlock { ...props } definition={ definition } BlockListBlock={ BlockListBlock } />;
 			},
 		'withFbClasses'
 	)

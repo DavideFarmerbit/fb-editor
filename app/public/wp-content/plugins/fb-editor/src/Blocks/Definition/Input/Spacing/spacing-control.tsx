@@ -18,6 +18,7 @@ import type { ReactElement } from 'react';
 
 import { settings } from '../../../../Editor/settings';
 import { controlKey, store } from '../../../../Editor/store';
+import type { BoxValue } from '../../../../Values/box';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
 import { inheritedFrom } from '../../../Inspector/control-reading';
 import { FrameActions } from '../../../Inspector/frame-actions';
@@ -78,14 +79,20 @@ interface SpacingFieldProps extends ControlFieldProps {
 }
 
 export function SpacingField( props: SpacingFieldProps ): ReactElement {
-	const { definition, control, input, values, fallback, fallbackStatus, breakpoint, breakpoints, onChange } = props;
+	const { definition, control, input, values, fallbacks, breakpoint, breakpoints, onChange } = props;
 	const at = control.scope === Scope.Static ? breakpoints.base.id : breakpoint.id;
 	const responsive = values.get( control.id );
 	const own = asBox( responsive.at( at ) );
-	// Per side: this value (own or from a larger breakpoint), else the fallback.
-	const fromValues = asBox( responsive.resolve( at, breakpoints ) );
-	const fromFallback = asBox( fallback.get( control.id ).resolve( at, breakpoints ) );
-	const resolved = fromValues === null ? fromFallback : fromFallback === null ? fromValues : fromValues.inheritFrom( fromFallback );
+	// Per side: this value (own or from a larger breakpoint), else the
+	// first fallback with that side.
+	const fallbackBoxes = fallbacks.sources.map( ( source ) => ( {
+		box: asBox( source.values.get( control.id ).resolve( at, breakpoints ) ),
+		status: source.status,
+	} ) );
+	const resolved = [ asBox( responsive.resolve( at, breakpoints ) ), ...fallbackBoxes.map( ( { box } ) => box ) ].reduce< BoxValue | null >(
+		( strong, weak ) => ( strong === null ? weak : weak === null ? strong : strong.inheritFrom( weak ) ),
+		null
+	);
 
 	const key = controlKey( definition.name, control.id );
 	const remembered = useSelect( ( select ) => select( store ).getSpacingMode( key ), [ key ] );
@@ -119,8 +126,8 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 				let status: string | null = null;
 				if ( sourceBreakpoint !== undefined ) {
 					status = inheritedFrom( sourceBreakpoint.label );
-				} else if ( rowValue( fromFallback, row.sides ) !== null ) {
-					status = fallbackStatus;
+				} else {
+					status = fallbackBoxes.find( ( { box } ) => rowValue( box, row.sides ) !== null )?.status ?? null;
 				}
 				return (
 					<LengthRow

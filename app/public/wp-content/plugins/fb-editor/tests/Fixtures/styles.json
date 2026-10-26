@@ -1257,12 +1257,16 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },
@@ -1453,12 +1457,16 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },
@@ -1651,12 +1659,16 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },
@@ -5125,12 +5137,16 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },
@@ -5320,12 +5336,16 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },
@@ -5532,17 +5552,23 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "focus",
                         "label": "Focus",
-                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))"
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },
@@ -5771,17 +5797,23 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "focus",
                         "label": "Focus",
-                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))"
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },
@@ -6029,12 +6061,16 @@
                     {
                         "id": "hover",
                         "label": "Hover",
-                        "pseudoClass": ":hover"
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
                     },
                     {
                         "id": "active",
                         "label": "Active",
-                        "pseudoClass": ":active"
+                        "pseudoClass": ":active",
+                        "editorPseudoClass": ":is(:active,.fb-preview-active)",
+                        "previewClass": "fb-preview-active"
                     }
                 ]
             },

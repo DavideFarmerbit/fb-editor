@@ -20,18 +20,15 @@ import { SpacingInput } from '../Definition/Input/Spacing/spacing-input';
 import { ToggleField } from '../Definition/Input/Toggle/toggle-control';
 import { ToggleInput } from '../Definition/Input/Toggle/toggle-input';
 import type { BlockValues } from '../Values/block-values';
+import type { Fallbacks } from './fallbacks';
 
 export interface ControlFieldProps {
 	readonly definition: BlockDefinition;
 	readonly control: Control;
+	/** The look being edited (a block's base or hover, a type default's…). */
 	readonly values: BlockValues;
-	/**
-	 * The last fallback of every control: the type's defaults when editing
-	 * a block, the theme's defaults when editing type defaults.
-	 */
-	readonly fallback: BlockValues;
-	/** How a value from `fallback` is labelled, e.g. "From Section default". */
-	readonly fallbackStatus: string;
+	/** What it falls back to beyond its own larger breakpoints. */
+	readonly fallbacks: Fallbacks;
 	/** The breakpoint being edited (the top-bar selection). */
 	readonly breakpoint: Breakpoint;
 	readonly breakpoints: BreakpointList;

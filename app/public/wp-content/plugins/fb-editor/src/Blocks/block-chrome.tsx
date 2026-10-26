@@ -4,16 +4,20 @@
  * sidebar, and live CSS (defaults + instance) in the canvas.
  */
 import { InspectorControls } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
 import { useMemo } from '@wordpress/element';
 import type { ReactElement } from 'react';
 
 import { settings } from '../Editor/settings';
+import { store } from '../Editor/store';
 import { ATTRIBUTE } from './BlockRegistry.generated';
 import { DefaultsStyles } from './Defaults/defaults-styles';
 import { useBlockDefaults, type BlockDefaults } from './Defaults/use-block-defaults';
 import type { BlockDefinition, Control } from './Definition/block-definition';
+import type { BlockState } from './States/BlockState.generated';
 import { fromDefault } from './Inspector/control-reading';
-import { Inspector } from './Inspector/inspector';
+import { WeakerSource } from './Inspector/fallbacks';
+import { StatefulInspector } from './Inspector/stateful-inspector';
 import { InstanceStyles } from './Rendering/instance-styles';
 import { StatefulValues } from './Values/stateful-values';
 
@@ -26,6 +30,18 @@ export class FbBlockState {
 		public readonly setValues: ( values: StatefulValues ) => void,
 		public readonly saveDefaults: ( saved: StatefulValues ) => void
 	) {}
+}
+
+/**
+ * Editor only: the class that previews the state inspected in this block's
+ * sidebar (memory key: its clientId), while the block is selected.
+ */
+export function usePreviewClass( definition: BlockDefinition, clientId: string, isSelected: boolean ): string | null {
+	const inspected = useSelect( ( select ) => select( store ).getInspectedState( clientId ), [ clientId ] );
+	if ( ! isSelected || inspected === null ) {
+		return null;
+	}
+	return definition.states.find( ( state ) => state.id === inspected )?.previewClass ?? null;
 }
 
 /**
@@ -69,18 +85,19 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 	return (
 		<>
 			<InspectorControls>
-				<Inspector
+				<StatefulInspector
 					definition={ definition }
-					values={ values.base }
-					fallback={ defaults.values.base }
-					fallbackStatus={ fromDefault( definition.title ) }
-					memoryKey={ clientId }
+					values={ values }
+					weaker={ [ new WeakerSource( defaults.values, fromDefault( definition.title ) ) ] }
 					listFallbackControls={ false }
-					onChange={ ( base ) => state.setValues( values.withBase( base ) ) }
+					memoryKey={ clientId }
+					onChange={ state.setValues }
 					makeDefault={
 						defaults.canEdit
-							? ( control: Control ) =>
-									state.saveDefaults( defaults.saved.withBase( defaults.saved.base.withControlFrom( control, values.base ) ) )
+							? ( control: Control, look: BlockState | null ) =>
+									state.saveDefaults(
+										defaults.saved.withLook( look, defaults.saved.look( look ).withControlFrom( control, values.look( look ) ) )
+									)
 							: null
 					}
 				/>

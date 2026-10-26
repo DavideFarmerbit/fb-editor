@@ -90,7 +90,8 @@ final class BlockDefinitionTest extends TestCase
 
 		self::assertStringStartsWith( '{"name":"fb/section","title":"Section","isCore":false,"className":"fb-section",', $encode( $definition ) );
 		self::assertStringEndsWith( ',"elements":[{"id":"inner","className":"fb-section__inner","editorClassName":"fb-section__inner"}],'
-			. '"states":[{"id":"hover","label":"Hover","pseudoClass":":hover"},{"id":"active","label":"Active","pseudoClass":":active"}]}', $encode( $definition ) );
+			. '"states":[{"id":"hover","label":"Hover","pseudoClass":":hover","editorPseudoClass":":is(:hover,.fb-preview-hover)","previewClass":"fb-preview-hover"},'
+			. '{"id":"active","label":"Active","pseudoClass":":active","editorPseudoClass":":is(:active,.fb-preview-active)","previewClass":"fb-preview-active"}]}', $encode( $definition ) );
 		self::assertSame(
 			'{"id":"gap","label":"Gap",'
 			. '"input":{"kind":"spacing","allowAuto":false,"allowNegative":false,"modes":["linked","axis"]},'

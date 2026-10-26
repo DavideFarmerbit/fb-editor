@@ -36,10 +36,35 @@ enum BlockState: string
 	/** Appended to the root's class selector. */
 	public function pseudoClass(): string
 	{
+		$matches = $this->matches();
+
+		return 1 === count( $matches ) ? $matches[0] : ':is(' . implode( ',', $matches ) . ')';
+	}
+
+	/**
+	 * Editor only: added to the selected block's root while this state is
+	 * inspected, so the canvas shows the state without interacting.
+	 */
+	public function previewClass(): string
+	{
+		return 'fb-preview-' . $this->value;
+	}
+
+	/** The editor's selector: the real state, or the preview class. */
+	public function editorPseudoClass(): string
+	{
+		return ':is(' . implode( ',', [ ...$this->matches(), '.' . $this->previewClass() ] ) . ')';
+	}
+
+	/**
+	 * @return non-empty-list<string>
+	 */
+	private function matches(): array
+	{
 		return match ( $this ) {
-			self::Hover  => ':hover',
-			self::Focus  => ':is(:focus-visible,:has(:focus-visible))',
-			self::Active => ':active',
+			self::Hover  => [ ':hover' ],
+			self::Focus  => [ ':focus-visible', ':has(:focus-visible)' ],
+			self::Active => [ ':active' ],
 		};
 	}
 

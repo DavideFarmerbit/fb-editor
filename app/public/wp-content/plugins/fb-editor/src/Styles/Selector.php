@@ -19,9 +19,12 @@ final readonly class Selector implements \Stringable
 	#[ExportToTypeScript( regExp: true )]
 	public const string CLASS_PATTERN = '^-?[_a-zA-Z][_a-zA-Z0-9-]*$';
 
-	/** Pseudo-classes a root may carry (state selectors, e.g. ":hover"). */
+	/**
+	 * Pseudo-classes a root may carry (state selectors, e.g. ":hover", or
+	 * ":is(:hover,.fb-preview-hover)" in the editor).
+	 */
 	#[ExportToTypeScript( regExp: true )]
-	public const string PSEUDO_CLASS_PATTERN = '^:[a-z][a-z(),:-]*$';
+	public const string PSEUDO_CLASS_PATTERN = '^:[a-z][a-z(),:.-]*$';
 
 	private function __construct(
 		/** Inner selector, built only from validated parts. */

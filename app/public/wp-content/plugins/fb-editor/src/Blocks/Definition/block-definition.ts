@@ -57,7 +57,11 @@ export class StateInfo {
 		public readonly id: BlockState,
 		public readonly label: string,
 		/** Appended to the root's selector, e.g. ":hover". */
-		public readonly pseudoClass: string
+		public readonly pseudoClass: string,
+		/** The editor's: the real state or the preview class. */
+		public readonly editorPseudoClass: string,
+		/** Editor only: on the selected block while the state is inspected. */
+		public readonly previewClass: string
 	) {}
 }
 
@@ -175,6 +179,15 @@ export function blockDefinitionFromJson( json: JsonValue ): BlockDefinition {
 		json
 			.get( 'states' )
 			.list()
-			.map( ( state ) => new StateInfo( state.get( 'id' ).oneOf( BlockState ), state.get( 'label' ).string(), state.get( 'pseudoClass' ).string() ) )
+			.map(
+				( state ) =>
+					new StateInfo(
+						state.get( 'id' ).oneOf( BlockState ),
+						state.get( 'label' ).string(),
+						state.get( 'pseudoClass' ).string(),
+						state.get( 'editorPseudoClass' ).string(),
+						state.get( 'previewClass' ).string()
+					)
+			)
 	);
 }
