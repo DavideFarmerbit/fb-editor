@@ -10,9 +10,10 @@ use Fb\Hookable;
 /**
  * Keeps core blocks inside fb's system:
  * - the inserter offers fb blocks + AllowedCoreBlock only;
- * - allowed core blocks lose core's styling supports and style variations
- *   (server side here; the editor uses core's bundled metadata, so
- *   core-block-restrictions.ts strips the same list in JS);
+ * - allowed core blocks lose core's styling supports and style variations,
+ *   and FreedCoreBlock ones their `parent` restriction (server side here;
+ *   the editor uses core's bundled metadata, so core-block-restrictions.ts
+ *   does the same in JS);
  * - WordPress 7.1's own responsive / state styling is switched off.
  */
 final readonly class CoreBlockRestrictions implements Hookable
@@ -61,6 +62,10 @@ final readonly class CoreBlockRestrictions implements Hookable
 			}
 		}
 		$args['styles'] = [];
+
+		if ( null !== FreedCoreBlock::tryFrom( $name ) ) {
+			unset( $args['parent'] );
+		}
 
 		return $args;
 	}
