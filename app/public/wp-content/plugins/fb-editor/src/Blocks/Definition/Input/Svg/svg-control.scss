@@ -1,0 +1,32 @@
+// "Load SVG file…" then the preview (right-aligned) on the value's line;
+// the code box below.
+.fb-svg__line {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 0;
+}
+
+.fb-svg__preview {
+	display: flex;
+	flex: 1;
+	justify-content: flex-end;
+	align-items: center;
+	min-width: 0;
+	height: 32px;
+
+	svg {
+		width: auto;
+		max-width: 100%;
+		height: 100%;
+	}
+}
+
+.fb-svg__code {
+	margin-top: 8px;
+}
+
+.fb-svg__code textarea {
+	font-family: monospace;
+	font-size: 11px;
+}

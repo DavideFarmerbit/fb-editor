@@ -15,6 +15,14 @@ import { GridColumnsField } from '../Definition/Input/GridColumns/grid-columns-c
 import { GridColumnsInput } from '../Definition/Input/GridColumns/grid-columns-input';
 import { LengthField } from '../Definition/Input/Length/length-control';
 import { LengthInput } from '../Definition/Input/Length/length-input';
+import { LinkField } from '../Definition/Input/Link/link-control';
+import { LinkInput } from '../Definition/Input/Link/link-input';
+import { MediaField } from '../Definition/Input/Media/media-control';
+import { MediaInput } from '../Definition/Input/Media/media-input';
+import { SvgField } from '../Definition/Input/Svg/svg-control';
+import { SvgInput } from '../Definition/Input/Svg/svg-input';
+import { TextField } from '../Definition/Input/Text/text-control';
+import { TextInput } from '../Definition/Input/Text/text-input';
 import { NumberField } from '../Definition/Input/Number/number-control';
 import { NumberInput } from '../Definition/Input/Number/number-input';
 import { PresetField } from '../Definition/Input/Preset/preset-control';
@@ -71,6 +79,18 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof AspectRatioInput ) {
 		return <AspectRatioField { ...props } input={ input } />;
+	}
+	if ( input instanceof TextInput ) {
+		return <TextField { ...props } input={ input } />;
+	}
+	if ( input instanceof LinkInput ) {
+		return <LinkField { ...props } input={ input } />;
+	}
+	if ( input instanceof MediaInput ) {
+		return <MediaField { ...props } input={ input } />;
+	}
+	if ( input instanceof SvgInput ) {
+		return <SvgField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

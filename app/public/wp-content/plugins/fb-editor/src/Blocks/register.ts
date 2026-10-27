@@ -33,6 +33,8 @@ export interface FbBlockEditProps extends BlockEditProps< FbAttributes > {
 	readonly defaults: StatefulValues;
 	/** The variant's values, if it uses one: what unset values fall back to first. */
 	readonly variant: StatefulValues | null;
+	/** Replaces the block's own values (e.g. from a placeholder's button). */
+	readonly setValues: ( values: StatefulValues ) => void;
 	readonly rootProps: RootProps;
 }
 
@@ -72,6 +74,7 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 			values: state.values,
 			defaults: state.defaults.values,
 			variant: state.variant?.values ?? null,
+			setValues: ( values: StatefulValues ) => state.setValues( values ),
 			rootProps: {
 				className: [ definition.className, variantClass( definition, state.variant ), state.instanceClass, preview ].filter( Boolean ).join( ' ' ),
 				ref: setRoot,

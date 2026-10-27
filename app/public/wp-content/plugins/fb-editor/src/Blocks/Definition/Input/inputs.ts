@@ -8,13 +8,17 @@ import { AspectRatioInput } from './AspectRatio/aspect-ratio-input';
 import { ColorInput } from './Color/color-input';
 import { GridColumnsInput } from './GridColumns/grid-columns-input';
 import { LengthInput } from './Length/length-input';
+import { LinkInput } from './Link/link-input';
+import { MediaInput } from './Media/media-input';
 import { NumberInput } from './Number/number-input';
 import { PresetInput } from './Preset/preset-input';
 import { SelectInput } from './Select/select-input';
 import { SpacingInput } from './Spacing/spacing-input';
+import { SvgInput } from './Svg/svg-input';
+import { TextInput } from './Text/text-input';
 import { ToggleInput } from './Toggle/toggle-input';
 
-export type Input = SpacingInput | SelectInput | ColorInput | LengthInput | ToggleInput | PresetInput | NumberInput | GridColumnsInput | AspectRatioInput;
+export type Input = SpacingInput | SelectInput | ColorInput | LengthInput | ToggleInput | PresetInput | NumberInput | GridColumnsInput | AspectRatioInput | TextInput | LinkInput | MediaInput | SvgInput;
 
 export function inputFromJson( json: JsonValue ): Input {
 	const kind = json.get( 'kind' ).string();
@@ -37,6 +41,14 @@ export function inputFromJson( json: JsonValue ): Input {
 			return GridColumnsInput.fromJson( json );
 		case 'aspect-ratio':
 			return AspectRatioInput.fromJson();
+		case 'text':
+			return TextInput.fromJson();
+		case 'link':
+			return LinkInput.fromJson();
+		case 'media':
+			return MediaInput.fromJson( json );
+		case 'svg':
+			return SvgInput.fromJson();
 		default:
 			throw new InvalidJson( `${ json.path }.kind: unknown input kind "${ kind }"` );
 	}

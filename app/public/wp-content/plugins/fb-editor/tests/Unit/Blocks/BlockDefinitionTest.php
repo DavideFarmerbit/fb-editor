@@ -97,7 +97,7 @@ final class BlockDefinitionTest extends TestCase
 			. '"input":{"kind":"spacing","allowAuto":false,"allowNegative":false,"modes":["linked","axis"],"scale":"spacing","shape":"sides"},'
 			. '"output":{"kind":"axis","block":"row-gap","inline":"column-gap"},'
 			. '"element":"inner","scope":"responsive",'
-			. '"visibleWhen":{"kind":"in","control":"display","values":["flex","grid"]},"placement":null}',
+			. '"visibleWhen":{"kind":"in","control":"display","values":["flex","grid"]},"placement":null,"alwaysShown":false}',
 			$encode( $definition->controls->get( new ControlId( 'gap' ) ) )
 		);
 		self::assertSame(

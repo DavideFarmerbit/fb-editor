@@ -12,6 +12,7 @@ use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Values\StatefulValues;
 use Fb\Output\ClassList;
 use Fb\Values\KeywordValue;
+use Fb\Values\ResponsiveValue;
 
 /**
  * Everything a block's render() needs, typed: its classes, its values and
@@ -44,6 +45,19 @@ final readonly class RenderContext
 	}
 
 	/**
+	 * A control's base value (static controls: their only value): the
+	 * block's own, else its variant's, else the type default's.
+	 */
+	public function value( ControlId $id ): ?ResponsiveValue
+	{
+		$base = $this->values->base->baseBreakpoint();
+
+		return $this->values->base->get( $id )->at( $base )
+			?? $this->variant?->base->get( $id )->at( $base )
+			?? $this->defaults->base->get( $id )->at( $base );
+	}
+
+	/**
 	 * The base value of a select control as its enum case (e.g. the tag):
 	 * the block's own, else its variant's, else the type default, else the
 	 * input's fallback.
@@ -61,10 +75,7 @@ final readonly class RenderContext
 			throw new \LogicException( "{$this->definition->name}: \"{$id}\" is not a select over {$options}." );
 		}
 
-		$base   = $this->values->base->baseBreakpoint();
-		$value  = $this->values->base->get( $id )->at( $base )
-			?? $this->variant?->base->get( $id )->at( $base )
-			?? $this->defaults->base->get( $id )->at( $base );
+		$value  = $this->value( $id );
 		$chosen = $value instanceof KeywordValue ? $options::tryFrom( $value->keyword ) : null;
 
 		$fallback = $input->fallback instanceof $options ? $input->fallback : null;

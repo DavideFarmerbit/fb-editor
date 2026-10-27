@@ -27,6 +27,11 @@ final readonly class Control implements \JsonSerializable
 		public ?Condition $visibleWhen = null,
 		/** Only inside a given parent block; null: anywhere. */
 		public ?Placement $placement = null,
+		/**
+		 * Listed in the sidebar from the start, without "Add setting": for
+		 * what the block needs to show anything (an icon's SVG).
+		 */
+		public bool $alwaysShown = false,
 	) {
 		if ( null !== $element && null === $output ) {
 			throw new \InvalidArgumentException( "Control \"{$id}\": an element only makes sense with an output." );
@@ -50,7 +55,7 @@ final readonly class Control implements \JsonSerializable
 	}
 
 	/**
-	 * @return array{id: ControlId, label: string, input: Input, output: ?StyleOutput, element: ?ElementId, scope: Scope, visibleWhen: ?Condition, placement: ?Placement}
+	 * @return array{id: ControlId, label: string, input: Input, output: ?StyleOutput, element: ?ElementId, scope: Scope, visibleWhen: ?Condition, placement: ?Placement, alwaysShown: bool}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -63,6 +68,7 @@ final readonly class Control implements \JsonSerializable
 			'scope'       => $this->scope,
 			'visibleWhen' => $this->visibleWhen,
 			'placement'   => $this->placement,
+			'alwaysShown' => $this->alwaysShown,
 		];
 	}
 }

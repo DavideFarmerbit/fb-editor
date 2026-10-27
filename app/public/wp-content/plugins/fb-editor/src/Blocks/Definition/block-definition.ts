@@ -6,6 +6,7 @@
 import { InvalidJson, type JsonValue } from '../../Json/json';
 import { outputFromJson, type StyleOutput } from '../../Styles/Output/outputs';
 import { KeywordValue } from '../../Values/keyword';
+import type { ResponsiveValue } from '../../Values/value';
 import { BlockState } from '../States/BlockState.generated';
 import type { VariantSlug } from '../Variants/variant-set';
 import { VARIANT_SEPARATOR } from './BlockName.generated';
@@ -39,7 +40,9 @@ export class Control {
 		public readonly scope: Scope,
 		public readonly visibleWhen: Condition | null,
 		/** Only inside a given parent block; null: anywhere. */
-		public readonly placement: Placement | null
+		public readonly placement: Placement | null,
+		/** Listed in the sidebar from the start (mirrors Control::$alwaysShown). */
+		public readonly alwaysShown: boolean
 	) {}
 
 	/** Mirrors Control::isStateful(). */
@@ -150,6 +153,24 @@ export class BlockDefinition implements ConditionLabels {
 	}
 
 	/**
+	 * Mirrors RenderContext::value(): a control's base value from the first
+	 * source that has one (own, variant, type default; nulls skipped).
+	 */
+	value( id: string, ...sources: ( StatefulValues | null )[] ): ResponsiveValue | null {
+		const control = this.controls.find( ( candidate ) => candidate.id === id );
+		if ( control === undefined ) {
+			throw new InvalidJson( `${ this.name }: no control "${ id }"` );
+		}
+		for ( const source of sources ) {
+			const value = source?.base.get( control.id ).at( source.base.baseBreakpoint() ) ?? null;
+			if ( value !== null ) {
+				return value;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Mirrors RenderContext::option(): the base value of a select control
 	 * from the first source that has one (the block's own, its variant's,
 	 * the type default's; null sources skipped), else the input's fallback.
@@ -161,10 +182,7 @@ export class BlockDefinition implements ConditionLabels {
 			throw new InvalidJson( `${ this.name }: "${ id }" is not a select control` );
 		}
 
-		let value = null;
-		for ( const source of sources ) {
-			value ??= source?.base.get( control.id ).at( source.base.baseBreakpoint() ) ?? null;
-		}
+		const value = this.value( id, ...sources );
 		const option = ( value instanceof KeywordValue ? value.keyword : null ) ?? control.input.fallback;
 		if ( option === null ) {
 			throw new InvalidJson( `${ this.name }: "${ id }" is read by the editor markup but has no fallback` );
@@ -182,7 +200,8 @@ function controlFromJson( json: JsonValue ): Control {
 		json.get( 'element' ).nullable( parseElementId ),
 		json.get( 'scope' ).oneOf( Scope ),
 		json.get( 'visibleWhen' ).nullable( conditionFromJson ),
-		json.get( 'placement' ).nullable( ( placement ) => new Placement( placement.get( 'parent' ).string(), conditionFromJson( placement.get( 'when' ) ) ) )
+		json.get( 'placement' ).nullable( ( placement ) => new Placement( placement.get( 'parent' ).string(), conditionFromJson( placement.get( 'when' ) ) ) ),
+		json.get( 'alwaysShown' ).boolean()
 	);
 }
 

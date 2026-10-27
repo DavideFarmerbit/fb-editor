@@ -1,0 +1,22 @@
+.fb-media {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 0;
+}
+
+.fb-media__thumbnail {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	border-radius: 2px;
+}
+
+.fb-media__name {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	font-size: 12px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

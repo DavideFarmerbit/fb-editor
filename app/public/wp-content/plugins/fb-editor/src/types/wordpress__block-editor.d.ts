@@ -27,6 +27,17 @@ declare module '@wordpress/block-editor' {
 		Content: ComponentType;
 	};
 
+	/** Opens the media library; `render` draws the opener. */
+	export const MediaUpload: ComponentType< {
+		allowedTypes?: string[];
+		value?: number;
+		onSelect: ( media: unknown ) => void;
+		render: ( props: { open: () => void } ) => ReactNode;
+	} >;
+
+	/** Renders its children only for users allowed to upload. */
+	export const MediaUploadCheck: ComponentType< { children?: ReactNode } >;
+
 	/** Fills the block sidebar ("Settings" tab by default). */
 	export const InspectorControls: ComponentType< { children?: ReactNode; group?: string } >;
 }

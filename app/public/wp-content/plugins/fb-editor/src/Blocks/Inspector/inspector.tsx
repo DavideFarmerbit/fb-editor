@@ -1,9 +1,10 @@
 /**
  * Settings panels generated from the PHP definition, for one look (base or
- * a state) of a block or of a block type's defaults. Starts empty: a
- * control shows once it has a value in this look, or once it's added from
- * the "Add setting" menu (kept for the session even while empty). Panels
- * show only when they hold a shown control.
+ * a state) of a block or of a block type's defaults. Starts empty but for
+ * what the block needs (controls marked alwaysShown): a control shows once
+ * it has a value in this look, or once it's added from the "Add setting"
+ * menu (kept for the session even while empty). Panels show only when they
+ * hold a shown control.
  */
 import { PanelBody } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
@@ -74,7 +75,7 @@ export function Inspector( props: InspectorProps ): ReactElement {
 			( ! control.isPlaced() || ( allowPlaced && ( appliesHere( control ) || values.has( control.id ) ) ) )
 	);
 	const isShown = ( control: Control ): boolean =>
-		values.has( control.id ) || added.includes( control.id ) || ( listFallbackControls && fallbackLook.has( control.id ) );
+		control.alwaysShown || values.has( control.id ) || added.includes( control.id ) || ( listFallbackControls && fallbackLook.has( control.id ) );
 	const available = controls.filter( ( control ) => ! isShown( control ) );
 
 	return (
