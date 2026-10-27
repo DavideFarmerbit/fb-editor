@@ -13,7 +13,21 @@
 import { Button, Icon, VisuallyHidden } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { sidesAll, sidesAxial, sidesBottom, sidesHorizontal, sidesLeft, sidesRight, sidesTop, sidesVertical } from '@wordpress/icons';
+import {
+	cornerAll,
+	cornerBottomLeft,
+	cornerBottomRight,
+	cornerTopLeft,
+	cornerTopRight,
+	sidesAll,
+	sidesAxial,
+	sidesBottom,
+	sidesHorizontal,
+	sidesLeft,
+	sidesRight,
+	sidesTop,
+	sidesVertical,
+} from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
 import { settings } from '../../../../Editor/settings';
@@ -24,7 +38,7 @@ import { inheritedFrom } from '../../../Inspector/control-reading';
 import { FrameActions } from '../../../Inspector/frame-actions';
 import { Scope } from '../../block-definition';
 import { LengthRow } from '../Length/length-control';
-import { SpacingMode, type SpacingInput } from './spacing-input';
+import { BoxShape, SpacingMode, type SpacingInput } from './spacing-input';
 import { asBox, inferMode, RowId, rowsFor, rowSource, rowValue, withRow } from './spacing';
 import './spacing-control.scss';
 
@@ -34,14 +48,14 @@ const MODE_ICONS: Record< SpacingMode, ReactElement > = {
 	[ SpacingMode.Sides ]: sidesHorizontal,
 };
 
-function modeLabel( mode: SpacingMode ): string {
+function modeLabel( mode: SpacingMode, shape: BoxShape ): string {
 	switch ( mode ) {
 		case SpacingMode.Linked:
-			return __( 'All sides', 'fb-editor' );
+			return shape === BoxShape.Corners ? __( 'All corners', 'fb-editor' ) : __( 'All sides', 'fb-editor' );
 		case SpacingMode.Axis:
 			return __( 'Vertical and horizontal', 'fb-editor' );
 		case SpacingMode.Sides:
-			return __( 'Each side', 'fb-editor' );
+			return shape === BoxShape.Corners ? __( 'Each corner', 'fb-editor' ) : __( 'Each side', 'fb-editor' );
 	}
 }
 
@@ -55,7 +69,34 @@ const ROW_ICONS: Record< RowId, ReactElement > = {
 	[ RowId.Left ]: sidesLeft,
 };
 
-function rowLabel( row: RowId ): string {
+/** Corners, clockwise from the top left: the box's top, right, bottom, left. */
+const CORNER_ICONS: Partial< Record< RowId, ReactElement > > = {
+	[ RowId.All ]: cornerAll,
+	[ RowId.Top ]: cornerTopLeft,
+	[ RowId.Right ]: cornerTopRight,
+	[ RowId.Bottom ]: cornerBottomRight,
+	[ RowId.Left ]: cornerBottomLeft,
+};
+
+function cornerLabel( row: RowId ): string {
+	switch ( row ) {
+		case RowId.Top:
+			return __( 'Top left', 'fb-editor' );
+		case RowId.Right:
+			return __( 'Top right', 'fb-editor' );
+		case RowId.Bottom:
+			return __( 'Bottom right', 'fb-editor' );
+		case RowId.Left:
+			return __( 'Bottom left', 'fb-editor' );
+		default:
+			return __( 'All corners', 'fb-editor' );
+	}
+}
+
+function rowLabel( row: RowId, shape: BoxShape ): string {
+	if ( shape === BoxShape.Corners ) {
+		return cornerLabel( row );
+	}
 	switch ( row ) {
 		case RowId.All:
 			return __( 'All sides', 'fb-editor' );
@@ -99,7 +140,8 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 	const { setSpacingMode } = useDispatch( store );
 	const mode = remembered !== null && input.modes.includes( remembered ) ? remembered : inferMode( own ?? resolved, input.modes );
 
-	const scale = settings.presets.ofKind( input.scale );
+	const scale = input.scale === null ? [] : settings.presets.ofKind( input.scale );
+	const rowIcon = ( row: RowId ): ReactElement | undefined => ( input.shape === BoxShape.Corners ? CORNER_ICONS[ row ] : ROW_ICONS[ row ] );
 
 	return (
 		<fieldset className="fb-spacing">
@@ -111,8 +153,8 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 						<Button
 							key={ candidate }
 							size="small"
-							icon={ MODE_ICONS[ candidate ] }
-							label={ modeLabel( candidate ) }
+							icon={ input.shape === BoxShape.Corners && candidate === SpacingMode.Linked ? cornerAll : MODE_ICONS[ candidate ] }
+							label={ modeLabel( candidate, input.shape ) }
 							isPressed={ candidate === mode }
 							onClick={ () => setSpacingMode( key, candidate ) }
 						/>
@@ -133,8 +175,8 @@ export function SpacingField( props: SpacingFieldProps ): ReactElement {
 					<LengthRow
 						// Remount per breakpoint: local edit state must not leak across.
 						key={ `${ at }/${ row.id }` }
-						label={ rowLabel( row.id ) }
-						{ ...( mode === SpacingMode.Linked ? {} : { icon: <Icon icon={ ROW_ICONS[ row.id ] } size={ 20 } /> } ) }
+						label={ rowLabel( row.id, input.shape ) }
+						{ ...( mode === SpacingMode.Linked ? {} : { icon: <Icon icon={ rowIcon( row.id ) ?? ROW_ICONS[ row.id ] } size={ 20 } /> } ) }
 						own={ ownRow }
 						inherited={ ownRow === null ? rowValue( resolved, row.sides ) : null }
 						status={ status }

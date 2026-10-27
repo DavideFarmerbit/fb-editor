@@ -1,0 +1,15 @@
+// Width : height on one line, both boxes sharing the width.
+.fb-aspect-ratio {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	> :not(.fb-aspect-ratio__separator) {
+		flex: 1 1 0;
+		min-width: 0;
+	}
+}
+
+.fb-aspect-ratio__separator {
+	color: #757575;
+}

@@ -6,6 +6,7 @@ namespace Fb\Tests\Unit\Blocks;
 
 use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\Library\Container\Container;
+use Fb\Blocks\BlockExtensions;
 use Fb\Blocks\Library\Container\ContainerItem;
 use Fb\Blocks\Values\StatefulValues;
 use Fb\Breakpoints\BreakpointConfig;
@@ -32,7 +33,7 @@ final class ContainerItemTest extends TestCase
 
 	public function testEveryBlockGetsTheItemControlsInTheirOwnPanel(): void
 	{
-		$definition = ContainerItem::extend( ( new Paragraph() )->definition() );
+		$definition = BlockExtensions::complete( ( new Paragraph() )->definition() );
 
 		$grow = $definition->controls->get( new ControlId( ContainerItem::GROW ) );
 		self::assertNotNull( $grow );
@@ -42,7 +43,7 @@ final class ContainerItemTest extends TestCase
 			'{"parent":"fb/container","when":{"kind":"in","control":"display","values":["flex"]}}',
 			wp_json_encode( $grow->placement, JSON_UNESCAPED_SLASHES )
 		);
-		self::assertSame( ContainerItem::extend( ( new Paragraph() )->definition() )->controls->get( new ControlId( ContainerItem::ORDER ) )?->label, 'Order' );
+		self::assertSame( BlockExtensions::complete( ( new Paragraph() )->definition() )->controls->get( new ControlId( ContainerItem::ORDER ) )?->label, 'Order' );
 	}
 
 	public function testItemSettingsStyleTheBlockItself(): void
@@ -75,7 +76,7 @@ final class ContainerItemTest extends TestCase
 
 	public function testDefaultsAndVariantsNeverHoldItemSettings(): void
 	{
-		$definition = ContainerItem::extend( ( new Paragraph() )->definition() );
+		$definition = BlockExtensions::complete( ( new Paragraph() )->definition() );
 		$json       = [ 'base' => [ 'itemGrow' => [ 'desktop' => 1 ], 'textAlign' => [ 'desktop' => 'center' ] ] ];
 
 		self::assertSame( '{"base":{"textAlign":{"desktop":"center"},"itemGrow":{"desktop":1.0}}}', wp_json_encode( StatefulValues::fromJson( $json, $definition, TestBreakpoints::list() ), JSON_PRESERVE_ZERO_FRACTION ) );

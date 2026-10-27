@@ -39,14 +39,9 @@ final class ContainerItem
 	/** Upper bound for flex-grow / flex-shrink factors. */
 	private const float MAX_FACTOR = 100.0;
 
-	/** @var \WeakMap<BlockDefinition, BlockDefinition>|null Extended definitions, per block's own (itself memoized). */
-	private static ?\WeakMap $extended = null;
-
 	public static function extend( BlockDefinition $definition ): BlockDefinition
 	{
-		self::$extended ??= new \WeakMap();
-
-		return self::$extended[ $definition ] ??= $definition->withControls( self::controls(), self::panel() );
+		return $definition->withControls( self::controls(), self::panel() );
 	}
 
 	private static function controls(): ControlSet

@@ -19,6 +19,7 @@ use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
 use Fb\Blocks\Definition\Input\Toggle\ToggleInput;
 use Fb\Blocks\Definition\Layout;
+use Fb\Blocks\Library\Shared\CommonControls as C;
 use Fb\Blocks\Definition\Panel;
 use Fb\Blocks\Definition\Scope;
 use Fb\Blocks\Options\AlignContent;
@@ -119,6 +120,10 @@ final class Container extends Block
 				new Control( $id( self::MARGIN ), __( 'Margin', 'fb-editor' ), SpacingInput::margin(), new BoxOutput( BoxProperty::Margin ) ),
 				new Control( $id( self::BACKGROUND ), __( 'Background', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::BackgroundColor ) ),
 				new Control( $id( self::TEXT_COLOR ), __( 'Text', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::Color ) ),
+				C::gradient(),
+				C::aspectRatio(),
+				C::shadow(),
+				...C::border(),
 			),
 			new Layout(
 				new Panel(
@@ -134,9 +139,17 @@ final class Container extends Block
 					$id( self::ALIGN_CONTENT ),
 					$id( self::GAP ),
 				),
-				new Panel( __( 'Size', 'fb-editor' ), $id( self::CONTENT_WIDTH ), $id( self::MAX_WIDTH ), $id( self::MIN_HEIGHT ) ),
+				new Panel( __( 'Size', 'fb-editor' ), $id( self::CONTENT_WIDTH ), $id( self::MAX_WIDTH ), $id( self::MIN_HEIGHT ), C::id( C::ASPECT_RATIO ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), $id( self::PADDING ), $id( self::MARGIN ) ),
-				new Panel( __( 'Colors', 'fb-editor' ), $id( self::BACKGROUND ), $id( self::TEXT_COLOR ) ),
+				new Panel( __( 'Colors', 'fb-editor' ), $id( self::BACKGROUND ), C::id( C::GRADIENT ), $id( self::TEXT_COLOR ) ),
+				new Panel(
+					__( 'Border & shadow', 'fb-editor' ),
+					C::id( C::BORDER_WIDTH ),
+					C::id( C::BORDER_STYLE ),
+					C::id( C::BORDER_COLOR ),
+					C::id( C::BORDER_RADIUS ),
+					C::id( C::SHADOW )
+				),
 			),
 		);
 	}

@@ -10,7 +10,7 @@ use Fb\Values\ResponsiveValue;
 use Fb\Values\Side;
 
 /**
- * BoxValue → `<property>-top/right/bottom/left`.
+ * BoxValue → one longhand per side (see BoxProperty).
  */
 final readonly class BoxOutput implements StyleOutput
 {
@@ -43,10 +43,21 @@ final readonly class BoxOutput implements StyleOutput
 	}
 
 	/**
-	 * @return array{kind: 'box', property: string}
+	 * The longhand of each side, computed here so the editor never
+	 * re-derives property names.
+	 *
+	 * @return array{kind: 'box', properties: array{top: string, right: string, bottom: string, left: string}}
 	 */
 	public function jsonSerialize(): array
 	{
-		return [ 'kind' => 'box', 'property' => $this->property->value ];
+		return [
+			'kind'       => 'box',
+			'properties' => [
+				'top'    => $this->property->longhand( Side::Top )->value,
+				'right'  => $this->property->longhand( Side::Right )->value,
+				'bottom' => $this->property->longhand( Side::Bottom )->value,
+				'left'   => $this->property->longhand( Side::Left )->value,
+			],
+		];
 	}
 }

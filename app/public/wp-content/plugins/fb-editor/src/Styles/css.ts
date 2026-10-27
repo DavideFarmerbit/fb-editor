@@ -5,13 +5,11 @@
  */
 import { CssLayer } from '../Css/CssLayer.generated';
 import { InvalidJson } from '../Json/json';
-import type { Side } from '../Values/box';
 import { CssProperty } from './CssProperty.generated';
-import { BoxProperty } from './Output/BoxProperty.generated';
 import { REVERT } from './DeclarationSet.generated';
 import { CLASS_PATTERN, PSEUDO_CLASS_PATTERN } from './Selector.generated';
 
-export { BoxProperty, CssLayer, CssProperty };
+export { CssLayer, CssProperty };
 
 export function wrapInLayer( layer: CssLayer, css: string ): string {
 	return `@layer ${ layer }{${ css }}`;
@@ -29,19 +27,6 @@ export function statesLayer( layer: CssLayer ): CssLayer {
 		default:
 			throw new Error( `No state layer for ${ layer }.` );
 	}
-}
-
-/**
- * `padding` + `top` → `padding-top`. Derived from the enums, so a longhand
- * missing from CssProperty fails loudly instead of being duplicated here.
- */
-export function boxLonghand( property: BoxProperty, side: Side ): CssProperty {
-	const name = `${ property }-${ side }`;
-	const longhand = Object.values( CssProperty ).find( ( candidate ) => candidate === name );
-	if ( longhand === undefined ) {
-		throw new InvalidJson( `No CSS property "${ name }" in CssProperty.php.` );
-	}
-	return longhand;
 }
 
 export { REVERT };

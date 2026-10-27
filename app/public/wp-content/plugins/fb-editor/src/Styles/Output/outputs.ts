@@ -8,7 +8,8 @@ import { KeywordValue } from '../../Values/keyword';
 import { NumberValue } from '../../Values/number';
 import type { Presets } from '../../Presets/presets';
 import { isCssValue, type ResponsiveValue } from '../../Values/value';
-import { BoxProperty, boxLonghand, CssProperty, DeclarationSet } from '../css';
+import { CssProperty, DeclarationSet } from '../css';
+import type { Side } from '../../Values/box';
 
 export interface StyleOutput {
 	/** Every property this output can write (used to revert it when hidden). */
@@ -17,11 +18,12 @@ export interface StyleOutput {
 	declarations( value: ResponsiveValue | null, presets: Presets ): DeclarationSet;
 }
 
+/** Mirrors BoxOutput: one longhand per side, as computed by PHP. */
 export class BoxOutput implements StyleOutput {
-	constructor( public readonly property: BoxProperty ) {}
+	constructor( private readonly longhands: Readonly< Record< Side, CssProperty > > ) {}
 
 	properties(): CssProperty[] {
-		return SIDES.map( ( side ) => boxLonghand( this.property, side ) );
+		return SIDES.map( ( side ) => this.longhands[ side ] );
 	}
 
 	declarations( value: ResponsiveValue | null, presets: Presets ): DeclarationSet {
@@ -32,7 +34,7 @@ export class BoxOutput implements StyleOutput {
 		for ( const side of SIDES ) {
 			const length = value.get( side );
 			if ( length !== null ) {
-				declarations = declarations.with( boxLonghand( this.property, side ), length.toCss( presets ) );
+				declarations = declarations.with( this.longhands[ side ], length.toCss( presets ) );
 			}
 		}
 		return declarations;
@@ -122,8 +124,15 @@ export class SpanOutput implements StyleOutput {
 export function outputFromJson( json: JsonValue ): StyleOutput {
 	const kind = json.get( 'kind' ).string();
 	switch ( kind ) {
-		case 'box':
-			return new BoxOutput( json.get( 'property' ).oneOf( BoxProperty ) );
+		case 'box': {
+			const longhands = json.get( 'properties' );
+			return new BoxOutput( {
+				top: longhands.get( 'top' ).oneOf( CssProperty ),
+				right: longhands.get( 'right' ).oneOf( CssProperty ),
+				bottom: longhands.get( 'bottom' ).oneOf( CssProperty ),
+				left: longhands.get( 'left' ).oneOf( CssProperty ),
+			} );
+		}
 		case 'axis':
 			return new AxisOutput( json.get( 'block' ).oneOf( CssProperty ), json.get( 'inline' ).oneOf( CssProperty ) );
 		case 'property': {

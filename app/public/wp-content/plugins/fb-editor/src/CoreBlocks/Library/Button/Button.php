@@ -39,11 +39,30 @@ final class Button extends CoreBlock
 		return new BlockDefinition(
 			BlockName::core( 'button' ),
 			__( 'Button', 'fb-editor' ),
-			new ControlSet( C::background( $link ), C::textColor( $link ), C::fontSize( $link ), C::fontWeight( $link ), C::padding( $link ) ),
+			new ControlSet(
+				C::background( $link ),
+				C::gradient( $link ),
+				C::textColor( $link ),
+				C::fontSize( $link ),
+				C::fontWeight( $link ),
+				C::lineHeight( $link ),
+				C::letterSpacing( $link ),
+				C::padding( $link ),
+				C::shadow( $link ),
+				...C::border( $link ),
+			),
 			new Layout(
-				new Panel( __( 'Colors', 'fb-editor' ), C::id( C::BACKGROUND ), C::id( C::TEXT_COLOR ) ),
-				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::FONT_SIZE ), C::id( C::FONT_WEIGHT ) ),
+				new Panel( __( 'Colors', 'fb-editor' ), C::id( C::BACKGROUND ), C::id( C::GRADIENT ), C::id( C::TEXT_COLOR ) ),
+				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::FONT_SIZE ), C::id( C::FONT_WEIGHT ), C::id( C::LINE_HEIGHT ), C::id( C::LETTER_SPACING ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::PADDING ) ),
+				new Panel(
+					__( 'Border & shadow', 'fb-editor' ),
+					C::id( C::BORDER_WIDTH ),
+					C::id( C::BORDER_STYLE ),
+					C::id( C::BORDER_COLOR ),
+					C::id( C::BORDER_RADIUS ),
+					C::id( C::SHADOW )
+				),
 			),
 			// In the editor the link keeps core's class.
 			[ new Element( $link, 'wp-block-button__link' ) ],

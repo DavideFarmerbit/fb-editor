@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Fb\Tests\Fixtures;
 
 use Fb\Blocks\Library\Container\Container;
-use Fb\Blocks\Library\Container\ContainerItem;
+use Fb\Blocks\BlockExtensions;
 use Fb\CoreBlocks\Library\Button\Button;
 use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\StatefulValues;
@@ -64,6 +64,8 @@ final class StyleFixtures
 			),
 			new Preset( PresetKind::Color, 'accent', 'Accent', '#3858e9' ),
 			new Preset( PresetKind::Color, 'x-dark', 'Extra dark', '#111111' ),
+			new Preset( PresetKind::Shadow, 'md', 'Medium', '0 4px 12px rgba(0,0,0,.1)' ),
+			new Preset( PresetKind::Gradient, 'accent-fade', 'Accent fade', 'linear-gradient(#3858e9,#111111)' ),
 		];
 
 		return (string) wp_json_encode(
@@ -79,8 +81,8 @@ final class StyleFixtures
 	{
 		$fixture = SectionFixture::definition();
 		// Complete definitions (with Container item controls), as the editor gets them.
-		$container = ContainerItem::extend( ( new Container() )->definition() );
-		$button  = ( new Button() )->definition();
+		$container = BlockExtensions::complete( ( new Container() )->definition() );
+		$button  = BlockExtensions::complete( ( new Button() )->definition() );
 
 		return [
 			new StyleCase( 'padding with presets and a mobile override', $container, [
@@ -244,6 +246,23 @@ final class StyleFixtures
 				[],
 				[ 'base' => [ 'itemOrder' => [ 'desktop' => 1 ], 'maxWidth' => [ 'desktop' => self::px( 600 ) ] ] ]
 			),
+			new StyleCase( 'button border, radius, shadow, gradient, typography', $button, [
+				'borderWidth'   => [ 'desktop' => [ 'top' => self::px( 2 ), 'right' => self::px( 2 ), 'bottom' => self::px( 2 ), 'left' => self::px( 2 ) ], 'mobile' => [ 'top' => self::px( -1 ) ] ],
+				'borderStyle'   => [ 'desktop' => 'solid', 'tablet' => 'ridge' ],
+				'borderColor'   => [ 'desktop' => self::color( 'accent' ) ],
+				'borderRadius'  => [ 'desktop' => [ 'top' => self::px( 8 ), 'bottom' => self::px( 8 ) ], 'tablet' => [ 'right' => self::preset( '40' ) ] ],
+				'shadow'        => [ 'desktop' => [ 'kind' => 'preset', 'preset' => 'shadow', 'slug' => 'md' ], 'mobile' => [ 'kind' => 'preset', 'preset' => 'color', 'slug' => 'accent' ] ],
+				'gradient'      => [ 'desktop' => [ 'kind' => 'preset', 'preset' => 'gradient', 'slug' => 'accent-fade' ] ],
+				'lineHeight'    => [ 'desktop' => 1.25, 'tablet' => 11 ],
+				'letterSpacing' => [ 'desktop' => [ 'kind' => 'custom', 'value' => -0.02, 'unit' => 'em' ] ],
+			] ),
+			new StyleCase( 'aspect ratio and position', $container, [
+				'aspectRatio' => [ 'desktop' => [ 'width' => 16, 'height' => 9 ], 'tablet' => [ 'width' => 0, 'height' => 1 ], 'mobile' => [ 'width' => 1, 'height' => 1 ] ],
+				'position'    => [ 'desktop' => 'sticky', 'mobile' => 'static' ],
+				'inset'       => [ 'desktop' => [ 'top' => self::px( 0 ), 'left' => [ 'kind' => 'auto' ] ] ],
+				'zIndex'      => [ 'desktop' => 10, 'tablet' => 1.5 ],
+				'opacity'     => [ 'desktop' => 0.9, 'mobile' => 2 ],
+			] ),
 			new StyleCase( 'garbage states', $container, [], [], [ 'hover' => 'nope', 'focus' => [ 'padding' => 'x' ] ] ),
 			new StyleCase( 'garbage attribute', $container, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
 		];

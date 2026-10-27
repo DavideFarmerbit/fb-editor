@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Fb\Blocks;
 
 use Fb\Blocks\Definition\BlockDefinition;
-use Fb\Blocks\Library\Container\ContainerItem;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\CoreBlocks\CoreBlock;
 use Fb\CoreBlocks\ManagedCoreBlock;
@@ -43,12 +42,12 @@ final readonly class BlockRegistry implements Hookable
 	}
 
 	/**
-	 * A block type's complete definition: its own, plus the controls every
-	 * block gets (Container item). What everything renders and edits with.
+	 * A block type's complete definition: its own, plus the settings every
+	 * block gets (see BlockExtensions). What everything renders and edits with.
 	 */
 	public function definitionOf( BlockType $type ): BlockDefinition
 	{
-		return ContainerItem::extend( $type->definition() );
+		return BlockExtensions::complete( $type->definition() );
 	}
 
 	public function definition( string $name ): ?BlockDefinition

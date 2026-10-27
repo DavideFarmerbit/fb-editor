@@ -8,6 +8,8 @@ import type { Breakpoint, BreakpointList } from '../../Breakpoints/breakpoints';
 import type { ResponsiveValue } from '../../Values/value';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
 import { ColorField } from '../Definition/Input/Color/color-control';
+import { AspectRatioField } from '../Definition/Input/AspectRatio/aspect-ratio-control';
+import { AspectRatioInput } from '../Definition/Input/AspectRatio/aspect-ratio-input';
 import { ColorInput } from '../Definition/Input/Color/color-input';
 import { GridColumnsField } from '../Definition/Input/GridColumns/grid-columns-control';
 import { GridColumnsInput } from '../Definition/Input/GridColumns/grid-columns-input';
@@ -66,6 +68,9 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof GridColumnsInput ) {
 		return <GridColumnsField { ...props } input={ input } />;
+	}
+	if ( input instanceof AspectRatioInput ) {
+		return <AspectRatioField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

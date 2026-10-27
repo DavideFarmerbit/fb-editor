@@ -94,7 +94,7 @@ final class BlockDefinitionTest extends TestCase
 			. '{"id":"active","label":"Active","pseudoClass":":active","editorPseudoClass":":is(:active,.fb-preview-active)","previewClass":"fb-preview-active"}]}', $encode( $definition ) );
 		self::assertSame(
 			'{"id":"gap","label":"Gap",'
-			. '"input":{"kind":"spacing","allowAuto":false,"allowNegative":false,"modes":["linked","axis"]},'
+			. '"input":{"kind":"spacing","allowAuto":false,"allowNegative":false,"modes":["linked","axis"],"scale":"spacing","shape":"sides"},'
 			. '"output":{"kind":"axis","block":"row-gap","inline":"column-gap"},'
 			. '"element":"inner","scope":"responsive",'
 			. '"visibleWhen":{"kind":"in","control":"display","values":["flex","grid"]},"placement":null}',

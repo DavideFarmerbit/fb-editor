@@ -6,7 +6,7 @@ namespace Fb\Tests\Fixtures;
 
 use Fb\Blocks\Block;
 use Fb\Blocks\Defaults\DefaultsRepository;
-use Fb\Blocks\Library\Container\ContainerItem;
+use Fb\Blocks\BlockExtensions;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\BlockStyler;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
@@ -45,6 +45,6 @@ final readonly class TestRendering
 	 */
 	public function render( Block $block, array $attributes, string $content ): string
 	{
-		return $this->renderer->render( $block, ContainerItem::extend( $block->definition() ), $attributes, $content );
+		return $this->renderer->render( $block, BlockExtensions::complete( $block->definition() ), $attributes, $content );
 	}
 }
