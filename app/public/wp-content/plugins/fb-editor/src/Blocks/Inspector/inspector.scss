@@ -189,3 +189,45 @@
 .fb-row.is-inherited .fb-row__main {
 	opacity: 0.55;
 }
+
+// "Add setting" popover: search (+ eye toggle) on top, list scrolls below.
+.fb-add-setting {
+	width: 280px;
+}
+
+.fb-add-setting__search {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 8px;
+	border-bottom: 1px solid #e0e0e0;
+
+	> :first-child {
+		flex: 1;
+		min-width: 0;
+	}
+}
+
+.fb-add-setting__list {
+	max-height: 360px;
+	padding: 8px;
+	overflow-y: auto;
+}
+
+// Menu items are buttons: centered text (the "Needs …" note and its wrapped
+// lines would be centered under the label) and a fixed 40px height (the note
+// would spill into the next item). Core resets both only inside a
+// DropdownMenu; this is a Dropdown, so same values here. Two classes, like
+// core's `.components-button.is-next-40px-default-size` (this sheet loads
+// after core's, so it wins the tie).
+.fb-add-setting__list .fb-add-setting__item {
+	height: auto;
+	min-height: 32px;
+	padding-block: 6px;
+	text-align: start;
+}
+
+.fb-add-setting__empty {
+	margin: 8px;
+	color: #757575;
+}

@@ -34,6 +34,8 @@ interface State {
 	 * selected block in a state also previews it on the canvas.
 	 */
 	readonly inspectedStates: Readonly< Record< string, BlockState > >;
+	/** "Add setting" also lists settings the block can't use right now. */
+	readonly showUnavailableSettings: boolean;
 }
 
 interface SetBreakpointAction {
@@ -65,7 +67,12 @@ interface InspectStateAction {
 	readonly state: BlockState | null;
 }
 
-type Action = SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction;
+interface ShowUnavailableSettingsAction {
+	readonly type: 'SHOW_UNAVAILABLE_SETTINGS';
+	readonly show: boolean;
+}
+
+type Action = SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction | ShowUnavailableSettingsAction;
 
 const NONE: readonly string[] = [];
 
@@ -74,6 +81,7 @@ const DEFAULT_STATE: State = {
 	spacingModes: {},
 	addedControls: {},
 	inspectedStates: {},
+	showUnavailableSettings: true,
 };
 
 const actions = {
@@ -92,6 +100,9 @@ const actions = {
 	/** null: back to the base look. */
 	inspectState( key: string, state: BlockState | null ): InspectStateAction {
 		return { type: 'INSPECT_STATE', key, state };
+	},
+	showUnavailableSettings( show: boolean ): ShowUnavailableSettingsAction {
+		return { type: 'SHOW_UNAVAILABLE_SETTINGS', show };
 	},
 };
 
@@ -112,6 +123,9 @@ const selectors = {
 	getInspectedState( state: State, key: string ): BlockState | null {
 		return state.inspectedStates[ key ] ?? null;
 	},
+	isShowingUnavailableSettings( state: State ): boolean {
+		return state.showUnavailableSettings;
+	},
 };
 
 export const store = createReduxStore( 'fb/editor', {
@@ -127,6 +141,8 @@ export const store = createReduxStore( 'fb/editor', {
 					? state
 					: { ...state, addedControls: { ...state.addedControls, [ action.key ]: [ ...added, action.controlId ] } };
 			}
+			case 'SHOW_UNAVAILABLE_SETTINGS':
+				return { ...state, showUnavailableSettings: action.show };
 			case 'INSPECT_STATE': {
 				const { [ action.key ]: _previous, ...others } = state.inspectedStates;
 				return { ...state, inspectedStates: action.state === null ? others : { ...others, [ action.key ]: action.state } };
