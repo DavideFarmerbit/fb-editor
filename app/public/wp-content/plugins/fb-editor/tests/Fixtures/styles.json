@@ -20855,6 +20855,26 @@
                         "kind": "style"
                     },
                     {
+                        "id": "fontFamily",
+                        "label": "Font family",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "font-family"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-family"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
                         "id": "fontSize",
                         "label": "Font size",
                         "input": {
@@ -21577,6 +21597,7 @@
                     {
                         "label": "Typography",
                         "controls": [
+                            "fontFamily",
                             "fontSize",
                             "fontWeight",
                             "lineHeight",
@@ -21803,6 +21824,26 @@
                         "kind": "style"
                     },
                     {
+                        "id": "fontFamily",
+                        "label": "Font family",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "font-family"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-family"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
                         "id": "fontSize",
                         "label": "Font size",
                         "input": {
@@ -22525,6 +22566,7 @@
                     {
                         "label": "Typography",
                         "controls": [
+                            "fontFamily",
                             "fontSize",
                             "fontWeight",
                             "lineHeight",
@@ -26405,6 +26447,26 @@
                         "kind": "style"
                     },
                     {
+                        "id": "fontFamily",
+                        "label": "Font family",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "font-family"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-family"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
                         "id": "fontSize",
                         "label": "Font size",
                         "input": {
@@ -27127,6 +27189,7 @@
                     {
                         "label": "Typography",
                         "controls": [
+                            "fontFamily",
                             "fontSize",
                             "fontWeight",
                             "lineHeight",

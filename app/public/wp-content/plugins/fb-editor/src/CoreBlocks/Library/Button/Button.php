@@ -59,6 +59,7 @@ final class Button extends CoreBlock
 				C::background( $link ),
 				C::gradient( $link ),
 				C::textColor( $link ),
+				C::fontFamily( $link ),
 				C::fontSize( $link ),
 				C::fontWeight( $link ),
 				C::lineHeight( $link ),
@@ -79,7 +80,7 @@ final class Button extends CoreBlock
 			),
 			new Layout(
 				new Panel( __( 'Colors', 'fb-editor' ), C::id( C::BACKGROUND ), C::id( C::GRADIENT ), C::id( C::TEXT_COLOR ) ),
-				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::FONT_SIZE ), C::id( C::FONT_WEIGHT ), C::id( C::LINE_HEIGHT ), C::id( C::LETTER_SPACING ) ),
+				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::FONT_FAMILY ), C::id( C::FONT_SIZE ), C::id( C::FONT_WEIGHT ), C::id( C::LINE_HEIGHT ), C::id( C::LETTER_SPACING ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::PADDING ) ),
 				new Panel( __( 'Icon', 'fb-editor' ), $id( self::ICON ), $id( self::ICON_AFTER ), $id( self::ICON_SIZE ), $id( self::ICON_GAP ) ),
 				new Panel(
