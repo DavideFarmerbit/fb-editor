@@ -95,3 +95,46 @@ export function observeCanvasSpace( onSpace: ( space: CanvasSpace | null ) => vo
 		resizes.disconnect();
 	};
 }
+
+/**
+ * The left part of the editor header (inserter, undo/redo, list view), in
+ * the post and site editors. Core offers no slot there.
+ */
+const HEADER_TOOLBAR = '.editor-header__toolbar';
+
+/**
+ * Calls `onNode` with an element of ours appended to the header's left
+ * toolbar (for a portal), or null while there's no header. Core rebuilds
+ * the header on some mode switches (site editor browse ↔ edit): a node left
+ * in the old one is detected and re-created in the new one. Returns a
+ * cleanup function that also removes the node.
+ */
+export function observeHeaderToolbar( className: string, onNode: ( node: HTMLElement | null ) => void ): () => void {
+	let node: HTMLElement | null = null;
+
+	const attach = (): void => {
+		if ( node !== null && node.isConnected ) {
+			return;
+		}
+		const toolbar = document.querySelector( HEADER_TOOLBAR );
+		if ( toolbar === null ) {
+			if ( node !== null ) {
+				node = null;
+				onNode( null );
+			}
+			return;
+		}
+		node = document.createElement( 'div' );
+		node.className = className;
+		toolbar.appendChild( node );
+		onNode( node );
+	};
+
+	attach();
+	const timer = window.setInterval( attach, 500 );
+
+	return () => {
+		window.clearInterval( timer );
+		node?.remove();
+	};
+}

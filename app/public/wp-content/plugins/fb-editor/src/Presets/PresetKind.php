@@ -29,6 +29,16 @@ enum PresetKind: string
 	}
 
 	/**
+	 * Whether a slider over this scale starts with a 0 step before the
+	 * theme's first preset (spacing: "none" is the most common pick). A 0
+	 * font size makes no sense.
+	 */
+	public function scaleStartsAtZero(): bool
+	{
+		return self::Spacing === $this;
+	}
+
+	/**
 	 * Path under theme.json `settings`.
 	 *
 	 * @return array{0: string, 1: string}

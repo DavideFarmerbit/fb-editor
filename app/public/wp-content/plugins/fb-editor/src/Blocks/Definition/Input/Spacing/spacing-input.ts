@@ -21,6 +21,8 @@ export class SpacingInput implements LengthRules {
 		public readonly modes: readonly SpacingMode[],
 		/** Scale offered as a slider; null for custom values only. */
 		public readonly scale: PresetKind | null,
+		/** The slider starts with a 0 step (PresetKind::scaleStartsAtZero()). */
+		public readonly zeroStep: boolean,
 		public readonly shape: BoxShape
 	) {}
 
@@ -68,6 +70,7 @@ export class SpacingInput implements LengthRules {
 			json.get( 'allowNegative' ).boolean(),
 			json.get( 'modes' ).list().map( ( mode ) => mode.oneOf( SpacingMode ) ),
 			json.get( 'scale' ).nullable( ( scale ) => scale.oneOf( PresetKind ) ),
+			json.get( 'zeroStep' ).boolean(),
 			json.get( 'shape' ).oneOf( BoxShape )
 		);
 	}

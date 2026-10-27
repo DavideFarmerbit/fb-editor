@@ -107,7 +107,7 @@ final readonly class SpacingInput implements Input
 	}
 
 	/**
-	 * @return array{kind: 'spacing', allowAuto: bool, allowNegative: bool, modes: non-empty-list<SpacingMode>, scale: ?string, shape: BoxShape}
+	 * @return array{kind: 'spacing', allowAuto: bool, allowNegative: bool, modes: non-empty-list<SpacingMode>, scale: ?string, zeroStep: bool, shape: BoxShape}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -117,6 +117,7 @@ final readonly class SpacingInput implements Input
 			'allowNegative' => $this->allowNegative,
 			'modes'         => $this->modes,
 			'scale'         => $this->scale?->value,
+			'zeroStep'      => $this->scale?->scaleStartsAtZero() ?? false,
 			'shape'         => $this->shape,
 		];
 	}

@@ -11,6 +11,8 @@ export interface LengthRules {
 	readonly allowNegative: boolean;
 	/** Theme scale offered as a slider; null for custom values only. */
 	readonly scale: PresetKind | null;
+	/** The slider starts with a 0 step (PresetKind::scaleStartsAtZero()). */
+	readonly zeroStep: boolean;
 	allows( length: Length ): boolean;
 }
 
@@ -20,7 +22,8 @@ export class LengthInput implements LengthRules {
 	constructor(
 		public readonly allowAuto: boolean,
 		public readonly allowNegative: boolean,
-		public readonly scale: PresetKind | null
+		public readonly scale: PresetKind | null,
+		public readonly zeroStep: boolean
 	) {}
 
 	allows( length: Length ): boolean {
@@ -45,7 +48,8 @@ export class LengthInput implements LengthRules {
 		return new LengthInput(
 			json.get( 'allowAuto' ).boolean(),
 			json.get( 'allowNegative' ).boolean(),
-			json.get( 'scale' ).nullable( ( scale ) => scale.oneOf( PresetKind ) )
+			json.get( 'scale' ).nullable( ( scale ) => scale.oneOf( PresetKind ) ),
+			json.get( 'zeroStep' ).boolean()
 		);
 	}
 }

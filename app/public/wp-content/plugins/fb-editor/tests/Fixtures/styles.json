@@ -502,6 +502,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -530,7 +531,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -558,6 +560,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -589,6 +592,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -844,7 +848,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -866,7 +871,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -888,7 +894,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -910,7 +917,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -932,7 +940,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -954,7 +963,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -1024,6 +1034,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -1097,6 +1108,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -1241,7 +1253,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2004,6 +2017,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -2032,7 +2046,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2060,6 +2075,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -2091,6 +2107,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -2346,7 +2363,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2368,7 +2386,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2390,7 +2409,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2412,7 +2432,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2434,7 +2455,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2456,7 +2478,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -2526,6 +2549,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -2599,6 +2623,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -2743,7 +2768,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -3484,6 +3510,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -3512,7 +3539,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -3540,6 +3568,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -3571,6 +3600,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -3826,7 +3856,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -3848,7 +3879,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -3870,7 +3902,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -3892,7 +3925,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -3914,7 +3948,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -3936,7 +3971,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -4006,6 +4042,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -4079,6 +4116,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -4223,7 +4261,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -4693,6 +4732,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -4723,6 +4763,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -4917,6 +4958,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -4947,6 +4989,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -5143,6 +5186,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -5173,6 +5217,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -5666,6 +5711,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -5694,7 +5740,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -5722,6 +5769,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -5753,6 +5801,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -6008,7 +6057,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -6030,7 +6080,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -6052,7 +6103,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -6074,7 +6126,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -6096,7 +6149,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -6118,7 +6172,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -6188,6 +6243,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -6261,6 +6317,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -6405,7 +6462,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7188,6 +7246,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -7216,7 +7275,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7244,6 +7304,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -7275,6 +7336,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -7530,7 +7592,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7552,7 +7615,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7574,7 +7638,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7596,7 +7661,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7618,7 +7684,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7640,7 +7707,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -7710,6 +7778,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -7783,6 +7852,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -7927,7 +7997,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -8686,6 +8757,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -8714,7 +8786,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -8742,6 +8815,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -8773,6 +8847,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -9028,7 +9103,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -9050,7 +9126,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -9072,7 +9149,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -9094,7 +9172,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -9116,7 +9195,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -9138,7 +9218,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -9208,6 +9289,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -9281,6 +9363,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -9425,7 +9508,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10194,6 +10278,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -10222,7 +10307,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10250,6 +10336,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -10281,6 +10368,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -10536,7 +10624,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10558,7 +10647,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10580,7 +10670,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10602,7 +10693,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10624,7 +10716,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10646,7 +10739,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -10716,6 +10810,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -10789,6 +10884,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -10933,7 +11029,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -11656,6 +11753,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -11684,7 +11782,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -11712,6 +11811,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -11743,6 +11843,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -11998,7 +12099,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -12020,7 +12122,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -12042,7 +12145,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -12064,7 +12168,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -12086,7 +12191,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -12108,7 +12214,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -12178,6 +12285,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -12251,6 +12359,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -12395,7 +12504,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13162,6 +13272,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -13190,7 +13301,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13218,6 +13330,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -13249,6 +13362,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -13504,7 +13618,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13526,7 +13641,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13548,7 +13664,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13570,7 +13687,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13592,7 +13710,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13614,7 +13733,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -13684,6 +13804,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -13757,6 +13878,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -13901,7 +14023,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -14643,6 +14766,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -14671,7 +14795,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -14699,6 +14824,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -14730,6 +14856,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -14985,7 +15112,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -15007,7 +15135,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -15029,7 +15158,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -15051,7 +15181,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -15073,7 +15204,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -15095,7 +15227,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -15165,6 +15298,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -15238,6 +15372,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -15382,7 +15517,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16139,6 +16275,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -16167,7 +16304,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16195,6 +16333,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -16226,6 +16365,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -16481,7 +16621,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16503,7 +16644,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16525,7 +16667,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16547,7 +16690,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16569,7 +16713,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16591,7 +16736,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -16661,6 +16807,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -16734,6 +16881,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -16878,7 +17026,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -17615,6 +17764,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -17643,7 +17793,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -17671,6 +17822,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -17702,6 +17854,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -17957,7 +18110,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -17979,7 +18133,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -18001,7 +18156,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -18023,7 +18179,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -18045,7 +18202,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -18067,7 +18225,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -18137,6 +18296,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -18210,6 +18370,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -18354,7 +18515,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19089,6 +19251,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -19117,7 +19280,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19145,6 +19309,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -19176,6 +19341,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -19431,7 +19597,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19453,7 +19620,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19475,7 +19643,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19497,7 +19666,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19519,7 +19689,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19541,7 +19712,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -19611,6 +19783,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -19684,6 +19857,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -19828,7 +20002,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -20245,6 +20420,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -20275,6 +20451,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -20468,6 +20645,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -20498,6 +20676,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -20682,7 +20861,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": "font-size"
+                            "scale": "font-size",
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -20773,7 +20953,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": true,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -20801,6 +20982,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -20881,7 +21063,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -20903,7 +21086,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -20973,6 +21157,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -21046,6 +21231,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -21190,7 +21376,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -21622,7 +21809,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": "font-size"
+                            "scale": "font-size",
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -21713,7 +21901,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": true,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -21741,6 +21930,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -21821,7 +22011,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -21843,7 +22034,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -21913,6 +22105,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -21986,6 +22179,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -22130,7 +22324,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -22607,6 +22802,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -22637,6 +22833,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -22874,6 +23071,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -22904,6 +23102,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -23462,6 +23661,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -23490,7 +23690,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -23518,6 +23719,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -23549,6 +23751,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -23804,7 +24007,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -23826,7 +24030,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -23848,7 +24053,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -23870,7 +24076,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -23892,7 +24099,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -23914,7 +24122,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -23984,6 +24193,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -24057,6 +24267,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -24201,7 +24412,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25007,6 +25219,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -25035,7 +25248,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25063,6 +25277,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -25094,6 +25309,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -25349,7 +25565,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25371,7 +25588,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25393,7 +25611,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25415,7 +25634,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25437,7 +25657,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25459,7 +25680,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -25529,6 +25751,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -25602,6 +25825,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -25746,7 +25970,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -26186,7 +26411,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": "font-size"
+                            "scale": "font-size",
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -26277,7 +26503,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": true,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -26305,6 +26532,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -26385,7 +26613,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -26407,7 +26636,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -26477,6 +26707,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -26550,6 +26781,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -26694,7 +26926,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -27574,6 +27807,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -27602,7 +27836,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -27630,6 +27865,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -27661,6 +27897,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -27916,7 +28153,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -27938,7 +28176,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -27960,7 +28199,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -27982,7 +28222,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -28004,7 +28245,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -28026,7 +28268,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -28096,6 +28339,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -28169,6 +28413,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -28313,7 +28558,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29104,6 +29350,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -29132,7 +29379,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29160,6 +29408,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -29191,6 +29440,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -29446,7 +29696,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29468,7 +29719,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29490,7 +29742,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29512,7 +29765,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29534,7 +29788,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29556,7 +29811,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -29626,6 +29882,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -29699,6 +29956,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -29843,7 +30101,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -30623,6 +30882,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -30651,7 +30911,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -30679,6 +30940,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -30710,6 +30972,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -30965,7 +31228,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -30987,7 +31251,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -31009,7 +31274,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -31031,7 +31297,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -31053,7 +31320,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -31075,7 +31343,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -31145,6 +31414,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -31218,6 +31488,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -31362,7 +31633,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32084,6 +32356,7 @@
                                 "axis"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -32112,7 +32385,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32140,6 +32414,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -32171,6 +32446,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -32426,7 +32702,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32448,7 +32725,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32470,7 +32748,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32492,7 +32771,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32514,7 +32794,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32536,7 +32817,8 @@
                             "kind": "length",
                             "allowAuto": false,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",
@@ -32606,6 +32888,7 @@
                                 "sides"
                             ],
                             "scale": null,
+                            "zeroStep": false,
                             "shape": "corners"
                         },
                         "output": {
@@ -32679,6 +32962,7 @@
                                 "sides"
                             ],
                             "scale": "spacing",
+                            "zeroStep": true,
                             "shape": "sides"
                         },
                         "output": {
@@ -32823,7 +33107,8 @@
                             "kind": "length",
                             "allowAuto": true,
                             "allowNegative": false,
-                            "scale": null
+                            "scale": null,
+                            "zeroStep": false
                         },
                         "output": {
                             "kind": "property",

@@ -28,6 +28,7 @@ const FIT_RULES: LengthRules = {
 	allowAuto: false,
 	allowNegative: false,
 	scale: null,
+	zeroStep: false,
 	allows: ( length: Length ): boolean => length instanceof CustomLength && length.value > 0,
 };
 

@@ -39,8 +39,8 @@ final readonly class CanvasStyles implements Hookable
 	/**
 	 * No post title above the content: with a block theme the template
 	 * decides where (and whether) the title shows, so the canvas's own copy
-	 * only pushes the real content down. It's still editable in the
-	 * document panel.
+	 * only pushes the real content down. It's edited from the header
+	 * instead (PostTitle/post-title-field.tsx).
 	 */
 	private const string NO_POST_TITLE = '.editor-visual-editor__post-title-wrapper{display:none;}';
 

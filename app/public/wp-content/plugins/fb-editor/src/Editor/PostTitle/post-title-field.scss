@@ -1,0 +1,51 @@
+// Title field in the header's left toolbar: borderless like the header's
+// buttons, outlined while editing.
+.fb-post-title {
+	display: flex;
+	flex: 1 1 auto;
+	align-items: center;
+	min-width: 0;
+	margin-inline-start: 8px;
+
+	// The header is already tight there: the field gives way first.
+	@media (max-width: 782px) {
+		display: none;
+	}
+}
+
+// Two classes: wp-admin's forms.css styles input[type="text"] (0,1,1) with
+// a 40px min-height and 12px padding. Back to the header's 32px buttons.
+.fb-post-title .fb-post-title__input {
+	width: 100%;
+	max-width: 280px;
+	min-width: 0;
+	height: 32px;
+	min-height: 32px;
+	padding: 0 8px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: transparent;
+	box-shadow: none;
+	color: inherit;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 30px;
+	text-overflow: ellipsis;
+
+	&:hover {
+		background: rgba(127, 127, 127, 0.12);
+	}
+
+	&:focus {
+		border-color: var(--wp-admin-theme-color, #3858e9);
+		background: transparent;
+		box-shadow: 0 0 0 0.5px var(--wp-admin-theme-color, #3858e9);
+		outline: none;
+	}
+
+	&::placeholder {
+		color: currentColor;
+		font-weight: 400;
+		opacity: 0.6;
+	}
+}

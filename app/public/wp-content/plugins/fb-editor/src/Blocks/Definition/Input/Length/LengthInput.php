@@ -50,7 +50,7 @@ final readonly class LengthInput implements Input
 	}
 
 	/**
-	 * @return array{kind: 'length', allowAuto: bool, allowNegative: bool, scale: ?string}
+	 * @return array{kind: 'length', allowAuto: bool, allowNegative: bool, scale: ?string, zeroStep: bool}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -59,6 +59,7 @@ final readonly class LengthInput implements Input
 			'allowAuto'     => $this->allowAuto,
 			'allowNegative' => $this->allowNegative,
 			'scale'         => $this->scale?->value,
+			'zeroStep'      => $this->scale?->scaleStartsAtZero() ?? false,
 		];
 	}
 }

@@ -11,7 +11,7 @@ import type { ReactElement, ReactNode } from 'react';
 
 import { settings } from '../../../../Editor/settings';
 import type { Preset } from '../../../../Presets/presets';
-import { AutoLength, CustomLength, PresetReference, type Length } from '../../../../Values/length';
+import { AutoLength, CustomLength, PresetReference, Unit, type Length } from '../../../../Values/length';
 import type { ControlFieldProps } from '../../../Inspector/control-field';
 import { readControl } from '../../../Inspector/control-reading';
 import { Row } from '../../../Inspector/row';
@@ -39,9 +39,18 @@ function asCustom( length: LengthReading ): CustomLength | AutoLength | null {
 	return length instanceof CustomLength || length instanceof AutoLength ? length : null;
 }
 
+/** What the slider's 0 step writes (see LengthRules.zeroStep). */
+const ZERO = new CustomLength( 0, Unit.Px );
+
+function isZero( length: Length | null ): boolean {
+	return length instanceof CustomLength && length.value === 0;
+}
+
 export function LengthRow( { label, icon, own, inherited, status: inheritedStatus, rules, scale, onChange }: LengthRowProps ): ReactElement {
 	const shown = own === 'mixed' ? null : own ?? ( inherited === 'mixed' ? null : inherited );
-	const [ custom, setCustom ] = useState( scale.length === 0 || shown instanceof CustomLength || shown instanceof AutoLength );
+	// A 0 is shown on the slider's 0 step, when it has one.
+	const onSlider = shown instanceof PresetReference || shown === null || ( rules.zeroStep && isZero( shown ) );
+	const [ custom, setCustom ] = useState( scale.length === 0 || ! onSlider );
 	const isInherited = own === null && inherited !== null;
 
 	const emit = ( length: Length ): void => {
@@ -84,7 +93,7 @@ export function LengthRow( { label, icon, own, inherited, status: inheritedStatu
 					onChange={ emit }
 				/>
 			) : (
-				<ScaleSlider label={ label } shown={ shown } scale={ scale } onChange={ emit } />
+				<ScaleSlider label={ label } shown={ shown } scale={ scale } zeroStep={ rules.zeroStep } onChange={ emit } />
 			) }
 		</Row>
 	);
@@ -94,6 +103,8 @@ interface ScaleSliderProps {
 	readonly label: string;
 	readonly shown: Length | null;
 	readonly scale: readonly Preset[];
+	/** Step 0 is a plain 0, before the scale's first preset. */
+	readonly zeroStep: boolean;
 	readonly onChange: ( length: Length ) => void;
 }
 
@@ -102,9 +113,16 @@ interface ScaleSliderProps {
  * per step draws the bar in sections. Never remounted while in use (that
  * would cut drags short). Step name and value are in the tooltip.
  */
-function ScaleSlider( { label, shown, scale, onChange }: ScaleSliderProps ): ReactElement {
-	const index = shown instanceof PresetReference ? scale.findIndex( ( preset ) => preset.slug === shown.slug ) : -1;
-	const marks = scale.map( ( _preset, step ) => ( { value: step } ) );
+function ScaleSlider( { label, shown, scale, zeroStep, onChange }: ScaleSliderProps ): ReactElement {
+	// Step → what it writes: the 0 step (if any), then the presets.
+	const steps: ReadonlyArray< { readonly length: Length; readonly tooltip: string } > = [
+		...( zeroStep ? [ { length: ZERO, tooltip: '0' } ] : [] ),
+		...scale.map( ( preset ) => ( { length: new PresetReference( preset.kind, preset.slug ), tooltip: `${ preset.name } · ${ preset.value }` } ) ),
+	];
+	const index = steps.findIndex( ( step ) =>
+		step.length instanceof PresetReference ? shown instanceof PresetReference && shown.slug === step.length.slug : isZero( shown )
+	);
+	const marks = steps.map( ( _step, step ) => ( { value: step } ) );
 
 	return (
 		<RangeControl
@@ -114,20 +132,17 @@ function ScaleSlider( { label, shown, scale, onChange }: ScaleSliderProps ): Rea
 			hideLabelFromVision
 			withInputField={ false }
 			min={ 0 }
-			max={ scale.length - 1 }
+			max={ steps.length - 1 }
 			step={ 1 }
 			marks={ marks }
 			initialPosition={ 0 }
 			// Omitted when nothing is set anywhere: the bar shows no selection.
 			{ ...( index === -1 ? {} : { value: index } ) }
-			renderTooltipContent={ ( value?: number | string | null ) => {
-				const preset = scale[ Number( value ?? 0 ) ];
-				return preset === undefined ? '' : `${ preset.name } · ${ preset.value }`;
-			} }
+			renderTooltipContent={ ( value?: number | string | null ) => steps[ Number( value ?? 0 ) ]?.tooltip ?? '' }
 			onChange={ ( value?: number ) => {
-				const preset = scale[ value ?? -1 ];
-				if ( preset !== undefined ) {
-					onChange( new PresetReference( preset.kind, preset.slug ) );
+				const step = steps[ value ?? -1 ];
+				if ( step !== undefined ) {
+					onChange( step.length );
 				}
 			} }
 		/>
