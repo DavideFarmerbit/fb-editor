@@ -73,9 +73,7 @@ final class Icon extends Block
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::PADDING ), C::id( C::MARGIN ) ),
 				new Panel(
 					__( 'Border & shadow', 'fb-editor' ),
-					C::id( C::BORDER_WIDTH ),
-					C::id( C::BORDER_STYLE ),
-					C::id( C::BORDER_COLOR ),
+					C::id( C::BORDER ),
 					C::id( C::BORDER_RADIUS ),
 					C::id( C::SHADOW )
 				),

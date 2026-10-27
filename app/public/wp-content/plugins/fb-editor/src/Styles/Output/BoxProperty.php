@@ -21,7 +21,6 @@ enum BoxProperty
 	 * base CSS composes the real padding from it (Container: content width).
 	 */
 	case PaddingVars;
-	case BorderWidth;
 	case BorderRadius;
 	/** top / right / bottom / left of a positioned box. */
 	case Inset;
@@ -32,12 +31,6 @@ enum BoxProperty
 			self::Padding      => CssProperty::padding( $side ),
 			self::Margin       => CssProperty::margin( $side ),
 			self::PaddingVars  => CssProperty::paddingVar( $side ),
-			self::BorderWidth  => match ( $side ) {
-				Side::Top    => CssProperty::BorderTopWidth,
-				Side::Right  => CssProperty::BorderRightWidth,
-				Side::Bottom => CssProperty::BorderBottomWidth,
-				Side::Left   => CssProperty::BorderLeftWidth,
-			},
 			self::BorderRadius => match ( $side ) {
 				Side::Top    => CssProperty::BorderTopLeftRadius,
 				Side::Right  => CssProperty::BorderTopRightRadius,

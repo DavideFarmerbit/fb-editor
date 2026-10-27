@@ -247,9 +247,15 @@ final class StyleFixtures
 				[ 'base' => [ 'itemOrder' => [ 'desktop' => 1 ], 'maxWidth' => [ 'desktop' => self::px( 600 ) ] ] ]
 			),
 			new StyleCase( 'button border, radius, shadow, gradient, typography', $button, [
-				'borderWidth'   => [ 'desktop' => [ 'top' => self::px( 2 ), 'right' => self::px( 2 ), 'bottom' => self::px( 2 ), 'left' => self::px( 2 ) ], 'mobile' => [ 'top' => self::px( -1 ) ] ],
-				'borderStyle'   => [ 'desktop' => 'solid', 'tablet' => 'ridge' ],
-				'borderColor'   => [ 'desktop' => self::color( 'accent' ) ],
+				'border'        => [
+					'desktop' => [
+						'top'    => [ 'width' => self::px( 2 ), 'style' => 'solid', 'color' => self::color( 'accent' ) ],
+						'bottom' => [ 'width' => self::px( 2 ), 'style' => 'solid', 'color' => self::color( 'accent' ) ],
+						'left'   => [ 'width' => self::px( -1 ), 'style' => 'ridge', 'color' => [ 'kind' => 'preset', 'preset' => 'spacing', 'slug' => '40' ] ],
+					],
+					'tablet'  => [ 'bottom' => [ 'style' => 'dashed' ] ],
+					'mobile'  => [ 'top' => [ 'width' => [ 'kind' => 'auto' ] ] ],
+				],
 				'borderRadius'  => [ 'desktop' => [ 'top' => self::px( 8 ), 'bottom' => self::px( 8 ) ], 'tablet' => [ 'right' => self::preset( '40' ) ] ],
 				'shadow'        => [ 'desktop' => [ 'kind' => 'preset', 'preset' => 'shadow', 'slug' => 'md' ], 'mobile' => [ 'kind' => 'preset', 'preset' => 'color', 'slug' => 'accent' ] ],
 				'gradient'      => [ 'desktop' => [ 'kind' => 'preset', 'preset' => 'gradient', 'slug' => 'accent-fade' ] ],

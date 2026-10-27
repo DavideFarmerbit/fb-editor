@@ -10,6 +10,8 @@ import type { BlockDefinition, Control } from '../Definition/block-definition';
 import { ColorField } from '../Definition/Input/Color/color-control';
 import { AspectRatioField } from '../Definition/Input/AspectRatio/aspect-ratio-control';
 import { AspectRatioInput } from '../Definition/Input/AspectRatio/aspect-ratio-input';
+import { BorderField } from '../Definition/Input/Border/border-control';
+import { BorderInput } from '../Definition/Input/Border/border-input';
 import { ColorInput } from '../Definition/Input/Color/color-input';
 import { FocalPointField } from '../Definition/Input/FocalPoint/focal-point-control';
 import { FocalPointInput } from '../Definition/Input/FocalPoint/focal-point-input';
@@ -96,6 +98,9 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof FocalPointInput ) {
 		return <FocalPointField { ...props } input={ input } />;
+	}
+	if ( input instanceof BorderInput ) {
+		return <BorderField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

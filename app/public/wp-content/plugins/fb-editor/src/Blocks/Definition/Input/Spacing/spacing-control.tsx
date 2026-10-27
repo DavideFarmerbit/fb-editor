@@ -42,13 +42,13 @@ import { BoxShape, SpacingMode, type SpacingInput } from './spacing-input';
 import { asBox, inferMode, RowId, rowsFor, rowSource, rowValue, withRow } from './spacing';
 import './spacing-control.scss';
 
-const MODE_ICONS: Record< SpacingMode, ReactElement > = {
+export const MODE_ICONS: Record< SpacingMode, ReactElement > = {
 	[ SpacingMode.Linked ]: sidesAll,
 	[ SpacingMode.Axis ]: sidesAxial,
 	[ SpacingMode.Sides ]: sidesHorizontal,
 };
 
-function modeLabel( mode: SpacingMode, shape: BoxShape ): string {
+export function modeLabel( mode: SpacingMode, shape: BoxShape ): string {
 	switch ( mode ) {
 		case SpacingMode.Linked:
 			return shape === BoxShape.Corners ? __( 'All corners', 'fb-editor' ) : __( 'All sides', 'fb-editor' );
@@ -59,7 +59,7 @@ function modeLabel( mode: SpacingMode, shape: BoxShape ): string {
 	}
 }
 
-const ROW_ICONS: Record< RowId, ReactElement > = {
+export const ROW_ICONS: Record< RowId, ReactElement > = {
 	[ RowId.All ]: sidesAll,
 	[ RowId.Vertical ]: sidesVertical,
 	[ RowId.Horizontal ]: sidesHorizontal,
@@ -93,7 +93,7 @@ function cornerLabel( row: RowId ): string {
 	}
 }
 
-function rowLabel( row: RowId, shape: BoxShape ): string {
+export function rowLabel( row: RowId, shape: BoxShape ): string {
 	if ( shape === BoxShape.Corners ) {
 		return cornerLabel( row );
 	}

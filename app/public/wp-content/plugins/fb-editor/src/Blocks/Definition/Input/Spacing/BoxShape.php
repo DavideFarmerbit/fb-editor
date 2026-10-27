@@ -8,7 +8,7 @@ use Fb\TypeScript\ExportToTypeScript;
 
 /**
  * What the four parts of a box input stand for: sides (padding, margin,
- * border width, inset) or corners (radius: top-left, top-right,
+ * inset) or corners (radius: top-left, top-right,
  * bottom-right, bottom-left). Only changes how the editor labels them.
  */
 #[ExportToTypeScript]

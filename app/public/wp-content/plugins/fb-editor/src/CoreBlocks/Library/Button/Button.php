@@ -84,9 +84,7 @@ final class Button extends CoreBlock
 				new Panel( __( 'Icon', 'fb-editor' ), $id( self::ICON ), $id( self::ICON_AFTER ), $id( self::ICON_SIZE ), $id( self::ICON_GAP ) ),
 				new Panel(
 					__( 'Border & shadow', 'fb-editor' ),
-					C::id( C::BORDER_WIDTH ),
-					C::id( C::BORDER_STYLE ),
-					C::id( C::BORDER_COLOR ),
+					C::id( C::BORDER ),
 					C::id( C::BORDER_RADIUS ),
 					C::id( C::SHADOW )
 				),

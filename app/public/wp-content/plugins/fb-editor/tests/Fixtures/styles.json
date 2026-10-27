@@ -940,41 +940,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -995,39 +970,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -1484,9 +1430,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -2420,41 +2364,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -2475,39 +2394,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -2964,9 +2854,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -3878,41 +3766,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -3933,39 +3796,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -4422,9 +4256,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -6026,41 +5858,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -6081,39 +5888,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -6570,9 +6348,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -7526,41 +7302,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -7581,39 +7332,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -8070,9 +7792,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -9002,41 +8722,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -9057,39 +8752,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -9546,9 +9212,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -10488,41 +10152,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -10543,39 +10182,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -11032,9 +10642,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -11928,41 +11536,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -11983,39 +11566,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -12472,9 +12026,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -13412,41 +12964,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -13467,39 +12994,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -13956,9 +13454,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -14871,41 +14367,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -14926,39 +14397,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -15415,9 +14857,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -16345,41 +15785,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -16400,39 +15815,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -16889,9 +16275,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -17799,41 +17183,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -17854,39 +17213,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -18343,9 +17673,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -19251,41 +18579,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -19306,39 +18609,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -19795,9 +19069,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -20600,41 +19872,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -20655,39 +19902,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": "link",
                         "scope": "responsive",
@@ -21122,9 +20340,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -21550,41 +20766,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -21605,39 +20796,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": "link",
                         "scope": "responsive",
@@ -22072,9 +21234,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -23606,41 +22766,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -23661,39 +22796,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -24150,9 +23256,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -25129,41 +24233,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -25184,39 +24263,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -25673,9 +24723,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -26072,41 +25120,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -26127,39 +25150,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": "link",
                         "scope": "responsive",
@@ -26594,9 +25588,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -26656,46 +25648,59 @@
             },
             "attribute": {
                 "base": {
-                    "borderWidth": {
+                    "border": {
                         "desktop": {
                             "top": {
-                                "kind": "custom",
-                                "value": 2,
-                                "unit": "px"
-                            },
-                            "right": {
-                                "kind": "custom",
-                                "value": 2,
-                                "unit": "px"
+                                "width": {
+                                    "kind": "custom",
+                                    "value": 2,
+                                    "unit": "px"
+                                },
+                                "style": "solid",
+                                "color": {
+                                    "kind": "preset",
+                                    "preset": "color",
+                                    "slug": "accent"
+                                }
                             },
                             "bottom": {
-                                "kind": "custom",
-                                "value": 2,
-                                "unit": "px"
+                                "width": {
+                                    "kind": "custom",
+                                    "value": 2,
+                                    "unit": "px"
+                                },
+                                "style": "solid",
+                                "color": {
+                                    "kind": "preset",
+                                    "preset": "color",
+                                    "slug": "accent"
+                                }
                             },
                             "left": {
-                                "kind": "custom",
-                                "value": 2,
-                                "unit": "px"
+                                "width": {
+                                    "kind": "custom",
+                                    "value": -1,
+                                    "unit": "px"
+                                },
+                                "style": "ridge",
+                                "color": {
+                                    "kind": "preset",
+                                    "preset": "spacing",
+                                    "slug": "40"
+                                }
+                            }
+                        },
+                        "tablet": {
+                            "bottom": {
+                                "style": "dashed"
                             }
                         },
                         "mobile": {
                             "top": {
-                                "kind": "custom",
-                                "value": -1,
-                                "unit": "px"
+                                "width": {
+                                    "kind": "auto"
+                                }
                             }
-                        }
-                    },
-                    "borderStyle": {
-                        "desktop": "solid",
-                        "tablet": "ridge"
-                    },
-                    "borderColor": {
-                        "desktop": {
-                            "kind": "preset",
-                            "preset": "color",
-                            "slug": "accent"
                         }
                     },
                     "borderRadius": {
@@ -26780,38 +25785,39 @@
                             "slug": "md"
                         }
                     },
-                    "borderWidth": {
+                    "border": {
                         "desktop": {
                             "top": {
-                                "kind": "custom",
-                                "value": 2.0,
-                                "unit": "px"
-                            },
-                            "right": {
-                                "kind": "custom",
-                                "value": 2.0,
-                                "unit": "px"
+                                "width": {
+                                    "kind": "custom",
+                                    "value": 2.0,
+                                    "unit": "px"
+                                },
+                                "style": "solid",
+                                "color": {
+                                    "kind": "preset",
+                                    "preset": "color",
+                                    "slug": "accent"
+                                }
                             },
                             "bottom": {
-                                "kind": "custom",
-                                "value": 2.0,
-                                "unit": "px"
-                            },
-                            "left": {
-                                "kind": "custom",
-                                "value": 2.0,
-                                "unit": "px"
+                                "width": {
+                                    "kind": "custom",
+                                    "value": 2.0,
+                                    "unit": "px"
+                                },
+                                "style": "solid",
+                                "color": {
+                                    "kind": "preset",
+                                    "preset": "color",
+                                    "slug": "accent"
+                                }
                             }
-                        }
-                    },
-                    "borderStyle": {
-                        "desktop": "solid"
-                    },
-                    "borderColor": {
-                        "desktop": {
-                            "kind": "preset",
-                            "preset": "color",
-                            "slug": "accent"
+                        },
+                        "tablet": {
+                            "bottom": {
+                                "style": "dashed"
+                            }
                         }
                     },
                     "borderRadius": {
@@ -26833,7 +25839,7 @@
             "variant": null,
             "defaultsCss": "",
             "variantCss": "",
-            "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-image:var(--wp--preset--gradient--accent-fade);line-height:1.25;letter-spacing:-0.02em;box-shadow:var(--wp--preset--shadow--md);border-top-width:2px;border-right-width:2px;border-bottom-width:2px;border-left-width:2px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:var(--wp--preset--color--accent);border-right-color:var(--wp--preset--color--accent);border-bottom-color:var(--wp--preset--color--accent);border-left-color:var(--wp--preset--color--accent);border-top-left-radius:8px;border-bottom-right-radius:8px;}}"
+            "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-image:var(--wp--preset--gradient--accent-fade);line-height:1.25;letter-spacing:-0.02em;box-shadow:var(--wp--preset--shadow--md);border-top-width:2px;border-top-style:solid;border-top-color:var(--wp--preset--color--accent);border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:var(--wp--preset--color--accent);border-top-left-radius:8px;border-bottom-right-radius:8px;}@media (max-width: 1024px){:where(.fb-case>.fb-button__link){border-bottom-style:dashed;}}}"
         },
         {
             "name": "aspect ratio and position",
@@ -27670,41 +26676,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -27725,39 +26706,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -28214,9 +27166,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -29178,41 +28128,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -29233,39 +28158,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -29722,9 +28618,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -30675,41 +29569,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -30730,39 +29599,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -31219,9 +30059,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]
@@ -32114,41 +30952,16 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "borderWidth",
-                        "label": "Border width",
+                        "id": "border",
+                        "label": "Border",
                         "input": {
-                            "kind": "spacing",
-                            "allowAuto": false,
-                            "allowNegative": false,
+                            "kind": "border",
                             "modes": [
                                 "linked",
                                 "axis",
                                 "sides"
                             ],
-                            "scale": null,
-                            "shape": "sides"
-                        },
-                        "output": {
-                            "kind": "box",
-                            "properties": {
-                                "top": "border-top-width",
-                                "right": "border-right-width",
-                                "bottom": "border-bottom-width",
-                                "left": "border-left-width"
-                            }
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderStyle",
-                        "label": "Border style",
-                        "input": {
-                            "kind": "select",
-                            "options": [
+                            "styles": [
                                 {
                                     "value": "none",
                                     "label": "None"
@@ -32169,39 +30982,10 @@
                                     "value": "double",
                                     "label": "Double"
                                 }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-style",
-                                "border-right-style",
-                                "border-bottom-style",
-                                "border-left-style"
                             ]
                         },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "borderColor",
-                        "label": "Border color",
-                        "input": {
-                            "kind": "color",
-                            "allowCustom": true
-                        },
                         "output": {
-                            "kind": "property",
-                            "properties": [
-                                "border-top-color",
-                                "border-right-color",
-                                "border-bottom-color",
-                                "border-left-color"
-                            ]
+                            "kind": "border"
                         },
                         "element": null,
                         "scope": "responsive",
@@ -32658,9 +31442,7 @@
                     {
                         "label": "Border & shadow",
                         "controls": [
-                            "borderWidth",
-                            "borderStyle",
-                            "borderColor",
+                            "border",
                             "borderRadius",
                             "shadow"
                         ]

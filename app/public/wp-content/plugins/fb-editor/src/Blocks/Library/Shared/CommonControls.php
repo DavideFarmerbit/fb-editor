@@ -8,18 +8,19 @@ use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\Definition\ElementId;
 use Fb\Blocks\Definition\Input\AspectRatio\AspectRatioInput;
+use Fb\Blocks\Definition\Input\Border\BorderInput;
 use Fb\Blocks\Definition\Input\Color\ColorInput;
 use Fb\Blocks\Definition\Input\Length\LengthInput;
 use Fb\Blocks\Definition\Input\Number\NumberInput;
 use Fb\Blocks\Definition\Input\Preset\PresetInput;
 use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
-use Fb\Blocks\Options\BorderStyle;
 use Fb\Blocks\Options\FontWeight;
 use Fb\Blocks\Options\TextAlign;
 use Fb\Presets\PresetKind;
 use Fb\Styles\CssProperty;
 use Fb\Styles\Output\AxisOutput;
+use Fb\Styles\Output\BorderOutput;
 use Fb\Styles\Output\BoxOutput;
 use Fb\Styles\Output\BoxProperty;
 use Fb\Styles\Output\PropertyOutput;
@@ -41,9 +42,7 @@ final class CommonControls
 	public const string GAP         = 'gap';
 	public const string LINE_HEIGHT    = 'lineHeight';
 	public const string LETTER_SPACING = 'letterSpacing';
-	public const string BORDER_WIDTH   = 'borderWidth';
-	public const string BORDER_STYLE   = 'borderStyle';
-	public const string BORDER_COLOR   = 'borderColor';
+	public const string BORDER         = 'border';
 	public const string BORDER_RADIUS  = 'borderRadius';
 	public const string SHADOW         = 'shadow';
 	public const string GRADIENT       = 'gradient';
@@ -113,31 +112,9 @@ final class CommonControls
 		return new Control( new ControlId( self::LETTER_SPACING ), __( 'Letter spacing', 'fb-editor' ), new LengthInput( allowNegative: true ), new PropertyOutput( CssProperty::LetterSpacing ), $element );
 	}
 
-	public static function borderWidth( ?ElementId $element = null ): Control
+	public static function borderSides( ?ElementId $element = null ): Control
 	{
-		return new Control( new ControlId( self::BORDER_WIDTH ), __( 'Border width', 'fb-editor' ), SpacingInput::borderWidth(), new BoxOutput( BoxProperty::BorderWidth ), $element );
-	}
-
-	public static function borderStyle( ?ElementId $element = null ): Control
-	{
-		return new Control(
-			new ControlId( self::BORDER_STYLE ),
-			__( 'Border style', 'fb-editor' ),
-			new SelectInput( BorderStyle::class ),
-			new PropertyOutput( CssProperty::BorderTopStyle, CssProperty::BorderRightStyle, CssProperty::BorderBottomStyle, CssProperty::BorderLeftStyle ),
-			$element
-		);
-	}
-
-	public static function borderColor( ?ElementId $element = null ): Control
-	{
-		return new Control(
-			new ControlId( self::BORDER_COLOR ),
-			__( 'Border color', 'fb-editor' ),
-			new ColorInput(),
-			new PropertyOutput( CssProperty::BorderTopColor, CssProperty::BorderRightColor, CssProperty::BorderBottomColor, CssProperty::BorderLeftColor ),
-			$element
-		);
+		return new Control( new ControlId( self::BORDER ), __( 'Border', 'fb-editor' ), new BorderInput(), new BorderOutput(), $element );
 	}
 
 	public static function borderRadius( ?ElementId $element = null ): Control
@@ -192,13 +169,13 @@ final class CommonControls
 	}
 
 	/**
-	 * Border width, style, colour and radius, for a block's panel.
+	 * Border (width, style, color per side) and radius, for a block's panel.
 	 *
 	 * @return list<Control>
 	 */
 	public static function border( ?ElementId $element = null ): array
 	{
-		return [ self::borderWidth( $element ), self::borderStyle( $element ), self::borderColor( $element ), self::borderRadius( $element ) ];
+		return [ self::borderSides( $element ), self::borderRadius( $element ) ];
 	}
 
 	public static function id( string $id ): ControlId

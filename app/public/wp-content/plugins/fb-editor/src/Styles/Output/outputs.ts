@@ -6,12 +6,13 @@ import { BooleanValue } from '../../Values/boolean';
 import { BoxValue, SIDES } from '../../Values/box';
 import { KeywordValue } from '../../Values/keyword';
 import { NumberValue } from '../../Values/number';
+import { BorderBox } from '../../Values/border';
 import { SvgValue } from '../../Values/content';
 import { sanitizeSvg } from '../../Blocks/Definition/Input/Svg/svg';
 import type { Presets } from '../../Presets/presets';
 import { isCssValue, type ResponsiveValue } from '../../Values/value';
 import { CssProperty, DeclarationSet } from '../css';
-import type { Side } from '../../Values/box';
+import { Side } from '../../Values/box';
 
 export interface StyleOutput {
 	/** Every property this output can write (used to revert it when hidden). */
@@ -149,6 +150,50 @@ export class MaskIconOutput implements StyleOutput {
 	}
 }
 
+/** Mirrors BorderOutput: per side, only the parts set. */
+export class BorderOutput implements StyleOutput {
+	properties(): CssProperty[] {
+		return SIDES.flatMap( ( side ) => [ ...BorderOutput.longhands( side ) ] );
+	}
+
+	declarations( value: ResponsiveValue | null, presets: Presets ): DeclarationSet {
+		let declarations = DeclarationSet.empty();
+		if ( ! ( value instanceof BorderBox ) ) {
+			return declarations;
+		}
+		for ( const side of SIDES ) {
+			const border = value.get( side );
+			if ( border === null ) {
+				continue;
+			}
+			const [ width, style, color ] = BorderOutput.longhands( side );
+			if ( border.width !== null ) {
+				declarations = declarations.with( width, border.width.toCss() );
+			}
+			if ( border.style !== null ) {
+				declarations = declarations.with( style, border.style );
+			}
+			if ( border.color !== null ) {
+				declarations = declarations.with( color, border.color.toCss( presets ) );
+			}
+		}
+		return declarations;
+	}
+
+	private static longhands( side: Side ): readonly [ CssProperty, CssProperty, CssProperty ] {
+		switch ( side ) {
+			case Side.Top:
+				return [ CssProperty.BorderTopWidth, CssProperty.BorderTopStyle, CssProperty.BorderTopColor ];
+			case Side.Right:
+				return [ CssProperty.BorderRightWidth, CssProperty.BorderRightStyle, CssProperty.BorderRightColor ];
+			case Side.Bottom:
+				return [ CssProperty.BorderBottomWidth, CssProperty.BorderBottomStyle, CssProperty.BorderBottomColor ];
+			case Side.Left:
+				return [ CssProperty.BorderLeftWidth, CssProperty.BorderLeftStyle, CssProperty.BorderLeftColor ];
+		}
+	}
+}
+
 export function outputFromJson( json: JsonValue ): StyleOutput {
 	const kind = json.get( 'kind' ).string();
 	switch ( kind ) {
@@ -180,6 +225,8 @@ export function outputFromJson( json: JsonValue ): StyleOutput {
 			return new SpanOutput( json.get( 'property' ).oneOf( CssProperty ) );
 		case 'mask-icon':
 			return new MaskIconOutput();
+		case 'border':
+			return new BorderOutput();
 		default:
 			throw new InvalidJson( `${ json.path }.kind: unknown output kind "${ kind }"` );
 	}

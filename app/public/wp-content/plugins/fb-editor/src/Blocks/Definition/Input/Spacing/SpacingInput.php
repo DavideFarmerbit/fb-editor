@@ -17,7 +17,7 @@ use Fb\Values\PresetReference;
 use Fb\Values\Side;
 
 /**
- * A four-part length (padding, margin, border width, radius, inset): a
+ * A four-part length (padding, margin, radius, inset): a
  * slider over a theme scale (when there is one) with a custom value + unit
  * toggle, edited linked / per axis / per part. Produces a BoxValue.
  */
@@ -53,11 +53,6 @@ final readonly class SpacingInput implements Input
 	public static function gap(): self
 	{
 		return new self( modes: [ SpacingMode::Linked, SpacingMode::Axis ] );
-	}
-
-	public static function borderWidth(): self
-	{
-		return new self( scale: null );
 	}
 
 	public static function borderRadius(): self
