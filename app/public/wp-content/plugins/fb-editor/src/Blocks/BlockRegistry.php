@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fb\Blocks;
 
 use Fb\Blocks\Definition\BlockDefinition;
+use Fb\Blocks\Library\Container\ContainerItem;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\CoreBlocks\CoreBlock;
 use Fb\CoreBlocks\ManagedCoreBlock;
@@ -41,6 +42,15 @@ final readonly class BlockRegistry implements Hookable
 	) {
 	}
 
+	/**
+	 * A block type's complete definition: its own, plus the controls every
+	 * block gets (Container item). What everything renders and edits with.
+	 */
+	public function definitionOf( BlockType $type ): BlockDefinition
+	{
+		return ContainerItem::extend( $type->definition() );
+	}
+
 	public function definition( string $name ): ?BlockDefinition
 	{
 		foreach ( $this->definitions() as $definition ) {
@@ -59,10 +69,17 @@ final readonly class BlockRegistry implements Hookable
 	 */
 	public function definitions(): array
 	{
-		return [
-			...array_map( static fn ( Block $block ): BlockDefinition => $block->definition(), $this->blocks ),
-			...array_map( static fn ( CoreBlock $block ): BlockDefinition => $block->definition(), $this->coreBlocks ),
-		];
+		return array_map( $this->definitionOf( ... ), $this->types() );
+	}
+
+	/**
+	 * Every block type: fb blocks, then managed core blocks.
+	 *
+	 * @return list<BlockType>
+	 */
+	public function types(): array
+	{
+		return [ ...$this->blocks, ...$this->coreBlocks ];
 	}
 
 	public function coreBlock( ManagedCoreBlock $managed ): ?CoreBlock
@@ -107,7 +124,7 @@ final readonly class BlockRegistry implements Hookable
 						'className'       => true,
 						'customClassName' => true,
 					],
-					'render_callback' => fn ( array $attributes, string $content ): string => $this->renderer->render( $block, $attributes, $content ),
+					'render_callback' => fn ( array $attributes, string $content ): string => $this->renderer->render( $block, $this->definitionOf( $block ), $attributes, $content ),
 				]
 			);
 		}

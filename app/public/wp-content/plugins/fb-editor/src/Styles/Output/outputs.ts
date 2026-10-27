@@ -5,6 +5,7 @@ import { InvalidJson, type JsonValue } from '../../Json/json';
 import { BooleanValue } from '../../Values/boolean';
 import { BoxValue, SIDES } from '../../Values/box';
 import { KeywordValue } from '../../Values/keyword';
+import { NumberValue } from '../../Values/number';
 import type { Presets } from '../../Presets/presets';
 import { isCssValue, type ResponsiveValue } from '../../Values/value';
 import { BoxProperty, boxLonghand, CssProperty, DeclarationSet } from '../css';
@@ -102,6 +103,22 @@ export class ToggleOutput implements StyleOutput {
 	}
 }
 
+/** Mirrors SpanOutput: a whole number of grid tracks (grid-column: span 2). */
+export class SpanOutput implements StyleOutput {
+	constructor( public readonly property: CssProperty ) {}
+
+	properties(): CssProperty[] {
+		return [ this.property ];
+	}
+
+	declarations( value: ResponsiveValue | null ): DeclarationSet {
+		if ( ! ( value instanceof NumberValue ) || ! Number.isInteger( value.value ) || value.value < 1 ) {
+			return DeclarationSet.empty();
+		}
+		return DeclarationSet.empty().with( this.property, `span ${ value.value }` );
+	}
+}
+
 export function outputFromJson( json: JsonValue ): StyleOutput {
 	const kind = json.get( 'kind' ).string();
 	switch ( kind ) {
@@ -122,6 +139,8 @@ export function outputFromJson( json: JsonValue ): StyleOutput {
 				new KeywordValue( json.get( 'on' ).string() ),
 				new KeywordValue( json.get( 'off' ).string() )
 			);
+		case 'span':
+			return new SpanOutput( json.get( 'property' ).oneOf( CssProperty ) );
 		default:
 			throw new InvalidJson( `${ json.path }.kind: unknown output kind "${ kind }"` );
 	}

@@ -45,6 +45,15 @@ final readonly class BlockDefinition implements \JsonSerializable
 		$this->validate();
 	}
 
+	/**
+	 * A copy with more controls, in a panel of their own (e.g. the
+	 * Container item controls every block gets).
+	 */
+	public function withControls( ControlSet $controls, Panel $panel ): self
+	{
+		return new self( $this->name, $this->title, $this->controls->with( $controls ), $this->layout->with( $panel ), $this->elements, $this->states );
+	}
+
 	public function supports( BlockState $state ): bool
 	{
 		return in_array( $state, $this->states, true );

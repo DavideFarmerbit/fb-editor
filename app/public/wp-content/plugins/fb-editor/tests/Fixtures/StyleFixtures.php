@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Fixtures;
 
-use Fb\Blocks\Library\Section\Section;
+use Fb\Blocks\Library\Container\Container;
+use Fb\Blocks\Library\Container\ContainerItem;
 use Fb\CoreBlocks\Library\Button\Button;
 use Fb\Blocks\Values\BlockStyles;
 use Fb\Blocks\Values\StatefulValues;
@@ -36,8 +37,9 @@ final class StyleFixtures
 		$cases = [];
 		foreach ( self::cases() as $case ) {
 			$values   = StatefulValues::fromJson( $case->attribute(), $case->definition, $breakpoints );
-			$defaults = StatefulValues::fromJson( $case->defaultsAttribute(), $case->definition, $breakpoints );
-			$variant  = null === $case->variant ? null : StatefulValues::fromJson( $case->variant, $case->definition, $breakpoints );
+			// Defaults and variants parse like their repositories: no placed values.
+			$defaults = StatefulValues::fromJson( $case->defaultsAttribute(), $case->definition, $breakpoints, placed: false );
+			$variant  = null === $case->variant ? null : StatefulValues::fromJson( $case->variant, $case->definition, $breakpoints, placed: false );
 			$weaker   = null === $variant ? [ $defaults ] : [ $variant, $defaults ];
 			$cases[]  = [
 				'name'        => $case->name,
@@ -76,20 +78,21 @@ final class StyleFixtures
 	private static function cases(): array
 	{
 		$fixture = SectionFixture::definition();
-		$section = ( new Section() )->definition();
+		// Complete definitions (with Container item controls), as the editor gets them.
+		$container = ContainerItem::extend( ( new Container() )->definition() );
 		$button  = ( new Button() )->definition();
 
 		return [
-			new StyleCase( 'padding with presets and a mobile override', $section, [
+			new StyleCase( 'padding with presets and a mobile override', $container, [
 				'padding' => [
 					'desktop' => [ 'top' => self::preset( '80' ), 'bottom' => self::preset( '80' ) ],
 					'mobile'  => [ 'top' => self::preset( '50' ) ],
 				],
 			] ),
-			new StyleCase( 'tablet-only value', $section, [
+			new StyleCase( 'tablet-only value', $container, [
 				'margin' => [ 'tablet' => [ 'left' => [ 'kind' => 'auto' ], 'right' => [ 'kind' => 'auto' ] ] ],
 			] ),
-			new StyleCase( 'repeated values are not written twice', $section, [
+			new StyleCase( 'repeated values are not written twice', $container, [
 				'padding' => [
 					'desktop' => [ 'top' => self::px( 10 ), 'left' => self::px( 10 ) ],
 					'tablet'  => [ 'top' => self::px( 10 ), 'left' => self::px( 12 ) ],
@@ -107,7 +110,7 @@ final class StyleFixtures
 			new StyleCase( 'gap never visible writes nothing', $fixture, [
 				'gap' => [ 'desktop' => [ 'top' => self::px( 8 ) ] ],
 			] ),
-			new StyleCase( 'number formatting and negative margins', $section, [
+			new StyleCase( 'number formatting and negative margins', $container, [
 				'margin' => [
 					'desktop' => [
 						'top'    => [ 'kind' => 'custom', 'value' => -12.5, 'unit' => 'px' ],
@@ -118,10 +121,10 @@ final class StyleFixtures
 					'mobile'  => [ 'bottom' => [ 'kind' => 'custom', 'value' => -0.0, 'unit' => 'em' ] ],
 				],
 			] ),
-			new StyleCase( 'kebab-cased preset slugs', $section, [
+			new StyleCase( 'kebab-cased preset slugs', $container, [
 				'padding' => [ 'desktop' => [ 'top' => self::preset( '2xl' ), 'right' => self::preset( 'xLarge' ), 'bottom' => self::preset( 'x_small' ) ] ],
 			] ),
-			new StyleCase( 'invalid values are dropped one by one', $section, [
+			new StyleCase( 'invalid values are dropped one by one', $container, [
 				'padding' => [
 					'desktop' => [ 'top' => self::px( -4 ), 'left' => self::px( 4 ) ],
 					'tablet'  => [ 'top' => [ 'kind' => 'auto' ] ],
@@ -131,33 +134,33 @@ final class StyleFixtures
 				'display' => [ 'desktop' => 'table' ],
 				'unknown' => [ 'desktop' => 'x' ],
 			] ),
-			new StyleCase( 'static control without output', $section, [ 'tag' => 'header' ] ),
-			new StyleCase( 'palette and custom colors', $section, [
+			new StyleCase( 'static control without output', $container, [ 'tag' => 'header' ] ),
+			new StyleCase( 'palette and custom colors', $container, [
 				'background' => [ 'desktop' => self::color( 'accent' ), 'mobile' => [ 'kind' => 'custom', 'value' => '#FFAA00' ] ],
 				'textColor'  => [ 'desktop' => self::color( 'x-dark' ), 'tablet' => self::color( 'x-dark' ) ],
 			] ),
-			new StyleCase( 'invalid colors are dropped', $section, [
+			new StyleCase( 'invalid colors are dropped', $container, [
 				'background' => [
 					'desktop' => [ 'kind' => 'custom', 'value' => 'red;}body{' ],
 					'tablet'  => [ 'kind' => 'preset', 'preset' => 'spacing', 'slug' => '40' ],
 					'mobile'  => [ 'kind' => 'custom', 'value' => '#abc' ],
 				],
 			] ),
-			new StyleCase( 'single lengths', $section, [
+			new StyleCase( 'single lengths', $container, [
 				'minHeight' => [ 'desktop' => [ 'kind' => 'custom', 'value' => 100, 'unit' => 'vh' ], 'mobile' => [ 'kind' => 'auto' ] ],
 				'maxWidth'  => [ 'desktop' => [ 'kind' => 'custom', 'value' => 72.5, 'unit' => 'rem' ], 'tablet' => self::preset( '40' ) ],
 			] ),
-			new StyleCase( 'wrap toggle only while display is flex', $section, [
+			new StyleCase( 'wrap toggle only while display is flex', $container, [
 				'display' => [ 'desktop' => 'flex', 'mobile' => 'grid' ],
 				'wrap'    => [ 'desktop' => true, 'tablet' => false ],
 			] ),
-			new StyleCase( 'toggle rejects non-booleans', $section, [
+			new StyleCase( 'toggle rejects non-booleans', $container, [
 				'display' => [ 'desktop' => 'flex' ],
 				'wrap'    => [ 'desktop' => 'yes', 'tablet' => 1, 'mobile' => false ],
 			] ),
 			new StyleCase(
 				'type defaults with a breakpoint override',
-				$section,
+				$container,
 				[],
 				[ 'padding' => [ 'desktop' => [ 'top' => self::preset( '80' ) ], 'mobile' => [ 'top' => self::preset( '40' ) ] ] ]
 			),
@@ -219,8 +222,30 @@ final class StyleFixtures
 					'states' => [ 'hover' => [ 'display' => [ 'desktop' => 'grid' ] ], 'focus' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 1 ) ] ] ] ],
 				]
 			),
-			new StyleCase( 'garbage states', $section, [], [], [ 'hover' => 'nope', 'focus' => [ 'padding' => 'x' ] ] ),
-			new StyleCase( 'garbage attribute', $section, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
+			new StyleCase( 'grid columns, numbers and spans', $container, [
+				'display'        => [ 'desktop' => 'grid', 'mobile' => 'flex' ],
+				'columns'        => [
+					'desktop' => [ 'kind' => 'count', 'count' => 4 ],
+					'tablet'  => [ 'kind' => 'fit', 'min' => [ 'kind' => 'custom', 'value' => 12.5, 'unit' => 'rem' ] ],
+					'mobile'  => [ 'kind' => 'count', 'count' => 13 ],
+				],
+				'contentWidth'   => [ 'desktop' => [ 'kind' => 'custom', 'value' => 1200, 'unit' => 'px' ] ],
+				'itemGrow'       => [ 'desktop' => 1.5, 'tablet' => -1 ],
+				'itemOrder'      => [ 'desktop' => 2, 'tablet' => 2.5 ],
+				'itemColumnSpan' => [ 'desktop' => 3, 'mobile' => 0 ],
+				'itemBasis'      => [ 'desktop' => [ 'kind' => 'auto' ] ],
+			] ),
+			new StyleCase(
+				'item settings never come from defaults or variants',
+				$container,
+				[ 'itemGrow' => [ 'desktop' => 2 ] ],
+				[ 'itemGrow' => [ 'desktop' => 1 ], 'padding' => [ 'desktop' => [ 'top' => self::px( 4 ) ] ] ],
+				[ 'hover' => [ 'itemGrow' => [ 'desktop' => 3 ] ] ],
+				[],
+				[ 'base' => [ 'itemOrder' => [ 'desktop' => 1 ], 'maxWidth' => [ 'desktop' => self::px( 600 ) ] ] ]
+			),
+			new StyleCase( 'garbage states', $container, [], [], [ 'hover' => 'nope', 'focus' => [ 'padding' => 'x' ] ] ),
+			new StyleCase( 'garbage attribute', $container, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
 		];
 	}
 

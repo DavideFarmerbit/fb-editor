@@ -19,6 +19,11 @@ final readonly class Layout implements \IteratorAggregate, \JsonSerializable
 		$this->panels = array_values( $panels );
 	}
 
+	public function with( Panel ...$panels ): self
+	{
+		return new self( ...$this->panels, ...$panels );
+	}
+
 	/**
 	 * @return \ArrayIterator<int, Panel>
 	 */

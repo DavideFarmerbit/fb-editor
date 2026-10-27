@@ -119,6 +119,22 @@ final readonly class BlockValues implements \JsonSerializable
 	}
 
 	/**
+	 * Without the controls that belong to the block's place (see
+	 * Placement): what type defaults and variants may hold.
+	 */
+	public function withoutPlaced(): self
+	{
+		$values = [];
+		foreach ( $this->definition->controls as $control ) {
+			if ( ! $control->isPlaced() && isset( $this->values[ $control->id->value ] ) ) {
+				$values[ $control->id->value ] = $this->values[ $control->id->value ];
+			}
+		}
+
+		return new self( $this->definition, $this->breakpoints, $values );
+	}
+
+	/**
 	 * Where values are resolved: the breakpoints they are keyed by.
 	 */
 	public function breakpoints(): BreakpointList

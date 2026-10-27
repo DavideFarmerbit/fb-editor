@@ -25,6 +25,8 @@ final readonly class Control implements \JsonSerializable
 		public ?ElementId $element = null,
 		public Scope $scope = Scope::Responsive,
 		public ?Condition $visibleWhen = null,
+		/** Only inside a given parent block; null: anywhere. */
+		public ?Placement $placement = null,
 	) {
 		if ( null !== $element && null === $output ) {
 			throw new \InvalidArgumentException( "Control \"{$id}\": an element only makes sense with an output." );
@@ -38,11 +40,17 @@ final readonly class Control implements \JsonSerializable
 	 */
 	public function isStateful(): bool
 	{
-		return Scope::Responsive === $this->scope && null !== $this->output;
+		return Scope::Responsive === $this->scope && null !== $this->output && null === $this->placement;
+	}
+
+	/** Belongs to the block's place (see Placement), not its look. */
+	public function isPlaced(): bool
+	{
+		return null !== $this->placement;
 	}
 
 	/**
-	 * @return array{id: ControlId, label: string, input: Input, output: ?StyleOutput, element: ?ElementId, scope: Scope, visibleWhen: ?Condition}
+	 * @return array{id: ControlId, label: string, input: Input, output: ?StyleOutput, element: ?ElementId, scope: Scope, visibleWhen: ?Condition, placement: ?Placement}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -54,6 +62,7 @@ final readonly class Control implements \JsonSerializable
 			'element'     => $this->element,
 			'scope'       => $this->scope,
 			'visibleWhen' => $this->visibleWhen,
+			'placement'   => $this->placement,
 		];
 	}
 }

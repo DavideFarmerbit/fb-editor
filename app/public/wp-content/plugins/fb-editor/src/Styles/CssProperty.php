@@ -39,6 +39,25 @@ enum CssProperty: string
 	case Height        = 'height';
 	case VerticalAlign = 'vertical-align';
 	case TextDecoration = 'text-decoration';
+	case LineHeight    = 'line-height';
+	case FlexDirection = 'flex-direction';
+	case AlignItems    = 'align-items';
+	case AlignContent  = 'align-content';
+	case JustifyItems  = 'justify-items';
+	case GridTemplateColumns = 'grid-template-columns';
+	case FlexGrow      = 'flex-grow';
+	case FlexShrink    = 'flex-shrink';
+	case FlexBasis     = 'flex-basis';
+	case AlignSelf     = 'align-self';
+	case Order         = 'order';
+	case GridColumn    = 'grid-column';
+	case GridRow       = 'grid-row';
+	// Custom properties composed by base CSS (see Container).
+	case PaddingTopVar    = '--fb-padding-top';
+	case PaddingRightVar  = '--fb-padding-right';
+	case PaddingBottomVar = '--fb-padding-bottom';
+	case PaddingLeftVar   = '--fb-padding-left';
+	case ContentWidthVar  = '--fb-content-width';
 
 	public static function padding( Side $side ): self
 	{
@@ -47,6 +66,16 @@ enum CssProperty: string
 			Side::Right  => self::PaddingRight,
 			Side::Bottom => self::PaddingBottom,
 			Side::Left   => self::PaddingLeft,
+		};
+	}
+
+	public static function paddingVar( Side $side ): self
+	{
+		return match ( $side ) {
+			Side::Top    => self::PaddingTopVar,
+			Side::Right  => self::PaddingRightVar,
+			Side::Bottom => self::PaddingBottomVar,
+			Side::Left   => self::PaddingLeftVar,
 		};
 	}
 

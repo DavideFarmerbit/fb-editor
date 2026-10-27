@@ -5,6 +5,8 @@
  * "Saving" a variant always takes what the block looks like (its variant,
  * if any, with its own values on top) and leaves the block pointing at the
  * variant with no values of its own: what it showed is now the variant.
+ * Values that belong to the block's place (Container item settings) never
+ * go into a variant: they stay on the block.
  */
 import type { BreakpointList } from '../../Breakpoints/breakpoints';
 import type { BlockDefinition } from '../Definition/block-definition';
@@ -26,8 +28,6 @@ function lookOf( attribute: BlockAttribute, variant: Variant | null ): StatefulV
 }
 
 export function saveAsNewVariant(
-	definition: BlockDefinition,
-	breakpoints: BreakpointList,
 	attribute: BlockAttribute,
 	variant: Variant | null,
 	all: VariantSet,
@@ -36,8 +36,8 @@ export function saveAsNewVariant(
 ): VariantChange {
 	const slug = slugFromName( name, all );
 	return new VariantChange(
-		new BlockAttribute( slug, StatefulValues.empty( definition, breakpoints ) ),
-		saved.with( new Variant( slug, name.trim() === '' ? slug : name.trim(), lookOf( attribute, variant ) ) )
+		new BlockAttribute( slug, attribute.values.onlyPlaced() ),
+		saved.with( new Variant( slug, name.trim() === '' ? slug : name.trim(), lookOf( attribute, variant ).withoutPlaced() ) )
 	);
 }
 
@@ -54,8 +54,8 @@ export function updateVariant(
 ): VariantChange {
 	const current = saved.get( variant.slug ) ?? new Variant( variant.slug, variant.name, StatefulValues.empty( definition, breakpoints ) );
 	return new VariantChange(
-		new BlockAttribute( variant.slug, StatefulValues.empty( definition, breakpoints ) ),
-		saved.with( current.withValues( current.values.overlay( attribute.values ) ) )
+		new BlockAttribute( variant.slug, attribute.values.onlyPlaced() ),
+		saved.with( current.withValues( current.values.overlay( attribute.values.withoutPlaced() ) ) )
 	);
 }
 

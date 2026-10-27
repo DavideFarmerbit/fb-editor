@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Fixtures;
 
+use Fb\Blocks\Block;
 use Fb\Blocks\Defaults\DefaultsRepository;
+use Fb\Blocks\Library\Container\ContainerItem;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\BlockStyler;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
@@ -34,5 +36,15 @@ final readonly class TestRendering
 		$this->collector = new InstanceStyleCollector( $breakpoints, $this->defaults );
 		$this->styler    = new BlockStyler( $breakpoints, $this->collector, $this->variants );
 		$this->renderer  = new BlockRenderer( $this->styler, $this->defaults );
+	}
+
+	/**
+	 * Renders like BlockRegistry does: with the block's complete definition.
+	 *
+	 * @param array<mixed> $attributes
+	 */
+	public function render( Block $block, array $attributes, string $content ): string
+	{
+		return $this->renderer->render( $block, ContainerItem::extend( $block->definition() ), $attributes, $content );
 	}
 }

@@ -104,7 +104,7 @@ final readonly class BlockMarkupCleaner implements Hookable
 
 		$attrs = is_array( $block['attrs'] ?? null ) ? $block['attrs'] : [];
 
-		return $this->styler->style( $coreBlock->definition(), $attrs[ BlockRegistry::ATTRIBUTE ] ?? null )->classes;
+		return $this->styler->style( $this->blocks->definitionOf( $coreBlock ), $attrs[ BlockRegistry::ATTRIBUTE ] ?? null )->classes;
 	}
 
 	/**

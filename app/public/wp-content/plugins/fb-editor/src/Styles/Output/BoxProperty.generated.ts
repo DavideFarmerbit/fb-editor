@@ -5,4 +5,5 @@
 export enum BoxProperty {
 	Padding = 'padding',
 	Margin = 'margin',
+	PaddingVars = '--fb-padding',
 }

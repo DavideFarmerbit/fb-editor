@@ -8,7 +8,7 @@ use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\BlockDefaultsPostType;
 use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Defaults\DefaultsStylesheet;
-use Fb\Blocks\Library\Section\Section;
+use Fb\Blocks\Library\Container\Container;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
@@ -27,17 +27,17 @@ final class DefaultsTest extends TestCase
 	private const string THEME = 'fb-phpunit-theme';
 
 	private BreakpointConfig $breakpoints;
-	private Section $section;
+	private Container $container;
 	private ?int $postId = null;
 
 	protected function setUp(): void
 	{
 		add_filter( 'fb_breakpoints', TestBreakpoints::list( ... ) );
 		$this->breakpoints = new BreakpointConfig();
-		$this->section     = new Section();
+		$this->container   = new Container();
 
 		// Sanitizing on save needs the post type hooks.
-		$registry = new BlockRegistry( $this->rendering()->renderer, [ $this->section ] );
+		$registry = new BlockRegistry( $this->rendering()->renderer, [ $this->container ] );
 		( new BlockDefaultsPostType( $registry, $this->breakpoints ) )->register();
 		do_action( 'init' );
 	}
@@ -67,8 +67,8 @@ final class DefaultsTest extends TestCase
 			[
 				'post_type'    => BlockDefaultsPostType::POST_TYPE,
 				'post_status'  => 'publish',
-				'post_title'   => 'fb/section',
-				'post_name'    => BlockDefaultsPostType::slug( $this->section->definition()->name, self::THEME ),
+				'post_title'   => 'fb/container',
+				'post_name'    => BlockDefaultsPostType::slug( $this->container->definition()->name, self::THEME ),
 				'post_content' => wp_slash( $content ),
 			]
 		);
@@ -88,15 +88,15 @@ final class DefaultsTest extends TestCase
 		self::assertSame(
 			// Theme desktop + saved mobile (beats theme mobile) + theme display.
 			'{"base":{"display":{"desktop":"flex"},"padding":{"desktop":{"top":{"kind":"custom","value":40.0,"unit":"px"}},"mobile":{"top":{"kind":"custom","value":24.0,"unit":"px"}}}}}',
-			wp_json_encode( $this->repository()->for( $this->section->definition() ), JSON_PRESERVE_ZERO_FRACTION )
+			wp_json_encode( $this->repository()->for( $this->container->definition() ), JSON_PRESERVE_ZERO_FRACTION )
 		);
 	}
 
 	public function testDefaultsAreCompiledOnTheBlockClass(): void
 	{
 		self::assertSame(
-			'@layer fb.defaults{:where(.fb-section>.fb-section__inner){display:flex;}:where(.fb-section){padding-top:40px;}@media (max-width: 767px){:where(.fb-section){padding-top:16px;}}}',
-			( new DefaultsStylesheet( $this->repository(), $this->breakpoints ) )->css( [ $this->section->definition() ] )
+			'@layer fb.defaults{:where(.fb-container){display:flex;--fb-padding-top:40px;}@media (max-width: 767px){:where(.fb-container){--fb-padding-top:16px;}}}',
+			( new DefaultsStylesheet( $this->repository(), $this->breakpoints ) )->css( [ $this->container->definition() ] )
 		);
 	}
 
@@ -113,10 +113,10 @@ final class DefaultsTest extends TestCase
 	public function testRenderFallsBackToTheDefaultTag(): void
 	{
 		$this->save( '{"base":{"tag":"aside"}}' );
-		$renderer = $this->rendering()->renderer;
+		$rendering = $this->rendering();
 
-		self::assertStringStartsWith( '<aside class="fb-section', $renderer->render( $this->section, [], '' ) );
-		self::assertStringStartsWith( '<main class="fb-section', $renderer->render( $this->section, [ 'fb' => [ 'base' => [ 'tag' => 'main' ] ] ], '' ) );
+		self::assertStringStartsWith( '<aside class="fb-container', $rendering->render( $this->container, [], '' ) );
+		self::assertStringStartsWith( '<main class="fb-container', $rendering->render( $this->container, [ 'fb' => [ 'base' => [ 'tag' => 'main' ] ] ], '' ) );
 	}
 
 	public function testNoBlocksOnThePageMeansNoDefaultsCss(): void

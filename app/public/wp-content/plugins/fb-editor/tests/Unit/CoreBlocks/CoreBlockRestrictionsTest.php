@@ -39,7 +39,7 @@ final class CoreBlockRestrictionsTest extends TestCase
 		$allowed = get_allowed_block_types( new \WP_Block_Editor_Context( [ 'name' => 'core/edit-post' ] ) );
 
 		self::assertIsArray( $allowed );
-		self::assertContains( 'fb/section', $allowed );
+		self::assertContains( 'fb/container', $allowed );
 		self::assertContains( 'core/paragraph', $allowed );
 		self::assertContains( 'core/template-part', $allowed );
 		self::assertNotContains( 'core/cover', $allowed );

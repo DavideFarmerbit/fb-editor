@@ -19,6 +19,7 @@ import type { BlockDefinition, Control } from './Definition/block-definition';
 import type { BlockState } from './States/BlockState.generated';
 import { fromDefault } from './Inspector/control-reading';
 import { WeakerSource } from './Inspector/fallbacks';
+import { ParentContext } from './Inspector/parent-context';
 import { StatefulInspector } from './Inspector/stateful-inspector';
 import { InstanceStyles } from './Rendering/instance-styles';
 import { BlockAttribute } from './Values/block-attribute';
@@ -86,6 +87,54 @@ export function useVariantOf( definition: BlockDefinition, attribute: unknown ):
 	return slug === null ? null : variants.all.get( slug );
 }
 
+/** The block editor store, by name: its package ships no store types. */
+const BLOCK_EDITOR = 'core/block-editor';
+
+interface BlockEditorSelectors {
+	getBlockRootClientId( clientId: string ): string | null;
+	getBlockName( clientId: string ): string | null;
+	getBlockAttributes( clientId: string ): Readonly< Record< string, unknown > > | null;
+}
+
+/**
+ * The block's parent as placed controls see it. Two plain selections (a
+ * name, the stored attribute), never a fresh object: useSelect compares
+ * results by identity, and a new object each time would re-render on every
+ * store change.
+ */
+function useParentContext( clientId: string, fallback: BlockDefinition ): ParentContext | null {
+	const name = useSelect(
+		( select ) => {
+			const editor = select( BLOCK_EDITOR ) as BlockEditorSelectors;
+			const root = editor.getBlockRootClientId( clientId );
+			return root === null ? null : editor.getBlockName( root );
+		},
+		[ clientId ]
+	);
+	const attribute = useSelect(
+		( select ) => {
+			const editor = select( BLOCK_EDITOR ) as BlockEditorSelectors;
+			const root = editor.getBlockRootClientId( clientId );
+			return root === null ? undefined : editor.getBlockAttributes( root )?.[ ATTRIBUTE ];
+		},
+		[ clientId ]
+	);
+	const parent = name === null ? undefined : settings.blocks.find( ( candidate ) => candidate.name === name );
+	// Hooks run unconditionally: without an fb parent their result is unused.
+	const { defaults } = useBlockDefaults( parent ?? fallback );
+	const { variants } = useBlockVariants( parent ?? fallback );
+
+	return useMemo( () => {
+		if ( parent === undefined ) {
+			return null;
+		}
+		const parsed = BlockAttribute.fromJson( attribute, parent, settings.breakpoints );
+		const variant = parsed.variant === null ? null : variants.all.get( parsed.variant );
+		const weaker = variant === null ? [ defaults.values ] : [ variant.values, defaults.values ];
+		return new ParentContext( parent, parsed.values.chain( null, ...weaker ) );
+	}, [ parent, attribute, defaults, variants ] );
+}
+
 /**
  * Editor-only instance class: stable per block while editing (the frontend
  * hash depends on values, so it would change on every edit).
@@ -134,6 +183,7 @@ interface FbBlockChromeProps {
 export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChromeProps ): ReactElement {
 	const { values, defaults, variant } = state;
 	const defaultsSource = new WeakerSource( defaults.values, fromDefault( definition.title ) );
+	const parent = useParentContext( clientId, definition );
 
 	return (
 		<>
@@ -144,6 +194,8 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 					values={ values }
 					weaker={ variant === null ? [ defaultsSource ] : [ new WeakerSource( variant.values, fromVariant( variant.name ) ), defaultsSource ] }
 					listFallbackControls={ false }
+					allowPlaced
+					parent={ parent }
 					memoryKey={ clientId }
 					onChange={ ( next ) => state.setValues( next ) }
 					makeDefault={

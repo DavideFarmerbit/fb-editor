@@ -7,6 +7,7 @@ namespace Fb\Blocks\Rendering;
 use Fb\Blocks\Block;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\DefaultsRepository;
+use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Output\ClassList;
 
 /**
@@ -22,11 +23,11 @@ final readonly class BlockRenderer
 	}
 
 	/**
-	 * @param array<mixed> $attributes Raw block attributes from WordPress.
+	 * @param BlockDefinition $definition The block's complete definition (BlockRegistry::definitionOf()).
+	 * @param array<mixed>    $attributes Raw block attributes from WordPress.
 	 */
-	public function render( Block $block, array $attributes, string $content ): string
+	public function render( Block $block, BlockDefinition $definition, array $attributes, string $content ): string
 	{
-		$definition = $block->definition();
 		$styled     = $this->styler->style( $definition, $attributes[ BlockRegistry::ATTRIBUTE ] ?? null );
 
 		$classes     = $styled->classes;

@@ -51,7 +51,7 @@ final readonly class VariantSet implements \JsonSerializable
 			if ( null === $slug || isset( $variants[ $slug->value ] ) ) {
 				continue;
 			}
-			$values                    = StatefulValues::fromJson( $item->has( 'values' ) ? $item->get( 'values' )->decoded() : null, $definition, $breakpoints );
+			$values                    = StatefulValues::fromJson( $item->has( 'values' ) ? $item->get( 'values' )->decoded() : null, $definition, $breakpoints, placed: false );
 			$variants[ $slug->value ] = new Variant( $slug, '' === $name ? $slug->value : sanitize_text_field( $name ), $values );
 		}
 

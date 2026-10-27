@@ -28,7 +28,7 @@ export function useBlockDefaults( definition: BlockDefinition ): { defaults: Blo
 	const post = useDesignPost( definition, POST_TYPE, info.postSlug, '{}' );
 
 	const defaults = useMemo( () => {
-		const saved = StatefulValues.fromJson( post.content, definition, settings.breakpoints );
+		const saved = StatefulValues.fromJson( post.content, definition, settings.breakpoints, false );
 		return new BlockDefaults( info.themeDefaults.overlay( saved ), saved, info.themeDefaults, post.canEdit );
 	}, [ post.content, post.canEdit, definition, info ] );
 

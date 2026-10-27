@@ -9,7 +9,7 @@ use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
-use Fb\CoreBlocks\BaseStylesheet;
+use Fb\Blocks\BaseStyles\BaseStylesheet;
 use Fb\CoreBlocks\Library\Button\Button;
 use Fb\CoreBlocks\Library\Paragraph\Paragraph;
 use Fb\Blocks\Variants\VariantsStylesheet;

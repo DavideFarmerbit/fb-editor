@@ -36,9 +36,11 @@ final readonly class StatefulValues implements \JsonSerializable
 	}
 
 	/**
-	 * @param mixed $json Decoded JSON (a block attribute, a saved default…).
+	 * @param mixed $json   Decoded JSON (a block attribute, a saved default…).
+	 * @param bool  $placed Keep controls that belong to the block's place
+	 *     (only a block's own attribute has them; see Placement).
 	 */
-	public static function fromJson( mixed $json, BlockDefinition $definition, BreakpointList $breakpoints ): self
+	public static function fromJson( mixed $json, BlockDefinition $definition, BreakpointList $breakpoints, bool $placed = true ): self
 	{
 		$root = JsonValue::of( $json, 'fb' );
 		if ( ! $root->isObject() ) {
@@ -46,6 +48,7 @@ final readonly class StatefulValues implements \JsonSerializable
 		}
 
 		$base       = BlockValues::fromAttribute( $root->has( 'base' ) ? $root->get( 'base' )->decoded() : null, $definition, $breakpoints );
+		$base       = $placed ? $base : $base->withoutPlaced();
 		$statesJson = $root->has( 'states' ) ? $root->get( 'states' ) : null;
 
 		$states = [];

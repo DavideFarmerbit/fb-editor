@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Fb\Editor;
 
 use Fb\Blocks\BlockRegistry;
-use Fb\CoreBlocks\BaseStylesheet;
+use Fb\Blocks\BaseStyles\BaseStylesheet;
 use Fb\Hookable;
 use Fb\Output\CanvasStylePolicy;
 use Fb\Output\StylePolicyApplier;
@@ -50,7 +50,7 @@ final readonly class CanvasStyles implements Hookable
 			wp_register_style( self::HANDLE, false, [], null );
 			wp_add_inline_style(
 				self::HANDLE,
-				$this->tokens->css( withCoreStyles: false ) . ( new BaseStylesheet() )->css( $this->blocks->coreBlocks, editor: true )
+				$this->tokens->css( withCoreStyles: false ) . ( new BaseStylesheet() )->css( $this->blocks->types(), editor: true )
 			);
 		}
 		wp_enqueue_style( self::HANDLE );

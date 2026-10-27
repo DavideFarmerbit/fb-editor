@@ -37,9 +37,10 @@ class ParityCase {
 	run(): void {
 		const definition = blockDefinitionFromJson( this.json.get( 'definition' ) );
 		const values = StatefulValues.fromJson( this.json.get( 'attribute' ).decoded(), definition, breakpoints );
-		const defaults = StatefulValues.fromJson( this.json.get( 'defaults' ).decoded(), definition, breakpoints );
+		// Defaults and variants never hold placed values (as their repositories parse them).
+		const defaults = StatefulValues.fromJson( this.json.get( 'defaults' ).decoded(), definition, breakpoints, false );
 		const variantJson = this.json.get( 'variant' );
-		const variant = variantJson.isNull() ? null : StatefulValues.fromJson( variantJson.decoded(), definition, breakpoints );
+		const variant = variantJson.isNull() ? null : StatefulValues.fromJson( variantJson.decoded(), definition, breakpoints, false );
 		const weaker = variant === null ? [ defaults ] : [ variant, defaults ];
 		const root = Selector.forClass( this.json.get( 'rootClass' ).string() );
 

@@ -62,6 +62,8 @@ function BlockTypeDefaults( { definition }: { readonly definition: BlockDefiniti
 						values={ defaults.saved }
 						weaker={ [ new WeakerSource( defaults.theme, __( 'From theme', 'fb-editor' ) ) ] }
 						listFallbackControls
+						allowPlaced={ false }
+						parent={ null }
 						memoryKey={ `defaults/${ definition.name }` }
 						onChange={ save }
 						makeDefault={ null }

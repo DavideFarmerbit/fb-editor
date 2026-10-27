@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Fb\CoreBlocks;
 
+use Fb\Blocks\BaseStyles\BaseStyle;
+use Fb\Blocks\BlockType;
 use Fb\Blocks\Definition\BlockDefinition;
 
 /**
@@ -11,7 +13,7 @@ use Fb\Blocks\Definition\BlockDefinition;
  * the functional base CSS that replaces core's stylesheet. Core renders the
  * markup; fb adds classes and CSS.
  */
-abstract class CoreBlock
+abstract class CoreBlock implements BlockType
 {
 	private ?BlockDefinition $definition = null;
 

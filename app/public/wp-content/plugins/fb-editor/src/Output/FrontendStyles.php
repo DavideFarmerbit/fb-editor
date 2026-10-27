@@ -8,7 +8,7 @@ use Fb\Blocks\Defaults\DefaultsStylesheet;
 use Fb\Blocks\Variants\VariantsStylesheet;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Blocks\BlockRegistry;
-use Fb\CoreBlocks\BaseStylesheet;
+use Fb\Blocks\BaseStyles\BaseStylesheet;
 use Fb\Hookable;
 use Fb\RequestContext;
 
@@ -62,7 +62,7 @@ final readonly class FrontendStyles implements Hookable
 		wp_add_inline_style(
 			self::HANDLE,
 			$this->tokens->css( withCoreStyles: true )
-				. ( new BaseStylesheet() )->css( $this->blocks->coreBlocks, editor: false )
+				. ( new BaseStylesheet() )->css( $this->blocks->types(), editor: false )
 				. $this->defaults->css( $this->instances->definitions() )
 				. $this->variants->css( $this->instances->variants() )
 				. $this->instances->css()

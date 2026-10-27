@@ -49,7 +49,7 @@ if ( primary === null ) {
 describe( 'variant actions', () => {
 	test( 'save as new: the block’s whole look becomes the variant', () => {
 		const block = attribute( { variant: 'primary', base: weight( '700', '400' ) } );
-		const change = saveAsNewVariant( button, breakpoints, block, primary, all, saved, ' Big & Bold ' );
+		const change = saveAsNewVariant( block, primary, all, saved, ' Big & Bold ' );
 
 		expect( json( change.attribute ) ).toEqual( { variant: 'big-bold' } );
 		expect( json( change.saved?.get( 'big-bold' as never ) ) ).toEqual( {

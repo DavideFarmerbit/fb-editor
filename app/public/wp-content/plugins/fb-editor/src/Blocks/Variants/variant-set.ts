@@ -85,7 +85,7 @@ export class VariantSet {
 			}
 			const rawName = item.has( 'name' ) ? item.get( 'name' ).decoded() : null;
 			const name = typeof rawName === 'string' ? rawName.trim() : '';
-			const values = StatefulValues.fromJson( item.has( 'values' ) ? item.get( 'values' ).decoded() : null, definition, breakpoints );
+			const values = StatefulValues.fromJson( item.has( 'values' ) ? item.get( 'values' ).decoded() : null, definition, breakpoints, false );
 			variants.set( slug, new Variant( slug, name === '' ? slug : name, values ) );
 		}
 

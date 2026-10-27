@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Fb\CoreBlocks;
+namespace Fb\Blocks\BaseStyles;
 
+use Fb\Blocks\BlockType;
 use Fb\Blocks\Definition\Element;
 use Fb\Css\CssLayer;
 use Fb\Styles\RuleSet;
 use Fb\Styles\Selector;
 
 /**
- * The `fb.base` layer: functional CSS of managed core blocks, below type
- * defaults so every bit of it can be overridden.
+ * The `fb.base` layer: functional CSS of block types (fb blocks and managed
+ * core blocks), below type defaults so every bit of it can be overridden.
  */
 final readonly class BaseStylesheet
 {
 	/**
-	 * @param list<CoreBlock> $blocks
+	 * @param list<BlockType> $blocks
 	 * @param bool            $editor Use core's element classes (editor canvas).
 	 */
 	public function css( array $blocks, bool $editor ): string

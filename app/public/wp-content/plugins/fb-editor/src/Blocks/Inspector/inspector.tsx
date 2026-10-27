@@ -16,6 +16,7 @@ import { ValueChain } from '../Values/value-chain';
 import { AddSetting } from './add-setting';
 import { ControlFrame } from './control-frame';
 import type { Fallbacks } from './fallbacks';
+import { describePlacement, type ParentContext } from './parent-context';
 import './inspector.scss';
 
 interface InspectorProps {
@@ -34,6 +35,13 @@ interface InspectorProps {
 	/** Only controls that can vary per state (editing a state). */
 	readonly statefulOnly: boolean;
 	/**
+	 * Controls that belong to the block's place (Container item) are
+	 * offered: false for type defaults, which never hold them.
+	 */
+	readonly allowPlaced: boolean;
+	/** The block's parent, for placed controls; null when it has none. */
+	readonly parent: ParentContext | null;
+	/**
 	 * Keys the session memory of added controls: the block clientId, or a
 	 * block type when editing defaults, plus the look.
 	 */
@@ -44,7 +52,7 @@ interface InspectorProps {
 }
 
 export function Inspector( props: InspectorProps ): ReactElement {
-	const { definition, values, fallbacks, fallbackLook, listFallbackControls, statefulOnly, memoryKey, onChange, makeDefault } = props;
+	const { definition, values, fallbacks, fallbackLook, listFallbackControls, statefulOnly, allowPlaced, parent, memoryKey, onChange, makeDefault } = props;
 	const { breakpoint, breakpoints, added } = useSelect(
 		( select ) => ( {
 			breakpoint: select( store ).getBreakpoint(),
@@ -57,7 +65,14 @@ export function Inspector( props: InspectorProps ): ReactElement {
 	// Conditions read the edited value, then the fallbacks (as the CSS does).
 	const resolved = new ValueChain( definition, values, ...fallbacks.values() ).resolvedAt( breakpoint.id );
 
-	const controls = definition.controls.filter( ( control ) => ! statefulOnly || control.isStateful() );
+	// A placed control shows where it applies, or while it still has a value
+	// here (then inactive, so it can be removed).
+	const appliesHere = ( control: Control ): boolean => parent?.allows( control, breakpoint.id ) ?? ! control.isPlaced();
+	const controls = definition.controls.filter(
+		( control ) =>
+			( ! statefulOnly || control.isStateful() ) &&
+			( ! control.isPlaced() || ( allowPlaced && ( appliesHere( control ) || values.has( control.id ) ) ) )
+	);
 	const isShown = ( control: Control ): boolean =>
 		values.has( control.id ) || added.includes( control.id ) || ( listFallbackControls && fallbackLook.has( control.id ) );
 	const available = controls.filter( ( control ) => ! isShown( control ) );
@@ -94,9 +109,11 @@ export function Inspector( props: InspectorProps ): ReactElement {
 								breakpoint={ breakpoint }
 								breakpoints={ breakpoints }
 								inactiveReason={
-									control.visibleWhen !== null && ! control.visibleWhen.evaluate( resolved )
-										? control.visibleWhen.describe( definition )
-										: null
+									! appliesHere( control )
+										? describePlacement( control )
+										: control.visibleWhen !== null && ! control.visibleWhen.evaluate( resolved )
+											? control.visibleWhen.describe( definition )
+											: null
 								}
 								onChange={ ( value ) => {
 									// Editing keeps the control in the sidebar even if a
@@ -108,7 +125,7 @@ export function Inspector( props: InspectorProps ): ReactElement {
 									forgetControl( memoryKey, control.id );
 									onChange( values.withoutControl( control ) );
 								} }
-								onMakeDefault={ makeDefault !== null && values.has( control.id ) ? () => makeDefault( control ) : null }
+								onMakeDefault={ makeDefault !== null && ! control.isPlaced() && values.has( control.id ) ? () => makeDefault( control ) : null }
 							/>
 						) ) }
 					</PanelBody>

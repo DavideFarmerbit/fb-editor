@@ -16,12 +16,18 @@ enum BoxProperty: string
 {
 	case Padding = 'padding';
 	case Margin  = 'margin';
+	/**
+	 * Padding as custom properties (--fb-padding-top…), for blocks whose
+	 * base CSS composes the real padding from it (Container: content width).
+	 */
+	case PaddingVars = '--fb-padding';
 
 	public function longhand( Side $side ): CssProperty
 	{
 		return match ( $this ) {
-			self::Padding => CssProperty::padding( $side ),
-			self::Margin  => CssProperty::margin( $side ),
+			self::Padding     => CssProperty::padding( $side ),
+			self::Margin      => CssProperty::margin( $side ),
+			self::PaddingVars => CssProperty::paddingVar( $side ),
 		};
 	}
 }

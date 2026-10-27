@@ -1,4 +1,4 @@
-import { sectionEditor } from './Library/Section/edit';
+import { containerEditor } from './Library/Container/edit';
 import { registerBlocks } from './register';
 
-registerBlocks( [ sectionEditor ] );
+registerBlocks( [ containerEditor ] );

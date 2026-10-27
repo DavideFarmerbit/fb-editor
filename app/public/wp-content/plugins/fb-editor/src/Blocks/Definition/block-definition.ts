@@ -19,6 +19,16 @@ import { Scope } from './Scope.generated';
 
 export { Scope };
 
+/** Mirrors Placement: only inside a given parent whose values satisfy `when`. */
+export class Placement {
+	constructor(
+		/** e.g. "fb/container" */
+		public readonly parent: string,
+		/** Evaluated against the parent's resolved values. */
+		public readonly when: Condition
+	) {}
+}
+
 export class Control {
 	constructor(
 		public readonly id: ControlId,
@@ -27,12 +37,19 @@ export class Control {
 		public readonly output: StyleOutput | null,
 		public readonly element: ElementId | null,
 		public readonly scope: Scope,
-		public readonly visibleWhen: Condition | null
+		public readonly visibleWhen: Condition | null,
+		/** Only inside a given parent block; null: anywhere. */
+		public readonly placement: Placement | null
 	) {}
 
-	/** Mirrors Control::isStateful(): per-breakpoint controls that write CSS. */
+	/** Mirrors Control::isStateful(). */
 	isStateful(): boolean {
-		return this.scope === Scope.Responsive && this.output !== null;
+		return this.scope === Scope.Responsive && this.output !== null && this.placement === null;
+	}
+
+	/** Mirrors Control::isPlaced(): belongs to the block's place, not its look. */
+	isPlaced(): boolean {
+		return this.placement !== null;
 	}
 }
 
@@ -164,7 +181,8 @@ function controlFromJson( json: JsonValue ): Control {
 		json.get( 'output' ).nullable( outputFromJson ),
 		json.get( 'element' ).nullable( parseElementId ),
 		json.get( 'scope' ).oneOf( Scope ),
-		json.get( 'visibleWhen' ).nullable( conditionFromJson )
+		json.get( 'visibleWhen' ).nullable( conditionFromJson ),
+		json.get( 'placement' ).nullable( ( placement ) => new Placement( placement.get( 'parent' ).string(), conditionFromJson( placement.get( 'when' ) ) ) )
 	);
 }
 

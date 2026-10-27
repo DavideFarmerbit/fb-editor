@@ -43,7 +43,7 @@ final class DefaultsRepository
 		$name    = (string) $definition->name;
 		$json    = null !== $section && $section->isObject() && $section->has( $name ) ? $section->get( $name ) : null;
 
-		return StatefulValues::fromJson( $json?->decoded(), $definition, $this->breakpoints->breakpoints() );
+		return StatefulValues::fromJson( $json?->decoded(), $definition, $this->breakpoints->breakpoints(), placed: false );
 	}
 
 	public function saved( BlockDefinition $definition ): StatefulValues
@@ -51,7 +51,8 @@ final class DefaultsRepository
 		return StatefulValues::fromJson(
 			ThemeDesignPostType::savedContent( BlockDefaultsPostType::POST_TYPE, $definition->name, $this->stylesheet ?? get_stylesheet() ),
 			$definition,
-			$this->breakpoints->breakpoints()
+			$this->breakpoints->breakpoints(),
+			placed: false
 		);
 	}
 }

@@ -110,10 +110,10 @@ describe( 'defaults in the editor', () => {
 	} );
 
 	test( '"Make default" copies one control, every breakpoint, leaving the rest', () => {
-		const block = values( { display: { desktop: 'grid', tablet: 'flex' }, tag: 'aside' } );
-		const saved = values( { tag: 'header' } );
+		const block = values( { display: { desktop: 'grid', tablet: 'flex' }, tag: 'section' } );
+		const saved = values( { tag: 'div' } );
 		expect( json( saved.withControlFrom( control( 'display' ), block ) ) ).toEqual( {
-			tag: 'header',
+			tag: 'div',
 			display: { desktop: 'grid', tablet: 'flex' },
 		} );
 	} );
@@ -129,13 +129,14 @@ describe( 'defaults in the editor', () => {
 		expect( gap?.evaluate( chain( values( { display: { mobile: 'grid' } } ) ).resolvedAt( bp( 'mobile' ) ) ) ).toBe( true );
 	} );
 
-	test( 'the tag falls back to the default, then the input fallback', () => {
-		const base = ( attribute: unknown ) => StatefulValues.fromJson( { base: attribute }, section, breakpoints );
+	test( 'the tag falls back to the variant, the default, then the input fallback', () => {
+		const container = definition( 'fb/container' );
+		const base = ( attribute: unknown ) => StatefulValues.fromJson( { base: attribute }, container, breakpoints );
 
-		expect( section.option( 'tag', base( {} ), null, base( { tag: 'aside' } ) ) ).toBe( 'aside' );
-		expect( section.option( 'tag', base( {} ), base( { tag: 'header' } ), base( { tag: 'aside' } ) ) ).toBe( 'header' );
-		expect( section.option( 'tag', base( { tag: 'main' } ), base( { tag: 'header' } ), base( { tag: 'aside' } ) ) ).toBe( 'main' );
-		expect( section.option( 'tag', base( {} ), null, base( {} ) ) ).toBe( 'section' );
+		expect( container.option( 'tag', base( {} ), null, base( { tag: 'aside' } ) ) ).toBe( 'aside' );
+		expect( container.option( 'tag', base( {} ), base( { tag: 'header' } ), base( { tag: 'aside' } ) ) ).toBe( 'header' );
+		expect( container.option( 'tag', base( { tag: 'main' } ), base( { tag: 'header' } ), base( { tag: 'aside' } ) ) ).toBe( 'main' );
+		expect( container.option( 'tag', base( {} ), null, base( {} ) ) ).toBe( 'div' );
 	} );
 
 	test( 'editing the base look keeps the states', () => {

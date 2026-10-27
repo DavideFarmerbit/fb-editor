@@ -9,8 +9,12 @@ import type { ResponsiveValue } from '../../Values/value';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
 import { ColorField } from '../Definition/Input/Color/color-control';
 import { ColorInput } from '../Definition/Input/Color/color-input';
+import { GridColumnsField } from '../Definition/Input/GridColumns/grid-columns-control';
+import { GridColumnsInput } from '../Definition/Input/GridColumns/grid-columns-input';
 import { LengthField } from '../Definition/Input/Length/length-control';
 import { LengthInput } from '../Definition/Input/Length/length-input';
+import { NumberField } from '../Definition/Input/Number/number-control';
+import { NumberInput } from '../Definition/Input/Number/number-input';
 import { PresetField } from '../Definition/Input/Preset/preset-control';
 import { PresetInput } from '../Definition/Input/Preset/preset-input';
 import { SelectField } from '../Definition/Input/Select/select-control';
@@ -56,6 +60,12 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof PresetInput ) {
 		return <PresetField { ...props } input={ input } />;
+	}
+	if ( input instanceof NumberInput ) {
+		return <NumberField { ...props } input={ input } />;
+	}
+	if ( input instanceof GridColumnsInput ) {
+		return <GridColumnsField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

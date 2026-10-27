@@ -12,7 +12,7 @@ use Fb\Blocks\Rendering\BlockStyler;
 use Fb\Blocks\Variants\BlockVariantsPostType;
 use Fb\Blocks\Variants\VariantsRepository;
 use Fb\Blocks\Variants\VariantsStylesheet;
-use Fb\Blocks\Library\Section\Section;
+use Fb\Blocks\Library\Container\Container;
 use Fb\Blocks\Rendering\BlockRenderer;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
@@ -54,7 +54,7 @@ final readonly class Plugin
 		$styler      = new BlockStyler( $breakpoints, $instances, $variants );
 		$blocks      = new BlockRegistry(
 			new BlockRenderer( $styler, $defaults ),
-			[ new Section() ],
+			[ new Container() ],
 			[ new Paragraph(), new Heading(), new ListBlock(), new Image(), new Buttons(), new Button() ],
 		);
 

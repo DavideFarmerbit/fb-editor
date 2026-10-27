@@ -13,7 +13,7 @@ use Fb\Blocks\Definition\Layout;
 use Fb\Blocks\Definition\Panel;
 use Fb\Blocks\Library\Shared\CommonControls as C;
 use Fb\Blocks\States\BlockState;
-use Fb\CoreBlocks\BaseStyle;
+use Fb\Blocks\BaseStyles\BaseStyle;
 use Fb\CoreBlocks\CoreBlock;
 use Fb\CoreBlocks\ManagedCoreBlock;
 use Fb\Styles\CssProperty;

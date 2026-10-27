@@ -59,7 +59,7 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 			return new BlockDesignInfo(
 				name,
 				item.get( 'postSlug' ).string(),
-				StatefulValues.fromJson( item.get( 'themeDefaults' ).decoded(), definition, breakpoints ),
+				StatefulValues.fromJson( item.get( 'themeDefaults' ).decoded(), definition, breakpoints, false ),
 				VariantSet.fromJson( item.get( 'themeVariants' ).decoded(), definition, breakpoints )
 			);
 		} );

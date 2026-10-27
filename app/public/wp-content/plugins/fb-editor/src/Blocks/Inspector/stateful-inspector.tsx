@@ -20,6 +20,7 @@ import { BlockValues } from '../Values/block-values';
 import type { StatefulValues } from '../Values/stateful-values';
 import { fallbacksFor, type WeakerSource } from './fallbacks';
 import { Inspector } from './inspector';
+import type { ParentContext } from './parent-context';
 
 interface StatefulInspectorProps {
 	readonly definition: BlockDefinition;
@@ -28,6 +29,10 @@ interface StatefulInspectorProps {
 	readonly weaker: readonly WeakerSource[];
 	/** Also list controls only the first weaker source sets (defaults editing). */
 	readonly listFallbackControls: boolean;
+	/** Offer controls that belong to the block's place (false for defaults). */
+	readonly allowPlaced: boolean;
+	/** The block's parent, for placed controls. */
+	readonly parent: ParentContext | null;
 	/** The block clientId, or a block type when editing defaults. */
 	readonly memoryKey: string;
 	readonly onChange: ( values: StatefulValues ) => void;
@@ -36,7 +41,7 @@ interface StatefulInspectorProps {
 }
 
 export function StatefulInspector( props: StatefulInspectorProps ): ReactElement {
-	const { definition, values, weaker, listFallbackControls, memoryKey, onChange, makeDefault } = props;
+	const { definition, values, weaker, listFallbackControls, allowPlaced, parent, memoryKey, onChange, makeDefault } = props;
 	const inspected = useSelect( ( select ) => select( store ).getInspectedState( memoryKey ), [ memoryKey ] );
 	const { inspectState } = useDispatch( store );
 
@@ -80,6 +85,8 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 				fallbackLook={ firstWeaker ?? BlockValues.empty( definition, values.base.breakpoints() ) }
 				listFallbackControls={ listFallbackControls }
 				statefulOnly={ state !== null }
+				allowPlaced={ allowPlaced }
+				parent={ parent }
 				memoryKey={ state === null ? memoryKey : `${ memoryKey }#${ state }` }
 				onChange={ ( look ) => onChange( values.withLook( state, look ) ) }
 				makeDefault={ makeDefault === null ? null : ( control ) => makeDefault( control, state ) }

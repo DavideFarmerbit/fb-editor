@@ -117,7 +117,7 @@ export function VariantPicker( { definition, state }: VariantPickerProps ): Reac
 					confirmLabel={ __( 'Save variant', 'fb-editor' ) }
 					initialName=""
 					onConfirm={ ( name ) =>
-						apply( saveAsNewVariant( definition, settings.breakpoints, attribute, variant, variants.all, variants.saved, name ) )
+						apply( saveAsNewVariant( attribute, variant, variants.all, variants.saved, name ) )
 					}
 					onClose={ () => setNaming( false ) }
 				/>

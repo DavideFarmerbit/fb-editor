@@ -39,7 +39,7 @@ final readonly class BlockDefaultsPostType extends ThemeDesignPostType
 
 	protected function sanitizeContent( mixed $json, BlockDefinition $definition, BreakpointList $breakpoints ): \JsonSerializable
 	{
-		return StatefulValues::fromJson( $json, $definition, $breakpoints );
+		return StatefulValues::fromJson( $json, $definition, $breakpoints, placed: false );
 	}
 
 	protected function emptyContent(): string

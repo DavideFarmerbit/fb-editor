@@ -23,13 +23,15 @@ export class StatefulValues {
 		return new StatefulValues( definition, BlockValues.empty( definition, breakpoints ), new Map() );
 	}
 
-	static fromJson( json: unknown, definition: BlockDefinition, breakpoints: BreakpointList ): StatefulValues {
+	/** `placed`: keep controls that belong to the block's place (only a block's own attribute has them). */
+	static fromJson( json: unknown, definition: BlockDefinition, breakpoints: BreakpointList, placed = true ): StatefulValues {
 		const root = JsonValue.of( json, 'fb' );
 		if ( ! root.isObject() ) {
 			return StatefulValues.empty( definition, breakpoints );
 		}
 
-		const base = BlockValues.fromAttribute( root.has( 'base' ) ? root.get( 'base' ).decoded() : null, definition, breakpoints );
+		const parsed = BlockValues.fromAttribute( root.has( 'base' ) ? root.get( 'base' ).decoded() : null, definition, breakpoints );
+		const base = placed ? parsed : parsed.withoutPlaced();
 		const statesJson = root.has( 'states' ) ? root.get( 'states' ) : null;
 
 		const states = new Map< BlockState, BlockValues >();
@@ -53,6 +55,16 @@ export class StatefulValues {
 
 	isEmpty(): boolean {
 		return this.base.isEmpty() && this.states.size === 0;
+	}
+
+	/** Without the values that belong to the block's place: a look to share. */
+	withoutPlaced(): StatefulValues {
+		return new StatefulValues( this.definition, this.base.withoutPlaced(), this.states );
+	}
+
+	/** Only the values that belong to the block's place (no states hold any). */
+	onlyPlaced(): StatefulValues {
+		return new StatefulValues( this.definition, this.base.onlyPlaced(), new Map() );
 	}
 
 	/** A copy with another base look (states kept). */

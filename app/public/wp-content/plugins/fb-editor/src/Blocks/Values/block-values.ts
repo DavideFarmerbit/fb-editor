@@ -138,6 +138,27 @@ export class BlockValues {
 		return new BlockValues( this.definition, this.breakpointList, values );
 	}
 
+	/** Mirrors BlockValues::withoutPlaced(): what defaults and variants may hold. */
+	withoutPlaced(): BlockValues {
+		return this.filtered( ( control ) => ! control.isPlaced() );
+	}
+
+	/** Only the controls that belong to the block's place (see Placement). */
+	onlyPlaced(): BlockValues {
+		return this.filtered( ( control ) => control.isPlaced() );
+	}
+
+	private filtered( keep: ( control: Control ) => boolean ): BlockValues {
+		const values = new Map< string, Responsive >();
+		for ( const control of this.definition.controls ) {
+			const value = this.values.get( control.id );
+			if ( keep( control ) && value !== undefined ) {
+				values.set( control.id, value );
+			}
+		}
+		return new BlockValues( this.definition, this.breakpointList, values );
+	}
+
 	/** Where values are resolved: the breakpoints they are keyed by. */
 	breakpoints(): BreakpointList {
 		return this.breakpointList;
