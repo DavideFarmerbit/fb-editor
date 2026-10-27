@@ -15,6 +15,7 @@ use Fb\Blocks\Definition\Panel;
 use Fb\Blocks\Library\Shared\CommonControls as C;
 use Fb\Blocks\Options\Justify;
 use Fb\Blocks\BaseStyles\BaseStyle;
+use Fb\Blocks\States\BlockState;
 use Fb\CoreBlocks\CoreBlock;
 use Fb\CoreBlocks\ManagedCoreBlock;
 use Fb\Styles\CssProperty;
@@ -44,6 +45,7 @@ final class Buttons extends CoreBlock
 				new Panel( __( 'Layout', 'fb-editor' ), new ControlId( self::JUSTIFY ), C::id( C::GAP ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::MARGIN ) ),
 			),
+			states: [ BlockState::Hover ],
 		);
 	}
 

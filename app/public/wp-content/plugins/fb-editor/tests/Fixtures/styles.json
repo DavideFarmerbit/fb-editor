@@ -1532,7 +1532,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -3019,7 +3034,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -4484,7 +4514,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -6651,7 +6696,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -8158,7 +8218,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -9641,7 +9716,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -11134,7 +11224,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -12581,7 +12686,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -14072,7 +14192,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -15538,7 +15673,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -17019,7 +17169,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -18480,7 +18645,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -19939,7 +20119,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {},
             "defaults": {
@@ -24297,7 +24492,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -25827,7 +26037,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -28379,7 +28604,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -29894,7 +30134,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {
@@ -31398,7 +31653,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "states": {
@@ -32844,7 +33114,22 @@
                         "editorClassName": "fb-container__overlay"
                     }
                 ],
-                "states": []
+                "states": [
+                    {
+                        "id": "hover",
+                        "label": "Hover",
+                        "pseudoClass": ":hover",
+                        "editorPseudoClass": ":is(:hover,.fb-preview-hover)",
+                        "previewClass": "fb-preview-hover"
+                    },
+                    {
+                        "id": "focus",
+                        "label": "Focus",
+                        "pseudoClass": ":is(:focus-visible,:has(:focus-visible))",
+                        "editorPseudoClass": ":is(:focus-visible,:has(:focus-visible),.fb-preview-focus)",
+                        "previewClass": "fb-preview-focus"
+                    }
+                ]
             },
             "attribute": {
                 "base": {

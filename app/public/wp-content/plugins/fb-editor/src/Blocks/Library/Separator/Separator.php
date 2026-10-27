@@ -23,6 +23,7 @@ use Fb\Blocks\Definition\Scope;
 use Fb\Blocks\Library\Shared\CommonControls as C;
 use Fb\Blocks\Options\BorderStyle;
 use Fb\Blocks\Rendering\RenderContext;
+use Fb\Blocks\States\BlockState;
 use Fb\Styles\CssProperty;
 use Fb\Styles\DeclarationSet;
 use Fb\Styles\Output\PropertyOutput;
@@ -80,6 +81,7 @@ final class Separator extends Block
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::MARGIN ) ),
 			),
 			[ $line, $icon ],
+			states: [ BlockState::Hover ],
 		);
 	}
 

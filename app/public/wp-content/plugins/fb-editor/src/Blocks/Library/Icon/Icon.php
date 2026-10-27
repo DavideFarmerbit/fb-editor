@@ -20,6 +20,7 @@ use Fb\Blocks\Definition\Panel;
 use Fb\Blocks\Definition\Scope;
 use Fb\Blocks\Library\Shared\CommonControls as C;
 use Fb\Blocks\Rendering\RenderContext;
+use Fb\Blocks\States\BlockState;
 use Fb\Styles\CssProperty;
 use Fb\Styles\DeclarationSet;
 use Fb\TypeScript\ExportToTypeScript;
@@ -79,6 +80,7 @@ final class Icon extends Block
 					C::id( C::SHADOW )
 				),
 			),
+			states: BlockState::cases(),
 		);
 	}
 
