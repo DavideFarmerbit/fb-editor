@@ -83,8 +83,8 @@ final class ContainerRenderTest extends TestCase
 			. 'padding-left:max(var(--fb-padding-left),calc((100% - var(--fb-content-width))/2));'
 			. 'padding-right:max(var(--fb-padding-right),calc((100% - var(--fb-content-width))/2));'
 			. 'position:relative;isolation:isolate;}'
-			. ':where(.fb-container>.fb-container__media){position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;object-fit:cover;}'
-			. ':where(.fb-container>.fb-container__overlay){position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}}',
+			. ':where(.fb-container>.fb-container__media){border-top-left-radius:inherit;border-top-right-radius:inherit;border-bottom-right-radius:inherit;border-bottom-left-radius:inherit;position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;object-fit:cover;}'
+			. ':where(.fb-container>.fb-container__overlay){border-top-left-radius:inherit;border-top-right-radius:inherit;border-bottom-right-radius:inherit;border-bottom-left-radius:inherit;position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}}',
 			( new BaseStylesheet() )->css( [ new Container() ], false )
 		);
 	}

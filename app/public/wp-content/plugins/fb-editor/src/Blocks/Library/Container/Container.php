@@ -235,10 +235,18 @@ final class Container extends Block
 		];
 	}
 
-	/** A layer covering the whole box, behind the content. */
+	/**
+	 * A layer covering the whole box, behind the content, with the box's
+	 * own rounded corners. Inherited, not clipped by the box: overflow on
+	 * the Container would also cut off whatever its content lets stick out.
+	 */
 	private static function behind(): DeclarationSet
 	{
 		return DeclarationSet::empty()
+			->with( CssProperty::BorderTopLeftRadius, 'inherit' )
+			->with( CssProperty::BorderTopRightRadius, 'inherit' )
+			->with( CssProperty::BorderBottomRightRadius, 'inherit' )
+			->with( CssProperty::BorderBottomLeftRadius, 'inherit' )
 			->with( CssProperty::Position, 'absolute' )
 			->with( CssProperty::Top, '0' )
 			->with( CssProperty::Right, '0' )
