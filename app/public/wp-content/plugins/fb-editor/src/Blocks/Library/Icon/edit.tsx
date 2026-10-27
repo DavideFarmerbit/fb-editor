@@ -35,7 +35,7 @@ function Edit( { definition, values, variant, defaults, setValues, rootProps }: 
 	} );
 
 	if ( markup === null ) {
-		const control = definition.controls.find( ( candidate ) => candidate.id === SVG );
+		const control = definition.control( definition.controlId( SVG ) );
 		return (
 			<div { ...blockProps }>
 				<Placeholder label={ definition.title } instructions={ __( 'Load an SVG file, or paste SVG code in the sidebar.', 'fb-editor' ) }>

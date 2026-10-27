@@ -81,7 +81,10 @@ final class ContainerRenderTest extends TestCase
 			. '--fb-padding-top:0px;--fb-padding-right:0px;--fb-padding-bottom:0px;--fb-padding-left:0px;--fb-content-width:100%;'
 			. 'padding-top:var(--fb-padding-top);padding-bottom:var(--fb-padding-bottom);'
 			. 'padding-left:max(var(--fb-padding-left),calc((100% - var(--fb-content-width))/2));'
-			. 'padding-right:max(var(--fb-padding-right),calc((100% - var(--fb-content-width))/2));}}',
+			. 'padding-right:max(var(--fb-padding-right),calc((100% - var(--fb-content-width))/2));'
+			. 'position:relative;isolation:isolate;}'
+			. ':where(.fb-container>.fb-container__media){position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;object-fit:cover;}'
+			. ':where(.fb-container>.fb-container__overlay){position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}}',
 			( new BaseStylesheet() )->css( [ new Container() ], false )
 		);
 	}

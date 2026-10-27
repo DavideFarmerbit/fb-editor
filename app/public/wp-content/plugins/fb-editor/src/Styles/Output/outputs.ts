@@ -6,6 +6,8 @@ import { BooleanValue } from '../../Values/boolean';
 import { BoxValue, SIDES } from '../../Values/box';
 import { KeywordValue } from '../../Values/keyword';
 import { NumberValue } from '../../Values/number';
+import { SvgValue } from '../../Values/content';
+import { sanitizeSvg } from '../../Blocks/Definition/Input/Svg/svg';
 import type { Presets } from '../../Presets/presets';
 import { isCssValue, type ResponsiveValue } from '../../Values/value';
 import { CssProperty, DeclarationSet } from '../css';
@@ -121,6 +123,32 @@ export class SpanOutput implements StyleOutput {
 	}
 }
 
+/** Mirrors PHP's rawurlencode(): encodeURIComponent also encodes !'()*. */
+function rawUrlEncode( text: string ): string {
+	return encodeURIComponent( text ).replace( /[!'()*]/g, ( char ) => `%${ char.charCodeAt( 0 ).toString( 16 ).toUpperCase() }` );
+}
+
+/**
+ * Mirrors MaskIconOutput. The editor sanitizes with the browser's parser,
+ * PHP with its own: same allowlists, possibly different serialization, so
+ * this output is not part of the byte-for-byte parity suite.
+ */
+export class MaskIconOutput implements StyleOutput {
+	properties(): CssProperty[] {
+		return [ CssProperty.IconVar, CssProperty.IconContentVar ];
+	}
+
+	declarations( value: ResponsiveValue | null ): DeclarationSet {
+		const markup = value instanceof SvgValue ? sanitizeSvg( value.markup ) : null;
+		if ( markup === null ) {
+			return DeclarationSet.empty();
+		}
+		return DeclarationSet.empty()
+			.with( CssProperty.IconVar, `url("data:image/svg+xml,${ rawUrlEncode( markup ) }")` )
+			.with( CssProperty.IconContentVar, '""' );
+	}
+}
+
 export function outputFromJson( json: JsonValue ): StyleOutput {
 	const kind = json.get( 'kind' ).string();
 	switch ( kind ) {
@@ -150,6 +178,8 @@ export function outputFromJson( json: JsonValue ): StyleOutput {
 			);
 		case 'span':
 			return new SpanOutput( json.get( 'property' ).oneOf( CssProperty ) );
+		case 'mask-icon':
+			return new MaskIconOutput();
 		default:
 			throw new InvalidJson( `${ json.path }.kind: unknown output kind "${ kind }"` );
 	}

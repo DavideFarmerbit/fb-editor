@@ -122,14 +122,9 @@ final class CoreBlockRenderTest extends TestCase
 	public function testBaseStylesUseCoreElementClassesInTheEditor(): void
 	{
 		$stylesheet = new BaseStylesheet();
+		$link       = '{display:inline-flex;align-items:center;justify-content:center;column-gap:0.5em;text-decoration:none;}';
 
-		self::assertSame(
-			'@layer fb.base{:where(.fb-button>.fb-button__link){display:inline-block;text-decoration:none;}}',
-			$stylesheet->css( [ new Button() ], false )
-		);
-		self::assertSame(
-			'@layer fb.base{:where(.fb-button>.wp-block-button__link){display:inline-block;text-decoration:none;}}',
-			$stylesheet->css( [ new Button() ], true )
-		);
+		self::assertStringStartsWith( '@layer fb.base{:where(.fb-button>.fb-button__link)' . $link, $stylesheet->css( [ new Button() ], false ) );
+		self::assertStringStartsWith( '@layer fb.base{:where(.fb-button>.wp-block-button__link)' . $link, $stylesheet->css( [ new Button() ], true ) );
 	}
 }

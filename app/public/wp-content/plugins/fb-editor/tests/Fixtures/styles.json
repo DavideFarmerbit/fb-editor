@@ -670,6 +670,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -1346,6 +1471,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -1377,7 +1513,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -2003,6 +2150,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -2679,6 +2951,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -2710,7 +2993,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -3314,6 +3608,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -3990,6 +4409,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -4021,7 +4451,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -5315,6 +5756,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -5991,6 +6557,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -6022,7 +6599,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -6668,6 +7256,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -7344,6 +8057,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -7375,7 +8099,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -7997,6 +8732,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -8673,6 +9533,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -8704,7 +9575,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -9336,6 +10218,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -10012,6 +11019,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -10043,7 +11061,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -10629,6 +11658,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -11305,6 +12459,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -11336,7 +12501,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -11966,6 +13142,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -12642,6 +13943,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -12673,7 +13985,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -13278,6 +14601,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -13954,6 +15402,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -13985,7 +15444,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -14605,6 +16075,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -15281,6 +16876,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -15312,7 +16918,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -15912,6 +17529,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -16588,6 +18330,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -16619,7 +18372,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -17217,6 +18981,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -17893,6 +19782,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -17924,7 +19824,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {},
@@ -18614,6 +20525,81 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "icon",
+                        "label": "Icon (SVG code)",
+                        "input": {
+                            "kind": "svg"
+                        },
+                        "output": {
+                            "kind": "mask-icon"
+                        },
+                        "element": "link",
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconAfter",
+                        "label": "Icon after the text",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "--fb-icon-order",
+                            "on": "1",
+                            "off": "0"
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconSize",
+                        "label": "Icon size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "--fb-icon-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconGap",
+                        "label": "Space to the text",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "column-gap"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "borderWidth",
                         "label": "Border width",
                         "input": {
@@ -19122,6 +21108,15 @@
                         "label": "Spacing",
                         "controls": [
                             "padding"
+                        ]
+                    },
+                    {
+                        "label": "Icon",
+                        "controls": [
+                            "icon",
+                            "iconAfter",
+                            "iconSize",
+                            "iconGap"
                         ]
                     },
                     {
@@ -19480,6 +21475,81 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "icon",
+                        "label": "Icon (SVG code)",
+                        "input": {
+                            "kind": "svg"
+                        },
+                        "output": {
+                            "kind": "mask-icon"
+                        },
+                        "element": "link",
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconAfter",
+                        "label": "Icon after the text",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "--fb-icon-order",
+                            "on": "1",
+                            "off": "0"
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconSize",
+                        "label": "Icon size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "--fb-icon-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconGap",
+                        "label": "Space to the text",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "column-gap"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "borderWidth",
                         "label": "Border width",
                         "input": {
@@ -19988,6 +22058,15 @@
                         "label": "Spacing",
                         "controls": [
                             "padding"
+                        ]
+                    },
+                    {
+                        "label": "Icon",
+                        "controls": [
+                            "icon",
+                            "iconAfter",
+                            "iconSize",
+                            "iconGap"
                         ]
                     },
                     {
@@ -21257,6 +23336,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -21933,6 +24137,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -21964,7 +24179,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -22633,6 +24859,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -23309,6 +25660,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -23340,7 +25702,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -23615,6 +25988,81 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "icon",
+                        "label": "Icon (SVG code)",
+                        "input": {
+                            "kind": "svg"
+                        },
+                        "output": {
+                            "kind": "mask-icon"
+                        },
+                        "element": "link",
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconAfter",
+                        "label": "Icon after the text",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "--fb-icon-order",
+                            "on": "1",
+                            "off": "0"
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconSize",
+                        "label": "Icon size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "--fb-icon-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "iconGap",
+                        "label": "Space to the text",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "column-gap"
                             ]
                         },
                         "element": "link",
@@ -24132,6 +26580,15 @@
                         "label": "Spacing",
                         "controls": [
                             "padding"
+                        ]
+                    },
+                    {
+                        "label": "Icon",
+                        "controls": [
+                            "icon",
+                            "iconAfter",
+                            "iconSize",
+                            "iconGap"
                         ]
                     },
                     {
@@ -24943,6 +27400,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -25619,6 +28201,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -25650,7 +28243,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -25738,6 +28342,1503 @@
             "defaultsCss": "",
             "variantCss": "",
             "css": "@layer fb.instances{:where(.fb-case){aspect-ratio:16/9;position:sticky;top:0;left:auto;z-index:10;opacity:0.9;}@media (max-width: 767px){:where(.fb-case){aspect-ratio:1/1;position:static;top:revert-layer;left:revert-layer;}}}"
+        },
+        {
+            "name": "cover: fit, focal point, overlay",
+            "definition": {
+                "name": "fb/container",
+                "title": "Container",
+                "isCore": false,
+                "className": "fb-container",
+                "controls": [
+                    {
+                        "id": "tag",
+                        "label": "HTML tag",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "section",
+                                    "label": "<section>"
+                                },
+                                {
+                                    "value": "div",
+                                    "label": "<div>"
+                                },
+                                {
+                                    "value": "header",
+                                    "label": "<header>"
+                                },
+                                {
+                                    "value": "footer",
+                                    "label": "<footer>"
+                                },
+                                {
+                                    "value": "main",
+                                    "label": "<main>"
+                                },
+                                {
+                                    "value": "article",
+                                    "label": "<article>"
+                                },
+                                {
+                                    "value": "aside",
+                                    "label": "<aside>"
+                                }
+                            ],
+                            "fallback": "div"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "display",
+                        "label": "Display",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "block",
+                                    "label": "Block"
+                                },
+                                {
+                                    "value": "flex",
+                                    "label": "Flex"
+                                },
+                                {
+                                    "value": "grid",
+                                    "label": "Grid"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "display"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "direction",
+                        "label": "Direction",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "row",
+                                    "label": "Row"
+                                },
+                                {
+                                    "value": "row-reverse",
+                                    "label": "Row, reversed"
+                                },
+                                {
+                                    "value": "column",
+                                    "label": "Column"
+                                },
+                                {
+                                    "value": "column-reverse",
+                                    "label": "Column, reversed"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "flex-direction"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "wrap",
+                        "label": "Wrap",
+                        "input": {
+                            "kind": "toggle"
+                        },
+                        "output": {
+                            "kind": "toggle",
+                            "property": "flex-wrap",
+                            "on": "wrap",
+                            "off": "nowrap"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "columns",
+                        "label": "Columns",
+                        "input": {
+                            "kind": "grid-columns",
+                            "maxCount": 12
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "grid-template-columns"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "grid"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "justify",
+                        "label": "Justify content",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "flex-start",
+                                    "label": "Start"
+                                },
+                                {
+                                    "value": "center",
+                                    "label": "Center"
+                                },
+                                {
+                                    "value": "flex-end",
+                                    "label": "End"
+                                },
+                                {
+                                    "value": "space-between",
+                                    "label": "Space between"
+                                },
+                                {
+                                    "value": "space-around",
+                                    "label": "Space around"
+                                },
+                                {
+                                    "value": "space-evenly",
+                                    "label": "Space evenly"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "justify-content"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "alignItems",
+                        "label": "Align items",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "stretch",
+                                    "label": "Stretch"
+                                },
+                                {
+                                    "value": "flex-start",
+                                    "label": "Start"
+                                },
+                                {
+                                    "value": "center",
+                                    "label": "Center"
+                                },
+                                {
+                                    "value": "flex-end",
+                                    "label": "End"
+                                },
+                                {
+                                    "value": "baseline",
+                                    "label": "Baseline"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "align-items"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "justifyItems",
+                        "label": "Justify items",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "stretch",
+                                    "label": "Stretch"
+                                },
+                                {
+                                    "value": "start",
+                                    "label": "Start"
+                                },
+                                {
+                                    "value": "center",
+                                    "label": "Center"
+                                },
+                                {
+                                    "value": "end",
+                                    "label": "End"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "justify-items"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "grid"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "alignContent",
+                        "label": "Align content",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "stretch",
+                                    "label": "Stretch"
+                                },
+                                {
+                                    "value": "flex-start",
+                                    "label": "Start"
+                                },
+                                {
+                                    "value": "center",
+                                    "label": "Center"
+                                },
+                                {
+                                    "value": "flex-end",
+                                    "label": "End"
+                                },
+                                {
+                                    "value": "space-between",
+                                    "label": "Space between"
+                                },
+                                {
+                                    "value": "space-around",
+                                    "label": "Space around"
+                                },
+                                {
+                                    "value": "space-evenly",
+                                    "label": "Space evenly"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "align-content"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "gap",
+                        "label": "Gap",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis"
+                            ],
+                            "scale": "spacing",
+                            "shape": "sides"
+                        },
+                        "output": {
+                            "kind": "axis",
+                            "block": "row-gap",
+                            "inline": "column-gap"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "display",
+                            "values": [
+                                "flex",
+                                "grid"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "contentWidth",
+                        "label": "Content width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "--fb-content-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "padding",
+                        "label": "Padding",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ],
+                            "scale": "spacing",
+                            "shape": "sides"
+                        },
+                        "output": {
+                            "kind": "box",
+                            "properties": {
+                                "top": "--fb-padding-top",
+                                "right": "--fb-padding-right",
+                                "bottom": "--fb-padding-bottom",
+                                "left": "--fb-padding-left"
+                            }
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "margin",
+                        "label": "Margin",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ],
+                            "scale": "spacing",
+                            "shape": "sides"
+                        },
+                        "output": {
+                            "kind": "box",
+                            "properties": {
+                                "top": "margin-top",
+                                "right": "margin-right",
+                                "bottom": "margin-bottom",
+                                "left": "margin-left"
+                            }
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "background",
+                        "label": "Background",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "textColor",
+                        "label": "Text",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "gradient",
+                        "label": "Gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "aspectRatio",
+                        "label": "Aspect ratio",
+                        "input": {
+                            "kind": "aspect-ratio"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "aspect-ratio"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "shadow",
+                        "label": "Shadow",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "shadow"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "borderWidth",
+                        "label": "Border width",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ],
+                            "scale": null,
+                            "shape": "sides"
+                        },
+                        "output": {
+                            "kind": "box",
+                            "properties": {
+                                "top": "border-top-width",
+                                "right": "border-right-width",
+                                "bottom": "border-bottom-width",
+                                "left": "border-left-width"
+                            }
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "borderStyle",
+                        "label": "Border style",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "none",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "solid",
+                                    "label": "Solid"
+                                },
+                                {
+                                    "value": "dashed",
+                                    "label": "Dashed"
+                                },
+                                {
+                                    "value": "dotted",
+                                    "label": "Dotted"
+                                },
+                                {
+                                    "value": "double",
+                                    "label": "Double"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "border-top-style",
+                                "border-right-style",
+                                "border-bottom-style",
+                                "border-left-style"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "borderColor",
+                        "label": "Border color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "border-top-color",
+                                "border-right-color",
+                                "border-bottom-color",
+                                "border-left-color"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "borderRadius",
+                        "label": "Radius",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "modes": [
+                                "linked",
+                                "sides"
+                            ],
+                            "scale": null,
+                            "shape": "corners"
+                        },
+                        "output": {
+                            "kind": "box",
+                            "properties": {
+                                "top": "border-top-left-radius",
+                                "right": "border-top-right-radius",
+                                "bottom": "border-bottom-right-radius",
+                                "left": "border-bottom-left-radius"
+                            }
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "position",
+                        "label": "Position",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "static",
+                                    "label": "Static"
+                                },
+                                {
+                                    "value": "relative",
+                                    "label": "Relative"
+                                },
+                                {
+                                    "value": "absolute",
+                                    "label": "Absolute"
+                                },
+                                {
+                                    "value": "sticky",
+                                    "label": "Sticky"
+                                },
+                                {
+                                    "value": "fixed",
+                                    "label": "Fixed"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "position"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "inset",
+                        "label": "Offsets",
+                        "input": {
+                            "kind": "spacing",
+                            "allowAuto": true,
+                            "allowNegative": true,
+                            "modes": [
+                                "linked",
+                                "axis",
+                                "sides"
+                            ],
+                            "scale": "spacing",
+                            "shape": "sides"
+                        },
+                        "output": {
+                            "kind": "box",
+                            "properties": {
+                                "top": "top",
+                                "right": "right",
+                                "bottom": "bottom",
+                                "left": "left"
+                            }
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": {
+                            "kind": "in",
+                            "control": "position",
+                            "values": [
+                                "relative",
+                                "absolute",
+                                "sticky",
+                                "fixed"
+                            ]
+                        },
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "zIndex",
+                        "label": "Stacking order",
+                        "input": {
+                            "kind": "number",
+                            "min": -9999.0,
+                            "max": 9999.0,
+                            "step": 1.0,
+                            "integer": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "z-index"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "opacity",
+                        "label": "Opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "itemGrow",
+                        "label": "Grow",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 100.0,
+                            "step": 1.0,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "flex-grow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": {
+                            "parent": "fb/container",
+                            "when": {
+                                "kind": "in",
+                                "control": "display",
+                                "values": [
+                                    "flex"
+                                ]
+                            }
+                        },
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "itemShrink",
+                        "label": "Shrink",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 100.0,
+                            "step": 1.0,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "flex-shrink"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": {
+                            "parent": "fb/container",
+                            "when": {
+                                "kind": "in",
+                                "control": "display",
+                                "values": [
+                                    "flex"
+                                ]
+                            }
+                        },
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "itemBasis",
+                        "label": "Basis",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "flex-basis"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": {
+                            "parent": "fb/container",
+                            "when": {
+                                "kind": "in",
+                                "control": "display",
+                                "values": [
+                                    "flex"
+                                ]
+                            }
+                        },
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "itemColumnSpan",
+                        "label": "Column span",
+                        "input": {
+                            "kind": "number",
+                            "min": 1.0,
+                            "max": 12.0,
+                            "step": 1.0,
+                            "integer": true
+                        },
+                        "output": {
+                            "kind": "span",
+                            "property": "grid-column"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": {
+                            "parent": "fb/container",
+                            "when": {
+                                "kind": "in",
+                                "control": "display",
+                                "values": [
+                                    "grid"
+                                ]
+                            }
+                        },
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "itemRowSpan",
+                        "label": "Row span",
+                        "input": {
+                            "kind": "number",
+                            "min": 1.0,
+                            "max": 12.0,
+                            "step": 1.0,
+                            "integer": true
+                        },
+                        "output": {
+                            "kind": "span",
+                            "property": "grid-row"
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": {
+                            "parent": "fb/container",
+                            "when": {
+                                "kind": "in",
+                                "control": "display",
+                                "values": [
+                                    "grid"
+                                ]
+                            }
+                        },
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "itemAlignSelf",
+                        "label": "Align self",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "auto",
+                                    "label": "Auto"
+                                },
+                                {
+                                    "value": "stretch",
+                                    "label": "Stretch"
+                                },
+                                {
+                                    "value": "flex-start",
+                                    "label": "Start"
+                                },
+                                {
+                                    "value": "center",
+                                    "label": "Center"
+                                },
+                                {
+                                    "value": "flex-end",
+                                    "label": "End"
+                                },
+                                {
+                                    "value": "baseline",
+                                    "label": "Baseline"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "align-self"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": {
+                            "parent": "fb/container",
+                            "when": {
+                                "kind": "in",
+                                "control": "display",
+                                "values": [
+                                    "flex",
+                                    "grid"
+                                ]
+                            }
+                        },
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "itemOrder",
+                        "label": "Order",
+                        "input": {
+                            "kind": "number",
+                            "min": -99.0,
+                            "max": 99.0,
+                            "step": 1.0,
+                            "integer": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "order"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": {
+                            "parent": "fb/container",
+                            "when": {
+                                "kind": "in",
+                                "control": "display",
+                                "values": [
+                                    "flex",
+                                    "grid"
+                                ]
+                            }
+                        },
+                        "alwaysShown": false
+                    }
+                ],
+                "layout": [
+                    {
+                        "label": "Layout",
+                        "controls": [
+                            "tag",
+                            "display",
+                            "direction",
+                            "wrap",
+                            "columns",
+                            "justify",
+                            "alignItems",
+                            "justifyItems",
+                            "alignContent",
+                            "gap"
+                        ]
+                    },
+                    {
+                        "label": "Size",
+                        "controls": [
+                            "contentWidth",
+                            "width",
+                            "minWidth",
+                            "maxWidth",
+                            "height",
+                            "minHeight",
+                            "maxHeight",
+                            "aspectRatio"
+                        ]
+                    },
+                    {
+                        "label": "Spacing",
+                        "controls": [
+                            "padding",
+                            "margin"
+                        ]
+                    },
+                    {
+                        "label": "Colors",
+                        "controls": [
+                            "background",
+                            "gradient",
+                            "textColor"
+                        ]
+                    },
+                    {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
+                        "label": "Border & shadow",
+                        "controls": [
+                            "borderWidth",
+                            "borderStyle",
+                            "borderColor",
+                            "borderRadius",
+                            "shadow"
+                        ]
+                    },
+                    {
+                        "label": "Position",
+                        "controls": [
+                            "position",
+                            "inset",
+                            "zIndex",
+                            "opacity"
+                        ]
+                    },
+                    {
+                        "label": "Container item",
+                        "controls": [
+                            "itemGrow",
+                            "itemShrink",
+                            "itemBasis",
+                            "itemColumnSpan",
+                            "itemRowSpan",
+                            "itemAlignSelf",
+                            "itemOrder"
+                        ]
+                    }
+                ],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
+                "states": []
+            },
+            "attribute": {
+                "base": {
+                    "mediaFit": {
+                        "desktop": "contain",
+                        "mobile": "fill"
+                    },
+                    "focalPoint": {
+                        "desktop": {
+                            "x": 0.25,
+                            "y": 0.33333299999999999
+                        },
+                        "tablet": {
+                            "x": 1.5,
+                            "y": 0
+                        }
+                    },
+                    "overlayColor": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "x-dark"
+                        }
+                    },
+                    "overlayGradient": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "gradient",
+                            "slug": "accent-fade"
+                        }
+                    },
+                    "overlayOpacity": {
+                        "desktop": 0.59999999999999998,
+                        "mobile": 0.29999999999999999
+                    }
+                }
+            },
+            "defaults": {},
+            "rootClass": "fb-case",
+            "variantClass": "fb-case-variant",
+            "values": {
+                "base": {
+                    "mediaFit": {
+                        "desktop": "contain"
+                    },
+                    "focalPoint": {
+                        "desktop": {
+                            "x": 0.25,
+                            "y": 0.33333299999999999
+                        }
+                    },
+                    "overlayColor": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "color",
+                            "slug": "x-dark"
+                        }
+                    },
+                    "overlayGradient": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "gradient",
+                            "slug": "accent-fade"
+                        }
+                    },
+                    "overlayOpacity": {
+                        "desktop": 0.59999999999999998,
+                        "mobile": 0.29999999999999999
+                    }
+                }
+            },
+            "variant": null,
+            "defaultsCss": "",
+            "variantCss": "",
+            "css": "@layer fb.instances{:where(.fb-case>.fb-container__media){object-fit:contain;object-position:25% 33.3333%;}:where(.fb-case>.fb-container__overlay){background-color:var(--wp--preset--color--x-dark);background-image:var(--wp--preset--gradient--accent-fade);opacity:0.6;}@media (max-width: 767px){:where(.fb-case>.fb-container__overlay){opacity:0.3;}}}"
         },
         {
             "name": "garbage states",
@@ -26304,6 +30405,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -26980,6 +31206,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -27011,7 +31248,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {
@@ -27596,6 +31844,131 @@
                         "alwaysShown": false
                     },
                     {
+                        "id": "backgroundMedia",
+                        "label": "Image or video",
+                        "input": {
+                            "kind": "media",
+                            "kinds": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "mediaFit",
+                        "label": "Fit",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "cover",
+                                    "label": "Cover (crop)"
+                                },
+                                {
+                                    "value": "contain",
+                                    "label": "Contain (whole)"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-fit"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "focalPoint",
+                        "label": "Focal point",
+                        "input": {
+                            "kind": "focal-point",
+                            "media": "backgroundMedia"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "object-position"
+                            ]
+                        },
+                        "element": "media",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayColor",
+                        "label": "Overlay color",
+                        "input": {
+                            "kind": "color",
+                            "allowCustom": true
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-color"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayGradient",
+                        "label": "Overlay gradient",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "gradient"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "background-image"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "overlayOpacity",
+                        "label": "Overlay opacity",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 1.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "opacity"
+                            ]
+                        },
+                        "element": "overlay",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
                         "id": "shadow",
                         "label": "Shadow",
                         "input": {
@@ -28272,6 +32645,17 @@
                         ]
                     },
                     {
+                        "label": "Background media",
+                        "controls": [
+                            "backgroundMedia",
+                            "mediaFit",
+                            "focalPoint",
+                            "overlayColor",
+                            "overlayGradient",
+                            "overlayOpacity"
+                        ]
+                    },
+                    {
                         "label": "Border & shadow",
                         "controls": [
                             "borderWidth",
@@ -28303,7 +32687,18 @@
                         ]
                     }
                 ],
-                "elements": [],
+                "elements": [
+                    {
+                        "id": "media",
+                        "className": "fb-container__media",
+                        "editorClassName": "fb-container__media"
+                    },
+                    {
+                        "id": "overlay",
+                        "className": "fb-container__overlay",
+                        "editorClassName": "fb-container__overlay"
+                    }
+                ],
                 "states": []
             },
             "attribute": {

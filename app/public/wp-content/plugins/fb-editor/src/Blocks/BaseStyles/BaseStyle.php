@@ -6,6 +6,7 @@ namespace Fb\Blocks\BaseStyles;
 
 use Fb\Blocks\Definition\ElementId;
 use Fb\Styles\DeclarationSet;
+use Fb\Styles\PseudoElement;
 
 /**
  * One functional base rule of a block type: what makes it work before any
@@ -20,6 +21,8 @@ final readonly class BaseStyle
 		public DeclarationSet $declarations,
 		public ?ElementId $element = null,
 		public ?string $descendantTag = null,
+		/** A generated box (::before…) of what the above selects. */
+		public ?PseudoElement $pseudoElement = null,
 	) {
 	}
 }

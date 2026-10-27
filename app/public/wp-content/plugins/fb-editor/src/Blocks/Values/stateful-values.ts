@@ -7,6 +7,7 @@
 import type { BreakpointList } from '../../Breakpoints/breakpoints';
 import { JsonValue } from '../../Json/json';
 import type { BlockDefinition } from '../Definition/block-definition';
+import type { ControlId } from '../Definition/control-id';
 import type { BlockState } from '../States/BlockState.generated';
 import { BlockValues } from './block-values';
 import { ValueChain } from './value-chain';
@@ -55,6 +56,11 @@ export class StatefulValues {
 
 	isEmpty(): boolean {
 		return this.base.isEmpty() && this.states.size === 0;
+	}
+
+	/** Mirrors StatefulValues::has(): set in any look, at any breakpoint. */
+	has( id: ControlId ): boolean {
+		return [ this.base, ...this.states.values() ].some( ( look ) => look.has( id ) );
 	}
 
 	/** Without the values that belong to the block's place: a look to share. */

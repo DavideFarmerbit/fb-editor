@@ -11,6 +11,8 @@ import { ColorField } from '../Definition/Input/Color/color-control';
 import { AspectRatioField } from '../Definition/Input/AspectRatio/aspect-ratio-control';
 import { AspectRatioInput } from '../Definition/Input/AspectRatio/aspect-ratio-input';
 import { ColorInput } from '../Definition/Input/Color/color-input';
+import { FocalPointField } from '../Definition/Input/FocalPoint/focal-point-control';
+import { FocalPointInput } from '../Definition/Input/FocalPoint/focal-point-input';
 import { GridColumnsField } from '../Definition/Input/GridColumns/grid-columns-control';
 import { GridColumnsInput } from '../Definition/Input/GridColumns/grid-columns-input';
 import { LengthField } from '../Definition/Input/Length/length-control';
@@ -91,6 +93,9 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof SvgInput ) {
 		return <SvgField { ...props } input={ input } />;
+	}
+	if ( input instanceof FocalPointInput ) {
+		return <FocalPointField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

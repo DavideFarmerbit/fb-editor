@@ -58,6 +58,22 @@ final readonly class RenderContext
 	}
 
 	/**
+	 * Whether any of the controls is set anywhere: own, variant or type
+	 * default, any look, any breakpoint (e.g. to render an element only
+	 * when something styles it).
+	 */
+	public function isSet( ControlId ...$ids ): bool
+	{
+		foreach ( $ids as $id ) {
+			if ( $this->values->has( $id ) || true === $this->variant?->has( $id ) || $this->defaults->has( $id ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * The base value of a select control as its enum case (e.g. the tag):
 	 * the block's own, else its variant's, else the type default, else the
 	 * input's fallback.

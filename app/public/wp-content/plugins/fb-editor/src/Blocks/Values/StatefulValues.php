@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fb\Blocks\Values;
 
 use Fb\Blocks\Definition\BlockDefinition;
+use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\States\BlockState;
 use Fb\Breakpoints\BreakpointList;
 use Fb\Json\JsonValue;
@@ -74,6 +75,18 @@ final readonly class StatefulValues implements \JsonSerializable
 	public function isEmpty(): bool
 	{
 		return $this->base->isEmpty() && [] === $this->states;
+	}
+
+	/** Whether the control is set in any look, at any breakpoint. */
+	public function has( ControlId $id ): bool
+	{
+		foreach ( [ $this->base, ...array_values( $this->states ) ] as $look ) {
+			if ( ! $look->get( $id )->isEmpty() ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

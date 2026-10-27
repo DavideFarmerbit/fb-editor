@@ -36,6 +36,9 @@ final readonly class BaseStylesheet
 				if ( null !== $style->descendantTag ) {
 					$selector = $selector->descendantTag( $style->descendantTag );
 				}
+				if ( null !== $style->pseudoElement ) {
+					$selector = $selector->withPseudoElement( $style->pseudoElement );
+				}
 
 				$rules->add( $selector, $style->declarations );
 			}

@@ -87,6 +87,21 @@ enum CssProperty: string
 	case PaddingBottomVar = '--fb-padding-bottom';
 	case PaddingLeftVar   = '--fb-padding-left';
 	case ContentWidthVar  = '--fb-content-width';
+	// The button icon, drawn by base CSS (see Button).
+	case IconVar        = '--fb-icon';
+	case IconContentVar = '--fb-icon-content';
+	case IconSizeVar    = '--fb-icon-size';
+	case IconOrderVar   = '--fb-icon-order';
+	case Content        = 'content';
+	case Flex           = 'flex';
+	case MaskImage      = 'mask-image';
+	case MaskPosition   = 'mask-position';
+	case MaskSize       = 'mask-size';
+	case MaskRepeat     = 'mask-repeat';
+	case ObjectFit      = 'object-fit';
+	case ObjectPosition = 'object-position';
+	case Isolation      = 'isolation';
+	case PointerEvents  = 'pointer-events';
 
 	public static function padding( Side $side ): self
 	{

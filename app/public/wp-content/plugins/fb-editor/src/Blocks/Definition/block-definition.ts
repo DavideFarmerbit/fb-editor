@@ -115,6 +115,15 @@ export class BlockDefinition implements ConditionLabels {
 		return this.controls.find( ( control ) => control.id === id );
 	}
 
+	/** The id of a control named by a PHP constant; throws for an unknown one. */
+	controlId( id: string ): ControlId {
+		const control = this.controls.find( ( candidate ) => candidate.id === id );
+		if ( control === undefined ) {
+			throw new InvalidJson( `${ this.name }: no control "${ id }"` );
+		}
+		return control.id;
+	}
+
 	controlLabel( id: ControlId ): string {
 		return this.control( id )?.label ?? id;
 	}

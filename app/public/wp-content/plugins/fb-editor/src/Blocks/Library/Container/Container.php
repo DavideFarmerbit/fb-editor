@@ -13,7 +13,12 @@ use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\Definition\ControlSet;
 use Fb\Blocks\Definition\Input\Color\ColorInput;
+use Fb\Blocks\Definition\ElementId;
+use Fb\Blocks\Definition\Input\FocalPoint\FocalPointInput;
 use Fb\Blocks\Definition\Input\GridColumns\GridColumnsInput;
+use Fb\Blocks\Definition\Input\Media\MediaInput;
+use Fb\Blocks\Definition\Input\Number\NumberInput;
+use Fb\Blocks\Definition\Input\Preset\PresetInput;
 use Fb\Blocks\Definition\Input\Length\LengthInput;
 use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
@@ -29,6 +34,7 @@ use Fb\Blocks\Options\Display;
 use Fb\Blocks\Options\FlexDirection;
 use Fb\Blocks\Options\Justify;
 use Fb\Blocks\Options\JustifyItems;
+use Fb\Blocks\Options\ObjectFit;
 use Fb\Blocks\Rendering\RenderContext;
 use Fb\Styles\CssProperty;
 use Fb\Styles\DeclarationSet;
@@ -38,7 +44,10 @@ use Fb\Styles\Output\BoxProperty;
 use Fb\Styles\Output\PropertyOutput;
 use Fb\Styles\Output\ToggleOutput;
 use Fb\TypeScript\ExportToTypeScript;
+use Fb\Presets\PresetKind;
 use Fb\Values\KeywordValue;
+use Fb\Values\MediaKind;
+use Fb\Values\MediaValue;
 
 /**
  * General-purpose layout block: a block, flex or grid container whose
@@ -73,6 +82,19 @@ final class Container extends Block
 	public const string ALIGN_CONTENT  = 'alignContent';
 	public const string GAP            = 'gap';
 	public const string CONTENT_WIDTH  = 'contentWidth';
+	#[ExportToTypeScript]
+	public const string MEDIA          = 'media';
+	#[ExportToTypeScript]
+	public const string OVERLAY        = 'overlay';
+	#[ExportToTypeScript]
+	public const string BACKGROUND_MEDIA = 'backgroundMedia';
+	#[ExportToTypeScript]
+	public const string OVERLAY_COLOR    = 'overlayColor';
+	#[ExportToTypeScript]
+	public const string OVERLAY_GRADIENT = 'overlayGradient';
+	public const string MEDIA_FIT        = 'mediaFit';
+	public const string FOCAL_POINT      = 'focalPoint';
+	public const string OVERLAY_OPACITY  = 'overlayOpacity';
 	public const string PADDING        = 'padding';
 	public const string MARGIN         = 'margin';
 	public const string BACKGROUND     = 'background';
@@ -90,6 +112,8 @@ final class Container extends Block
 		$flex    = new In( $display, Display::Flex );
 		$grid    = new In( $display, Display::Grid );
 		$layout  = new In( $display, Display::Flex, Display::Grid );
+		$media   = new ElementId( self::MEDIA );
+		$overlay = new ElementId( self::OVERLAY );
 
 		return new BlockDefinition(
 			new BlockName( self::NAME ),
@@ -118,6 +142,18 @@ final class Container extends Block
 				new Control( $id( self::TEXT_COLOR ), __( 'Text', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::Color ) ),
 				C::gradient(),
 				C::aspectRatio(),
+				new Control( $id( self::BACKGROUND_MEDIA ), __( 'Image or video', 'fb-editor' ), new MediaInput( MediaKind::Image, MediaKind::Video ), scope: Scope::Static ),
+				new Control( $id( self::MEDIA_FIT ), __( 'Fit', 'fb-editor' ), new SelectInput( ObjectFit::class ), new PropertyOutput( CssProperty::ObjectFit ), $media ),
+				new Control( $id( self::FOCAL_POINT ), __( 'Focal point', 'fb-editor' ), new FocalPointInput( $id( self::BACKGROUND_MEDIA ) ), new PropertyOutput( CssProperty::ObjectPosition ), $media ),
+				new Control( $id( self::OVERLAY_COLOR ), __( 'Overlay color', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::BackgroundColor ), $overlay ),
+				new Control( $id( self::OVERLAY_GRADIENT ), __( 'Overlay gradient', 'fb-editor' ), new PresetInput( PresetKind::Gradient ), new PropertyOutput( CssProperty::BackgroundImage ), $overlay ),
+				new Control(
+					$id( self::OVERLAY_OPACITY ),
+					__( 'Overlay opacity', 'fb-editor' ),
+					new NumberInput( min: 0.0, max: 1.0, step: 0.05 ),
+					new PropertyOutput( CssProperty::Opacity ),
+					$overlay
+				),
 				C::shadow(),
 				...C::size(),
 				...C::border(),
@@ -140,6 +176,15 @@ final class Container extends Block
 				new Panel( __( 'Spacing', 'fb-editor' ), $id( self::PADDING ), $id( self::MARGIN ) ),
 				new Panel( __( 'Colors', 'fb-editor' ), $id( self::BACKGROUND ), C::id( C::GRADIENT ), $id( self::TEXT_COLOR ) ),
 				new Panel(
+					__( 'Background media', 'fb-editor' ),
+					$id( self::BACKGROUND_MEDIA ),
+					$id( self::MEDIA_FIT ),
+					$id( self::FOCAL_POINT ),
+					$id( self::OVERLAY_COLOR ),
+					$id( self::OVERLAY_GRADIENT ),
+					$id( self::OVERLAY_OPACITY )
+				),
+				new Panel(
 					__( 'Border & shadow', 'fb-editor' ),
 					C::id( C::BORDER_WIDTH ),
 					C::id( C::BORDER_STYLE ),
@@ -148,6 +193,7 @@ final class Container extends Block
 					C::id( C::SHADOW )
 				),
 			),
+			[ $media, $overlay ],
 		);
 	}
 
@@ -159,6 +205,10 @@ final class Container extends Block
 	 *
 	 * The custom properties are reset here, on every container, so a nested
 	 * container never inherits its parent's.
+	 *
+	 * Background media and overlay sit behind the content, covering the box
+	 * (out of flow, so flex/grid layout ignores them); `isolation` keeps
+	 * their negative z-index inside the container.
 	 */
 	public function baseStyles(): array
 	{
@@ -176,14 +226,62 @@ final class Container extends Block
 					->with( CssProperty::PaddingBottom, 'var(' . CssProperty::PaddingBottomVar->value . ')' )
 					->with( CssProperty::PaddingLeft, $side( CssProperty::PaddingLeftVar ) )
 					->with( CssProperty::PaddingRight, $side( CssProperty::PaddingRightVar ) )
+					->with( CssProperty::Position, 'relative' )
+					->with( CssProperty::Isolation, 'isolate' )
 			),
+			new BaseStyle( self::behind()->with( CssProperty::ObjectFit, 'cover' ), new ElementId( self::MEDIA ) ),
+			new BaseStyle( self::behind(), new ElementId( self::OVERLAY ) ),
 		];
+	}
+
+	/** A layer covering the whole box, behind the content. */
+	private static function behind(): DeclarationSet
+	{
+		return DeclarationSet::empty()
+			->with( CssProperty::Position, 'absolute' )
+			->with( CssProperty::Top, '0' )
+			->with( CssProperty::Right, '0' )
+			->with( CssProperty::Bottom, '0' )
+			->with( CssProperty::Left, '0' )
+			->with( CssProperty::Width, '100%' )
+			->with( CssProperty::Height, '100%' )
+			->with( CssProperty::ZIndex, '-1' )
+			->with( CssProperty::PointerEvents, 'none' );
 	}
 
 	public function render( RenderContext $context ): string
 	{
 		$tag = $context->option( new ControlId( self::TAG ), ContainerTag::class )->value;
 
-		return sprintf( '<%1$s class="%2$s">%3$s</%1$s>', $tag, $context->rootClassAttribute(), $context->content );
+		$media = $this->media( $context );
+		// The overlay only when something can show through it (or it has a look).
+		$overlay = '' !== $media || $context->isSet( new ControlId( self::OVERLAY_COLOR ), new ControlId( self::OVERLAY_GRADIENT ) )
+			? sprintf( '<span class="%s" aria-hidden="true"></span>', $context->elementClassAttribute( new ElementId( self::OVERLAY ) ) )
+			: '';
+
+		return sprintf( '<%1$s class="%2$s">%3$s%4$s%5$s</%1$s>', $tag, $context->rootClassAttribute(), $media, $overlay, $context->content );
+	}
+
+	/**
+	 * The background image (responsive, decorative) or video (muted, looped,
+	 * inline: the only way browsers autoplay); empty when unset or when the
+	 * attachment is gone or of another kind.
+	 */
+	private function media( RenderContext $context ): string
+	{
+		$media = $context->value( new ControlId( self::BACKGROUND_MEDIA ) );
+		if ( ! $media instanceof MediaValue || ! wp_attachment_is( $media->kind->value, $media->id ) ) {
+			return '';
+		}
+
+		$class = $context->elementClassAttribute( new ElementId( self::MEDIA ) );
+
+		if ( MediaKind::Video === $media->kind ) {
+			$url = wp_get_attachment_url( $media->id );
+
+			return false === $url ? '' : sprintf( '<video class="%s" src="%s" autoplay muted loop playsinline aria-hidden="true"></video>', $class, esc_url( $url ) );
+		}
+
+		return wp_get_attachment_image( $media->id, 'full', false, [ 'class' => $class, 'alt' => '', 'aria-hidden' => 'true' ] );
 	}
 }

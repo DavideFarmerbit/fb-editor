@@ -31,7 +31,18 @@ final readonly class Selector implements \Stringable
 		private string $inner,
 		/** Still just the root class (+ pseudo-classes): no child yet. */
 		private bool $isRoot = true,
+		/** Generated box drawn on the selected element (base CSS only). */
+		private ?PseudoElement $pseudoElement = null,
 	) {
+	}
+
+	/**
+	 * A generated box of the selected element. Pseudo-elements can't sit
+	 * inside :where(): it goes after, specificity still zero.
+	 */
+	public function withPseudoElement( PseudoElement $pseudoElement ): self
+	{
+		return new self( $this->inner, $this->isRoot, $pseudoElement );
 	}
 
 	public static function forClass( string $className ): self
@@ -70,7 +81,7 @@ final readonly class Selector implements \Stringable
 
 	public function __toString(): string
 	{
-		return ":where({$this->inner})";
+		return ":where({$this->inner})" . ( null === $this->pseudoElement ? '' : '::' . $this->pseudoElement->value );
 	}
 
 	private static function validClass( string $className ): string
