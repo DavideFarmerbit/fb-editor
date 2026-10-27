@@ -1,7 +1,7 @@
 /**
- * Editor UI for MediaInput, on one line: a thumbnail (or the file name for
- * video) and a "Choose…/Replace…" button opening the media library, then
- * reset.
+ * Editor UI for MediaInput, on one line: a "Choose…/Replace…" button
+ * opening the media library, then (right-aligned) a thumbnail or the file
+ * name for video, then reset. Same order as the SVG input.
  */
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
@@ -39,12 +39,6 @@ export function MediaField( props: MediaFieldProps ): ReactElement {
 	return (
 		<Row status={ reading.status } inherited={ reading.own === null } onReset={ reading.own === null ? null : () => onChange( null ) }>
 			<div className="fb-media">
-				{ shown !== null &&
-					( shown.kind === MediaKind.Image && media !== null ? (
-						<img className="fb-media__thumbnail" src={ media.thumbnail } alt="" />
-					) : (
-						<span className="fb-media__name">{ media === null ? `#${ shown.id }` : media.url.split( '/' ).pop() }</span>
-					) ) }
 				<MediaUploadCheck>
 					<MediaUpload
 						allowedTypes={ [ ...input.kinds ] }
@@ -63,6 +57,12 @@ export function MediaField( props: MediaFieldProps ): ReactElement {
 						) }
 					/>
 				</MediaUploadCheck>
+				{ shown !== null &&
+					( shown.kind === MediaKind.Image && media !== null ? (
+						<img className="fb-media__thumbnail" src={ media.thumbnail } alt="" />
+					) : (
+						<span className="fb-media__name">{ media === null ? `#${ shown.id }` : media.url.split( '/' ).pop() }</span>
+					) ) }
 			</div>
 		</Row>
 	);

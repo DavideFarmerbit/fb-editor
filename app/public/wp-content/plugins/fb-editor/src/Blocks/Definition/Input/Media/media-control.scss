@@ -6,6 +6,7 @@
 }
 
 .fb-media__thumbnail {
+	margin-inline-start: auto;
 	width: 40px;
 	height: 40px;
 	object-fit: cover;
@@ -15,6 +16,7 @@
 .fb-media__name {
 	flex: 1;
 	min-width: 0;
+	text-align: end;
 	overflow: hidden;
 	font-size: 12px;
 	white-space: nowrap;
