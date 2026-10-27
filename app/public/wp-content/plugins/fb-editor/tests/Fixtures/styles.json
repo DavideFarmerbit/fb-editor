@@ -535,48 +535,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -722,6 +680,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -1237,8 +1321,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -1780,48 +1868,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -1967,6 +2013,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -2482,8 +2654,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -3003,48 +3179,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -3190,6 +3324,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -3705,8 +3965,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -4916,48 +5180,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -5103,6 +5325,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -5618,8 +5966,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -6181,48 +6533,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -6368,6 +6678,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -6883,8 +7319,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -7422,48 +7862,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -7609,6 +8007,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -8124,8 +8648,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -8673,48 +9201,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -8860,6 +9346,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -9375,8 +9987,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -9878,48 +10494,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -10065,6 +10639,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -10580,8 +11280,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -11127,48 +11831,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -11314,6 +11976,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -11829,8 +12617,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -12351,48 +13143,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -12538,6 +13288,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -13053,8 +13929,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -13590,48 +14470,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -13777,6 +14615,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -14292,8 +15256,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -14809,48 +15777,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -14996,6 +15922,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -15511,8 +16563,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -16026,48 +17082,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -16213,6 +17227,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -16728,8 +17868,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -19978,48 +21122,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -20165,6 +21267,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -20680,8 +21908,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -21266,48 +22498,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -21453,6 +22643,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -21968,8 +23284,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -23488,48 +24808,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -23675,6 +24953,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -24190,8 +25594,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -24761,48 +26169,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -24948,6 +26314,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -25463,8 +26955,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
@@ -25965,48 +27461,6 @@
                         "alwaysShown": false
                     },
                     {
-                        "id": "maxWidth",
-                        "label": "Max width",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "max-width"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
-                        "id": "minHeight",
-                        "label": "Min height",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "min-height"
-                            ]
-                        },
-                        "element": null,
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -26152,6 +27606,132 @@
                             "kind": "property",
                             "properties": [
                                 "box-shadow"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "width",
+                        "label": "Width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minWidth",
+                        "label": "Min width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxWidth",
+                        "label": "Max width",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-width"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "height",
+                        "label": "Height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": true,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "minHeight",
+                        "label": "Min height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "min-height"
+                            ]
+                        },
+                        "element": null,
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
+                    },
+                    {
+                        "id": "maxHeight",
+                        "label": "Max height",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "max-height"
                             ]
                         },
                         "element": null,
@@ -26667,8 +28247,12 @@
                         "label": "Size",
                         "controls": [
                             "contentWidth",
+                            "width",
+                            "minWidth",
                             "maxWidth",
+                            "height",
                             "minHeight",
+                            "maxHeight",
                             "aspectRatio"
                         ]
                     },
