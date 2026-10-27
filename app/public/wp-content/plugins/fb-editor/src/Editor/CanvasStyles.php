@@ -36,6 +36,14 @@ final readonly class CanvasStyles implements Hookable
 	 */
 	private const string NO_SCROLLBAR = 'html{scrollbar-width:none;}html::-webkit-scrollbar{width:0;height:0;}';
 
+	/**
+	 * No post title above the content: with a block theme the template
+	 * decides where (and whether) the title shows, so the canvas's own copy
+	 * only pushes the real content down. It's still editable in the
+	 * document panel.
+	 */
+	private const string NO_POST_TITLE = '.editor-visual-editor__post-title-wrapper{display:none;}';
+
 	private StylePolicyApplier $applier;
 
 	public function __construct(
@@ -65,6 +73,7 @@ final readonly class CanvasStyles implements Hookable
 				$this->tokens->css( withCoreStyles: false ) . ( new BaseStylesheet() )->css( $this->blocks->types(), editor: true )
 					. Hiding::css( $this->breakpoints->breakpoints(), editor: true )
 					. self::NO_SCROLLBAR
+					. self::NO_POST_TITLE
 			);
 		}
 		wp_enqueue_style( self::HANDLE );
