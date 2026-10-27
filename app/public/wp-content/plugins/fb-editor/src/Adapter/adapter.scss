@@ -21,3 +21,9 @@ $canvas-frame: ".block-editor-iframe__container:has(> .block-editor-iframe__scal
 // sized from the block's offsetWidth/Height read inside the iframe, so
 // unscaled (BlockPopoverCover → CoverContainer in block-editor.js).
 $cover-popover: ".block-editor-block-popover > .components-popover__content > div[style*='position: absolute']";
+
+// A core block-support panel ("Dimensions"…) is a ToolsPanel that marks its
+// first visible item with this class (__experimentalFirstVisibleItemClass).
+// Without one, it holds nothing to show: e.g. core's image always renders
+// its Dimensions panel, emptied by NO_IMAGE_RESIZE_CONTEXT (adapter.ts).
+$empty-support-panel: ".dimensions-block-support-panel:not(:has(.first))";

@@ -75,6 +75,9 @@ final readonly class CoreBlockRestrictions implements Hookable
 		// breakpoints, core's version would write styles we don't output.
 		$settings['responsiveEditingEnabled']  = false;
 		$settings['blockStatesEditingEnabled'] = false;
+		// One list per block, no Settings/Styles tabs: fb's sidebar has its
+		// own Settings/Styles view filter instead (no switching back and forth).
+		$settings['blockInspectorTabs'] = [ 'default' => false ];
 
 		return $settings;
 	}

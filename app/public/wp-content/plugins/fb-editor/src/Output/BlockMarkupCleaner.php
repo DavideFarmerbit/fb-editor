@@ -76,7 +76,7 @@ final readonly class BlockMarkupCleaner implements Hookable
 
 		// Only treat the first tag as the wrapper if it's really this block's
 		// (static blocks saved without wrapper markup don't have one).
-		if ( self::classes( $processor )->contains( $managed->coreClass() ) ) {
+		if ( ! $managed->wrapperHasCoreClass() || self::classes( $processor )->contains( $managed->coreClass() ) ) {
 			self::setClasses( $processor, $this->fbClasses( $managed, $block )->with( $userClasses ) );
 		}
 

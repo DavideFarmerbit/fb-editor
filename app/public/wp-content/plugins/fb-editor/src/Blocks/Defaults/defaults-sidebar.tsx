@@ -59,6 +59,8 @@ function BlockTypeDefaults( { definition }: { readonly definition: BlockDefiniti
 				<>
 					<StatefulInspector
 						definition={ definition }
+						// Type defaults: every control in one list.
+						filterable={ false }
 						values={ defaults.saved }
 						weaker={ [ new WeakerSource( defaults.theme, __( 'From theme', 'fb-editor' ) ) ] }
 						listFallbackControls

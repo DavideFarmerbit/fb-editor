@@ -11,6 +11,7 @@ use Fb\Blocks\Definition\BlockName;
 use Fb\Blocks\Definition\Condition\In;
 use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
+use Fb\Blocks\Definition\ControlKind;
 use Fb\Blocks\Definition\ControlSet;
 use Fb\Blocks\Definition\Input\Color\ColorInput;
 use Fb\Blocks\Definition\ElementId;
@@ -119,7 +120,7 @@ final class Container extends Block
 			new BlockName( self::NAME ),
 			__( 'Container', 'fb-editor' ),
 			new ControlSet(
-				new Control( $id( self::TAG ), __( 'HTML tag', 'fb-editor' ), new SelectInput( ContainerTag::class, ContainerTag::Div ), scope: Scope::Static ),
+				new Control( $id( self::TAG ), __( 'HTML tag', 'fb-editor' ), new SelectInput( ContainerTag::class, ContainerTag::Div ), scope: Scope::Static, kind: ControlKind::Setting ),
 				new Control( $display, __( 'Display', 'fb-editor' ), new SelectInput( Display::class ), new PropertyOutput( CssProperty::Display ) ),
 				new Control( $id( self::DIRECTION ), __( 'Direction', 'fb-editor' ), new SelectInput( FlexDirection::class ), new PropertyOutput( CssProperty::FlexDirection ), visibleWhen: $flex ),
 				new Control(

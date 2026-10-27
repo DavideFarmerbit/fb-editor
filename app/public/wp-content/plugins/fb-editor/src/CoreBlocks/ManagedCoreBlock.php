@@ -16,6 +16,7 @@ enum ManagedCoreBlock: string
 	case Paragraph    = 'core/paragraph';
 	case Heading      = 'core/heading';
 	case List         = 'core/list';
+	case ListItem     = 'core/list-item';
 	case Image        = 'core/image';
 	case Buttons      = 'core/buttons';
 	case Button       = 'core/button';
@@ -46,6 +47,16 @@ enum ManagedCoreBlock: string
 		return 'wp-block-' . $this->slug();
 	}
 
+	/**
+	 * Whether core's wrapper carries coreClass(). Without it (no className
+	 * support, e.g. list items), the first tag of the markup is the wrapper:
+	 * these are static blocks whose saved markup always starts with it.
+	 */
+	public function wrapperHasCoreClass(): bool
+	{
+		return self::ListItem !== $this;
+	}
+
 	/** Class fb puts there instead, e.g. "fb-post-title". */
 	public function fbClass(): string
 	{
@@ -64,6 +75,7 @@ enum ManagedCoreBlock: string
 			self::SiteTitle    => CleanupScope::Subtree,
 			self::PostTemplate => CleanupScope::RootAndPostItems,
 			self::List,
+			self::ListItem,
 			self::Buttons,
 			self::PostContent,
 			self::Query,

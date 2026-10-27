@@ -24,6 +24,7 @@ use Fb\CoreBlocks\Library\Buttons\Buttons;
 use Fb\CoreBlocks\Library\Heading\Heading;
 use Fb\CoreBlocks\Library\Image\Image;
 use Fb\CoreBlocks\Library\ListBlock\ListBlock;
+use Fb\CoreBlocks\Library\ListItem\ListItem;
 use Fb\CoreBlocks\Library\Paragraph\Paragraph;
 use Fb\Editor\CanvasStyles;
 use Fb\Editor\EditorAssets;
@@ -58,7 +59,7 @@ final readonly class Plugin
 		$blocks      = new BlockRegistry(
 			new BlockRenderer( $styler, $defaults ),
 			[ new Container(), new Icon(), new Separator() ],
-			[ new Paragraph(), new Heading(), new ListBlock(), new Image(), new Buttons(), new Button() ],
+			[ new Paragraph(), new Heading(), new ListBlock(), new ListItem(), new Image(), new Buttons(), new Button() ],
 		);
 
 		$services = [

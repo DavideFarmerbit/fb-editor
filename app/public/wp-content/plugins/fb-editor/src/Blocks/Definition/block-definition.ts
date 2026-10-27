@@ -3,6 +3,7 @@
  * BlockDefinition}. Built only from the JSON PHP exports, including every
  * class name: nothing about a block is re-derived here.
  */
+import { ControlKind } from './ControlKind.generated';
 import { InvalidJson, type JsonValue } from '../../Json/json';
 import { outputFromJson, type StyleOutput } from '../../Styles/Output/outputs';
 import { KeywordValue } from '../../Values/keyword';
@@ -42,7 +43,9 @@ export class Control {
 		/** Only inside a given parent block; null: anywhere. */
 		public readonly placement: Placement | null,
 		/** Listed in the sidebar from the start (mirrors Control::$alwaysShown). */
-		public readonly alwaysShown: boolean
+		public readonly alwaysShown: boolean,
+		/** Listed under the sidebar's Settings or Styles switch. */
+		public readonly kind: ControlKind
 	) {}
 
 	/** Mirrors Control::isStateful(). */
@@ -210,7 +213,8 @@ function controlFromJson( json: JsonValue ): Control {
 		json.get( 'scope' ).oneOf( Scope ),
 		json.get( 'visibleWhen' ).nullable( conditionFromJson ),
 		json.get( 'placement' ).nullable( ( placement ) => new Placement( placement.get( 'parent' ).string(), conditionFromJson( placement.get( 'when' ) ) ) ),
-		json.get( 'alwaysShown' ).boolean()
+		json.get( 'alwaysShown' ).boolean(),
+		json.get( 'kind' ).oneOf( ControlKind )
 	);
 }
 

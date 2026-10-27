@@ -10,6 +10,7 @@ use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Definition\BlockName;
 use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
+use Fb\Blocks\Definition\ControlKind;
 use Fb\Blocks\Definition\ControlSet;
 use Fb\Blocks\Definition\Input\Link\LinkInput;
 use Fb\Blocks\Definition\Input\Svg\SvgInput;
@@ -55,9 +56,9 @@ final class Icon extends Block
 			new BlockName( self::NAME ),
 			__( 'Icon', 'fb-editor' ),
 			new ControlSet(
-				new Control( $id( self::SVG ), __( 'SVG code', 'fb-editor' ), new SvgInput(), scope: Scope::Static, alwaysShown: true ),
-				new Control( $id( self::LABEL ), __( 'Accessible label', 'fb-editor' ), new TextInput(), scope: Scope::Static ),
-				new Control( $id( self::LINK ), __( 'Link', 'fb-editor' ), new LinkInput(), scope: Scope::Static ),
+				new Control( $id( self::SVG ), __( 'SVG code', 'fb-editor' ), new SvgInput(), scope: Scope::Static, alwaysShown: true, kind: ControlKind::Setting ),
+				new Control( $id( self::LABEL ), __( 'Accessible label', 'fb-editor' ), new TextInput(), scope: Scope::Static, kind: ControlKind::Setting ),
+				new Control( $id( self::LINK ), __( 'Link', 'fb-editor' ), new LinkInput(), scope: Scope::Static, kind: ControlKind::Setting ),
 				C::textColor(),
 				C::background(),
 				C::padding(),

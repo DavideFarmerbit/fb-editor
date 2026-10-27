@@ -12,13 +12,26 @@ import type { ReactElement } from 'react';
 
 import { store } from '../../Editor/store';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
+import { ControlKind } from '../Definition/ControlKind.generated';
 import type { BlockValues } from '../Values/block-values';
 import { ValueChain } from '../Values/value-chain';
 import { AddSetting } from './add-setting';
+import { SidebarViewFilter } from './sidebar-view-filter';
 import { ControlFrame } from './control-frame';
 import type { Fallbacks } from './fallbacks';
 import { describePlacement, type ParentContext } from './parent-context';
 import './inspector.scss';
+
+/**
+ * A narrower view of a block's sidebar: only its settings or only its
+ * styles (see ControlKind); null: everything.
+ */
+export type SidebarView = 'settings' | 'styles';
+
+/** Whether a control is in a view (null: every control). */
+export function inView( control: Control, view: SidebarView | null ): boolean {
+	return view === null || ( view === 'styles' ) === ( control.kind === ControlKind.Style );
+}
 
 interface InspectorProps {
 	readonly definition: BlockDefinition;
@@ -35,6 +48,10 @@ interface InspectorProps {
 	readonly listFallbackControls: boolean;
 	/** Only controls that can vary per state (editing a state). */
 	readonly statefulOnly: boolean;
+	/** Only the controls of this view; null: all of them. */
+	readonly view: SidebarView | null;
+	/** The view filter sits next to "Add setting". */
+	readonly filterable: boolean;
 	/**
 	 * Controls that belong to the block's place (Container item) are
 	 * offered: false for type defaults, which never hold them.
@@ -53,7 +70,7 @@ interface InspectorProps {
 }
 
 export function Inspector( props: InspectorProps ): ReactElement {
-	const { definition, values, fallbacks, fallbackLook, listFallbackControls, statefulOnly, allowPlaced, parent, memoryKey, onChange, makeDefault } = props;
+	const { definition, values, fallbacks, fallbackLook, listFallbackControls, statefulOnly, view, filterable, allowPlaced, parent, memoryKey, onChange, makeDefault } = props;
 	const { breakpoint, breakpoints, added } = useSelect(
 		( select ) => ( {
 			breakpoint: select( store ).getBreakpoint(),
@@ -71,6 +88,7 @@ export function Inspector( props: InspectorProps ): ReactElement {
 	const appliesHere = ( control: Control ): boolean => parent?.allows( control, breakpoint.id ) ?? ! control.isPlaced();
 	const controls = definition.controls.filter(
 		( control ) =>
+			inView( control, view ) &&
 			( ! statefulOnly || control.isStateful() ) &&
 			( ! control.isPlaced() || ( allowPlaced && ( appliesHere( control ) || values.has( control.id ) ) ) )
 	);
@@ -88,6 +106,7 @@ export function Inspector( props: InspectorProps ): ReactElement {
 					defaults={ fallbackLook }
 					onAdd={ ( control ) => addControl( memoryKey, control.id ) }
 				/>
+				{ filterable && <SidebarViewFilter /> }
 			</div>
 			{ definition.layout.map( ( panel ) => {
 				const shown = panel.controls

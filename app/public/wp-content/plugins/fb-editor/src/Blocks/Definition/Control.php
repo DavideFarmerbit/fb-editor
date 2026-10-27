@@ -32,6 +32,8 @@ final readonly class Control implements \JsonSerializable
 		 * what the block needs to show anything (an icon's SVG).
 		 */
 		public bool $alwaysShown = false,
+		/** Listed under the sidebar's Settings or Styles switch. */
+		public ControlKind $kind = ControlKind::Style,
 	) {
 		if ( null !== $element && null === $output ) {
 			throw new \InvalidArgumentException( "Control \"{$id}\": an element only makes sense with an output." );
@@ -55,7 +57,7 @@ final readonly class Control implements \JsonSerializable
 	}
 
 	/**
-	 * @return array{id: ControlId, label: string, input: Input, output: ?StyleOutput, element: ?ElementId, scope: Scope, visibleWhen: ?Condition, placement: ?Placement, alwaysShown: bool}
+	 * @return array{id: ControlId, label: string, input: Input, output: ?StyleOutput, element: ?ElementId, scope: Scope, visibleWhen: ?Condition, placement: ?Placement, alwaysShown: bool, kind: ControlKind}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -69,6 +71,7 @@ final readonly class Control implements \JsonSerializable
 			'visibleWhen' => $this->visibleWhen,
 			'placement'   => $this->placement,
 			'alwaysShown' => $this->alwaysShown,
+			'kind'        => $this->kind,
 		];
 	}
 }

@@ -5,6 +5,7 @@
 import { createReduxStore, register } from '@wordpress/data';
 
 import type { SpacingMode } from '../Blocks/Definition/Input/Spacing/spacing-input';
+import type { SidebarView } from '../Blocks/Inspector/inspector';
 import type { BlockState } from '../Blocks/States/BlockState.generated';
 import type { Breakpoint, BreakpointId, BreakpointList } from '../Breakpoints/breakpoints';
 import { settings } from './settings';
@@ -41,6 +42,8 @@ interface State {
 	 * canvas, faded, so they can be selected. Off: hidden as on the page.
 	 */
 	readonly showHiddenBlocks: boolean;
+	/** Block sidebars list only settings or only styles; null: both (the view filter switches). */
+	readonly sidebarView: SidebarView | null;
 }
 
 interface SetBreakpointAction {
@@ -77,12 +80,17 @@ interface ShowUnavailableSettingsAction {
 	readonly show: boolean;
 }
 
+interface SetSidebarViewAction {
+	readonly type: 'SET_SIDEBAR_VIEW';
+	readonly view: SidebarView | null;
+}
+
 interface ShowHiddenBlocksAction {
 	readonly type: 'SHOW_HIDDEN_BLOCKS';
 	readonly show: boolean;
 }
 
-type Action = ShowHiddenBlocksAction | SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction | ShowUnavailableSettingsAction;
+type Action = SetSidebarViewAction | ShowHiddenBlocksAction | SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction | ShowUnavailableSettingsAction;
 
 const NONE: readonly string[] = [];
 
@@ -93,6 +101,7 @@ const DEFAULT_STATE: State = {
 	inspectedStates: {},
 	showUnavailableSettings: true,
 	showHiddenBlocks: true,
+	sidebarView: null,
 };
 
 const actions = {
@@ -114,6 +123,10 @@ const actions = {
 	},
 	showUnavailableSettings( show: boolean ): ShowUnavailableSettingsAction {
 		return { type: 'SHOW_UNAVAILABLE_SETTINGS', show };
+	},
+	/** null: settings and styles. */
+	setSidebarView( view: SidebarView | null ): SetSidebarViewAction {
+		return { type: 'SET_SIDEBAR_VIEW', view };
 	},
 	showHiddenBlocks( show: boolean ): ShowHiddenBlocksAction {
 		return { type: 'SHOW_HIDDEN_BLOCKS', show };
@@ -140,6 +153,9 @@ const selectors = {
 	isShowingUnavailableSettings( state: State ): boolean {
 		return state.showUnavailableSettings;
 	},
+	getSidebarView( state: State ): SidebarView | null {
+		return state.sidebarView;
+	},
 	isShowingHiddenBlocks( state: State ): boolean {
 		return state.showHiddenBlocks;
 	},
@@ -160,6 +176,8 @@ export const store = createReduxStore( 'fb/editor', {
 			}
 			case 'SHOW_UNAVAILABLE_SETTINGS':
 				return { ...state, showUnavailableSettings: action.show };
+			case 'SET_SIDEBAR_VIEW':
+				return { ...state, sidebarView: action.view };
 			case 'SHOW_HIDDEN_BLOCKS':
 				return { ...state, showHiddenBlocks: action.show };
 			case 'INSPECT_STATE': {

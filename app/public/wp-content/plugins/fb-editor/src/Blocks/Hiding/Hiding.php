@@ -7,6 +7,7 @@ namespace Fb\Blocks\Hiding;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
+use Fb\Blocks\Definition\ControlKind;
 use Fb\Blocks\Definition\ControlSet;
 use Fb\Blocks\Definition\Input\Breakpoints\BreakpointsInput;
 use Fb\Blocks\Definition\Panel;
@@ -56,7 +57,7 @@ final class Hiding
 		$id = new ControlId( self::CONTROL );
 
 		return $definition->withControls(
-			new ControlSet( new Control( $id, __( 'Hide on', 'fb-editor' ), new BreakpointsInput(), scope: Scope::Static ) ),
+			new ControlSet( new Control( $id, __( 'Hide on', 'fb-editor' ), new BreakpointsInput(), scope: Scope::Static, kind: ControlKind::Setting ) ),
 			new Panel( __( 'Visibility', 'fb-editor' ), $id )
 		);
 	}

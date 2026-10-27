@@ -3,7 +3,8 @@
  * Core renders them; through public filters fb adds:
  * - its `fb` attribute (the editor registers core blocks from its own
  *   metadata, so the server's attribute alone isn't enough);
- * - the sidebar and live CSS, next to core's edit (editor.BlockEdit);
+ * - the sidebar and live CSS, next to core's edit (editor.BlockEdit),
+ *   whose own styling UI is turned off where props allow (image sizing);
  * - the block class + instance class on the wrapper (editor.BlockListBlock).
  *
  * Must load before core blocks register (they do on domReady).
@@ -13,7 +14,7 @@ import { useEffect, useMemo, useState } from '@wordpress/element';
 import { addFilter } from '@wordpress/hooks';
 import type { ComponentType, ReactElement } from 'react';
 
-import { canvasBlockElement } from '../Adapter/adapter';
+import { canvasBlockElement, NO_IMAGE_RESIZE_CONTEXT } from '../Adapter/adapter';
 import { editorInstanceClass, FbBlockChrome, useFbBlock, usePreviewClass, useVariantOf, variantClass } from '../Blocks/block-chrome';
 import { ATTRIBUTE, ATTRIBUTE_TYPE } from '../Blocks/BlockRegistry.generated';
 import { useBlockDefaults } from '../Blocks/Defaults/use-block-defaults';
@@ -21,6 +22,7 @@ import type { BlockDefinition } from '../Blocks/Definition/block-definition';
 import { useHidingClasses } from '../Blocks/Hiding/hiding';
 import { BlockAttribute } from '../Blocks/Values/block-attribute';
 import { settings } from '../Editor/settings';
+import './core-block-controls.scss';
 
 function coreDefinition( name: string ): BlockDefinition | undefined {
 	return settings.blocks.find( ( definition ) => definition.isCore && definition.name === name );
@@ -45,7 +47,14 @@ interface CoreBlockProps {
 	readonly setAttributes: ( attributes: Record< string, unknown > ) => void;
 	readonly className?: string;
 	readonly isSelected?: boolean;
+	/** Block context, as core computed it. */
+	readonly context?: Readonly< Record< string, unknown > >;
 }
+
+/** Context core's edit of a block gets instead of its own, by block name. */
+const CONTEXT_OVERRIDES: Readonly< Record< string, Readonly< Record< string, unknown > > > > = {
+	'core/image': NO_IMAGE_RESIZE_CONTEXT,
+};
 
 /** The block's wrapper in the canvas, found once it's mounted. */
 function useCanvasBlockElement( clientId: string ): HTMLElement | null {
@@ -62,6 +71,11 @@ function CoreBlockChrome( { definition, ...props }: CoreBlockProps & { readonly 
 	return <FbBlockChrome definition={ definition } state={ state } clientId={ props.clientId } root={ root } />;
 }
 
+function withContextOverrides( props: CoreBlockProps ): Pick< CoreBlockProps, 'context' > {
+	const overrides = CONTEXT_OVERRIDES[ props.name ];
+	return overrides === undefined ? {} : { context: { ...props.context, ...overrides } };
+}
+
 addFilter(
 	'editor.BlockEdit',
 	'fb/core-block-controls',
@@ -71,7 +85,7 @@ addFilter(
 				const definition = coreDefinition( props.name );
 				return (
 					<>
-						<BlockEdit { ...props } />
+						<BlockEdit { ...props } { ...withContextOverrides( props ) } />
 						{ definition !== undefined && <CoreBlockChrome { ...props } definition={ definition } /> }
 					</>
 				);

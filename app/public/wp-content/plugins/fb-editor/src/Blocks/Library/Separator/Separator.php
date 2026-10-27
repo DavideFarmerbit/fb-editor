@@ -10,6 +10,7 @@ use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Definition\BlockName;
 use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
+use Fb\Blocks\Definition\ControlKind;
 use Fb\Blocks\Definition\ControlSet;
 use Fb\Blocks\Definition\ElementId;
 use Fb\Blocks\Definition\Input\Color\ColorInput;
@@ -64,7 +65,7 @@ final class Separator extends Block
 			new BlockName( self::NAME ),
 			__( 'Separator', 'fb-editor' ),
 			new ControlSet(
-				new Control( $id( self::SVG ), __( 'Icon (SVG code)', 'fb-editor' ), new SvgInput(), scope: Scope::Static ),
+				new Control( $id( self::SVG ), __( 'Icon (SVG code)', 'fb-editor' ), new SvgInput(), scope: Scope::Static, kind: ControlKind::Setting ),
 				new Control( $id( self::LINE_WIDTH ), __( 'Thickness', 'fb-editor' ), new LengthInput(), new PropertyOutput( CssProperty::BorderTopWidth ), $line ),
 				new Control( $id( self::LINE_STYLE ), __( 'Style', 'fb-editor' ), new SelectInput( BorderStyle::class ), new PropertyOutput( CssProperty::BorderTopStyle ), $line ),
 				new Control( $id( self::LINE_COLOR ), __( 'Line color', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::BorderTopColor ), $line ),

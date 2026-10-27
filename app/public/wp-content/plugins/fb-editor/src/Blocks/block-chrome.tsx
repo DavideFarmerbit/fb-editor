@@ -3,6 +3,10 @@
  * or a managed core block: parsed values, its variant, type defaults, the
  * generated sidebar, and live CSS (defaults + variant + instance) in the
  * canvas.
+ *
+ * One list (core's inspector tabs are off), narrowed by the Settings /
+ * Styles switches next to "Add setting" (each control declares its
+ * ControlKind).
  */
 import { InspectorControls } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
@@ -184,6 +188,11 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 	const { values, defaults, variant } = state;
 	const defaultsSource = new WeakerSource( defaults.values, fromDefault( definition.title ) );
 	const parent = useParentContext( clientId, definition );
+	const weaker = variant === null ? [ defaultsSource ] : [ new WeakerSource( variant.values, fromVariant( variant.name ) ), defaultsSource ];
+	const makeDefault = defaults.canEdit
+		? ( control: Control, look: BlockState | null ) =>
+				state.saveDefaults( defaults.saved.withLook( look, defaults.saved.look( look ).withControlFrom( control, values.look( look ) ) ) )
+		: null;
 
 	return (
 		<>
@@ -191,21 +200,15 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 				<VariantPicker definition={ definition } state={ state } />
 				<StatefulInspector
 					definition={ definition }
+					filterable
 					values={ values }
-					weaker={ variant === null ? [ defaultsSource ] : [ new WeakerSource( variant.values, fromVariant( variant.name ) ), defaultsSource ] }
+					weaker={ weaker }
 					listFallbackControls={ false }
 					allowPlaced
 					parent={ parent }
 					memoryKey={ clientId }
 					onChange={ ( next ) => state.setValues( next ) }
-					makeDefault={
-						defaults.canEdit
-							? ( control: Control, look: BlockState | null ) =>
-									state.saveDefaults(
-										defaults.saved.withLook( look, defaults.saved.look( look ).withControlFrom( control, values.look( look ) ) )
-									)
-							: null
-					}
+					makeDefault={ makeDefault }
 				/>
 			</InspectorControls>
 			<DefaultsStyles definition={ definition } defaults={ defaults.values } root={ root } />

@@ -1,0 +1,7 @@
+@use "../Adapter/adapter" as *;
+
+// Core's own styling panels emptied by fb (see adapter.scss): not even
+// their title.
+#{$empty-support-panel} {
+	display: none;
+}

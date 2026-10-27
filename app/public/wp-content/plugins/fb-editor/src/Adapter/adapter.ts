@@ -14,6 +14,15 @@
 export const PINNED_ITEMS_SLOT = 'PinnedItems/core';
 
 /**
+ * Block context that turns off core's own sizing UI of an image: the
+ * Dimensions panel (aspect ratio, width, height, scale) and the canvas
+ * resize handles. Both write core attributes (inline sizes) fb doesn't
+ * manage. Core's image edit reads `context.allowResize` (galleries pass
+ * false); nothing public does the same.
+ */
+export const NO_IMAGE_RESIZE_CONTEXT: Readonly< Record< string, unknown > > = { allowResize: false };
+
+/**
  * The editor canvas iframe (post and site editors). Core's own code finds
  * it by this name.
  */

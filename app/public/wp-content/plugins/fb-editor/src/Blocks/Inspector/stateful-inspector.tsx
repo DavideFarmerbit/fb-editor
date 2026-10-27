@@ -33,6 +33,13 @@ interface StatefulInspectorProps {
 	readonly allowPlaced: boolean;
 	/** The block's parent, for placed controls. */
 	readonly parent: ParentContext | null;
+	/**
+	 * Offers the All · Settings · Styles filter (block sidebars) and follows
+	 * it; otherwise every control is listed (type defaults). Settings have
+	 * no states (none of them changes on hover): in that view the
+	 * state bar stays, disabled, so nothing below it moves.
+	 */
+	readonly filterable: boolean;
 	/** The block clientId, or a block type when editing defaults. */
 	readonly memoryKey: string;
 	readonly onChange: ( values: StatefulValues ) => void;
@@ -41,12 +48,16 @@ interface StatefulInspectorProps {
 }
 
 export function StatefulInspector( props: StatefulInspectorProps ): ReactElement {
-	const { definition, values, weaker, listFallbackControls, allowPlaced, parent, memoryKey, onChange, makeDefault } = props;
+	const { definition, values, weaker, listFallbackControls, allowPlaced, filterable, parent, memoryKey, onChange, makeDefault } = props;
 	const inspected = useSelect( ( select ) => select( store ).getInspectedState( memoryKey ), [ memoryKey ] );
+	const chosenView = useSelect( ( select ) => select( store ).getSidebarView(), [] );
+	const view = filterable ? chosenView : null;
 	const { inspectState } = useDispatch( store );
 
-	// A state the block doesn't support (anymore) is the base.
-	const info = definition.states.find( ( candidate ) => candidate.id === inspected );
+	// A state the block doesn't support (anymore) is the base; so is
+	// everything in the Settings view.
+	const statesApply = view !== 'settings';
+	const info = statesApply ? definition.states.find( ( candidate ) => candidate.id === inspected ) : undefined;
 	const state = info?.id ?? null;
 	const firstWeaker = weaker[ 0 ]?.values.look( state ) ?? null;
 
@@ -68,6 +79,9 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 								key={ id ?? 'base' }
 								className={ classes.join( ' ' ) }
 								aria-pressed={ id === state }
+								disabled={ ! statesApply }
+								accessibleWhenDisabled
+								{ ...( statesApply ? {} : { label: __( 'Settings are the same in every state', 'fb-editor' ), showTooltip: true } ) }
 								onClick={ () => inspectState( memoryKey, id ) }
 							>
 								{ candidate?.label ?? __( 'Base', 'fb-editor' ) }
@@ -85,6 +99,8 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 				fallbackLook={ firstWeaker ?? BlockValues.empty( definition, values.base.breakpoints() ) }
 				listFallbackControls={ listFallbackControls }
 				statefulOnly={ state !== null }
+				view={ view }
+				filterable={ filterable }
 				allowPlaced={ allowPlaced }
 				parent={ parent }
 				memoryKey={ state === null ? memoryKey : `${ memoryKey }#${ state }` }
