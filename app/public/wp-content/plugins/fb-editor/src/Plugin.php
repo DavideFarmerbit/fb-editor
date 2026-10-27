@@ -31,6 +31,7 @@ use Fb\Output\BlockMarkupCleaner;
 use Fb\Output\FrontendStyles;
 use Fb\Output\TokenStylesheet;
 use Fb\Presets\PresetRepository;
+use Fb\Site\AdminSidebar\AdminSidebar;
 use Fb\Theme\ThemeConfigFile;
 use Fb\ThemeJson\CoreDefaultsStripper;
 
@@ -77,6 +78,7 @@ final readonly class Plugin
 			),
 			new BlockMarkupCleaner( $blocks, $styler ),
 			new CoreBlockRestrictions( $blocks ),
+			new AdminSidebar( $this->paths ),
 		];
 
 		foreach ( $services as $service ) {
