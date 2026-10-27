@@ -17,6 +17,8 @@ use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
 use Fb\Blocks\Options\FontWeight;
 use Fb\Blocks\Options\TextAlign;
+use Fb\Blocks\Options\TextDecoration;
+use Fb\Blocks\Options\TextTransform;
 use Fb\Presets\PresetKind;
 use Fb\Styles\CssProperty;
 use Fb\Styles\Output\AxisOutput;
@@ -42,6 +44,9 @@ final class CommonControls
 	public const string GAP         = 'gap';
 	public const string LINE_HEIGHT    = 'lineHeight';
 	public const string LETTER_SPACING = 'letterSpacing';
+	public const string TEXT_DECORATION = 'textDecoration';
+	public const string TEXT_TRANSFORM  = 'textTransform';
+	public const string TEXT_INDENT     = 'textIndent';
 	public const string BORDER         = 'border';
 	public const string BORDER_RADIUS  = 'borderRadius';
 	public const string SHADOW         = 'shadow';
@@ -110,6 +115,42 @@ final class CommonControls
 	public static function letterSpacing( ?ElementId $element = null ): Control
 	{
 		return new Control( new ControlId( self::LETTER_SPACING ), __( 'Letter spacing', 'fb-editor' ), new LengthInput( allowNegative: true ), new PropertyOutput( CssProperty::LetterSpacing ), $element );
+	}
+
+	/** Underline… (the `-line` longhand: combines with a base `text-decoration: none`). */
+	public static function textDecoration( ?ElementId $element = null ): Control
+	{
+		return new Control( new ControlId( self::TEXT_DECORATION ), __( 'Decoration', 'fb-editor' ), new SelectInput( TextDecoration::class ), new PropertyOutput( CssProperty::TextDecorationLine ), $element );
+	}
+
+	public static function textTransform( ?ElementId $element = null ): Control
+	{
+		return new Control( new ControlId( self::TEXT_TRANSFORM ), __( 'Letter case', 'fb-editor' ), new SelectInput( TextTransform::class ), new PropertyOutput( CssProperty::TextTransform ), $element );
+	}
+
+	/** First-line indent; negative for a hanging indent. */
+	public static function textIndent( ?ElementId $element = null ): Control
+	{
+		return new Control( new ControlId( self::TEXT_INDENT ), __( 'Indent', 'fb-editor' ), new LengthInput( allowNegative: true ), new PropertyOutput( CssProperty::TextIndent ), $element );
+	}
+
+	/**
+	 * The text options every block with text gets, after its own
+	 * typography controls.
+	 *
+	 * @return list<Control>
+	 */
+	public static function textOptions( ?ElementId $element = null ): array
+	{
+		return [ self::textDecoration( $element ), self::textTransform( $element ), self::textIndent( $element ) ];
+	}
+
+	/**
+	 * @return list<ControlId>
+	 */
+	public static function textOptionIds(): array
+	{
+		return [ self::id( self::TEXT_DECORATION ), self::id( self::TEXT_TRANSFORM ), self::id( self::TEXT_INDENT ) ];
 	}
 
 	public static function borderSides( ?ElementId $element = null ): Control

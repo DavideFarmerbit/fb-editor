@@ -29,9 +29,9 @@ final class ListBlock extends CoreBlock
 		return new BlockDefinition(
 			BlockName::core( 'list' ),
 			__( 'List', 'fb-editor' ),
-			new ControlSet( C::fontSize(), C::lineHeight(), C::letterSpacing(), C::textColor(), C::margin(), C::padding() ),
+			new ControlSet( C::fontSize(), C::lineHeight(), C::letterSpacing(), C::textColor(), C::margin(), C::padding(), ...C::textOptions() ),
 			new Layout(
-				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::FONT_SIZE ), C::id( C::LINE_HEIGHT ), C::id( C::LETTER_SPACING ) ),
+				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::FONT_SIZE ), C::id( C::LINE_HEIGHT ), C::id( C::LETTER_SPACING ), ...C::textOptionIds() ),
 				new Panel( __( 'Colors', 'fb-editor' ), C::id( C::TEXT_COLOR ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::MARGIN ), C::id( C::PADDING ) ),
 			),

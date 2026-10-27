@@ -55,6 +55,9 @@ enum CssProperty: string
 	case GridColumn    = 'grid-column';
 	case GridRow       = 'grid-row';
 	case LetterSpacing = 'letter-spacing';
+	case TextDecorationLine = 'text-decoration-line';
+	case TextTransform = 'text-transform';
+	case TextIndent    = 'text-indent';
 	case BorderTopWidth    = 'border-top-width';
 	case BorderRightWidth  = 'border-right-width';
 	case BorderBottomWidth = 'border-bottom-width';

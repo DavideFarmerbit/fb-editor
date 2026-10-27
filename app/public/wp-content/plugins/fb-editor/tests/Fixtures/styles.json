@@ -21123,6 +21123,105 @@
                         "kind": "style"
                     },
                     {
+                        "id": "textDecoration",
+                        "label": "Decoration",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "none",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "underline",
+                                    "label": "Underline"
+                                },
+                                {
+                                    "value": "overline",
+                                    "label": "Overline"
+                                },
+                                {
+                                    "value": "line-through",
+                                    "label": "Strikethrough"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-decoration-line"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "textTransform",
+                        "label": "Letter case",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "none",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "uppercase",
+                                    "label": "Uppercase"
+                                },
+                                {
+                                    "value": "lowercase",
+                                    "label": "Lowercase"
+                                },
+                                {
+                                    "value": "capitalize",
+                                    "label": "Capitalize"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-transform"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "textIndent",
+                        "label": "Indent",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": true,
+                            "scale": null,
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-indent"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
                         "id": "border",
                         "label": "Border",
                         "input": {
@@ -21601,7 +21700,10 @@
                             "fontSize",
                             "fontWeight",
                             "lineHeight",
-                            "letterSpacing"
+                            "letterSpacing",
+                            "textDecoration",
+                            "textTransform",
+                            "textIndent"
                         ]
                     },
                     {
@@ -22092,6 +22194,105 @@
                         "kind": "style"
                     },
                     {
+                        "id": "textDecoration",
+                        "label": "Decoration",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "none",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "underline",
+                                    "label": "Underline"
+                                },
+                                {
+                                    "value": "overline",
+                                    "label": "Overline"
+                                },
+                                {
+                                    "value": "line-through",
+                                    "label": "Strikethrough"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-decoration-line"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "textTransform",
+                        "label": "Letter case",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "none",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "uppercase",
+                                    "label": "Uppercase"
+                                },
+                                {
+                                    "value": "lowercase",
+                                    "label": "Lowercase"
+                                },
+                                {
+                                    "value": "capitalize",
+                                    "label": "Capitalize"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-transform"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "textIndent",
+                        "label": "Indent",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": true,
+                            "scale": null,
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-indent"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
                         "id": "border",
                         "label": "Border",
                         "input": {
@@ -22570,7 +22771,10 @@
                             "fontSize",
                             "fontWeight",
                             "lineHeight",
-                            "letterSpacing"
+                            "letterSpacing",
+                            "textDecoration",
+                            "textTransform",
+                            "textIndent"
                         ]
                     },
                     {
@@ -26715,6 +26919,105 @@
                         "kind": "style"
                     },
                     {
+                        "id": "textDecoration",
+                        "label": "Decoration",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "none",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "underline",
+                                    "label": "Underline"
+                                },
+                                {
+                                    "value": "overline",
+                                    "label": "Overline"
+                                },
+                                {
+                                    "value": "line-through",
+                                    "label": "Strikethrough"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-decoration-line"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "textTransform",
+                        "label": "Letter case",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "none",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "uppercase",
+                                    "label": "Uppercase"
+                                },
+                                {
+                                    "value": "lowercase",
+                                    "label": "Lowercase"
+                                },
+                                {
+                                    "value": "capitalize",
+                                    "label": "Capitalize"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-transform"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "textIndent",
+                        "label": "Indent",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": true,
+                            "scale": null,
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "text-indent"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
                         "id": "border",
                         "label": "Border",
                         "input": {
@@ -27193,7 +27496,10 @@
                             "fontSize",
                             "fontWeight",
                             "lineHeight",
-                            "letterSpacing"
+                            "letterSpacing",
+                            "textDecoration",
+                            "textTransform",
+                            "textIndent"
                         ]
                     },
                     {
