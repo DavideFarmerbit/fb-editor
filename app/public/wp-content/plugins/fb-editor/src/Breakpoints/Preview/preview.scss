@@ -87,3 +87,8 @@ body.fb-has-canvas-width {
 .fb-breakpoints .fb-breakpoints__hidden {
 	margin-inline-start: 6px;
 }
+
+// Core's View dropdown: replaced by ViewOptions.
+#{$core-view-dropdown} {
+	display: none;
+}

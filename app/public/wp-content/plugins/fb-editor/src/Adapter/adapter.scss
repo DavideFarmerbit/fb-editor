@@ -27,3 +27,8 @@ $cover-popover: ".block-editor-block-popover > .components-popover__content > di
 // Without one, it holds nothing to show: e.g. core's image always renders
 // its Dimensions panel, emptied by NO_IMAGE_RESIZE_CONTEXT (adapter.ts).
 $empty-support-panel: ".dimensions-block-support-panel:not(:has(.first))";
+
+// Core's "View" dropdown in the editor header (device preview, Show
+// template, Preview in new tab). Hidden: its device choices fight fb's
+// breakpoints; ViewOptions (Breakpoints/Preview) offers the rest.
+$core-view-dropdown: ".editor-header .editor-preview-dropdown";

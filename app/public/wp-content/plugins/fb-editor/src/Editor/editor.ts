@@ -8,9 +8,14 @@ import './store';
 import '../Blocks/blocks';
 import { DefaultsSidebar } from '../Blocks/Defaults/defaults-sidebar';
 import BreakpointPreview from '../Breakpoints/Preview/preview';
+import ViewOptions from '../Breakpoints/Preview/view-options';
 
 registerPlugin( 'fb-breakpoint-preview', {
 	render: BreakpointPreview,
+} );
+
+registerPlugin( 'fb-view-options', {
+	render: ViewOptions,
 } );
 
 registerPlugin( 'fb-block-defaults', {
