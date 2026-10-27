@@ -27,6 +27,15 @@ final readonly class CanvasStyles implements Hookable
 {
 	private const string HANDLE = 'fb-canvas';
 
+	/**
+	 * The canvas draws no scrollbar: a classic (non-overlay) one takes its
+	 * width from the page, so previewing LG at 992px would lay it out
+	 * narrower and fire MD's queries. Only the bar goes: wheel, trackpad,
+	 * keyboard and block dragging still scroll. `::-webkit-scrollbar` is
+	 * for WebKit versions without `scrollbar-width`.
+	 */
+	private const string NO_SCROLLBAR = 'html{scrollbar-width:none;}html::-webkit-scrollbar{width:0;height:0;}';
+
 	private StylePolicyApplier $applier;
 
 	public function __construct(
@@ -55,6 +64,7 @@ final readonly class CanvasStyles implements Hookable
 				self::HANDLE,
 				$this->tokens->css( withCoreStyles: false ) . ( new BaseStylesheet() )->css( $this->blocks->types(), editor: true )
 					. Hiding::css( $this->breakpoints->breakpoints(), editor: true )
+					. self::NO_SCROLLBAR
 			);
 		}
 		wp_enqueue_style( self::HANDLE );
