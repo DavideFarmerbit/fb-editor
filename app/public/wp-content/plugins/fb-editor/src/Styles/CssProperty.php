@@ -36,6 +36,7 @@ enum CssProperty: string
 	case FontSize      = 'font-size';
 	case FontFamily    = 'font-family';
 	case FontWeight    = 'font-weight';
+	case FontStyle     = 'font-style';
 	case TextAlign     = 'text-align';
 	case JustifyContent = 'justify-content';
 	case Height        = 'height';

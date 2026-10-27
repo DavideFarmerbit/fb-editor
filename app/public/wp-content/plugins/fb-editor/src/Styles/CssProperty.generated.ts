@@ -25,6 +25,7 @@ export enum CssProperty {
 	FontSize = 'font-size',
 	FontFamily = 'font-family',
 	FontWeight = 'font-weight',
+	FontStyle = 'font-style',
 	TextAlign = 'text-align',
 	JustifyContent = 'justify-content',
 	Height = 'height',

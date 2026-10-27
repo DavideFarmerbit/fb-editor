@@ -15,6 +15,7 @@ use Fb\Blocks\Definition\Input\Number\NumberInput;
 use Fb\Blocks\Definition\Input\Preset\PresetInput;
 use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
+use Fb\Blocks\Options\FontStyle;
 use Fb\Blocks\Options\FontWeight;
 use Fb\Blocks\Options\TextAlign;
 use Fb\Blocks\Options\TextDecoration;
@@ -37,6 +38,7 @@ final class CommonControls
 	public const string FONT_FAMILY = 'fontFamily';
 	public const string FONT_SIZE   = 'fontSize';
 	public const string FONT_WEIGHT = 'fontWeight';
+	public const string FONT_STYLE  = 'fontStyle';
 	public const string TEXT_COLOR  = 'textColor';
 	public const string BACKGROUND  = 'background';
 	public const string MARGIN      = 'margin';
@@ -80,6 +82,11 @@ final class CommonControls
 	public static function fontWeight( ?ElementId $element = null ): Control
 	{
 		return new Control( new ControlId( self::FONT_WEIGHT ), __( 'Font weight', 'fb-editor' ), new SelectInput( FontWeight::class ), new PropertyOutput( CssProperty::FontWeight ), $element );
+	}
+
+	public static function fontStyle( ?ElementId $element = null ): Control
+	{
+		return new Control( new ControlId( self::FONT_STYLE ), __( 'Font style', 'fb-editor' ), new SelectInput( FontStyle::class ), new PropertyOutput( CssProperty::FontStyle ), $element );
 	}
 
 	public static function textColor( ?ElementId $element = null ): Control
@@ -135,22 +142,35 @@ final class CommonControls
 	}
 
 	/**
-	 * The text options every block with text gets, after its own
-	 * typography controls.
+	 * Every font option, in sidebar order: what each block with text gets,
+	 * the same everywhere (on the element holding its text). Text align and
+	 * color are not font options: blocks add them where they make sense.
 	 *
 	 * @return list<Control>
 	 */
-	public static function textOptions( ?ElementId $element = null ): array
+	public static function typography( ?ElementId $element = null ): array
 	{
-		return [ self::textDecoration( $element ), self::textTransform( $element ), self::textIndent( $element ) ];
+		return [
+			self::fontFamily( $element ),
+			self::fontSize( $element ),
+			self::fontWeight( $element ),
+			self::fontStyle( $element ),
+			self::lineHeight( $element ),
+			self::letterSpacing( $element ),
+			self::textDecoration( $element ),
+			self::textTransform( $element ),
+			self::textIndent( $element ),
+		];
 	}
 
 	/**
+	 * The ids of typography(), same order.
+	 *
 	 * @return list<ControlId>
 	 */
-	public static function textOptionIds(): array
+	public static function typographyIds(): array
 	{
-		return [ self::id( self::TEXT_DECORATION ), self::id( self::TEXT_TRANSFORM ), self::id( self::TEXT_INDENT ) ];
+		return array_map( static fn ( Control $control ): ControlId => $control->id, self::typography() );
 	}
 
 	public static function borderSides( ?ElementId $element = null ): Control

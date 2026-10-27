@@ -20855,141 +20855,6 @@
                         "kind": "style"
                     },
                     {
-                        "id": "fontFamily",
-                        "label": "Font family",
-                        "input": {
-                            "kind": "preset",
-                            "preset": "font-family"
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-family"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "fontSize",
-                        "label": "Font size",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": "font-size",
-                            "zeroStep": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-size"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "fontWeight",
-                        "label": "Font weight",
-                        "input": {
-                            "kind": "select",
-                            "options": [
-                                {
-                                    "value": "300",
-                                    "label": "Light"
-                                },
-                                {
-                                    "value": "400",
-                                    "label": "Regular"
-                                },
-                                {
-                                    "value": "500",
-                                    "label": "Medium"
-                                },
-                                {
-                                    "value": "600",
-                                    "label": "Semibold"
-                                },
-                                {
-                                    "value": "700",
-                                    "label": "Bold"
-                                },
-                                {
-                                    "value": "800",
-                                    "label": "Extra bold"
-                                }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-weight"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "lineHeight",
-                        "label": "Line height",
-                        "input": {
-                            "kind": "number",
-                            "min": 0.0,
-                            "max": 10.0,
-                            "step": 0.050000000000000003,
-                            "integer": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "line-height"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "letterSpacing",
-                        "label": "Letter spacing",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": true,
-                            "scale": null,
-                            "zeroStep": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "letter-spacing"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -21113,6 +20978,171 @@
                             "kind": "property",
                             "properties": [
                                 "column-gap"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontFamily",
+                        "label": "Font family",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "font-family"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-family"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontSize",
+                        "label": "Font size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": "font-size",
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontWeight",
+                        "label": "Font weight",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "300",
+                                    "label": "Light"
+                                },
+                                {
+                                    "value": "400",
+                                    "label": "Regular"
+                                },
+                                {
+                                    "value": "500",
+                                    "label": "Medium"
+                                },
+                                {
+                                    "value": "600",
+                                    "label": "Semibold"
+                                },
+                                {
+                                    "value": "700",
+                                    "label": "Bold"
+                                },
+                                {
+                                    "value": "800",
+                                    "label": "Extra bold"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-weight"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontStyle",
+                        "label": "Font style",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "normal",
+                                    "label": "Normal"
+                                },
+                                {
+                                    "value": "italic",
+                                    "label": "Italic"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-style"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "lineHeight",
+                        "label": "Line height",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 10.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "line-height"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "letterSpacing",
+                        "label": "Letter spacing",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": true,
+                            "scale": null,
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "letter-spacing"
                             ]
                         },
                         "element": "link",
@@ -21699,6 +21729,7 @@
                             "fontFamily",
                             "fontSize",
                             "fontWeight",
+                            "fontStyle",
                             "lineHeight",
                             "letterSpacing",
                             "textDecoration",
@@ -21926,141 +21957,6 @@
                         "kind": "style"
                     },
                     {
-                        "id": "fontFamily",
-                        "label": "Font family",
-                        "input": {
-                            "kind": "preset",
-                            "preset": "font-family"
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-family"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "fontSize",
-                        "label": "Font size",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": "font-size",
-                            "zeroStep": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-size"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "fontWeight",
-                        "label": "Font weight",
-                        "input": {
-                            "kind": "select",
-                            "options": [
-                                {
-                                    "value": "300",
-                                    "label": "Light"
-                                },
-                                {
-                                    "value": "400",
-                                    "label": "Regular"
-                                },
-                                {
-                                    "value": "500",
-                                    "label": "Medium"
-                                },
-                                {
-                                    "value": "600",
-                                    "label": "Semibold"
-                                },
-                                {
-                                    "value": "700",
-                                    "label": "Bold"
-                                },
-                                {
-                                    "value": "800",
-                                    "label": "Extra bold"
-                                }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-weight"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "lineHeight",
-                        "label": "Line height",
-                        "input": {
-                            "kind": "number",
-                            "min": 0.0,
-                            "max": 10.0,
-                            "step": 0.050000000000000003,
-                            "integer": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "line-height"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "letterSpacing",
-                        "label": "Letter spacing",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": true,
-                            "scale": null,
-                            "zeroStep": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "letter-spacing"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -22184,6 +22080,171 @@
                             "kind": "property",
                             "properties": [
                                 "column-gap"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontFamily",
+                        "label": "Font family",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "font-family"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-family"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontSize",
+                        "label": "Font size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": "font-size",
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontWeight",
+                        "label": "Font weight",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "300",
+                                    "label": "Light"
+                                },
+                                {
+                                    "value": "400",
+                                    "label": "Regular"
+                                },
+                                {
+                                    "value": "500",
+                                    "label": "Medium"
+                                },
+                                {
+                                    "value": "600",
+                                    "label": "Semibold"
+                                },
+                                {
+                                    "value": "700",
+                                    "label": "Bold"
+                                },
+                                {
+                                    "value": "800",
+                                    "label": "Extra bold"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-weight"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontStyle",
+                        "label": "Font style",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "normal",
+                                    "label": "Normal"
+                                },
+                                {
+                                    "value": "italic",
+                                    "label": "Italic"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-style"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "lineHeight",
+                        "label": "Line height",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 10.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "line-height"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "letterSpacing",
+                        "label": "Letter spacing",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": true,
+                            "scale": null,
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "letter-spacing"
                             ]
                         },
                         "element": "link",
@@ -22770,6 +22831,7 @@
                             "fontFamily",
                             "fontSize",
                             "fontWeight",
+                            "fontStyle",
                             "lineHeight",
                             "letterSpacing",
                             "textDecoration",
@@ -26651,141 +26713,6 @@
                         "kind": "style"
                     },
                     {
-                        "id": "fontFamily",
-                        "label": "Font family",
-                        "input": {
-                            "kind": "preset",
-                            "preset": "font-family"
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-family"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "fontSize",
-                        "label": "Font size",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": false,
-                            "scale": "font-size",
-                            "zeroStep": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-size"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "fontWeight",
-                        "label": "Font weight",
-                        "input": {
-                            "kind": "select",
-                            "options": [
-                                {
-                                    "value": "300",
-                                    "label": "Light"
-                                },
-                                {
-                                    "value": "400",
-                                    "label": "Regular"
-                                },
-                                {
-                                    "value": "500",
-                                    "label": "Medium"
-                                },
-                                {
-                                    "value": "600",
-                                    "label": "Semibold"
-                                },
-                                {
-                                    "value": "700",
-                                    "label": "Bold"
-                                },
-                                {
-                                    "value": "800",
-                                    "label": "Extra bold"
-                                }
-                            ],
-                            "fallback": null
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "font-weight"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "lineHeight",
-                        "label": "Line height",
-                        "input": {
-                            "kind": "number",
-                            "min": 0.0,
-                            "max": 10.0,
-                            "step": 0.050000000000000003,
-                            "integer": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "line-height"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
-                        "id": "letterSpacing",
-                        "label": "Letter spacing",
-                        "input": {
-                            "kind": "length",
-                            "allowAuto": false,
-                            "allowNegative": true,
-                            "scale": null,
-                            "zeroStep": false
-                        },
-                        "output": {
-                            "kind": "property",
-                            "properties": [
-                                "letter-spacing"
-                            ]
-                        },
-                        "element": "link",
-                        "scope": "responsive",
-                        "visibleWhen": null,
-                        "placement": null,
-                        "alwaysShown": false,
-                        "kind": "style"
-                    },
-                    {
                         "id": "padding",
                         "label": "Padding",
                         "input": {
@@ -26909,6 +26836,171 @@
                             "kind": "property",
                             "properties": [
                                 "column-gap"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontFamily",
+                        "label": "Font family",
+                        "input": {
+                            "kind": "preset",
+                            "preset": "font-family"
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-family"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontSize",
+                        "label": "Font size",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": false,
+                            "scale": "font-size",
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-size"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontWeight",
+                        "label": "Font weight",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "300",
+                                    "label": "Light"
+                                },
+                                {
+                                    "value": "400",
+                                    "label": "Regular"
+                                },
+                                {
+                                    "value": "500",
+                                    "label": "Medium"
+                                },
+                                {
+                                    "value": "600",
+                                    "label": "Semibold"
+                                },
+                                {
+                                    "value": "700",
+                                    "label": "Bold"
+                                },
+                                {
+                                    "value": "800",
+                                    "label": "Extra bold"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-weight"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "fontStyle",
+                        "label": "Font style",
+                        "input": {
+                            "kind": "select",
+                            "options": [
+                                {
+                                    "value": "normal",
+                                    "label": "Normal"
+                                },
+                                {
+                                    "value": "italic",
+                                    "label": "Italic"
+                                }
+                            ],
+                            "fallback": null
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "font-style"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "lineHeight",
+                        "label": "Line height",
+                        "input": {
+                            "kind": "number",
+                            "min": 0.0,
+                            "max": 10.0,
+                            "step": 0.050000000000000003,
+                            "integer": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "line-height"
+                            ]
+                        },
+                        "element": "link",
+                        "scope": "responsive",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false,
+                        "kind": "style"
+                    },
+                    {
+                        "id": "letterSpacing",
+                        "label": "Letter spacing",
+                        "input": {
+                            "kind": "length",
+                            "allowAuto": false,
+                            "allowNegative": true,
+                            "scale": null,
+                            "zeroStep": false
+                        },
+                        "output": {
+                            "kind": "property",
+                            "properties": [
+                                "letter-spacing"
                             ]
                         },
                         "element": "link",
@@ -27495,6 +27587,7 @@
                             "fontFamily",
                             "fontSize",
                             "fontWeight",
+                            "fontStyle",
                             "lineHeight",
                             "letterSpacing",
                             "textDecoration",
@@ -27706,6 +27799,13 @@
                             "slug": "accent-fade"
                         }
                     },
+                    "shadow": {
+                        "desktop": {
+                            "kind": "preset",
+                            "preset": "shadow",
+                            "slug": "md"
+                        }
+                    },
                     "lineHeight": {
                         "desktop": 1.25
                     },
@@ -27714,13 +27814,6 @@
                             "kind": "custom",
                             "value": -0.02,
                             "unit": "em"
-                        }
-                    },
-                    "shadow": {
-                        "desktop": {
-                            "kind": "preset",
-                            "preset": "shadow",
-                            "slug": "md"
                         }
                     },
                     "border": {
@@ -27777,7 +27870,7 @@
             "variant": null,
             "defaultsCss": "",
             "variantCss": "",
-            "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-image:var(--wp--preset--gradient--accent-fade);line-height:1.25;letter-spacing:-0.02em;box-shadow:var(--wp--preset--shadow--md);border-top-width:2px;border-top-style:solid;border-top-color:var(--wp--preset--color--accent);border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:var(--wp--preset--color--accent);border-top-left-radius:8px;border-bottom-right-radius:8px;}@media (max-width: 1024px){:where(.fb-case>.fb-button__link){border-bottom-style:dashed;}}}"
+            "css": "@layer fb.instances{:where(.fb-case>.fb-button__link){background-image:var(--wp--preset--gradient--accent-fade);box-shadow:var(--wp--preset--shadow--md);line-height:1.25;letter-spacing:-0.02em;border-top-width:2px;border-top-style:solid;border-top-color:var(--wp--preset--color--accent);border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:var(--wp--preset--color--accent);border-top-left-radius:8px;border-bottom-right-radius:8px;}@media (max-width: 1024px){:where(.fb-case>.fb-button__link){border-bottom-style:dashed;}}}"
         },
         {
             "name": "aspect ratio and position",

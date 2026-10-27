@@ -26,9 +26,9 @@ final class Paragraph extends CoreBlock
 		return new BlockDefinition(
 			BlockName::core( 'paragraph' ),
 			__( 'Paragraph', 'fb-editor' ),
-			new ControlSet( C::textAlign(), C::fontSize(), C::fontWeight(), C::lineHeight(), C::letterSpacing(), C::textColor(), C::margin(), ...C::textOptions() ),
+			new ControlSet( C::textAlign(), C::textColor(), C::margin(), ...C::typography() ),
 			new Layout(
-				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::TEXT_ALIGN ), C::id( C::FONT_SIZE ), C::id( C::FONT_WEIGHT ), C::id( C::LINE_HEIGHT ), C::id( C::LETTER_SPACING ), ...C::textOptionIds() ),
+				new Panel( __( 'Typography', 'fb-editor' ), C::id( C::TEXT_ALIGN ), ...C::typographyIds() ),
 				new Panel( __( 'Colors', 'fb-editor' ), C::id( C::TEXT_COLOR ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::MARGIN ) ),
 			),
