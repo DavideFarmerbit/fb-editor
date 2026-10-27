@@ -48,6 +48,12 @@ final class CommonControls
 	public const string SHADOW         = 'shadow';
 	public const string GRADIENT       = 'gradient';
 	public const string ASPECT_RATIO   = 'aspectRatio';
+	public const string WIDTH          = 'width';
+	public const string MIN_WIDTH      = 'minWidth';
+	public const string MAX_WIDTH      = 'maxWidth';
+	public const string HEIGHT         = 'height';
+	public const string MIN_HEIGHT     = 'minHeight';
+	public const string MAX_HEIGHT     = 'maxHeight';
 
 	/** Line heights beyond this are typos, not designs. */
 	private const float MAX_LINE_HEIGHT = 10.0;
@@ -152,6 +158,37 @@ final class CommonControls
 	public static function aspectRatio( ?ElementId $element = null ): Control
 	{
 		return new Control( new ControlId( self::ASPECT_RATIO ), __( 'Aspect ratio', 'fb-editor' ), new AspectRatioInput(), new PropertyOutput( CssProperty::AspectRatio ), $element );
+	}
+
+	/**
+	 * Width and height with their minimums and maximums, in that order.
+	 * Width and height also accept `auto`.
+	 *
+	 * @return list<Control>
+	 */
+	public static function size( ?ElementId $element = null ): array
+	{
+		$length = static fn ( string $id, string $label, CssProperty $property, bool $auto = false ): Control
+			=> new Control( new ControlId( $id ), $label, new LengthInput( allowAuto: $auto ), new PropertyOutput( $property ), $element );
+
+		return [
+			$length( self::WIDTH, __( 'Width', 'fb-editor' ), CssProperty::Width, true ),
+			$length( self::MIN_WIDTH, __( 'Min width', 'fb-editor' ), CssProperty::MinWidth ),
+			$length( self::MAX_WIDTH, __( 'Max width', 'fb-editor' ), CssProperty::MaxWidth ),
+			$length( self::HEIGHT, __( 'Height', 'fb-editor' ), CssProperty::Height, true ),
+			$length( self::MIN_HEIGHT, __( 'Min height', 'fb-editor' ), CssProperty::MinHeight ),
+			$length( self::MAX_HEIGHT, __( 'Max height', 'fb-editor' ), CssProperty::MaxHeight ),
+		];
+	}
+
+	/**
+	 * Ids of size(), for a panel.
+	 *
+	 * @return list<ControlId>
+	 */
+	public static function sizeIds(): array
+	{
+		return array_map( self::id( ... ), [ self::WIDTH, self::MIN_WIDTH, self::MAX_WIDTH, self::HEIGHT, self::MIN_HEIGHT, self::MAX_HEIGHT ] );
 	}
 
 	/**

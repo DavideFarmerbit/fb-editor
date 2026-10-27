@@ -73,8 +73,6 @@ final class Container extends Block
 	public const string ALIGN_CONTENT  = 'alignContent';
 	public const string GAP            = 'gap';
 	public const string CONTENT_WIDTH  = 'contentWidth';
-	public const string MAX_WIDTH      = 'maxWidth';
-	public const string MIN_HEIGHT     = 'minHeight';
 	public const string PADDING        = 'padding';
 	public const string MARGIN         = 'margin';
 	public const string BACKGROUND     = 'background';
@@ -114,8 +112,6 @@ final class Container extends Block
 				new Control( $id( self::ALIGN_CONTENT ), __( 'Align content', 'fb-editor' ), new SelectInput( AlignContent::class ), new PropertyOutput( CssProperty::AlignContent ), visibleWhen: $layout ),
 				new Control( $id( self::GAP ), __( 'Gap', 'fb-editor' ), SpacingInput::gap(), AxisOutput::gap(), visibleWhen: $layout ),
 				new Control( $id( self::CONTENT_WIDTH ), __( 'Content width', 'fb-editor' ), new LengthInput(), new PropertyOutput( CssProperty::ContentWidthVar ) ),
-				new Control( $id( self::MAX_WIDTH ), __( 'Max width', 'fb-editor' ), new LengthInput(), new PropertyOutput( CssProperty::MaxWidth ) ),
-				new Control( $id( self::MIN_HEIGHT ), __( 'Min height', 'fb-editor' ), new LengthInput(), new PropertyOutput( CssProperty::MinHeight ) ),
 				new Control( $id( self::PADDING ), __( 'Padding', 'fb-editor' ), SpacingInput::padding(), new BoxOutput( BoxProperty::PaddingVars ) ),
 				new Control( $id( self::MARGIN ), __( 'Margin', 'fb-editor' ), SpacingInput::margin(), new BoxOutput( BoxProperty::Margin ) ),
 				new Control( $id( self::BACKGROUND ), __( 'Background', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::BackgroundColor ) ),
@@ -123,6 +119,7 @@ final class Container extends Block
 				C::gradient(),
 				C::aspectRatio(),
 				C::shadow(),
+				...C::size(),
 				...C::border(),
 			),
 			new Layout(
@@ -139,7 +136,7 @@ final class Container extends Block
 					$id( self::ALIGN_CONTENT ),
 					$id( self::GAP ),
 				),
-				new Panel( __( 'Size', 'fb-editor' ), $id( self::CONTENT_WIDTH ), $id( self::MAX_WIDTH ), $id( self::MIN_HEIGHT ), C::id( C::ASPECT_RATIO ) ),
+				new Panel( __( 'Size', 'fb-editor' ), $id( self::CONTENT_WIDTH ), ...[ ...C::sizeIds(), C::id( C::ASPECT_RATIO ) ] ),
 				new Panel( __( 'Spacing', 'fb-editor' ), $id( self::PADDING ), $id( self::MARGIN ) ),
 				new Panel( __( 'Colors', 'fb-editor' ), $id( self::BACKGROUND ), C::id( C::GRADIENT ), $id( self::TEXT_COLOR ) ),
 				new Panel(

@@ -28,6 +28,8 @@ enum CssProperty: string
 	case Width         = 'width';
 	case MaxWidth      = 'max-width';
 	case MinHeight     = 'min-height';
+	case MinWidth      = 'min-width';
+	case MaxHeight     = 'max-height';
 	case FlexWrap      = 'flex-wrap';
 	case Color         = 'color';
 	case BackgroundColor = 'background-color';

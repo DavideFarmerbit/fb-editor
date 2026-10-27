@@ -11,7 +11,6 @@ use Fb\Blocks\Definition\BlockName;
 use Fb\Blocks\Definition\Control;
 use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\Definition\ControlSet;
-use Fb\Blocks\Definition\Input\Length\LengthInput;
 use Fb\Blocks\Definition\Input\Link\LinkInput;
 use Fb\Blocks\Definition\Input\Svg\SvgInput;
 use Fb\Blocks\Definition\Input\Text\TextInput;
@@ -22,7 +21,6 @@ use Fb\Blocks\Library\Shared\CommonControls as C;
 use Fb\Blocks\Rendering\RenderContext;
 use Fb\Styles\CssProperty;
 use Fb\Styles\DeclarationSet;
-use Fb\Styles\Output\PropertyOutput;
 use Fb\TypeScript\ExportToTypeScript;
 use Fb\Values\LinkValue;
 use Fb\Values\SvgValue;
@@ -34,8 +32,9 @@ use Fb\Values\TextValue;
  *   <span class="fb-icon" role="img" aria-label="…"><svg>…</svg></span>
  *   <a class="fb-icon" href="…" aria-label="…"><svg>…</svg></a>
  *
- * The SVG fills the block's box (size); icons drawn with currentColor
- * follow the Color setting.
+ * The SVG fills the block's box: 1em square by default (it sits in text
+ * like a glyph). Setting only the width keeps it square; a height too
+ * overrides that. Icons drawn with currentColor follow the Color setting.
  */
 final class Icon extends Block
 {
@@ -47,7 +46,6 @@ final class Icon extends Block
 	public const string LABEL = 'label';
 	#[ExportToTypeScript]
 	public const string LINK = 'link';
-	public const string SIZE = 'size';
 
 	protected function define(): BlockDefinition
 	{
@@ -60,17 +58,17 @@ final class Icon extends Block
 				new Control( $id( self::SVG ), __( 'SVG code', 'fb-editor' ), new SvgInput(), scope: Scope::Static, alwaysShown: true ),
 				new Control( $id( self::LABEL ), __( 'Accessible label', 'fb-editor' ), new TextInput(), scope: Scope::Static ),
 				new Control( $id( self::LINK ), __( 'Link', 'fb-editor' ), new LinkInput(), scope: Scope::Static ),
-				new Control( $id( self::SIZE ), __( 'Size', 'fb-editor' ), new LengthInput(), new PropertyOutput( CssProperty::Width, CssProperty::Height ) ),
 				C::textColor(),
 				C::background(),
 				C::padding(),
 				C::margin(),
 				C::shadow(),
+				...C::size(),
 				...C::border(),
 			),
 			new Layout(
 				new Panel( __( 'Icon', 'fb-editor' ), $id( self::SVG ), $id( self::LABEL ), $id( self::LINK ) ),
-				new Panel( __( 'Size', 'fb-editor' ), $id( self::SIZE ) ),
+				new Panel( __( 'Size', 'fb-editor' ), ...C::sizeIds() ),
 				new Panel( __( 'Colors', 'fb-editor' ), C::id( C::TEXT_COLOR ), C::id( C::BACKGROUND ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::PADDING ), C::id( C::MARGIN ) ),
 				new Panel(
@@ -86,7 +84,8 @@ final class Icon extends Block
 	}
 
 	/**
-	 * A box the SVG fills; 1em by default, so it sits in text like a glyph.
+	 * A box the SVG fills: 1em wide and square until a height is set (an
+	 * explicit height wins over aspect-ratio).
 	 */
 	public function baseStyles(): array
 	{
@@ -95,7 +94,7 @@ final class Icon extends Block
 				DeclarationSet::empty()
 					->with( CssProperty::Display, 'inline-flex' )
 					->with( CssProperty::Width, '1em' )
-					->with( CssProperty::Height, '1em' )
+					->with( CssProperty::AspectRatio, '1/1' )
 					->with( CssProperty::LineHeight, '0' )
 			),
 			new BaseStyle(
