@@ -1,0 +1,9 @@
+// Scale slider tooltip ("Spacing 3 (12px)"): one line, and never past the
+// slider's ends. Core centers it on the thumb (translateX(-50%)), so near
+// the ends half of it sticks out of the sidebar and wraps. Shifted instead
+// by the thumb's own position: starts at the thumb on the left end, ends
+// at it on the right end, centered in the middle.
+.fb-scale-slider .components-range-control__tooltip {
+	white-space: nowrap;
+	transform: translateX(calc(var(--fb-slider-position, 50) * -1%));
+}

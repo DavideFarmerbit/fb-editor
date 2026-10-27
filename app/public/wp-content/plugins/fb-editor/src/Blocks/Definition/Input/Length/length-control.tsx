@@ -7,7 +7,7 @@ import { Button, RangeControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { settings as customIcon } from '@wordpress/icons';
-import type { ReactElement, ReactNode } from 'react';
+import type { CSSProperties, ReactElement, ReactNode } from 'react';
 
 import { settings } from '../../../../Editor/settings';
 import type { Preset } from '../../../../Presets/presets';
@@ -17,6 +17,7 @@ import { readControl } from '../../../Inspector/control-reading';
 import { Row } from '../../../Inspector/row';
 import type { LengthInput, LengthRules } from './length-input';
 import { UnitInput } from './unit-input';
+import './length-control.scss';
 
 /** A length as read from the value: set, unset, or differing across sides. */
 export type LengthReading = Length | null | 'mixed';
@@ -117,36 +118,45 @@ function ScaleSlider( { label, shown, scale, zeroStep, onChange }: ScaleSliderPr
 	// Step → what it writes: the 0 step (if any), then the presets.
 	const steps: ReadonlyArray< { readonly length: Length; readonly tooltip: string } > = [
 		...( zeroStep ? [ { length: ZERO, tooltip: '0' } ] : [] ),
-		...scale.map( ( preset ) => ( { length: new PresetReference( preset.kind, preset.slug ), tooltip: `${ preset.name } · ${ preset.value }` } ) ),
+		...scale.map( ( preset ) => ( { length: new PresetReference( preset.kind, preset.slug ), tooltip: stepLabel( preset ) } ) ),
 	];
 	const index = steps.findIndex( ( step ) =>
 		step.length instanceof PresetReference ? shown instanceof PresetReference && shown.slug === step.length.slug : isZero( shown )
 	);
 	const marks = steps.map( ( _step, step ) => ( { value: step } ) );
+	// Where the thumb is, 0–100: the tooltip shifts by as much (see scss).
+	const position = steps.length < 2 ? 0 : ( Math.max( index, 0 ) / ( steps.length - 1 ) ) * 100;
 
 	return (
-		<RangeControl
-			__next40pxDefaultSize
-			__nextHasNoMarginBottom
-			label={ label }
-			hideLabelFromVision
-			withInputField={ false }
-			min={ 0 }
-			max={ steps.length - 1 }
-			step={ 1 }
-			marks={ marks }
-			initialPosition={ 0 }
-			// Omitted when nothing is set anywhere: the bar shows no selection.
-			{ ...( index === -1 ? {} : { value: index } ) }
-			renderTooltipContent={ ( value?: number | string | null ) => steps[ Number( value ?? 0 ) ]?.tooltip ?? '' }
-			onChange={ ( value?: number ) => {
-				const step = steps[ value ?? -1 ];
-				if ( step !== undefined ) {
-					onChange( step.length );
-				}
-			} }
-		/>
+		<div className="fb-scale-slider" style={ { '--fb-slider-position': String( position ) } as CSSProperties }>
+			<RangeControl
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
+				label={ label }
+				hideLabelFromVision
+				withInputField={ false }
+				min={ 0 }
+				max={ steps.length - 1 }
+				step={ 1 }
+				marks={ marks }
+				initialPosition={ 0 }
+				// Omitted when nothing is set anywhere: the bar shows no selection.
+				{ ...( index === -1 ? {} : { value: index } ) }
+				renderTooltipContent={ ( value?: number | string | null ) => steps[ Number( value ?? 0 ) ]?.tooltip ?? '' }
+				onChange={ ( value?: number ) => {
+					const step = steps[ value ?? -1 ];
+					if ( step !== undefined ) {
+						onChange( step.length );
+					}
+				} }
+			/>
+		</div>
 	);
+}
+
+/** "Spacing 3 (12px)", or "Large · 1.5rem" when the name doesn't say the value. */
+function stepLabel( preset: Preset ): string {
+	return preset.name.includes( preset.value ) ? preset.name : `${ preset.name } · ${ preset.value }`;
 }
 
 interface LengthFieldProps extends ControlFieldProps {
