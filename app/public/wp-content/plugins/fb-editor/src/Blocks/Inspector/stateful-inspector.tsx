@@ -78,7 +78,8 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 							<Button
 								key={ id ?? 'base' }
 								className={ classes.join( ' ' ) }
-								aria-pressed={ id === state }
+								// Not aria-pressed: core would give it its dark pressed look.
+								{ ...( id === state ? { 'aria-current': true } : {} ) }
 								disabled={ ! statesApply }
 								accessibleWhenDisabled
 								{ ...( statesApply ? {} : { label: __( 'Settings are the same in every state', 'fb-editor' ), showTooltip: true } ) }

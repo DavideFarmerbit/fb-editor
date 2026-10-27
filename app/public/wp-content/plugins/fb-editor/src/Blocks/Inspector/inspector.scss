@@ -47,8 +47,31 @@
 	}
 }
 
-// State bar over the panels (Base · Hover · …): same language as the
-// breakpoint strip, set = filled, inspected = outlined.
+// The look of a strip button (breakpoints, states): faint when unset,
+// filled when set, outlined when it's the one being edited. $mark is the
+// fill / outline color (grey for a disabled bar).
+@mixin strip-item-look($mark: var(--wp-admin-theme-color, #3858e9)) {
+	color: #949494;
+	opacity: 0.6;
+
+	&.is-set {
+		background: $mark;
+		color: #fff;
+		opacity: 1;
+	}
+
+	&.is-current {
+		box-shadow: inset 0 0 0 1px $mark;
+		opacity: 1;
+	}
+
+	&.is-set.is-current {
+		box-shadow: inset 0 0 0 1px #fff, 0 0 0 1px $mark;
+	}
+}
+
+// State bar over the panels (Base · Hover · …): the breakpoint strip's
+// look, a bit larger.
 .fb-states {
 	display: flex;
 	gap: 4px;
@@ -68,46 +91,15 @@
 	padding: 0 4px;
 	justify-content: center;
 	border-radius: 2px;
-	color: #757575;
 	font-size: 11px;
 	font-weight: 500;
 
-	&.is-set {
-		background: var(--wp-admin-theme-color, #3858e9);
-		color: #fff;
-	}
-
-	// Selected: core's pressed look (dark background), so light text.
-	&.is-current {
-		box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color, #3858e9);
-		color: #fff;
-	}
-
-	&.is-set.is-current {
-		box-shadow: inset 0 0 0 1px #fff, 0 0 0 1px var(--wp-admin-theme-color, #3858e9);
-		color: #fff;
-	}
+	@include strip-item-look;
 
 	// Disabled (Styles switched off): the same marks, in grey. Disabled
 	// buttons stay focusable, so they carry aria-disabled, not `disabled`.
 	&[aria-disabled="true"] {
-		color: #949494;
-
-		&.is-set {
-			background: #e0e0e0;
-			color: #757575;
-		}
-
-		// Not core's dark pressed look either.
-		&.is-current {
-			background: #f0f0f0;
-			box-shadow: inset 0 0 0 1px #949494;
-		}
-
-		&.is-set.is-current {
-			background: #e0e0e0;
-			box-shadow: inset 0 0 0 1px #fff, 0 0 0 1px #949494;
-		}
+		@include strip-item-look(#949494);
 	}
 }
 
@@ -126,25 +118,10 @@
 	padding: 0;
 	justify-content: center;
 	border-radius: 2px;
-	color: #949494;
 	font-size: 8px;
 	font-weight: 600;
-	opacity: 0.6;
 
-	&.is-set {
-		background: var(--wp-admin-theme-color, #3858e9);
-		color: #fff;
-		opacity: 1;
-	}
-
-	&.is-current {
-		box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color, #3858e9);
-		opacity: 1;
-	}
-
-	&.is-set.is-current {
-		box-shadow: inset 0 0 0 1px #fff, 0 0 0 1px var(--wp-admin-theme-color, #3858e9);
-	}
+	@include strip-item-look;
 }
 
 .fb-strip.is-static {
