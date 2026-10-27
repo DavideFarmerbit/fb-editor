@@ -33,19 +33,129 @@
 			"link": false,
 			"palette": [
 				{
-					"slug": "base",
-					"name": "Base",
+					"name": "Brand 50",
+					"slug": "brand-50",
+					"color": "#e6f5f9"
+				},
+				{
+					"name": "Brand 100",
+					"slug": "brand-100",
+					"color": "#ccebf3"
+				},
+				{
+					"name": "Brand 200",
+					"slug": "brand-200",
+					"color": "#99d6e8"
+				},
+				{
+					"name": "Brand 300",
+					"slug": "brand-300",
+					"color": "#66c2dc"
+				},
+				{
+					"name": "Brand 400",
+					"slug": "brand-400",
+					"color": "#33add1"
+				},
+				{
+					"name": "Brand 500",
+					"slug": "brand-500",
+					"color": "#0099c5"
+				},
+				{
+					"name": "Brand 600",
+					"slug": "brand-600",
+					"color": "#007a9e"
+				},
+				{
+					"name": "Brand 700",
+					"slug": "brand-700",
+					"color": "#005c76"
+				},
+				{
+					"name": "Brand 800",
+					"slug": "brand-800",
+					"color": "#003d4f"
+				},
+				{
+					"name": "Brand 850",
+					"slug": "brand-850",
+					"color": "#002e3b"
+				},
+				{
+					"name": "Brand 900",
+					"slug": "brand-900",
+					"color": "#001f27"
+				},
+				{
+					"name": "Brand 950",
+					"slug": "brand-950",
+					"color": "#000f14"
+				},
+				{
+					"name": "Neutrals 0",
+					"slug": "neutrals-0",
 					"color": "#ffffff"
 				},
 				{
-					"slug": "contrast",
-					"name": "Contrast",
-					"color": "#111111"
+					"name": "Neutrals 50",
+					"slug": "neutrals-50",
+					"color": "#f0f1f1"
 				},
 				{
-					"slug": "accent",
-					"name": "Accent",
-					"color": "#3858e9"
+					"name": "Neutrals 100",
+					"slug": "neutrals-100",
+					"color": "#e0e2e3"
+				},
+				{
+					"name": "Neutrals 200",
+					"slug": "neutrals-200",
+					"color": "#c2c5c7"
+				},
+				{
+					"name": "Neutrals 300",
+					"slug": "neutrals-300",
+					"color": "#a3a9aa"
+				},
+				{
+					"name": "Neutrals 400",
+					"slug": "neutrals-400",
+					"color": "#858c8e"
+				},
+				{
+					"name": "Neutrals 500",
+					"slug": "neutrals-500",
+					"color": "#666f72"
+				},
+				{
+					"name": "Neutrals 600",
+					"slug": "neutrals-600",
+					"color": "#52595b"
+				},
+				{
+					"name": "Neutrals 700",
+					"slug": "neutrals-700",
+					"color": "#3d4344"
+				},
+				{
+					"name": "Neutrals 800",
+					"slug": "neutrals-800",
+					"color": "#292c2e"
+				},
+				{
+					"name": "Neutrals 900",
+					"slug": "neutrals-900",
+					"color": "#141617"
+				},
+				{
+					"name": "Neutrals 950",
+					"slug": "neutrals-950",
+					"color": "#0a0b0b"
+				},
+				{
+					"name": "Neutrals 1000",
+					"slug": "neutrals-1000",
+					"color": "#000000"
 				}
 			]
 		},
@@ -77,54 +187,79 @@
 			"padding": false,
 			"spacingSizes": [
 				{
-					"slug": "10",
-					"name": "1",
-					"size": "0.25rem"
+					"name": "Spacing 1 (4px)",
+					"slug": "spacing-1",
+					"size": "4px"
 				},
 				{
-					"slug": "20",
-					"name": "2",
-					"size": "0.5rem"
+					"name": "Spacing 2 (8px)",
+					"slug": "spacing-2",
+					"size": "8px"
 				},
 				{
-					"slug": "30",
-					"name": "3",
-					"size": "0.75rem"
+					"name": "Spacing 3 (12px)",
+					"slug": "spacing-3",
+					"size": "12px"
 				},
 				{
-					"slug": "40",
-					"name": "4",
-					"size": "1rem"
+					"name": "Spacing 4 (16px)",
+					"slug": "spacing-4",
+					"size": "16px"
 				},
 				{
-					"slug": "50",
-					"name": "5",
-					"size": "1.5rem"
+					"name": "Spacing 5 (20px)",
+					"slug": "spacing-5",
+					"size": "20px"
 				},
 				{
-					"slug": "60",
-					"name": "6",
-					"size": "2rem"
+					"name": "Spacing 6 (24px)",
+					"slug": "spacing-6",
+					"size": "24px"
 				},
 				{
-					"slug": "70",
-					"name": "7",
-					"size": "3rem"
+					"name": "Spacing 7 (28px)",
+					"slug": "spacing-7",
+					"size": "28px"
 				},
 				{
-					"slug": "80",
-					"name": "8",
-					"size": "4rem"
+					"name": "Spacing 8 (32px)",
+					"slug": "spacing-8",
+					"size": "32px"
 				},
 				{
-					"slug": "90",
-					"name": "9",
-					"size": "6rem"
+					"name": "Spacing 10 (40px)",
+					"slug": "spacing-10",
+					"size": "40px"
 				},
 				{
-					"slug": "100",
-					"name": "10",
-					"size": "8rem"
+					"name": "Spacing 12 (48px)",
+					"slug": "spacing-12",
+					"size": "48px"
+				},
+				{
+					"name": "Spacing 16 (64px)",
+					"slug": "spacing-16",
+					"size": "64px"
+				},
+				{
+					"name": "Spacing 20 (80px)",
+					"slug": "spacing-20",
+					"size": "80px"
+				},
+				{
+					"name": "Spacing 24 (96px)",
+					"slug": "spacing-24",
+					"size": "96px"
+				},
+				{
+					"name": "Spacing 30 (120px)",
+					"slug": "spacing-30",
+					"size": "120px"
+				},
+				{
+					"name": "Spacing 40 (160px)",
+					"slug": "spacing-40",
+					"size": "160px"
 				}
 			]
 		},
@@ -135,46 +270,142 @@
 			"fluid": false,
 			"fontFamilies": [
 				{
-					"slug": "sans",
-					"name": "System sans",
-					"fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif"
+					"name": "Inter",
+					"slug": "inter",
+					"fontFamily": "Inter, system-ui, sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Inter",
+							"fontWeight": "100 900",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/inter-latin-wght-normal.woff2"
+							]
+						},
+						{
+							"fontFamily": "Inter",
+							"fontWeight": "100 900",
+							"fontStyle": "italic",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/inter-latin-wght-italic.woff2"
+							]
+						}
+					]
+				},
+				{
+					"name": "DM Mono",
+					"slug": "dm-mono",
+					"fontFamily": "\"DM Mono\", ui-monospace, monospace",
+					"fontFace": [
+						{
+							"fontFamily": "DM Mono",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/dm-mono-latin-300-normal.woff2"
+							]
+						},
+						{
+							"fontFamily": "DM Mono",
+							"fontWeight": "300",
+							"fontStyle": "italic",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/dm-mono-latin-300-italic.woff2"
+							]
+						},
+						{
+							"fontFamily": "DM Mono",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/dm-mono-latin-400-normal.woff2"
+							]
+						},
+						{
+							"fontFamily": "DM Mono",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/dm-mono-latin-400-italic.woff2"
+							]
+						},
+						{
+							"fontFamily": "DM Mono",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/dm-mono-latin-500-normal.woff2"
+							]
+						},
+						{
+							"fontFamily": "DM Mono",
+							"fontWeight": "500",
+							"fontStyle": "italic",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/dm-mono-latin-500-italic.woff2"
+							]
+						}
+					]
 				}
 			],
 			"fontSizes": [
 				{
+					"name": "Body",
+					"slug": "body",
+					"size": "16px"
+				},
+				{
+					"name": "Extra Small",
 					"slug": "xs",
-					"name": "XS",
-					"size": "0.75rem"
+					"size": "12px"
 				},
 				{
+					"name": "Small",
 					"slug": "sm",
-					"name": "S",
-					"size": "0.875rem"
+					"size": "14px"
 				},
 				{
-					"slug": "md",
-					"name": "M",
-					"size": "1rem"
+					"name": "Medium",
+					"slug": "label-1",
+					"size": "24px"
 				},
 				{
-					"slug": "lg",
-					"name": "L",
-					"size": "1.25rem"
+					"name": "H1",
+					"slug": "h-1",
+					"size": "56px"
 				},
 				{
-					"slug": "xl",
-					"name": "XL",
-					"size": "1.5rem"
+					"name": "H2",
+					"slug": "h-2",
+					"size": "48px"
 				},
 				{
-					"slug": "xxl",
-					"name": "XXL",
-					"size": "2rem"
+					"name": "H3",
+					"slug": "h-3",
+					"size": "40px"
 				},
 				{
-					"slug": "xxxl",
-					"name": "3XL",
-					"size": "3rem"
+					"name": "H4",
+					"slug": "h-4",
+					"size": "32px"
+				},
+				{
+					"name": "H5",
+					"slug": "h-5",
+					"size": "28px"
+				},
+				{
+					"name": "H6",
+					"slug": "h-6",
+					"size": "20px"
 				}
 			],
 			"fontStyle": false,
