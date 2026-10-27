@@ -12,6 +12,8 @@ import { AspectRatioField } from '../Definition/Input/AspectRatio/aspect-ratio-c
 import { AspectRatioInput } from '../Definition/Input/AspectRatio/aspect-ratio-input';
 import { BorderField } from '../Definition/Input/Border/border-control';
 import { BorderInput } from '../Definition/Input/Border/border-input';
+import { BreakpointsField } from '../Definition/Input/Breakpoints/breakpoints-control';
+import { BreakpointsInput } from '../Definition/Input/Breakpoints/breakpoints-input';
 import { ColorInput } from '../Definition/Input/Color/color-input';
 import { FocalPointField } from '../Definition/Input/FocalPoint/focal-point-control';
 import { FocalPointInput } from '../Definition/Input/FocalPoint/focal-point-input';
@@ -101,6 +103,9 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof BorderInput ) {
 		return <BorderField { ...props } input={ input } />;
+	}
+	if ( input instanceof BreakpointsInput ) {
+		return <BreakpointsField { ...props } input={ input } />;
 	}
 
 	return input satisfies never;

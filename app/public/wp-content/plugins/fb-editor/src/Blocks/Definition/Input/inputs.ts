@@ -6,6 +6,7 @@
 import { InvalidJson, type JsonValue } from '../../../Json/json';
 import { AspectRatioInput } from './AspectRatio/aspect-ratio-input';
 import { BorderInput } from './Border/border-input';
+import { BreakpointsInput } from './Breakpoints/breakpoints-input';
 import { ColorInput } from './Color/color-input';
 import { FocalPointInput } from './FocalPoint/focal-point-input';
 import { GridColumnsInput } from './GridColumns/grid-columns-input';
@@ -20,7 +21,7 @@ import { SvgInput } from './Svg/svg-input';
 import { TextInput } from './Text/text-input';
 import { ToggleInput } from './Toggle/toggle-input';
 
-export type Input = SpacingInput | SelectInput | ColorInput | LengthInput | ToggleInput | PresetInput | NumberInput | GridColumnsInput | AspectRatioInput | TextInput | LinkInput | MediaInput | SvgInput | FocalPointInput | BorderInput;
+export type Input = SpacingInput | SelectInput | ColorInput | LengthInput | ToggleInput | PresetInput | NumberInput | GridColumnsInput | AspectRatioInput | TextInput | LinkInput | MediaInput | SvgInput | FocalPointInput | BorderInput | BreakpointsInput;
 
 export function inputFromJson( json: JsonValue ): Input {
 	const kind = json.get( 'kind' ).string();
@@ -55,6 +56,8 @@ export function inputFromJson( json: JsonValue ): Input {
 			return FocalPointInput.fromJson( json );
 		case 'border':
 			return BorderInput.fromJson( json );
+		case 'breakpoints':
+			return BreakpointsInput.fromJson();
 		default:
 			throw new InvalidJson( `${ json.path }.kind: unknown input kind "${ kind }"` );
 	}

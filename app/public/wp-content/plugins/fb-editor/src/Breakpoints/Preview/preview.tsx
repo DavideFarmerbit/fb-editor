@@ -1,13 +1,16 @@
 /**
  * Top-bar breakpoint switcher: one button per breakpoint (XXL … XS),
  * exactly one active. Switching resizes the canvas to that breakpoint, so
- * the theme's real media queries fire inside the iframe.
+ * the theme's real media queries fire inside the iframe. Next to it, the
+ * toggle for blocks hidden at that breakpoint ("Hide on"): shown faded, or
+ * hidden as on the page.
  */
 import { Button, Fill } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { useEffect, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
+import { seen, unseen } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
 import { observeCanvasSpace, PINNED_ITEMS_SLOT, type CanvasSpace } from '../../Adapter/adapter';
@@ -70,15 +73,16 @@ export function describeBreakpoint( breakpoint: Breakpoint ): string {
 }
 
 export default function BreakpointPreview(): ReactElement | null {
-	const { breakpoints, current, coreDeviceType } = useSelect(
+	const { breakpoints, current, coreDeviceType, showHidden } = useSelect(
 		( select ) => ( {
 			breakpoints: select( store ).getBreakpoints(),
 			current: select( store ).getBreakpoint(),
+			showHidden: select( store ).isShowingHiddenBlocks(),
 			coreDeviceType: select( editorStore ).getDeviceType(),
 		} ),
 		[]
 	);
-	const { setBreakpoint } = useDispatch( store );
+	const { setBreakpoint, showHiddenBlocks } = useDispatch( store );
 	const { setDeviceType } = useDispatch( editorStore );
 
 	const scale = useCanvasWidth( current.previewWidth );
@@ -109,6 +113,14 @@ export default function BreakpointPreview(): ReactElement | null {
 						{ breakpoint.label }
 					</Button>
 				) ) }
+				<Button
+					size="compact"
+					className="fb-breakpoints__hidden"
+					icon={ showHidden ? seen : unseen }
+					label={ showHidden ? __( 'Hidden blocks: shown faded', 'fb-editor' ) : __( 'Hidden blocks: hidden, as on the page', 'fb-editor' ) }
+					showTooltip
+					onClick={ () => showHiddenBlocks( ! showHidden ) }
+				/>
 				{ scale < 1 && (
 					<span
 						className="fb-breakpoints__scale"

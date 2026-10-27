@@ -14,13 +14,14 @@ import { settings } from '../Editor/settings';
 import { FbBlockChrome, useFbBlock, usePreviewClass, variantClass } from './block-chrome';
 import type { BlockDefinition } from './Definition/block-definition';
 import { NAMESPACE } from './Definition/BlockName.generated';
+import { useHidingClasses } from './Hiding/hiding';
 import type { StatefulValues } from './Values/stateful-values';
 
 export type FbAttributes = Record< string, unknown >;
 
 /** Props for the block root: pass to useBlockProps() as is. */
 export interface RootProps {
-	/** Block class + editor-only instance class (live CSS targets it). */
+	/** Block, variant and hide classes + editor-only instance class (live CSS targets it). */
 	readonly className: string;
 	readonly ref: RefCallback< HTMLElement >;
 }
@@ -63,6 +64,7 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 	const [ root, setRoot ] = useState< HTMLElement | null >( null );
 	const state = useFbBlock( definition, props.attributes, props.setAttributes, props.clientId );
 	const preview = usePreviewClass( definition, props.clientId, props.isSelected );
+	const hiding = useHidingClasses( definition, [ state.values, ...state.weaker() ] );
 
 	return createElement(
 		Fragment,
@@ -76,7 +78,7 @@ function FbBlockEdit( { editor, definition, ...props }: WrapperProps ): ReactEle
 			variant: state.variant?.values ?? null,
 			setValues: ( values: StatefulValues ) => state.setValues( values ),
 			rootProps: {
-				className: [ definition.className, variantClass( definition, state.variant ), state.instanceClass, preview ].filter( Boolean ).join( ' ' ),
+				className: [ definition.className, variantClass( definition, state.variant ), state.instanceClass, preview, ...hiding ].filter( Boolean ).join( ' ' ),
 				ref: setRoot,
 			},
 		} )

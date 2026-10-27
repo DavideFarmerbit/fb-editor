@@ -6,6 +6,8 @@ namespace Fb\Editor;
 
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\BaseStyles\BaseStylesheet;
+use Fb\Blocks\Hiding\Hiding;
+use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;
 use Fb\Output\CanvasStylePolicy;
 use Fb\Output\StylePolicyApplier;
@@ -30,6 +32,7 @@ final readonly class CanvasStyles implements Hookable
 	public function __construct(
 		private TokenStylesheet $tokens,
 		private BlockRegistry $blocks,
+		private BreakpointConfig $breakpoints,
 	) {
 		$this->applier = new StylePolicyApplier( new CanvasStylePolicy() );
 	}
@@ -51,6 +54,7 @@ final readonly class CanvasStyles implements Hookable
 			wp_add_inline_style(
 				self::HANDLE,
 				$this->tokens->css( withCoreStyles: false ) . ( new BaseStylesheet() )->css( $this->blocks->types(), editor: true )
+					. Hiding::css( $this->breakpoints->breakpoints(), editor: true )
 			);
 		}
 		wp_enqueue_style( self::HANDLE );

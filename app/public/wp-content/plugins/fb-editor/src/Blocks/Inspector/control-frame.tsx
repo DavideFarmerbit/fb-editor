@@ -15,6 +15,7 @@ import { moreVertical, trash } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
 import { Scope } from '../Definition/block-definition';
+import { BreakpointsInput } from '../Definition/Input/Breakpoints/breakpoints-input';
 import { BreakpointStrip } from './breakpoint-strip';
 import { ControlField, type ControlFieldProps } from './control-field';
 import { FrameActionsContext } from './frame-actions';
@@ -81,7 +82,8 @@ export function ControlFrame( props: ControlFrameProps ): ReactElement {
 					) }
 				</DropdownMenu>
 			</div>
-			{ isStatic ? (
+			{ /* A breakpoint pick is edited on a strip of its own: no second one. */ }
+			{ control.input instanceof BreakpointsInput ? null : isStatic ? (
 				<span className={ touched ? 'fb-strip is-static is-set' : 'fb-strip is-static' }>{ __( 'All breakpoints', 'fb-editor' ) }</span>
 			) : (
 				<BreakpointStrip breakpoints={ breakpoints } current={ breakpoint } setAt={ responsive.setAt( breakpoints ) } />

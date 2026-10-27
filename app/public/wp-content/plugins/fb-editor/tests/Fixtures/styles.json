@@ -1370,6 +1370,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -1454,6 +1467,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -2794,6 +2813,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -2878,6 +2910,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -4196,6 +4234,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -4280,6 +4331,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -6288,6 +6345,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -6372,6 +6442,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -7732,6 +7808,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -7816,6 +7905,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -9152,6 +9247,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -9236,6 +9344,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -10582,6 +10696,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -10666,6 +10793,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -11966,6 +12099,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -12050,6 +12196,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -13394,6 +13546,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -13478,6 +13643,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -14797,6 +14968,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -14881,6 +15065,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -16215,6 +16405,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -16299,6 +16502,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -17613,6 +17822,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -17697,6 +17919,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -19009,6 +19237,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -19093,6 +19334,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -20302,6 +20549,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -20364,6 +20624,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -21196,6 +21462,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -21258,6 +21537,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -23196,6 +23481,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -23280,6 +23578,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -24663,6 +24967,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -24747,6 +25064,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -25550,6 +25873,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -25612,6 +25948,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -27106,6 +27448,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -27190,6 +27545,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -28558,6 +28919,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -28642,6 +29016,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -29999,6 +30379,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -30083,6 +30476,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],
@@ -31382,6 +31781,19 @@
                             }
                         },
                         "alwaysShown": false
+                    },
+                    {
+                        "id": "hideOn",
+                        "label": "Hide on",
+                        "input": {
+                            "kind": "breakpoints"
+                        },
+                        "output": null,
+                        "element": null,
+                        "scope": "static",
+                        "visibleWhen": null,
+                        "placement": null,
+                        "alwaysShown": false
                     }
                 ],
                 "layout": [
@@ -31466,6 +31878,12 @@
                             "itemRowSpan",
                             "itemAlignSelf",
                             "itemOrder"
+                        ]
+                    },
+                    {
+                        "label": "Visibility",
+                        "controls": [
+                            "hideOn"
                         ]
                     }
                 ],

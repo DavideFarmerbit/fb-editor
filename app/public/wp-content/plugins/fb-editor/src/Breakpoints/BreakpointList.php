@@ -97,6 +97,25 @@ final readonly class BreakpointList implements \IteratorAggregate, \Countable, \
 	}
 
 	/**
+	 * Media query matching exactly the widths a breakpoint covers (not
+	 * "from there down", like mediaQuery()); null when that's every width
+	 * (a single breakpoint).
+	 */
+	public function bandQuery( Breakpoint $breakpoint ): ?string
+	{
+		$min   = $this->minWidth( $breakpoint );
+		$parts = [];
+		if ( null !== $min ) {
+			$parts[] = "(min-width: {$min}px)";
+		}
+		if ( null !== $breakpoint->maxWidth ) {
+			$parts[] = "(max-width: {$breakpoint->maxWidth}px)";
+		}
+
+		return [] === $parts ? null : implode( ' and ', $parts );
+	}
+
+	/**
 	 * The editor canvas width while previewing a breakpoint: always fixed,
 	 * so the window size never decides which media queries apply. Its own
 	 * previewWidth, else the smallest width it covers, else (the smallest

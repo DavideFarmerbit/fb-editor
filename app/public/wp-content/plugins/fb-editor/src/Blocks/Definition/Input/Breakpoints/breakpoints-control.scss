@@ -1,0 +1,9 @@
+// The strip as an input: inside a row, taller targets, no gap below.
+.fb-strip.fb-strip--picker {
+	margin-bottom: 0;
+
+	.fb-strip__item {
+		height: 28px;
+		font-size: 10px;
+	}
+}

@@ -9,6 +9,8 @@ use Fb\Blocks\Variants\VariantsStylesheet;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\BaseStyles\BaseStylesheet;
+use Fb\Blocks\Hiding\Hiding;
+use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;
 use Fb\RequestContext;
 
@@ -28,6 +30,7 @@ final readonly class FrontendStyles implements Hookable
 		private DefaultsStylesheet $defaults,
 		private VariantsStylesheet $variants,
 		private BlockRegistry $blocks,
+		private BreakpointConfig $breakpoints,
 	) {
 		$this->applier = new StylePolicyApplier( new FrontendStylePolicy() );
 	}
@@ -66,6 +69,7 @@ final readonly class FrontendStyles implements Hookable
 				. $this->defaults->css( $this->instances->definitions() )
 				. $this->variants->css( $this->instances->variants() )
 				. $this->instances->css()
+				. Hiding::css( $this->breakpoints->breakpoints(), editor: false )
 		);
 		wp_enqueue_style( self::HANDLE );
 	}

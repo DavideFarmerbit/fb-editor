@@ -53,7 +53,7 @@ final readonly class Plugin
 		$tokens      = new TokenStylesheet( $presets );
 		$variants    = new VariantsRepository( $themeFile, $breakpoints );
 		$instances   = new InstanceStyleCollector( $breakpoints, $defaults );
-		$styler      = new BlockStyler( $breakpoints, $instances, $variants );
+		$styler      = new BlockStyler( $breakpoints, $instances, $variants, $defaults );
 		$blocks      = new BlockRegistry(
 			new BlockRenderer( $styler, $defaults ),
 			[ new Container(), new Icon(), new Separator() ],
@@ -66,13 +66,14 @@ final readonly class Plugin
 			new BlockDefaultsPostType( $blocks, $breakpoints ),
 			new BlockVariantsPostType( $blocks, $breakpoints ),
 			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets, $defaults, $variants ),
-			new CanvasStyles( $tokens, $blocks ),
+			new CanvasStyles( $tokens, $blocks, $breakpoints ),
 			new FrontendStyles(
 				$tokens,
 				$instances,
 				new DefaultsStylesheet( $defaults, $breakpoints ),
 				new VariantsStylesheet( $defaults, $breakpoints ),
-				$blocks
+				$blocks,
+				$breakpoints
 			),
 			new BlockMarkupCleaner( $blocks, $styler ),
 			new CoreBlockRestrictions( $blocks ),

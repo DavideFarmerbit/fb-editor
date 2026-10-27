@@ -36,6 +36,11 @@ interface State {
 	readonly inspectedStates: Readonly< Record< string, BlockState > >;
 	/** "Add setting" also lists settings the block can't use right now. */
 	readonly showUnavailableSettings: boolean;
+	/**
+	 * Blocks hidden at the previewed breakpoint ("Hide on") stay in the
+	 * canvas, faded, so they can be selected. Off: hidden as on the page.
+	 */
+	readonly showHiddenBlocks: boolean;
 }
 
 interface SetBreakpointAction {
@@ -72,7 +77,12 @@ interface ShowUnavailableSettingsAction {
 	readonly show: boolean;
 }
 
-type Action = SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction | ShowUnavailableSettingsAction;
+interface ShowHiddenBlocksAction {
+	readonly type: 'SHOW_HIDDEN_BLOCKS';
+	readonly show: boolean;
+}
+
+type Action = ShowHiddenBlocksAction | SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction | ShowUnavailableSettingsAction;
 
 const NONE: readonly string[] = [];
 
@@ -82,6 +92,7 @@ const DEFAULT_STATE: State = {
 	addedControls: {},
 	inspectedStates: {},
 	showUnavailableSettings: true,
+	showHiddenBlocks: true,
 };
 
 const actions = {
@@ -103,6 +114,9 @@ const actions = {
 	},
 	showUnavailableSettings( show: boolean ): ShowUnavailableSettingsAction {
 		return { type: 'SHOW_UNAVAILABLE_SETTINGS', show };
+	},
+	showHiddenBlocks( show: boolean ): ShowHiddenBlocksAction {
+		return { type: 'SHOW_HIDDEN_BLOCKS', show };
 	},
 };
 
@@ -126,6 +140,9 @@ const selectors = {
 	isShowingUnavailableSettings( state: State ): boolean {
 		return state.showUnavailableSettings;
 	},
+	isShowingHiddenBlocks( state: State ): boolean {
+		return state.showHiddenBlocks;
+	},
 };
 
 export const store = createReduxStore( 'fb/editor', {
@@ -143,6 +160,8 @@ export const store = createReduxStore( 'fb/editor', {
 			}
 			case 'SHOW_UNAVAILABLE_SETTINGS':
 				return { ...state, showUnavailableSettings: action.show };
+			case 'SHOW_HIDDEN_BLOCKS':
+				return { ...state, showHiddenBlocks: action.show };
 			case 'INSPECT_STATE': {
 				const { [ action.key ]: _previous, ...others } = state.inspectedStates;
 				return { ...state, inspectedStates: action.state === null ? others : { ...others, [ action.key ]: action.state } };

@@ -17,7 +17,7 @@ final readonly class StyledBlock
 	public function __construct(
 		public BlockAttribute $attribute,
 		public ?Variant $variant,
-		/** Block class, variant class, instance class (if it has CSS). */
+		/** Block class, variant class, instance class (if it has CSS), hide classes. */
 		public ClassList $classes,
 	) {
 	}

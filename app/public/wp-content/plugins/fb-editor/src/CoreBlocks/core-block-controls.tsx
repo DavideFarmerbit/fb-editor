@@ -9,14 +9,17 @@
  * Must load before core blocks register (they do on domReady).
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useMemo, useState } from '@wordpress/element';
 import { addFilter } from '@wordpress/hooks';
 import type { ComponentType, ReactElement } from 'react';
 
 import { canvasBlockElement } from '../Adapter/adapter';
 import { editorInstanceClass, FbBlockChrome, useFbBlock, usePreviewClass, useVariantOf, variantClass } from '../Blocks/block-chrome';
 import { ATTRIBUTE, ATTRIBUTE_TYPE } from '../Blocks/BlockRegistry.generated';
+import { useBlockDefaults } from '../Blocks/Defaults/use-block-defaults';
 import type { BlockDefinition } from '../Blocks/Definition/block-definition';
+import { useHidingClasses } from '../Blocks/Hiding/hiding';
+import { BlockAttribute } from '../Blocks/Values/block-attribute';
 import { settings } from '../Editor/settings';
 
 function coreDefinition( name: string ): BlockDefinition | undefined {
@@ -78,9 +81,9 @@ addFilter(
 );
 
 /**
- * Same classes as the frontend root (block, variant), plus the editor-only
- * instance class
- * and, while a state is inspected, its preview class.
+ * Same classes as the frontend root (block, variant, hide), plus the
+ * editor-only instance class and, while a state is inspected, its preview
+ * class.
  */
 function CoreBlockListBlock( {
 	definition,
@@ -88,8 +91,12 @@ function CoreBlockListBlock( {
 	...props
 }: CoreBlockProps & { readonly definition: BlockDefinition; readonly BlockListBlock: ComponentType< CoreBlockProps > } ): ReactElement {
 	const preview = usePreviewClass( definition, props.clientId, props.isSelected === true );
-	const variant = useVariantOf( definition, props.attributes[ ATTRIBUTE ] );
-	const className = [ props.className, definition.className, variantClass( definition, variant ), editorInstanceClass( props.clientId ), preview ]
+	const raw = props.attributes[ ATTRIBUTE ];
+	const variant = useVariantOf( definition, raw );
+	const { defaults } = useBlockDefaults( definition );
+	const own = useMemo( () => BlockAttribute.fromJson( raw, definition, settings.breakpoints ).values, [ raw, definition ] );
+	const hiding = useHidingClasses( definition, variant === null ? [ own, defaults.values ] : [ own, variant.values, defaults.values ] );
+	const className = [ props.className, definition.className, variantClass( definition, variant ), editorInstanceClass( props.clientId ), preview, ...hiding ]
 		.filter( Boolean )
 		.join( ' ' );
 	return <BlockListBlock { ...props } className={ className } />;

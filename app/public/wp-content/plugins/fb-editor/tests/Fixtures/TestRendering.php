@@ -34,7 +34,7 @@ final readonly class TestRendering
 		$this->defaults  = new DefaultsRepository( $file, $breakpoints, self::THEME );
 		$this->variants  = new VariantsRepository( $file, $breakpoints, self::THEME );
 		$this->collector = new InstanceStyleCollector( $breakpoints, $this->defaults );
-		$this->styler    = new BlockStyler( $breakpoints, $this->collector, $this->variants );
+		$this->styler    = new BlockStyler( $breakpoints, $this->collector, $this->variants, $this->defaults );
 		$this->renderer  = new BlockRenderer( $this->styler, $this->defaults );
 	}
 

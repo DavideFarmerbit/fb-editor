@@ -35,6 +35,11 @@ enum CssLayer: string
 	case StateDefaults = 'fb.states.defaults';
 	case StateVariants = 'fb.states.variants';
 	case StateInstances = 'fb.states.instances';
+	/**
+	 * "Hide on" (see Hiding): above everything, so a hidden block stays
+	 * hidden whatever display its own settings give it.
+	 */
+	case Visibility = 'fb.visibility';
 
 	/**
 	 * Establishes the order. Must precede (or accompany) the first fb layer.

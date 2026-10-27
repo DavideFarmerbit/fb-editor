@@ -12,4 +12,5 @@ export enum CssLayer {
 	StateDefaults = 'fb.states.defaults',
 	StateVariants = 'fb.states.variants',
 	StateInstances = 'fb.states.instances',
+	Visibility = 'fb.visibility',
 }
