@@ -35,7 +35,6 @@ use Fb\Blocks\Options\Display;
 use Fb\Blocks\Options\FlexDirection;
 use Fb\Blocks\Options\Justify;
 use Fb\Blocks\Options\JustifyItems;
-use Fb\Blocks\Options\ObjectFit;
 use Fb\Blocks\Rendering\RenderContext;
 use Fb\Blocks\Parts\Part;
 use Fb\Blocks\States\BlockState;
@@ -95,7 +94,6 @@ final class Container extends Block
 	public const string OVERLAY_COLOR    = 'overlayColor';
 	#[ExportToTypeScript]
 	public const string OVERLAY_GRADIENT = 'overlayGradient';
-	public const string MEDIA_FIT        = 'mediaFit';
 	public const string FOCAL_POINT      = 'focalPoint';
 	public const string OVERLAY_OPACITY  = 'overlayOpacity';
 	public const string PADDING        = 'padding';
@@ -146,7 +144,6 @@ final class Container extends Block
 				C::gradient(),
 				C::aspectRatio(),
 				new Control( $id( self::BACKGROUND_MEDIA ), __( 'Image or video', 'fb-editor' ), new MediaInput( MediaKind::Image, MediaKind::Video ), scope: Scope::Static ),
-				new Control( $id( self::MEDIA_FIT ), __( 'Fit', 'fb-editor' ), new SelectInput( ObjectFit::class ), new PropertyOutput( CssProperty::ObjectFit ), $media ),
 				new Control( $id( self::FOCAL_POINT ), __( 'Focal point', 'fb-editor' ), new FocalPointInput( $id( self::BACKGROUND_MEDIA ) ), new PropertyOutput( CssProperty::ObjectPosition ), $media ),
 				new Control( $id( self::OVERLAY_COLOR ), __( 'Overlay color', 'fb-editor' ), new ColorInput(), new PropertyOutput( CssProperty::BackgroundColor ), $overlay ),
 				new Control( $id( self::OVERLAY_GRADIENT ), __( 'Overlay gradient', 'fb-editor' ), new PresetInput( PresetKind::Gradient ), new PropertyOutput( CssProperty::BackgroundImage ), $overlay ),
@@ -181,7 +178,6 @@ final class Container extends Block
 				new Panel(
 					__( 'Background media', 'fb-editor' ),
 					$id( self::BACKGROUND_MEDIA ),
-					$id( self::MEDIA_FIT ),
 					$id( self::FOCAL_POINT ),
 					$id( self::OVERLAY_COLOR ),
 					$id( self::OVERLAY_GRADIENT ),

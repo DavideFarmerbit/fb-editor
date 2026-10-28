@@ -10,26 +10,33 @@ use Fb\TypeScript\ExportToTypeScript;
  * Interaction states a block can be styled for, on top of its base look.
  *
  * Case order is cascade order: in the states layers a later state wins, so
- * a hovered button being clicked looks active.
+ * a hovered button being clicked looks active, the current menu item still
+ * reacts to hover, and a disabled button never looks hovered or pressed.
  *
  * States belong to the block as a whole: the pseudo-class goes on the block
  * root and styles reach its elements from there (hovering a button styles
- * its link). The root itself is rarely focusable, so focus means "it, or
- * something inside it, has visible focus".
+ * its link). The root itself is rarely focusable or a link, so focus,
+ * current and disabled also match through its direct child (a button's
+ * link) or, for focus, anything inside it.
  */
 #[ExportToTypeScript]
 enum BlockState: string
 {
-	case Hover  = 'hover';
-	case Focus  = 'focus';
-	case Active = 'active';
+	/** Points at the page being viewed (aria-current, a menu's current item). */
+	case Current  = 'current';
+	case Hover    = 'hover';
+	case Focus    = 'focus';
+	case Active   = 'active';
+	case Disabled = 'disabled';
 
 	public function label(): string
 	{
 		return match ( $this ) {
-			self::Hover  => __( 'Hover', 'fb-editor' ),
-			self::Focus  => __( 'Focus', 'fb-editor' ),
-			self::Active => __( 'Active', 'fb-editor' ),
+			self::Current  => __( 'Current', 'fb-editor' ),
+			self::Hover    => __( 'Hover', 'fb-editor' ),
+			self::Focus    => __( 'Focus', 'fb-editor' ),
+			self::Active   => __( 'Active', 'fb-editor' ),
+			self::Disabled => __( 'Disabled', 'fb-editor' ),
 		};
 	}
 
@@ -61,10 +68,15 @@ enum BlockState: string
 	 */
 	private function matches(): array
 	{
+		// aria-current="false" is a value too: it means "not current".
+		$current = '[aria-current]:not([aria-current=false])';
+
 		return match ( $this ) {
-			self::Hover  => [ ':hover' ],
-			self::Focus  => [ ':focus-visible', ':has(:focus-visible)' ],
-			self::Active => [ ':active' ],
+			self::Current  => [ $current, '.current-menu-item', ":has(>{$current})" ],
+			self::Hover    => [ ':hover' ],
+			self::Focus    => [ ':focus-visible', ':has(:focus-visible)' ],
+			self::Active   => [ ':active' ],
+			self::Disabled => [ ':disabled', '[aria-disabled=true]', ':has(>[aria-disabled=true])' ],
 		};
 	}
 

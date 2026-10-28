@@ -80,7 +80,8 @@ final class Icon extends Block
 					C::id( C::SHADOW )
 				),
 			),
-			states: BlockState::cases(),
+			// It can be a link: current, hover, focus, active (never disabled).
+			states: [ BlockState::Current, BlockState::Hover, BlockState::Focus, BlockState::Active ],
 		);
 	}
 

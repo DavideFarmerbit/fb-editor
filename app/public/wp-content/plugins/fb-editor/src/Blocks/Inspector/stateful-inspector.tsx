@@ -14,10 +14,12 @@ import type { ReactElement } from 'react';
 
 import { store } from '../../Editor/store';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
-import { LookKey } from '../Looks/look-key';
+import { LookKey, type MediaCondition } from '../Looks/look-key';
+import type { BlockState } from '../States/BlockState.generated';
 import { BlockValues } from '../Values/block-values';
 import { definitionOf, type StatefulValues } from '../Values/stateful-values';
-import { fallbacksFor, lookLabel, type WeakerSource } from './fallbacks';
+import { ConditionPicker } from './condition-picker';
+import { fallbacksFor, type WeakerSource } from './fallbacks';
 import { Inspector } from './inspector';
 import type { ParentContext } from './parent-context';
 import { PartsTree } from './parts-tree';
@@ -73,10 +75,26 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 	const edited = definitionOf( key, definition );
 	const firstWeaker = weaker[ 0 ]?.values.look( key ) ?? null;
 
-	const items = [ LookKey.BASE, ...definition.states.map( ( info ) => LookKey.ofState( info.id ) ) ].map( ( candidate ) => {
-		const onPart = candidate.onPart( key.part );
-		return new StateBarItem( onPart.id(), lookLabel( definition, onPart ), ! values.look( onPart ).isEmpty() );
-	} );
+	// One item per single state, in the edited part and conditions: filled
+	// when that look has values, outlined when the edited look has the state
+	// (several, for a combined look; Base when it has none).
+	const items = [
+		new StateBarItem( '', __( 'Base', 'fb-editor' ), ! values.look( new LookKey( [], key.conditions, key.part ) ).isEmpty(), ! key.hasStates() ),
+		...definition.states.map(
+			( info ) =>
+				new StateBarItem( info.id, info.label, ! values.look( new LookKey( [ info.id ], key.conditions, key.part ) ).isEmpty(), key.states.includes( info.id ) )
+		),
+	];
+	const selectState = ( id: string, additive: boolean ): void => {
+		const state = definition.states.find( ( info ) => info.id === id )?.id;
+		let states: BlockState[] = state === undefined ? [] : [ state ];
+		if ( additive && state !== undefined ) {
+			states = key.states.includes( state ) ? key.states.filter( ( candidate ) => candidate !== state ) : [ ...key.states, state ];
+		}
+		inspectLook( memoryKey, new LookKey( states, key.conditions, key.part ) );
+	};
+	const conditionIsSet = ( condition: MediaCondition ): boolean =>
+		values.looks().some( ( look ) => look.key.part === key.part && look.key.conditions.includes( condition ) );
 
 	return (
 		<>
@@ -101,14 +119,20 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 					} }
 				/>
 			) }
-			{ definition.states.length > 0 && (
-				<StateBar
-					items={ items }
-					current={ key.id() }
-					disabledReason={ statesApply ? null : __( 'Settings are the same in every state', 'fb-editor' ) }
-					onSelect={ ( id ) => inspectLook( memoryKey, LookKey.fromId( id ) ) }
-				/>
-			) }
+			<StateBar
+				items={ items }
+				disabledReason={ statesApply ? null : __( 'Settings are the same in every state', 'fb-editor' ) }
+				onSelect={ selectState }
+				trailing={
+					<ConditionPicker
+						definition={ definition }
+						current={ key.conditions }
+						isSet={ conditionIsSet }
+						disabled={ ! statesApply }
+						onChange={ ( conditions ) => inspectLook( memoryKey, new LookKey( key.states, conditions, key.part ) ) }
+					/>
+				}
+			/>
 			<Inspector
 				// A fresh panel per look: open panels and edit state don't leak.
 				key={ key.id() }

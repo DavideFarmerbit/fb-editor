@@ -314,13 +314,21 @@ final class StyleFixtures
 				'zIndex'      => [ 'desktop' => 10, 'tablet' => 1.5 ],
 				'opacity'     => [ 'desktop' => 0.9, 'mobile' => 2 ],
 			] ),
-			new StyleCase( 'cover: fit, focal point, overlay', $container, [
-				'mediaFit'       => [ 'desktop' => 'contain', 'mobile' => 'fill' ],
-				'focalPoint'     => [ 'desktop' => [ 'x' => 0.25, 'y' => 0.333333 ], 'tablet' => [ 'x' => 1.5, 'y' => 0 ] ],
-				'overlayColor'   => [ 'desktop' => self::color( 'x-dark' ) ],
-				'overlayGradient' => [ 'desktop' => [ 'kind' => 'preset', 'preset' => 'gradient', 'slug' => 'accent-fade' ] ],
-				'overlayOpacity' => [ 'desktop' => 0.6, 'mobile' => 0.3 ],
-			] ),
+			new StyleCase(
+				'cover: focal point, overlay, fit on the media part',
+				$container,
+				[
+					'focalPoint'      => [ 'desktop' => [ 'x' => 0.25, 'y' => 0.333333 ], 'tablet' => [ 'x' => 1.5, 'y' => 0 ] ],
+					'overlayColor'    => [ 'desktop' => self::color( 'x-dark' ) ],
+					'overlayGradient' => [ 'desktop' => [ 'kind' => 'preset', 'preset' => 'gradient', 'slug' => 'accent-fade' ] ],
+					'overlayOpacity'  => [ 'desktop' => 0.6, 'mobile' => 0.3 ],
+				],
+				[],
+				[],
+				[],
+				null,
+				[ [ 'part' => 'media', 'values' => [ 'objectFit' => [ 'desktop' => 'contain', 'mobile' => 'fill' ] ] ] ]
+			),
 			new StyleCase( 'garbage states', $container, [], [], [ 'hover' => 'nope', 'focus' => [ 'padding' => 'x' ] ] ),
 			new StyleCase( 'garbage attribute', $container, [ 'padding' => 'nope', 'margin' => [ 'desktop' => 'nope' ] ] ),
 		];

@@ -6,4 +6,4 @@ export const TAG_PATTERN = /^[a-z][a-z0-9]*$/;
 
 export const CLASS_PATTERN = /^-?[_a-zA-Z][_a-zA-Z0-9-]*$/;
 
-export const PSEUDO_CLASS_PATTERN = /^:[a-z][a-z(),:.-]*$/;
+export const PSEUDO_CLASS_PATTERN = /^:[a-z][a-z(),:.=>\[\]-]*$/;

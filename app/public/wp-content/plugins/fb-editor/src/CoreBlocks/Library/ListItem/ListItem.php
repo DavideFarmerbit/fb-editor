@@ -36,7 +36,8 @@ final class ListItem extends CoreBlock
 				new Panel( __( 'Colors', 'fb-editor' ), C::id( C::TEXT_COLOR ) ),
 				new Panel( __( 'Spacing', 'fb-editor' ), C::id( C::MARGIN ), C::id( C::PADDING ) ),
 			),
-			states: [ BlockState::Hover ],
+			// Current: menus built as lists of links.
+			states: [ BlockState::Current, BlockState::Hover ],
 			parts: [ Part::marker() ],
 		);
 	}

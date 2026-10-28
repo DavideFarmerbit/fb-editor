@@ -23,11 +23,13 @@ final readonly class Selector implements \Stringable
 	public const string CLASS_PATTERN = '^-?[_a-zA-Z][_a-zA-Z0-9-]*$';
 
 	/**
-	 * Pseudo-classes a root may carry (state selectors, e.g. ":hover", or
-	 * ":is(:hover,.fb-preview-hover)" in the editor).
+	 * Pseudo-classes a root may carry (state selectors, e.g. ":hover",
+	 * ":is(:hover,.fb-preview-hover)" in the editor, or with unquoted
+	 * attribute tests: ":is([aria-current]:not([aria-current=false]))").
+	 * No quotes, spaces or braces: nothing can break out of the rule.
 	 */
 	#[ExportToTypeScript( regExp: true )]
-	public const string PSEUDO_CLASS_PATTERN = '^:[a-z][a-z(),:.-]*$';
+	public const string PSEUDO_CLASS_PATTERN = '^:[a-z][a-z(),:.=>\[\]-]*$';
 
 	private function __construct(
 		/** Inner selector, built only from validated parts. */

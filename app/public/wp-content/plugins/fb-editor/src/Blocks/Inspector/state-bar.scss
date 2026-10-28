@@ -1,15 +1,24 @@
+// The scrolling row of states, then what stays put (the condition picker).
+.fb-state-bar {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 12px 16px 0;
+}
+
 // One row, scrolling sideways when it doesn't fit; the buttons keep their
 // natural width. No scrollbar: the faded edges say there's more.
-.fb-state-bar {
+.fb-state-bar__scroll {
 	position: relative;
-	padding: 12px 16px 0;
+	flex: 1;
+	min-width: 0;
 
 	&::before,
 	&::after {
 		content: "";
 		position: absolute;
 		z-index: 1;
-		top: 12px;
+		top: 0;
 		bottom: 0;
 		width: 24px;
 		pointer-events: none;
@@ -18,12 +27,12 @@
 	}
 
 	&::before {
-		left: 16px;
+		left: 0;
 		background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
 	}
 
 	&::after {
-		right: 16px;
+		right: 0;
 		background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
 	}
 

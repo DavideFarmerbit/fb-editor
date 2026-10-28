@@ -3,11 +3,15 @@
  * that scrolls sideways when it doesn't fit. Native scrolling (trackpad
  * swipes, shift + wheel), plus dragging with the mouse; edges fade where
  * there's more; the current item is scrolled into view.
+ *
+ * A click picks one item; ⌘/Ctrl-click adds it to (or removes it from) the
+ * current ones, for looks combining several states. A trailing slot holds
+ * what doesn't scroll (the condition picker).
  */
 import { Button } from '@wordpress/components';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import type { PointerEvent, ReactElement } from 'react';
+import type { MouseEvent, PointerEvent, ReactElement, ReactNode } from 'react';
 
 import './state-bar.scss';
 
@@ -17,22 +21,35 @@ export class StateBarItem {
 		public readonly id: string,
 		public readonly label: string,
 		/** Has values: filled. */
-		public readonly isSet: boolean
+		public readonly isSet: boolean,
+		/** Part of the look being edited: outlined (several, in a combined look). */
+		public readonly isCurrent: boolean
 	) {}
+}
+
+/** ⌘ on a Mac, Ctrl elsewhere: adds to the selection instead of replacing it. */
+export function isAdditive( event: MouseEvent ): boolean {
+	return event.metaKey || event.ctrlKey;
 }
 
 interface StateBarProps {
 	readonly items: readonly StateBarItem[];
-	readonly current: string;
 	/** Disabled: shown (so nothing moves), not clickable, with why. */
 	readonly disabledReason: string | null;
-	readonly onSelect: ( id: string ) => void;
+	/** `additive`: ⌘/Ctrl-click, toggle the item within the current ones. */
+	readonly onSelect: ( id: string, additive: boolean ) => void;
+	/** After the scrolling row, always visible. */
+	readonly trailing?: ReactNode;
 }
 
 /** A drag shorter than this is still a click. */
 const DRAG_THRESHOLD = 4;
 
-export function StateBar( { items, current, disabledReason, onSelect }: StateBarProps ): ReactElement {
+export function StateBar( { items, disabledReason, onSelect, trailing }: StateBarProps ): ReactElement {
+	const current = items
+		.filter( ( item ) => item.isCurrent )
+		.map( ( item ) => item.id )
+		.join( ' ' );
 	const track = useRef< HTMLDivElement >( null );
 	const drag = useRef< { x: number; scroll: number; moved: boolean } | null >( null );
 	const [ edges, setEdges ] = useState( { start: false, end: false } );
@@ -88,16 +105,17 @@ export function StateBar( { items, current, disabledReason, onSelect }: StateBar
 		} );
 	};
 
-	const classes = [ 'fb-state-bar' ];
+	const scrollClasses = [ 'fb-state-bar__scroll' ];
 	if ( edges.start ) {
-		classes.push( 'has-more-start' );
+		scrollClasses.push( 'has-more-start' );
 	}
 	if ( edges.end ) {
-		classes.push( 'has-more-end' );
+		scrollClasses.push( 'has-more-end' );
 	}
 
 	return (
-		<div className={ classes.join( ' ' ) }>
+		<div className="fb-state-bar">
+			<div className={ scrollClasses.join( ' ' ) }>
 			<div
 				ref={ track }
 				className="fb-state-bar__track"
@@ -114,7 +132,7 @@ export function StateBar( { items, current, disabledReason, onSelect }: StateBar
 					if ( item.isSet ) {
 						itemClasses.push( 'is-set' );
 					}
-					if ( item.id === current ) {
+					if ( item.isCurrent ) {
 						itemClasses.push( 'is-current' );
 					}
 					return (
@@ -122,13 +140,13 @@ export function StateBar( { items, current, disabledReason, onSelect }: StateBar
 							key={ item.id }
 							className={ itemClasses.join( ' ' ) }
 							// Not aria-pressed: core would give it its dark pressed look.
-							{ ...( item.id === current ? { 'aria-current': true } : {} ) }
+							{ ...( item.isCurrent ? { 'aria-current': true } : {} ) }
 							disabled={ disabledReason !== null }
 							accessibleWhenDisabled
 							{ ...( disabledReason === null ? {} : { label: disabledReason, showTooltip: true } ) }
-							onClick={ () => {
+							onClick={ ( event: MouseEvent ) => {
 								if ( drag.current?.moved !== true ) {
-									onSelect( item.id );
+									onSelect( item.id, isAdditive( event ) );
 								}
 							} }
 						>
@@ -137,6 +155,8 @@ export function StateBar( { items, current, disabledReason, onSelect }: StateBar
 					);
 				} ) }
 			</div>
+			</div>
+			{ trailing }
 		</div>
 	);
 }
