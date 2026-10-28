@@ -36,8 +36,11 @@
 .fb-state-bar__track {
 	display: flex;
 	gap: 4px;
-	// Room for the selection outline, which sits outside the buttons.
-	padding: 1px;
+	// A scrolling box clips what's drawn outside its content: room for the
+	// selection ring and core's 1.5px focus ring around the buttons, taken
+	// back by the margin so the bar doesn't move.
+	margin: -3px;
+	padding: 3px;
 	overflow-x: auto;
 	overscroll-behavior-x: contain;
 	scrollbar-width: none;
@@ -49,11 +52,5 @@
 
 	&:active {
 		cursor: grabbing;
-	}
-
-	.fb-states__item {
-		flex: 1 0 auto;
-		min-width: 56px;
-		padding: 0 10px;
 	}
 }

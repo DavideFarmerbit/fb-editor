@@ -70,23 +70,18 @@
 	}
 }
 
-// State bar over the panels (Base · Hover · …): the breakpoint strip's
-// look, a bit larger.
-.fb-states {
-	display: flex;
-	gap: 4px;
-	padding: 12px 16px 0;
-}
-
 .fb-view-filter {
 	display: flex;
 	gap: 2px;
 	margin-inline-start: auto;
 }
 
-.fb-states .fb-states__item {
-	flex: 1;
-	min-width: 0;
+// State bar items (Base · Hover · …, see state-bar.tsx): the breakpoint
+// strip's look, a bit larger. Equal widths, but never narrower than their
+// label: when they don't fit, the bar scrolls.
+.fb-state-bar .fb-states__item {
+	flex: 1 0 0;
+	min-width: max-content;
 	height: 24px;
 	padding: 0 4px;
 	justify-content: center;
