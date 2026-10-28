@@ -98,8 +98,22 @@ export class ConditionInfo {
 		public readonly id: MediaCondition,
 		public readonly label: string,
 		/** e.g. "(prefers-color-scheme: dark)". */
-		public readonly mediaQuery: string
+		public readonly mediaQuery: string,
+		/** Editor only: on the canvas page while previewed with this condition. */
+		public readonly previewClass: string,
+		/** The condition a device can't have at the same time. */
+		public readonly excludes: MediaCondition | null
 	) {}
+
+	static fromJson( json: JsonValue ): ConditionInfo {
+		return new ConditionInfo(
+			json.get( 'id' ).oneOf( MediaCondition ),
+			json.get( 'label' ).string(),
+			json.get( 'mediaQuery' ).string(),
+			json.get( 'previewClass' ).string(),
+			json.get( 'excludes' ).nullable( ( excludes ) => excludes.oneOf( MediaCondition ) )
+		);
+	}
 }
 
 export class BlockDefinition implements ConditionLabels {
@@ -269,13 +283,7 @@ export function blockDefinitionFromJson( json: JsonValue ): BlockDefinition {
 						state.get( 'previewClass' ).string()
 					)
 			),
-		json
-			.get( 'conditions' )
-			.list()
-			.map(
-				( condition ) =>
-					new ConditionInfo( condition.get( 'id' ).oneOf( MediaCondition ), condition.get( 'label' ).string(), condition.get( 'mediaQuery' ).string() )
-			),
+		json.get( 'conditions' ).list().map( ConditionInfo.fromJson ),
 		json.has( 'parts' ) ? json.get( 'parts' ).list().map( ( part ) => Part.fromJson( part, blockDefinitionFromJson ) ) : []
 	);
 }

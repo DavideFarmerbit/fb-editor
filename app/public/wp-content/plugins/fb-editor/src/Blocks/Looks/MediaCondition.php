@@ -48,6 +48,44 @@ enum MediaCondition: string
 	}
 
 	/**
+	 * Editor only: on the canvas page while it's previewed as a device with
+	 * this condition (View menu). There, condition looks follow these
+	 * classes instead of the editing device's real media features.
+	 */
+	public function previewClass(): string
+	{
+		return 'fb-when-' . $this->value;
+	}
+
+	/** The condition a device can't have at the same time, if any. */
+	public function excludes(): ?self
+	{
+		return match ( $this ) {
+			self::CanHover  => self::Touch,
+			self::Touch     => self::CanHover,
+			self::Portrait  => self::Landscape,
+			self::Landscape => self::Portrait,
+			default         => null,
+		};
+	}
+
+	/**
+	 * What the editor receives.
+	 *
+	 * @return array{id: self, label: string, mediaQuery: string, previewClass: string, excludes: ?self}
+	 */
+	public function info(): array
+	{
+		return [
+			'id'           => $this,
+			'label'        => $this->label(),
+			'mediaQuery'   => $this->mediaQuery(),
+			'previewClass' => $this->previewClass(),
+			'excludes'     => $this->excludes(),
+		];
+	}
+
+	/**
 	 * In cascade (case) order, without duplicates.
 	 *
 	 * @param list<self> $conditions

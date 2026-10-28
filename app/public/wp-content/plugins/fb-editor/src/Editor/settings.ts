@@ -4,7 +4,7 @@
  */
 import { breakpointListFromJson, type BreakpointList } from '../Breakpoints/breakpoints';
 import { BlockDesignInfo } from '../Blocks/Storage/block-design-info';
-import { blockDefinitionFromJson, type BlockDefinition } from '../Blocks/Definition/block-definition';
+import { blockDefinitionFromJson, ConditionInfo, type BlockDefinition } from '../Blocks/Definition/block-definition';
 import { StatefulValues } from '../Blocks/Values/stateful-values';
 import { VariantSet } from '../Blocks/Variants/variant-set';
 import { InvalidJson, JsonValue } from '../Json/json';
@@ -15,7 +15,9 @@ export class EditorSettings {
 		public readonly breakpoints: BreakpointList,
 		public readonly presets: Presets,
 		public readonly blocks: readonly BlockDefinition[],
-		private readonly designs: readonly BlockDesignInfo[]
+		private readonly designs: readonly BlockDesignInfo[],
+		/** Every media condition, for the canvas preview (View menu). */
+		public readonly conditions: readonly ConditionInfo[]
 	) {}
 
 	designFor( definition: BlockDefinition ): BlockDesignInfo {
@@ -64,7 +66,13 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 			);
 		} );
 
-	return new EditorSettings( breakpoints, new Presets( json.get( 'presets' ).list().map( Preset.fromJson ) ), blocks, designs );
+	return new EditorSettings(
+		breakpoints,
+		new Presets( json.get( 'presets' ).list().map( Preset.fromJson ) ),
+		blocks,
+		designs,
+		json.get( 'conditions' ).list().map( ConditionInfo.fromJson )
+	);
 }
 
 export const settings: EditorSettings = parseEditorSettings( window.fbEditorSettings );

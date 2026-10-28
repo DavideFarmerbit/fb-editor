@@ -40,6 +40,30 @@ export function canvasBlockElement( clientId: string ): HTMLElement | null {
 }
 
 /**
+ * Calls `onDocument` with the canvas page's document, now and whenever core
+ * replaces the iframe (mode or device switches), or null while there's
+ * none. Returns a cleanup function.
+ */
+export function observeCanvasDocument( onDocument: ( canvas: Document | null ) => void ): () => void {
+	let current: Document | null | undefined;
+
+	const check = (): void => {
+		const iframe = document.querySelector< HTMLIFrameElement >( CANVAS_IFRAME );
+		// Until the iframe has loaded its page, its document is a blank one.
+		const canvas = iframe?.contentDocument?.body?.classList.contains( 'editor-styles-wrapper' ) === true ? iframe.contentDocument : null;
+		if ( canvas !== current ) {
+			current = canvas;
+			onDocument( canvas );
+		}
+	};
+
+	check();
+	const timer = window.setInterval( check, 500 );
+
+	return () => window.clearInterval( timer );
+}
+
+/**
  * The flex container around the canvas (post and site editors); same class
  * as `$canvas-container` in adapter.scss.
  */

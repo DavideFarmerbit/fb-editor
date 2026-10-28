@@ -20,19 +20,24 @@ export class BlockStyles {
 	/**
 	 * Mirrors BlockStyles::forSource(): every look of one source. `weaker`:
 	 * sources below it (a block's type defaults), for conditions.
+	 *
+	 * In the editor, a look's media conditions don't read the editing
+	 * device: the look applies inside the canvas page's preview classes
+	 * (View menu) instead of a media query.
 	 */
 	forSource( definition: BlockDefinition, values: StatefulValues, root: Selector, ...weaker: StatefulValues[] ): BlockBindings {
 		let bindings = new BlockBindings();
 		for ( const look of values.looks() ) {
-			const selector = look.key.hasStates() ? root.withPseudoClass( look.key.pseudoClass( definition, this.editor ) ) : root;
+			const states = look.key.hasStates() ? root.withPseudoClass( look.key.pseudoClass( definition, this.editor ) ) : root;
 			const part = look.key.part === null ? undefined : definition.part( look.key.part );
+			const target = part === undefined ? states : part.selector( states, definition, this.editor );
 			bindings = bindings.with(
 				look.key,
-				look.key.mediaQuery( definition ),
+				this.editor ? null : look.key.mediaQuery( definition ),
 				this.bindings(
 					definitionOf( look.key, definition ),
 					look.values,
-					part === undefined ? selector : part.selector( selector, definition, this.editor ),
+					this.editor ? target.inside( look.key.previewClasses( definition ) ) : target,
 					values.chain( look.key, ...weaker )
 				)
 			);

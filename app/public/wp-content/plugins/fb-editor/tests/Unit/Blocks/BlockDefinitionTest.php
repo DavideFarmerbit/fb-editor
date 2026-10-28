@@ -92,9 +92,15 @@ final class BlockDefinitionTest extends TestCase
 		self::assertStringContainsString( ',"elements":[{"id":"inner","className":"fb-section__inner","editorClassName":"fb-section__inner"}],'
 			. '"states":[{"id":"hover","label":"Hover","pseudoClass":":hover","editorPseudoClass":":is(:hover,.fb-preview-hover)","previewClass":"fb-preview-hover"},'
 			. '{"id":"active","label":"Active","pseudoClass":":active","editorPseudoClass":":is(:active,.fb-preview-active)","previewClass":"fb-preview-active"}],', $encode( $definition ) );
-		// Every condition, with label and media query from PHP.
-		self::assertStringContainsString( '"conditions":[{"id":"can-hover","label":"Can hover","mediaQuery":"(hover: hover)"},', $encode( $definition ) );
-		self::assertStringEndsWith( '{"id":"reduced-motion","label":"Reduced motion","mediaQuery":"(prefers-reduced-motion: reduce)"}]}', $encode( $definition ) );
+		// Every condition, with label, media query, preview class and the one it rules out, from PHP.
+		self::assertStringContainsString(
+			'"conditions":[{"id":"can-hover","label":"Can hover","mediaQuery":"(hover: hover)","previewClass":"fb-when-can-hover","excludes":"touch"},',
+			$encode( $definition )
+		);
+		self::assertStringEndsWith(
+			'{"id":"reduced-motion","label":"Reduced motion","mediaQuery":"(prefers-reduced-motion: reduce)","previewClass":"fb-when-reduced-motion","excludes":null}]}',
+			$encode( $definition )
+		);
 		self::assertSame(
 			'{"id":"gap","label":"Gap",'
 			. '"input":{"kind":"spacing","allowAuto":false,"allowNegative":false,"modes":["linked","axis"],"scale":"spacing","zeroStep":true,"shape":"sides"},'

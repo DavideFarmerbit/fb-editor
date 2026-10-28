@@ -6,7 +6,7 @@ import { createReduxStore, register } from '@wordpress/data';
 
 import type { SpacingMode } from '../Blocks/Definition/Input/Spacing/spacing-input';
 import type { SidebarView } from '../Blocks/Inspector/inspector';
-import type { LookKey } from '../Blocks/Looks/look-key';
+import type { LookKey, MediaCondition } from '../Blocks/Looks/look-key';
 import type { Breakpoint, BreakpointId, BreakpointList } from '../Breakpoints/breakpoints';
 import { settings } from './settings';
 
@@ -44,6 +44,12 @@ interface State {
 	readonly showHiddenBlocks: boolean;
 	/** Block sidebars list only settings or only styles; null: both (the view filter switches). */
 	readonly sidebarView: SidebarView | null;
+	/**
+	 * The device the canvas is previewed as (View menu): looks requiring
+	 * these media conditions apply there, others don't, whatever the
+	 * editing device is.
+	 */
+	readonly previewConditions: readonly MediaCondition[];
 }
 
 interface SetBreakpointAction {
@@ -91,7 +97,12 @@ interface ShowHiddenBlocksAction {
 	readonly show: boolean;
 }
 
-type Action = SetSidebarViewAction | ShowHiddenBlocksAction | SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectLookAction | ShowUnavailableSettingsAction;
+interface PreviewConditionsAction {
+	readonly type: 'PREVIEW_CONDITIONS';
+	readonly conditions: readonly MediaCondition[];
+}
+
+type Action = PreviewConditionsAction | SetSidebarViewAction | ShowHiddenBlocksAction | SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectLookAction | ShowUnavailableSettingsAction;
 
 const NONE: readonly string[] = [];
 
@@ -103,6 +114,7 @@ const DEFAULT_STATE: State = {
 	showUnavailableSettings: true,
 	showHiddenBlocks: true,
 	sidebarView: null,
+	previewConditions: [],
 };
 
 const actions = {
@@ -131,6 +143,9 @@ const actions = {
 	},
 	showHiddenBlocks( show: boolean ): ShowHiddenBlocksAction {
 		return { type: 'SHOW_HIDDEN_BLOCKS', show };
+	},
+	previewConditions( conditions: readonly MediaCondition[] ): PreviewConditionsAction {
+		return { type: 'PREVIEW_CONDITIONS', conditions };
 	},
 };
 
@@ -161,6 +176,9 @@ const selectors = {
 	isShowingHiddenBlocks( state: State ): boolean {
 		return state.showHiddenBlocks;
 	},
+	getPreviewConditions( state: State ): readonly MediaCondition[] {
+		return state.previewConditions;
+	},
 };
 
 export const store = createReduxStore( 'fb/editor', {
@@ -182,6 +200,8 @@ export const store = createReduxStore( 'fb/editor', {
 				return { ...state, sidebarView: action.view };
 			case 'SHOW_HIDDEN_BLOCKS':
 				return { ...state, showHiddenBlocks: action.show };
+			case 'PREVIEW_CONDITIONS':
+				return { ...state, previewConditions: action.conditions };
 			case 'INSPECT_LOOK': {
 				const { [ action.key ]: _previous, ...others } = state.inspectedLooks;
 				return { ...state, inspectedLooks: action.look === '' ? others : { ...others, [ action.key ]: action.look } };

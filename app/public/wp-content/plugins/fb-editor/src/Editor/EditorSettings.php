@@ -6,6 +6,7 @@ namespace Fb\Editor;
 
 use Fb\Blocks\Storage\BlockDesignInfo;
 use Fb\Blocks\Definition\BlockDefinition;
+use Fb\Blocks\Looks\MediaCondition;
 use Fb\Breakpoints\BreakpointList;
 use Fb\Presets\Preset;
 
@@ -29,7 +30,7 @@ final readonly class EditorSettings implements \JsonSerializable
 	}
 
 	/**
-	 * @return array{breakpoints: BreakpointList, presets: list<Preset>, blocks: list<BlockDefinition>, designs: list<BlockDesignInfo>}
+	 * @return array{breakpoints: BreakpointList, presets: list<Preset>, blocks: list<BlockDefinition>, designs: list<BlockDesignInfo>, conditions: list<array<string, mixed>>}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -38,6 +39,8 @@ final readonly class EditorSettings implements \JsonSerializable
 			'presets'     => $this->presets,
 			'blocks'      => $this->blocks,
 			'designs'     => $this->designs,
+			// For the canvas preview (View menu): not tied to any block.
+			'conditions'  => array_map( static fn ( MediaCondition $condition ): array => $condition->info(), MediaCondition::cases() ),
 		];
 	}
 }

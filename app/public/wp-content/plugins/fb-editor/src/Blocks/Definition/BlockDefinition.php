@@ -165,7 +165,7 @@ final readonly class BlockDefinition implements \JsonSerializable
 	 *
 	 * Class names are computed here, so the editor never re-derives them.
 	 *
-	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string, editorPseudoClass: string, previewClass: string}>, parts: list<array<string, mixed>>, conditions: list<array{id: MediaCondition, label: string, mediaQuery: string}>}
+	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string, editorPseudoClass: string, previewClass: string}>, parts: list<array<string, mixed>>, conditions: list<array{id: MediaCondition, label: string, mediaQuery: string, previewClass: string, excludes: ?MediaCondition}>}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -200,14 +200,7 @@ final readonly class BlockDefinition implements \JsonSerializable
 			),
 			// Every block can have looks for any condition: listed here so the
 			// editor gets labels and queries from PHP.
-			'conditions' => array_map(
-				static fn ( MediaCondition $condition ): array => [
-					'id'         => $condition,
-					'label'      => $condition->label(),
-					'mediaQuery' => $condition->mediaQuery(),
-				],
-				MediaCondition::cases()
-			),
+			'conditions' => array_map( static fn ( MediaCondition $condition ): array => $condition->info(), MediaCondition::cases() ),
 		];
 	}
 }

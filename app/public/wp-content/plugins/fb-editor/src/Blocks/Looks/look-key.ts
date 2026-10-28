@@ -150,6 +150,11 @@ export class LookKey {
 			.join( '' );
 	}
 
+	/** Editor only: the canvas page's classes while previewed with this look's conditions. */
+	previewClasses( definition: BlockDefinition ): string[] {
+		return this.conditions.flatMap( ( condition ) => definition.conditions.find( ( info ) => info.id === condition )?.previewClass ?? [] );
+	}
+
 	/** Mirrors LookKey::mediaQuery(). */
 	mediaQuery( definition: BlockDefinition ): string | null {
 		return this.conditions.length === 0

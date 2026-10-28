@@ -105,3 +105,22 @@ test( 'the editor previews a state with its preview class', () => {
 
 	expect( css ).toBe( '@layer fb.states.instances{:where(.fb-i-x:is(:hover,.fb-preview-hover)>.wp-block-button__link){font-weight:700;}}' );
 } );
+
+test( 'in the editor, conditions follow the canvas preview classes, not the editing device', () => {
+	const compiler = new StyleCompiler( breakpoints, new Presets( fixtures.get( 'presets' ).list().map( Preset.fromJson ) ) );
+	const values = stateful( {
+		looks: [
+			{ when: [ 'dark' ], values: weight( '300' ) },
+			{ states: [ 'hover' ], when: [ 'touch', 'dark' ], values: weight( '800' ) },
+		],
+	} );
+
+	expect( new BlockStyles( breakpoints, true ).forSource( button, values, Selector.forClass( 'fb-i-x' ) ).css( compiler, CssLayer.Instances ) ).toBe(
+		'@layer fb.instances{:where(.fb-when-dark .fb-i-x>.wp-block-button__link){font-weight:300;}}' +
+			'@layer fb.states.instances{:where(.fb-when-touch.fb-when-dark .fb-i-x:is(:hover,.fb-preview-hover)>.wp-block-button__link){font-weight:800;}}'
+	);
+	// The page itself keeps the real media queries.
+	expect( new BlockStyles( breakpoints ).forSource( button, values, Selector.forClass( 'fb-i-x' ) ).css( compiler, CssLayer.Instances ) ).toContain(
+		'@media (hover: none) and (pointer: coarse) and (prefers-color-scheme: dark){'
+	);
+} );

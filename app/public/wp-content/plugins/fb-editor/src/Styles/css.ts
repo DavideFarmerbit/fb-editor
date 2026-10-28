@@ -102,6 +102,18 @@ export class Selector {
 		return new Selector( `${ this.inner }>.${ Selector.valid( className ) }`, false );
 	}
 
+	/**
+	 * Editor only: matches only inside an element carrying all these classes
+	 * (the canvas page previewed with some media conditions). Still zero
+	 * specificity, inside :where().
+	 */
+	inside( classNames: readonly string[] ): Selector {
+		if ( classNames.length === 0 ) {
+			return this;
+		}
+		return new Selector( `${ classNames.map( ( name ) => `.${ Selector.valid( name ) }` ).join( '' ) } ${ this.inner }`, false, this.pseudoElement );
+	}
+
 	/** A direct child of this HTML tag. */
 	childTag( tag: string ): Selector {
 		return new Selector( `${ this.inner }>${ Selector.validTag( tag ) }`, false );
