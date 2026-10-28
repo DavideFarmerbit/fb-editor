@@ -3,7 +3,7 @@
  * edit. Lists the parts with values (in any look) or added this session;
  * "Add part" offers the others. Removing a part drops all its looks.
  */
-import { Button, DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
+import { Button, Dropdown, DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { moreVertical, plus, trash } from '@wordpress/icons';
 import type { ReactElement } from 'react';
@@ -32,11 +32,17 @@ export function PartsTree( { definition, values, current, added, onSelect, onAdd
 
 	return (
 		<div className="fb-parts">
-			<Button className={ current === null ? 'fb-parts__item is-current' : 'fb-parts__item' } { ...( current === null ? { 'aria-current': true } : {} ) } onClick={ () => onSelect( null ) }>
-				{ definition.title }
-			</Button>
+			<div className="fb-parts__row">
+				<Button
+					className={ current === null ? 'fb-parts__item is-block is-current' : 'fb-parts__item is-block' }
+					{ ...( current === null ? { 'aria-current': true } : {} ) }
+					onClick={ () => onSelect( null ) }
+				>
+					{ definition.title }
+				</Button>
+			</div>
 			{ listed.map( ( part ) => (
-				<div key={ part.id } className="fb-parts__row">
+				<div key={ part.id } className="fb-parts__row is-part">
 					<Button
 						className={ [ 'fb-parts__item', 'is-part', isSet( part ) ? 'is-set' : '', part.id === current ? 'is-current' : '' ].filter( Boolean ).join( ' ' ) }
 						{ ...( part.id === current ? { 'aria-current': true } : {} ) }
@@ -63,13 +69,16 @@ export function PartsTree( { definition, values, current, added, onSelect, onAdd
 				</div>
 			) ) }
 			{ available.length > 0 && (
-				<DropdownMenu
-					icon={ plus }
-					label={ __( 'Add part', 'fb-editor' ) }
-					toggleProps={ { size: 'small', className: 'fb-parts__add', children: __( 'Add part', 'fb-editor' ) } }
+				// One more row of the tree, where the next part would go.
+				<Dropdown
+					className="fb-parts__row is-part"
 					popoverProps={ { placement: 'bottom-start' } }
-				>
-					{ ( { onClose } ) => (
+					renderToggle={ ( { isOpen, onToggle } ) => (
+						<Button className="fb-parts__item is-add" icon={ plus } aria-expanded={ isOpen } onClick={ onToggle }>
+							{ __( 'Add part', 'fb-editor' ) }
+						</Button>
+					) }
+					renderContent={ ( { onClose } ) => (
 						<MenuGroup>
 							{ available.map( ( part ) => (
 								<MenuItem
@@ -84,7 +93,7 @@ export function PartsTree( { definition, values, current, added, onSelect, onAdd
 							) ) }
 						</MenuGroup>
 					) }
-				</DropdownMenu>
+				/>
 			) }
 		</div>
 	);
