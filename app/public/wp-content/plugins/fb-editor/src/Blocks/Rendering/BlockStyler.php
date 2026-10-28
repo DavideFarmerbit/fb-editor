@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Rendering;
 
+use Fb\Actions\BlockAnchor;
 use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Definition\ControlId;
@@ -48,6 +49,12 @@ final readonly class BlockStyler
 		}
 
 		$classes = $classes->with( Hiding::classes( $this->hideOn( $definition, $parsed, $variant ), $this->breakpoints->breakpoints() ) );
+
+		// What other blocks' actions find it by.
+		$anchor = BlockAnchor::ofAttribute( $attribute );
+		if ( null !== $anchor ) {
+			$classes = $classes->with( new ClassList( $anchor->className() ) );
+		}
 
 		return new StyledBlock( $parsed, $variant, $classes );
 	}

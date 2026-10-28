@@ -1516,6 +1516,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -1881,6 +1888,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -2759,6 +2773,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -3635,6 +3656,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -5220,6 +5248,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -5585,6 +5620,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -6463,6 +6505,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -7339,6 +7388,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -8902,6 +8958,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -9267,6 +9330,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -10145,6 +10215,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -11021,6 +11098,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -13451,6 +13535,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -13816,6 +13907,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -14694,6 +14792,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -15570,6 +15675,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -17175,6 +17287,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -17540,6 +17659,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -18418,6 +18544,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -19294,6 +19427,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -20875,6 +21015,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -21240,6 +21387,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -22118,6 +22272,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -22994,6 +23155,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -24585,6 +24753,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -24950,6 +25125,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -25828,6 +26010,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -26704,6 +26893,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -28249,6 +28445,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -28614,6 +28817,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -29492,6 +29702,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -30368,6 +30585,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -31957,6 +32181,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -32322,6 +32553,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -33200,6 +33438,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -34076,6 +34321,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -35640,6 +35892,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -36005,6 +36264,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -36883,6 +37149,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -37759,6 +38032,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -39338,6 +39618,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -39703,6 +39990,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -40581,6 +40875,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -41457,6 +41758,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -43016,6 +43324,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -43381,6 +43696,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -44259,6 +44581,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -45135,6 +45464,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -46692,6 +47028,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -47057,6 +47400,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -47935,6 +48285,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -48811,6 +49168,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -50530,6 +50894,13 @@
                         "previewClass": "fb-preview-current"
                     },
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -51380,6 +51751,13 @@
                                     "pseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])))",
                                     "editorPseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])),.fb-preview-current)",
                                     "previewClass": "fb-preview-current"
+                                },
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
                                 },
                                 {
                                     "id": "hover",
@@ -52278,6 +52656,13 @@
                                     "pseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])))",
                                     "editorPseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])),.fb-preview-current)",
                                     "previewClass": "fb-preview-current"
+                                },
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
                                 },
                                 {
                                     "id": "hover",
@@ -53500,6 +53885,13 @@
                         "previewClass": "fb-preview-current"
                     },
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -54350,6 +54742,13 @@
                                     "pseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])))",
                                     "editorPseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])),.fb-preview-current)",
                                     "previewClass": "fb-preview-current"
+                                },
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
                                 },
                                 {
                                     "id": "hover",
@@ -55248,6 +55647,13 @@
                                     "pseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])))",
                                     "editorPseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])),.fb-preview-current)",
                                     "previewClass": "fb-preview-current"
+                                },
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
                                 },
                                 {
                                     "id": "hover",
@@ -58083,6 +58489,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -58448,6 +58861,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -59326,6 +59746,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -60202,6 +60629,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -61906,6 +62340,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -62271,6 +62712,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -63149,6 +63597,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -64025,6 +64480,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -65653,6 +66115,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -66018,6 +66487,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -66896,6 +67372,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -67772,6 +68255,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -68974,6 +69464,13 @@
                         "previewClass": "fb-preview-current"
                     },
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -69824,6 +70321,13 @@
                                     "pseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])))",
                                     "editorPseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])),.fb-preview-current)",
                                     "previewClass": "fb-preview-current"
+                                },
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
                                 },
                                 {
                                     "id": "hover",
@@ -70722,6 +71226,13 @@
                                     "pseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])))",
                                     "editorPseudoClass": ":is([aria-current]:not([aria-current=false]),.current-menu-item,:has(>[aria-current]:not([aria-current=false])),.fb-preview-current)",
                                     "previewClass": "fb-preview-current"
+                                },
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
                                 },
                                 {
                                     "id": "hover",
@@ -72459,6 +72970,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -72824,6 +73342,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -73702,6 +74227,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -74578,6 +75110,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -76191,6 +76730,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -76556,6 +77102,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -77434,6 +77987,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -78310,6 +78870,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -79922,6 +80489,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -80287,6 +80861,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -81165,6 +81746,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -82041,6 +82629,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -83587,6 +84182,13 @@
                 ],
                 "states": [
                     {
+                        "id": "open",
+                        "label": "Open",
+                        "pseudoClass": ":is([open],.is-fb-open)",
+                        "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                        "previewClass": "fb-preview-open"
+                    },
+                    {
                         "id": "hover",
                         "label": "Hover",
                         "pseudoClass": ":hover",
@@ -83952,6 +84554,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",
@@ -84830,6 +85439,13 @@
                             "elements": [],
                             "states": [
                                 {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
+                                {
                                     "id": "hover",
                                     "label": "Hover",
                                     "pseudoClass": ":hover",
@@ -85706,6 +86322,13 @@
                             ],
                             "elements": [],
                             "states": [
+                                {
+                                    "id": "open",
+                                    "label": "Open",
+                                    "pseudoClass": ":is([open],.is-fb-open)",
+                                    "editorPseudoClass": ":is([open],.is-fb-open,.fb-preview-open)",
+                                    "previewClass": "fb-preview-open"
+                                },
                                 {
                                     "id": "hover",
                                     "label": "Hover",

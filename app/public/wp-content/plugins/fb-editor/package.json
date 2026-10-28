@@ -3,8 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"build": "wp-scripts build editor=./src/Editor/editor.ts admin-sidebar=./src/Site/AdminSidebar/admin-sidebar.ts",
-		"start": "wp-scripts start editor=./src/Editor/editor.ts admin-sidebar=./src/Site/AdminSidebar/admin-sidebar.ts",
+		"build": "wp-scripts build editor=./src/Editor/editor.ts admin-sidebar=./src/Site/AdminSidebar/admin-sidebar.ts actions=./src/Actions/runtime/actions.ts",
+		"start": "wp-scripts start editor=./src/Editor/editor.ts admin-sidebar=./src/Site/AdminSidebar/admin-sidebar.ts actions=./src/Actions/runtime/actions.ts",
 		"typecheck": "tsc",
 		"lint": "wp-scripts lint-js src tests",
 		"test": "wp-scripts test-unit-js tests"

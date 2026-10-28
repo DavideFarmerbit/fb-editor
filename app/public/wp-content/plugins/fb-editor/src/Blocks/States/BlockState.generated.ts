@@ -4,6 +4,7 @@
 
 export enum BlockState {
 	Current = 'current',
+	Open = 'open',
 	Hover = 'hover',
 	Focus = 'focus',
 	Active = 'active',

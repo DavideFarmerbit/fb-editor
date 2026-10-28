@@ -191,7 +191,8 @@ final class Container extends Block
 				),
 			),
 			[ $media, $overlay ],
-			states: [ BlockState::Hover, BlockState::Focus ],
+			// Open: what panels, menus and accordions opened by an action look like.
+			states: [ BlockState::Open, BlockState::Hover, BlockState::Focus ],
 			parts: [ Part::element( 'media', __( 'Image or video', 'fb-editor' ), $media ) ],
 		);
 	}

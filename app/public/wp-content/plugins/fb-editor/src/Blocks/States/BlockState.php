@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\States;
 
+use Fb\Actions\Library\OpenClose;
 use Fb\TypeScript\ExportToTypeScript;
 
 /**
  * Interaction states a block can be styled for, on top of its base look.
  *
  * Case order is cascade order: in the states layers a later state wins, so
- * a hovered button being clicked looks active, the current menu item still
- * reacts to hover, and a disabled button never looks hovered or pressed.
+ * a hovered button being clicked looks active, the current menu item and an
+ * open panel still react to hover, and a disabled button never looks hovered
+ * or pressed.
  *
  * States belong to the block as a whole: the pseudo-class goes on the block
  * root and styles reach its elements from there (hovering a button styles
@@ -24,6 +26,8 @@ enum BlockState: string
 {
 	/** Points at the page being viewed (aria-current, a menu's current item). */
 	case Current  = 'current';
+	/** Opened: by an Open / close action, or natively ([open] on <details>, <dialog>). */
+	case Open     = 'open';
 	case Hover    = 'hover';
 	case Focus    = 'focus';
 	case Active   = 'active';
@@ -33,6 +37,7 @@ enum BlockState: string
 	{
 		return match ( $this ) {
 			self::Current  => __( 'Current', 'fb-editor' ),
+			self::Open     => __( 'Open', 'fb-editor' ),
 			self::Hover    => __( 'Hover', 'fb-editor' ),
 			self::Focus    => __( 'Focus', 'fb-editor' ),
 			self::Active   => __( 'Active', 'fb-editor' ),
@@ -73,6 +78,7 @@ enum BlockState: string
 
 		return match ( $this ) {
 			self::Current  => [ $current, '.current-menu-item', ":has(>{$current})" ],
+			self::Open     => [ '[open]', '.' . OpenClose::OPEN_CLASS ],
 			self::Hover    => [ ':hover' ],
 			self::Focus    => [ ':focus-visible', ':has(:focus-visible)' ],
 			self::Active   => [ ':active' ],

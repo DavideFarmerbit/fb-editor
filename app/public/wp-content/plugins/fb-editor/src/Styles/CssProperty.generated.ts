@@ -67,6 +67,7 @@ export enum CssProperty {
 	BoxShadow = 'box-shadow',
 	BackgroundImage = 'background-image',
 	Opacity = 'opacity',
+	Visibility = 'visibility',
 	ZIndex = 'z-index',
 	Position = 'position',
 	Top = 'top',

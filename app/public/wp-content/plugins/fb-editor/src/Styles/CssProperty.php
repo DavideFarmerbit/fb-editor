@@ -78,6 +78,7 @@ enum CssProperty: string
 	case BoxShadow       = 'box-shadow';
 	case BackgroundImage = 'background-image';
 	case Opacity  = 'opacity';
+	case Visibility = 'visibility';
 	case ZIndex   = 'z-index';
 	case Position = 'position';
 	case Top      = 'top';
