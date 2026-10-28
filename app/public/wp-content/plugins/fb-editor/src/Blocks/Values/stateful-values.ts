@@ -10,8 +10,14 @@ import { InvalidJson, JsonValue } from '../../Json/json';
 import type { BlockDefinition } from '../Definition/block-definition';
 import type { ControlId } from '../Definition/control-id';
 import { Look, LookKey } from '../Looks/look-key';
+import type { PartId } from '../Parts/part';
 import { BlockValues } from './block-values';
 import { ValueChain } from './value-chain';
+
+/** Mirrors StatefulValues::definitionOf(): the block's definition, or its part's. */
+export function definitionOf( key: LookKey, definition: BlockDefinition ): BlockDefinition {
+	return key.part === null ? definition : definition.part( key.part )?.definition ?? definition;
+}
 
 function sorted( looks: ReadonlyArray< Look< BlockValues > > ): Array< Look< BlockValues > > {
 	return [ ...looks ].sort( ( a, b ) => LookKey.compare( a.key, b.key ) );
@@ -53,7 +59,7 @@ export class StatefulValues {
 			if ( key === null || ( key.isBase() ? base !== null : looks.has( key.id() ) ) ) {
 				continue;
 			}
-			const values = BlockValues.fromAttribute( item.has( 'values' ) ? item.get( 'values' ).decoded() : null, definition, breakpoints );
+			const values = BlockValues.fromAttribute( item.has( 'values' ) ? item.get( 'values' ).decoded() : null, definitionOf( key, definition ), breakpoints );
 			if ( key.isBase() ) {
 				base = placed ? values : values.withoutPlaced();
 				continue;
@@ -72,7 +78,7 @@ export class StatefulValues {
 		if ( key.isBase() ) {
 			return this.base;
 		}
-		return this.others.find( ( look ) => look.key.equals( key ) )?.values ?? BlockValues.empty( this.definition, this.base.breakpoints() );
+		return this.others.find( ( look ) => look.key.equals( key ) )?.values ?? BlockValues.empty( definitionOf( key, this.definition ), this.base.breakpoints() );
 	}
 
 	/** Every look, the base first, in cascade order. */
@@ -97,6 +103,11 @@ export class StatefulValues {
 	/** Only the values that belong to the block's place (only the base holds any). */
 	onlyPlaced(): StatefulValues {
 		return new StatefulValues( this.definition, this.base.onlyPlaced(), [] );
+	}
+
+	/** Without any look of a part (removing the part). */
+	withoutPart( part: PartId ): StatefulValues {
+		return new StatefulValues( this.definition, this.base, this.others.filter( ( look ) => look.key.part !== part ) );
 	}
 
 	/** A copy with another base look (the others kept). */
@@ -133,7 +144,7 @@ export class StatefulValues {
 				}
 			}
 		}
-		return new ValueChain( this.definition, ...values );
+		return new ValueChain( definitionOf( key, this.definition ), ...values );
 	}
 
 	/** Mirrors StatefulValues::overlay(). */

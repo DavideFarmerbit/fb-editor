@@ -15,6 +15,8 @@ import { BorderInput } from '../Definition/Input/Border/border-input';
 import { BreakpointsField } from '../Definition/Input/Breakpoints/breakpoints-control';
 import { BreakpointsInput } from '../Definition/Input/Breakpoints/breakpoints-input';
 import { ColorInput } from '../Definition/Input/Color/color-input';
+import { ContentField } from '../Definition/Input/Content/content-control';
+import { ContentInput } from '../Definition/Input/Content/content-input';
 import { FocalPointField } from '../Definition/Input/FocalPoint/focal-point-control';
 import { FocalPointInput } from '../Definition/Input/FocalPoint/focal-point-input';
 import { GridColumnsField } from '../Definition/Input/GridColumns/grid-columns-control';
@@ -103,6 +105,9 @@ export function ControlField( props: ControlFieldProps ): ReactElement {
 	}
 	if ( input instanceof BorderInput ) {
 		return <BorderField { ...props } input={ input } />;
+	}
+	if ( input instanceof ContentInput ) {
+		return <ContentField { ...props } input={ input } />;
 	}
 	if ( input instanceof BreakpointsInput ) {
 		return <BreakpointsField { ...props } input={ input } />;

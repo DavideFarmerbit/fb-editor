@@ -62,9 +62,9 @@ export class WeakerSource {
 	) {}
 }
 
-/** "Hover", "Hover + Focus · Dark mode", "Base". */
+/** "Hover", "Hover + Focus · Dark mode", "Base" (of the block or of a part: the parts tree names the part). */
 export function lookLabel( definition: BlockDefinition, key: LookKey ): string {
-	if ( key.isBase() ) {
+	if ( key.isPlain() ) {
 		return __( 'Base', 'fb-editor' );
 	}
 	const states = key.states.map( ( state ) => definition.states.find( ( info ) => info.id === state )?.label ?? state );
@@ -80,7 +80,7 @@ function inLook( status: string, label: string ): string {
 
 /** "From base", "From Hover". */
 function fromOwn( definition: BlockDefinition, key: LookKey ): string {
-	return key.isBase()
+	return key.isPlain()
 		? __( 'From base', 'fb-editor' )
 		: /* translators: %s: another look of the same block, e.g. "Hover" */ sprintf( __( 'From %s', 'fb-editor' ), lookLabel( definition, key ) );
 }
@@ -103,7 +103,7 @@ export function fallbacksFor( definition: BlockDefinition, values: StatefulValue
 				if ( index === 0 ) {
 					status = fromOwn( definition, look.key );
 				} else {
-					status = look.key.isBase() ? source.status : inLook( source.status, lookLabel( definition, look.key ) );
+					status = look.key.isPlain() ? source.status : inLook( source.status, lookLabel( definition, look.key ) );
 				}
 				sources.push( new Fallback( look.values, status ) );
 			}

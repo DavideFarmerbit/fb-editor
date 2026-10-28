@@ -1,11 +1,13 @@
 /**
- * Mirrors Fb\Blocks\Looks\LookKey: which look of a block, the states and
- * media conditions it requires (all at once). Selectors and queries come
- * from the definition (computed by PHP).
+ * Mirrors Fb\Blocks\Looks\LookKey: which look of a block, the part it
+ * styles (null: the block), the states and media conditions it requires (all
+ * at once). Selectors and queries come from the definition (computed by PHP).
  */
 import { InvalidJson, type JsonValue } from '../../Json/json';
 import type { BlockDefinition } from '../Definition/block-definition';
 import { BlockState } from '../States/BlockState.generated';
+import { PATTERN as PART_PATTERN } from '../Parts/PartId.generated';
+import type { PartId } from '../Parts/part';
 import { MediaCondition } from './MediaCondition.generated';
 
 export { MediaCondition };
@@ -23,9 +25,19 @@ export class LookKey {
 	/** In cascade order, no duplicates. */
 	readonly conditions: readonly MediaCondition[];
 
-	constructor( states: readonly BlockState[] = [], conditions: readonly MediaCondition[] = [] ) {
+	constructor(
+		states: readonly BlockState[] = [],
+		conditions: readonly MediaCondition[] = [],
+		/** The part it styles; null: the block. */
+		public readonly part: PartId | null = null
+	) {
 		this.states = ordered( states, STATE_ORDER );
 		this.conditions = ordered( conditions, CONDITION_ORDER );
+	}
+
+	/** The same look, on a part (null: the block). */
+	onPart( part: PartId | null ): LookKey {
+		return new LookKey( this.states, this.conditions, part );
 	}
 
 	static readonly BASE = new LookKey();
@@ -36,10 +48,12 @@ export class LookKey {
 
 	/** From id(); the base for anything unreadable. */
 	static fromId( id: string ): LookKey {
-		const [ states = '', conditions = '' ] = id.split( '|' );
+		const slash = id.indexOf( '/' );
+		const part = slash === -1 ? null : id.slice( 0, slash );
+		const [ states = '', conditions = '' ] = id.slice( slash + 1 ).split( '|' );
 		const pick = < T extends string >( text: string, order: readonly T[] ): T[] =>
 			text.split( '+' ).flatMap( ( value ) => order.filter( ( candidate ) => candidate === value ) );
-		return new LookKey( pick( states, STATE_ORDER ), pick( conditions, CONDITION_ORDER ) );
+		return new LookKey( pick( states, STATE_ORDER ), pick( conditions, CONDITION_ORDER ), part !== null && PART_PATTERN.test( part ) ? ( part as PartId ) : null );
 	}
 
 	/**
@@ -51,6 +65,10 @@ export class LookKey {
 			return null;
 		}
 		try {
+			const part = json.has( 'part' ) ? json.get( 'part' ).string() : null;
+			if ( part !== null && definition.part( part as PartId ) === undefined ) {
+				return null;
+			}
 			const states = ( json.has( 'states' ) ? json.get( 'states' ).list() : [] ).map( ( value ) => value.string() );
 			const conditions = ( json.has( 'when' ) ? json.get( 'when' ).list() : [] ).map( ( value ) => value.string() );
 			if (
@@ -59,7 +77,7 @@ export class LookKey {
 			) {
 				return null;
 			}
-			return new LookKey( states as BlockState[], conditions as MediaCondition[] );
+			return new LookKey( states as BlockState[], conditions as MediaCondition[], part as PartId | null );
 		} catch ( error ) {
 			if ( error instanceof InvalidJson ) {
 				return null;
@@ -69,6 +87,11 @@ export class LookKey {
 	}
 
 	isBase(): boolean {
+		return this.part === null && this.states.length === 0 && this.conditions.length === 0;
+	}
+
+	/** No states and no conditions: the base look of the block or of its part. */
+	isPlain(): boolean {
 		return this.states.length === 0 && this.conditions.length === 0;
 	}
 
@@ -76,23 +99,30 @@ export class LookKey {
 		return this.states.length > 0;
 	}
 
-	/** Mirrors LookKey::appliesWithin(). */
+	/** Mirrors LookKey::appliesWithin(): same part, states and conditions among the other's. */
 	appliesWithin( other: LookKey ): boolean {
-		return this.states.every( ( state ) => other.states.includes( state ) ) && this.conditions.every( ( condition ) => other.conditions.includes( condition ) );
+		return this.part === other.part && this.states.every( ( state ) => other.states.includes( state ) ) && this.conditions.every( ( condition ) => other.conditions.includes( condition ) );
 	}
 
 	equals( other: LookKey ): boolean {
 		return this.id() === other.id();
 	}
 
-	/** Mirrors LookKey::id(), e.g. "hover+focus|dark"; "" for the base. */
+	/** Mirrors LookKey::id(), e.g. "hover+focus|dark", "before/hover"; "" for the base. */
 	id(): string {
 		const states = this.states.join( '+' );
-		return this.conditions.length === 0 ? states : `${ states }|${ this.conditions.join( '+' ) }`;
+		const look = this.conditions.length === 0 ? states : `${ states }|${ this.conditions.join( '+' ) }`;
+		return this.part === null ? look : `${ this.part }/${ look }`;
 	}
 
-	/** Mirrors LookKey::compare(): cascade order, weakest first. */
+	/** Mirrors LookKey::compare(): cascade order, weakest first (the block before its parts). */
 	static compare( a: LookKey, b: LookKey ): number {
+		const partA = a.part ?? '';
+		const partB = b.part ?? '';
+		if ( partA !== partB ) {
+			// PHP compares strings byte by byte (<=>): same as < on ASCII ids.
+			return partA < partB ? -1 : 1;
+		}
 		const rank = ( key: LookKey ): number[] => [
 			key.states.length,
 			...key.states.map( ( state ) => STATE_ORDER.indexOf( state ) ),
@@ -128,8 +158,9 @@ export class LookKey {
 	}
 
 	/** Mirrors LookKey::jsonSerialize(). */
-	toJSON(): { states?: readonly BlockState[]; when?: readonly MediaCondition[] } {
+	toJSON(): { part?: PartId; states?: readonly BlockState[]; when?: readonly MediaCondition[] } {
 		return {
+			...( this.part !== null ? { part: this.part } : {} ),
 			...( this.states.length > 0 ? { states: this.states } : {} ),
 			...( this.conditions.length > 0 ? { when: this.conditions } : {} ),
 		};

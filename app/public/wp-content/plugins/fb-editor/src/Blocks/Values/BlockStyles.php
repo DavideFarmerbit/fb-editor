@@ -36,7 +36,16 @@ final readonly class BlockStyles
 		$bindings = new BlockBindings();
 		foreach ( $values->looks() as $look ) {
 			$selector = $look->key->hasStates() ? $root->withPseudoClass( $look->key->pseudoClass() ) : $root;
-			$bindings = $bindings->with( $look->key, ...$this->bindings( $definition, $look->values, $selector, $values->chain( $look->key, ...$weaker ) ) );
+			$part     = null === $look->key->part ? null : $definition->part( $look->key->part );
+			$bindings = $bindings->with(
+				$look->key,
+				...$this->bindings(
+					StatefulValues::definitionOf( $look->key, $definition ),
+					$look->values,
+					null === $part ? $selector : $part->selector( $selector, $definition ),
+					$values->chain( $look->key, ...$weaker )
+				)
+			);
 		}
 
 		return $bindings;

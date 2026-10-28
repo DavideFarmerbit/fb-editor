@@ -9,6 +9,7 @@ use Fb\Blocks\Definition\ControlId;
 use Fb\Blocks\Looks\Look;
 use Fb\Blocks\Looks\LookKey;
 use Fb\Blocks\Looks\MediaCondition;
+use Fb\Blocks\Parts\PartId;
 use Fb\Blocks\States\BlockState;
 use Fb\Breakpoints\BreakpointList;
 use Fb\Json\InvalidJson;
@@ -21,10 +22,12 @@ use Fb\Json\JsonValue;
  *
  *   {"looks": [{"values": {…}}, {"states": ["hover"], "values": {…}}]}
  *
- * Dropped when parsed: looks requiring a state the block type doesn't
- * support, or an unknown condition; outside the base, controls that can't
- * vary per look (see Control::isStateful()); empty looks; repeated looks
- * (the first one counts).
+ * A part's looks hold values of the part's own definition (see Part).
+ *
+ * Dropped when parsed: looks of a part the block type doesn't have, or
+ * requiring a state it doesn't support, or an unknown condition; outside
+ * the base, controls that can't vary per look (see Control::isStateful());
+ * empty looks; repeated looks (the first one counts).
  */
 final readonly class StatefulValues implements \JsonSerializable
 {
@@ -68,7 +71,7 @@ final readonly class StatefulValues implements \JsonSerializable
 			if ( null === $key || ( $key->isBase() ? null !== $base : isset( $looks[ $key->id() ] ) ) ) {
 				continue;
 			}
-			$values = BlockValues::fromAttribute( $item->has( 'values' ) ? $item->get( 'values' )->decoded() : null, $definition, $breakpoints );
+			$values = BlockValues::fromAttribute( $item->has( 'values' ) ? $item->get( 'values' )->decoded() : null, self::definitionOf( $key, $definition ), $breakpoints );
 			if ( $key->isBase() ) {
 				$base = $placed ? $values : $values->withoutPlaced();
 				continue;
@@ -93,6 +96,14 @@ final readonly class StatefulValues implements \JsonSerializable
 		}
 
 		try {
+			$part = null;
+			if ( $item->has( 'part' ) ) {
+				$part = PartId::tryFrom( $item->get( 'part' )->string() );
+				if ( null === $part || null === $definition->part( $part ) ) {
+					return null;
+				}
+			}
+
 			$states = [];
 			foreach ( $item->has( 'states' ) ? $item->get( 'states' )->list() : [] as $value ) {
 				$state = BlockState::tryFrom( $value->string() );
@@ -114,7 +125,13 @@ final readonly class StatefulValues implements \JsonSerializable
 			return null;
 		}
 
-		return new LookKey( $states, $conditions );
+		return new LookKey( $states, $conditions, $part );
+	}
+
+	/** What a look's values are parsed and styled with: the block's definition, or its part's. */
+	public static function definitionOf( LookKey $key, BlockDefinition $definition ): BlockDefinition
+	{
+		return null === $key->part ? $definition : ( $definition->partDefinition( $key->part ) ?? $definition );
 	}
 
 	/** One look's values; empty for looks it doesn't set. */
@@ -129,7 +146,7 @@ final readonly class StatefulValues implements \JsonSerializable
 			}
 		}
 
-		return BlockValues::empty( $this->definition, $this->base->breakpoints() );
+		return BlockValues::empty( self::definitionOf( $key, $this->definition ), $this->base->breakpoints() );
 	}
 
 	/**
@@ -182,7 +199,7 @@ final readonly class StatefulValues implements \JsonSerializable
 			}
 		}
 
-		return new ValueChain( $this->definition, ...$values );
+		return new ValueChain( self::definitionOf( $key, $this->definition ), ...$values );
 	}
 
 	/**

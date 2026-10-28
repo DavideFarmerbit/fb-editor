@@ -7,9 +7,10 @@ import { CssLayer } from '../Css/CssLayer.generated';
 import { InvalidJson } from '../Json/json';
 import { CssProperty } from './CssProperty.generated';
 import { REVERT } from './DeclarationSet.generated';
-import { CLASS_PATTERN, PSEUDO_CLASS_PATTERN } from './Selector.generated';
+import { PseudoElement } from './PseudoElement.generated';
+import { CLASS_PATTERN, PSEUDO_CLASS_PATTERN, TAG_PATTERN } from './Selector.generated';
 
-export { CssLayer, CssProperty };
+export { CssLayer, CssProperty, PseudoElement };
 
 export function wrapInLayer( layer: CssLayer, css: string ): string {
 	return `@layer ${ layer }{${ css }}`;
@@ -72,8 +73,15 @@ export class Selector {
 		/** Built only from validated parts. */
 		private readonly inner: string,
 		/** Still just the root class (+ pseudo-classes): no child yet. */
-		private readonly isRoot = true
+		private readonly isRoot = true,
+		/** Generated box drawn on the selected element. */
+		private readonly pseudoElement: PseudoElement | null = null
 	) {}
+
+	/** A generated box of the selected element: goes after :where(), specificity still zero. */
+	withPseudoElement( pseudoElement: PseudoElement ): Selector {
+		return new Selector( this.inner, this.isRoot, pseudoElement );
+	}
 
 	static forClass( className: string ): Selector {
 		return new Selector( `.${ Selector.valid( className ) }` );
@@ -94,8 +102,25 @@ export class Selector {
 		return new Selector( `${ this.inner }>.${ Selector.valid( className ) }`, false );
 	}
 
+	/** A direct child of this HTML tag. */
+	childTag( tag: string ): Selector {
+		return new Selector( `${ this.inner }>${ Selector.validTag( tag ) }`, false );
+	}
+
+	/** Any descendant of this HTML tag. */
+	descendantTag( tag: string ): Selector {
+		return new Selector( `${ this.inner } ${ Selector.validTag( tag ) }`, false );
+	}
+
 	toString(): string {
-		return `:where(${ this.inner })`;
+		return `:where(${ this.inner })` + ( this.pseudoElement === null ? '' : `::${ this.pseudoElement }` );
+	}
+
+	private static validTag( tag: string ): string {
+		if ( ! TAG_PATTERN.test( tag ) ) {
+			throw new InvalidJson( `Invalid tag name "${ tag }".` );
+		}
+		return tag;
 	}
 
 	private static valid( className: string ): string {

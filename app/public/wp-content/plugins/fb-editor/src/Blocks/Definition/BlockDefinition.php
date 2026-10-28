@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Fb\Blocks\Definition;
 
 use Fb\Blocks\Looks\MediaCondition;
+use Fb\Blocks\Parts\Part;
+use Fb\Blocks\Parts\PartId;
 use Fb\Blocks\States\BlockState;
 
 /**
@@ -26,9 +28,16 @@ final readonly class BlockDefinition implements \JsonSerializable
 	/** @var list<BlockState> In cascade order. */
 	public array $states;
 
+	/** @var list<Part> */
+	public array $parts;
+
+	/** @var array<string, BlockDefinition> Each part's own definition, keyed by part id. Private storage. */
+	private array $partDefinitions;
+
 	/**
 	 * @param list<ElementId|Element> $elements Plain ids: same class in the editor.
 	 * @param list<BlockState>        $states   States it can be styled for.
+	 * @param list<Part>              $parts    Parts styled from its sidebar (see Part).
 	 */
 	public function __construct(
 		public BlockName $name,
@@ -37,12 +46,25 @@ final readonly class BlockDefinition implements \JsonSerializable
 		public Layout $layout,
 		array $elements = [],
 		array $states = [],
+		array $parts = [],
 	) {
 		$this->elements = array_map(
 			static fn ( ElementId|Element $element ): Element => $element instanceof Element ? $element : new Element( $element ),
 			$elements
 		);
 		$this->states   = BlockState::ordered( $states );
+		$this->parts    = $parts;
+		$definitions    = [];
+		foreach ( $parts as $part ) {
+			if ( isset( $definitions[ $part->id->value ] ) ) {
+				throw new \InvalidArgumentException( "{$name}: part \"{$part->id}\" declared twice." );
+			}
+			if ( null !== $part->element && ! $this->hasElement( $part->element ) ) {
+				throw new \InvalidArgumentException( "{$name}: part \"{$part->id}\" targets undeclared element \"{$part->element}\"." );
+			}
+			$definitions[ $part->id->value ] = $part->definition( $this );
+		}
+		$this->partDefinitions = $definitions;
 		$this->validate();
 	}
 
@@ -52,7 +74,30 @@ final readonly class BlockDefinition implements \JsonSerializable
 	 */
 	public function withControls( ControlSet $controls, Panel $panel ): self
 	{
-		return new self( $this->name, $this->title, $this->controls->with( $controls ), $this->layout->with( $panel ), $this->elements, $this->states );
+		return new self( $this->name, $this->title, $this->controls->with( $controls ), $this->layout->with( $panel ), $this->elements, $this->states, $this->parts );
+	}
+
+	/** A copy with more parts (e.g. the ::before / ::after every block gets). */
+	public function withParts( Part ...$parts ): self
+	{
+		return new self( $this->name, $this->title, $this->controls, $this->layout, $this->elements, $this->states, [ ...$this->parts, ...array_values( $parts ) ] );
+	}
+
+	public function part( PartId $id ): ?Part
+	{
+		foreach ( $this->parts as $part ) {
+			if ( $part->id->equals( $id ) ) {
+				return $part;
+			}
+		}
+
+		return null;
+	}
+
+	/** What a part of this block is styled with (see Part::definition()). */
+	public function partDefinition( PartId $id ): ?self
+	{
+		return $this->partDefinitions[ $id->value ] ?? null;
 	}
 
 	public function supports( BlockState $state ): bool
@@ -120,7 +165,7 @@ final readonly class BlockDefinition implements \JsonSerializable
 	 *
 	 * Class names are computed here, so the editor never re-derives them.
 	 *
-	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string, editorPseudoClass: string, previewClass: string}>, conditions: list<array{id: MediaCondition, label: string, mediaQuery: string}>}
+	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string, editorPseudoClass: string, previewClass: string}>, parts: list<array<string, mixed>>, conditions: list<array{id: MediaCondition, label: string, mediaQuery: string}>}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -148,6 +193,10 @@ final readonly class BlockDefinition implements \JsonSerializable
 					'previewClass'      => $state->previewClass(),
 				],
 				$this->states
+			),
+			'parts'      => array_map(
+				fn ( Part $part ): array => [ ...$part->jsonSerialize(), 'definition' => $this->partDefinitions[ $part->id->value ] ?? null ],
+				$this->parts
 			),
 			// Every block can have looks for any condition: listed here so the
 			// editor gets labels and queries from PHP.

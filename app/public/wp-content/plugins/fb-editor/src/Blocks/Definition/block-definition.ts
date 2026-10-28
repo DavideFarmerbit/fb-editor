@@ -5,6 +5,7 @@
  */
 import { ControlKind } from './ControlKind.generated';
 import { MediaCondition } from '../Looks/MediaCondition.generated';
+import { Part, type PartId } from '../Parts/part';
 import { InvalidJson, type JsonValue } from '../../Json/json';
 import { outputFromJson, type StyleOutput } from '../../Styles/Output/outputs';
 import { KeywordValue } from '../../Values/keyword';
@@ -116,7 +117,9 @@ export class BlockDefinition implements ConditionLabels {
 		/** In cascade order. */
 		public readonly states: readonly StateInfo[],
 		/** Every condition, in cascade order. */
-		public readonly conditions: readonly ConditionInfo[]
+		public readonly conditions: readonly ConditionInfo[],
+		/** Parts styled from its sidebar (see Part). */
+		public readonly parts: readonly Part[] = []
 	) {
 		for ( const control of controls ) {
 			for ( const reference of control.visibleWhen?.references() ?? [] ) {
@@ -125,6 +128,10 @@ export class BlockDefinition implements ConditionLabels {
 				}
 			}
 		}
+	}
+
+	part( id: PartId ): Part | undefined {
+		return this.parts.find( ( part ) => part.id === id );
 	}
 
 	control( id: ControlId ): Control | undefined {
@@ -268,6 +275,7 @@ export function blockDefinitionFromJson( json: JsonValue ): BlockDefinition {
 			.map(
 				( condition ) =>
 					new ConditionInfo( condition.get( 'id' ).oneOf( MediaCondition ), condition.get( 'label' ).string(), condition.get( 'mediaQuery' ).string() )
-			)
+			),
+		json.has( 'parts' ) ? json.get( 'parts' ).list().map( ( part ) => Part.fromJson( part, blockDefinitionFromJson ) ) : []
 	);
 }

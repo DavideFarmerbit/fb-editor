@@ -17,6 +17,9 @@ use Fb\TypeScript\ExportToTypeScript;
 final readonly class Selector implements \Stringable
 {
 	#[ExportToTypeScript( regExp: true )]
+	public const string TAG_PATTERN = '^[a-z][a-z0-9]*$';
+
+	#[ExportToTypeScript( regExp: true )]
 	public const string CLASS_PATTERN = '^-?[_a-zA-Z][_a-zA-Z0-9-]*$';
 
 	/**
@@ -69,19 +72,30 @@ final readonly class Selector implements \Stringable
 		return new self( "{$this->inner}>." . self::validClass( $className ), false );
 	}
 
+	/** A direct child of this HTML tag. */
+	public function childTag( string $tag ): self
+	{
+		return new self( "{$this->inner}>" . self::validTag( $tag ), false );
+	}
+
 	/** Any descendant of this HTML tag. */
 	public function descendantTag( string $tag ): self
 	{
-		if ( 1 !== preg_match( '/^[a-z][a-z0-9]*$/', $tag ) ) {
-			throw new \InvalidArgumentException( "Invalid tag name \"{$tag}\"." );
-		}
-
-		return new self( "{$this->inner} {$tag}", false );
+		return new self( "{$this->inner} " . self::validTag( $tag ), false );
 	}
 
 	public function __toString(): string
 	{
 		return ":where({$this->inner})" . ( null === $this->pseudoElement ? '' : '::' . $this->pseudoElement->value );
+	}
+
+	private static function validTag( string $tag ): string
+	{
+		if ( 1 !== preg_match( '/' . self::TAG_PATTERN . '/', $tag ) ) {
+			throw new \InvalidArgumentException( "Invalid tag name \"{$tag}\"." );
+		}
+
+		return $tag;
 	}
 
 	private static function validClass( string $className ): string

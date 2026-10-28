@@ -7,7 +7,7 @@ import { BoxValue, SIDES } from '../../Values/box';
 import { KeywordValue } from '../../Values/keyword';
 import { NumberValue } from '../../Values/number';
 import { BorderBox } from '../../Values/border';
-import { SvgValue } from '../../Values/content';
+import { SvgValue, TextValue } from '../../Values/content';
 import { sanitizeSvg } from '../../Blocks/Definition/Input/Svg/svg';
 import type { Presets } from '../../Presets/presets';
 import { isCssValue, type ResponsiveValue } from '../../Values/value';
@@ -124,6 +124,21 @@ export class SpanOutput implements StyleOutput {
 	}
 }
 
+/** Mirrors ContentOutput: text as a CSS string (`content: "→"`), \ " and < escaped. */
+export class ContentOutput implements StyleOutput {
+	properties(): CssProperty[] {
+		return [ CssProperty.Content ];
+	}
+
+	declarations( value: ResponsiveValue | null ): DeclarationSet {
+		if ( ! ( value instanceof TextValue ) ) {
+			return DeclarationSet.empty();
+		}
+		const escaped = value.text.replace( /[\\"<]/g, ( char ) => ( char === '<' ? '\\3C ' : `\\${ char }` ) );
+		return DeclarationSet.empty().with( CssProperty.Content, `"${ escaped }"` );
+	}
+}
+
 /** Mirrors PHP's rawurlencode(): encodeURIComponent also encodes !'()*. */
 function rawUrlEncode( text: string ): string {
 	return encodeURIComponent( text ).replace( /[!'()*]/g, ( char ) => `%${ char.charCodeAt( 0 ).toString( 16 ).toUpperCase() }` );
@@ -221,6 +236,8 @@ export function outputFromJson( json: JsonValue ): StyleOutput {
 				new KeywordValue( json.get( 'on' ).string() ),
 				new KeywordValue( json.get( 'off' ).string() )
 			);
+		case 'content':
+			return new ContentOutput();
 		case 'span':
 			return new SpanOutput( json.get( 'property' ).oneOf( CssProperty ) );
 		case 'mask-icon':

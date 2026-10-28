@@ -10,6 +10,7 @@ use Fb\Blocks\Definition\ElementId;
 use Fb\Blocks\Definition\Input\AspectRatio\AspectRatioInput;
 use Fb\Blocks\Definition\Input\Border\BorderInput;
 use Fb\Blocks\Definition\Input\Color\ColorInput;
+use Fb\Blocks\Definition\Input\Content\ContentInput;
 use Fb\Blocks\Definition\Input\Length\LengthInput;
 use Fb\Blocks\Definition\Input\Number\NumberInput;
 use Fb\Blocks\Definition\Input\Preset\PresetInput;
@@ -17,6 +18,7 @@ use Fb\Blocks\Definition\Input\Select\SelectInput;
 use Fb\Blocks\Definition\Input\Spacing\SpacingInput;
 use Fb\Blocks\Options\FontStyle;
 use Fb\Blocks\Options\FontWeight;
+use Fb\Blocks\Options\ObjectFit;
 use Fb\Blocks\Options\TextAlign;
 use Fb\Blocks\Options\TextDecoration;
 use Fb\Blocks\Options\TextTransform;
@@ -26,6 +28,7 @@ use Fb\Styles\Output\AxisOutput;
 use Fb\Styles\Output\BorderOutput;
 use Fb\Styles\Output\BoxOutput;
 use Fb\Styles\Output\BoxProperty;
+use Fb\Styles\Output\ContentOutput;
 use Fb\Styles\Output\PropertyOutput;
 
 /**
@@ -60,6 +63,8 @@ final class CommonControls
 	public const string HEIGHT         = 'height';
 	public const string MIN_HEIGHT     = 'minHeight';
 	public const string MAX_HEIGHT     = 'maxHeight';
+	public const string OBJECT_FIT     = 'objectFit';
+	public const string CONTENT        = 'content';
 
 	/** Line heights beyond this are typos, not designs. */
 	private const float MAX_LINE_HEIGHT = 10.0;
@@ -191,6 +196,18 @@ final class CommonControls
 	public static function gradient( ?ElementId $element = null ): Control
 	{
 		return new Control( new ControlId( self::GRADIENT ), __( 'Gradient', 'fb-editor' ), new PresetInput( PresetKind::Gradient ), new PropertyOutput( CssProperty::BackgroundImage ), $element );
+	}
+
+	/** How an image or video fills its box. */
+	public static function objectFit( ?ElementId $element = null ): Control
+	{
+		return new Control( new ControlId( self::OBJECT_FIT ), __( 'Fit', 'fb-editor' ), new SelectInput( ObjectFit::class ), new PropertyOutput( CssProperty::ObjectFit ), $element );
+	}
+
+	/** What a ::before / ::after or marker shows; listed from the start (nothing draws without it). */
+	public static function content( ?ElementId $element = null ): Control
+	{
+		return new Control( new ControlId( self::CONTENT ), __( 'Content', 'fb-editor' ), new ContentInput(), new ContentOutput(), $element, alwaysShown: true );
 	}
 
 	public static function aspectRatio( ?ElementId $element = null ): Control

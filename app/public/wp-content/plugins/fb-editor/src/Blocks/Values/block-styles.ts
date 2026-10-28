@@ -7,7 +7,7 @@ import type { Selector } from '../../Styles/css';
 import { StyleBinding, Visibility } from '../../Styles/compiler';
 import { BlockBindings } from './block-bindings';
 import type { BlockValues } from './block-values';
-import type { StatefulValues } from './stateful-values';
+import { definitionOf, type StatefulValues } from './stateful-values';
 import type { ValueChain } from './value-chain';
 
 export class BlockStyles {
@@ -25,7 +25,17 @@ export class BlockStyles {
 		let bindings = new BlockBindings();
 		for ( const look of values.looks() ) {
 			const selector = look.key.hasStates() ? root.withPseudoClass( look.key.pseudoClass( definition, this.editor ) ) : root;
-			bindings = bindings.with( look.key, look.key.mediaQuery( definition ), this.bindings( definition, look.values, selector, values.chain( look.key, ...weaker ) ) );
+			const part = look.key.part === null ? undefined : definition.part( look.key.part );
+			bindings = bindings.with(
+				look.key,
+				look.key.mediaQuery( definition ),
+				this.bindings(
+					definitionOf( look.key, definition ),
+					look.values,
+					part === undefined ? selector : part.selector( selector, definition, this.editor ),
+					values.chain( look.key, ...weaker )
+				)
+			);
 		}
 		return bindings;
 	}

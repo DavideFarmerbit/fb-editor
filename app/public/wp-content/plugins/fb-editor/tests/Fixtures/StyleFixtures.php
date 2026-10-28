@@ -244,6 +244,31 @@ final class StyleFixtures
 					[ 'when' => [ 'dark' ], 'values' => [ 'display' => [ 'desktop' => 'grid' ] ] ],
 				]
 			),
+			new StyleCase(
+				'parts: pseudo-elements, an element, states and conditions on parts',
+				$container,
+				[ 'display' => [ 'desktop' => 'flex' ] ],
+				[],
+				[],
+				[],
+				null,
+				[
+					[
+						'part'   => 'before',
+						'values' => [
+							'content'  => [ 'desktop' => 'Say "hi" \\ </style><b>', 'mobile' => '' ],
+							'width'    => [ 'desktop' => self::px( 40 ) ],
+							'position' => [ 'desktop' => 'absolute' ],
+							'inset'    => [ 'desktop' => [ 'top' => self::px( 0 ) ] ],
+							'display'  => [ 'desktop' => 'block', 'tablet' => 'grid' ],     // grid: not a ::before option, dropped
+						],
+					],
+					[ 'part' => 'before', 'states' => [ 'hover' ], 'values' => [ 'width' => [ 'desktop' => self::px( 80 ) ] ] ],
+					[ 'part' => 'after', 'when' => [ 'dark' ], 'values' => [ 'content' => [ 'desktop' => "\u{2192}\x07" ] ] ],
+					[ 'part' => 'media', 'states' => [ 'hover' ], 'values' => [ 'objectFit' => [ 'desktop' => 'contain' ], 'opacity' => [ 'tablet' => 0.5 ] ] ],
+					[ 'part' => 'nope', 'values' => [ 'width' => [ 'desktop' => self::px( 1 ) ] ] ],   // unknown part: dropped
+				]
+			),
 			new StyleCase( 'grid columns, numbers and spans', $container, [
 				'display'        => [ 'desktop' => 'grid', 'mobile' => 'flex' ],
 				'columns'        => [

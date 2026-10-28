@@ -25,6 +25,7 @@ import { fromDefault } from './Inspector/control-reading';
 import { WeakerSource } from './Inspector/fallbacks';
 import { ParentContext } from './Inspector/parent-context';
 import { StatefulInspector } from './Inspector/stateful-inspector';
+import { PartOutline } from './Parts/part-outline';
 import { InstanceStyles } from './Rendering/instance-styles';
 import { BlockAttribute } from './Values/block-attribute';
 import type { StatefulValues } from './Values/stateful-values';
@@ -216,6 +217,7 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 			<DefaultsStyles definition={ definition } defaults={ defaults.values } root={ root } />
 			{ variant !== null && <VariantStyles definition={ definition } variant={ variant } defaults={ defaults.values } root={ root } /> }
 			<InstanceStyles definition={ definition } values={ values } weaker={ state.weaker() } instanceClass={ state.instanceClass } root={ root } />
+			<PartOutline definition={ definition } clientId={ clientId } instanceClass={ state.instanceClass } root={ root } />
 		</>
 	);
 }

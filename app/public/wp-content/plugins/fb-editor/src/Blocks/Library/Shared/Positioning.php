@@ -36,27 +36,52 @@ final class Positioning
 
 	public static function extend( BlockDefinition $definition ): BlockDefinition
 	{
+		return $definition->withControls( new ControlSet( ...self::controls() ), self::panel() );
+	}
+
+	/**
+	 * Position, offsets, stacking order, opacity (also offered on parts).
+	 *
+	 * @return list<Control>
+	 */
+	public static function controls(): array
+	{
 		$position = new ControlId( self::POSITION );
 
-		return $definition->withControls(
-			new ControlSet(
-				new Control( $position, __( 'Position', 'fb-editor' ), new SelectInput( Position::class ), new PropertyOutput( CssProperty::Position ) ),
-				new Control(
-					new ControlId( self::INSET ),
-					__( 'Offsets', 'fb-editor' ),
-					SpacingInput::inset(),
-					new BoxOutput( BoxProperty::Inset ),
-					visibleWhen: new In( $position, Position::Relative, Position::Absolute, Position::Sticky, Position::Fixed )
-				),
-				new Control(
-					new ControlId( self::Z_INDEX ),
-					__( 'Stacking order', 'fb-editor' ),
-					new NumberInput( min: -self::MAX_Z_INDEX, max: self::MAX_Z_INDEX, step: 1.0, integer: true ),
-					new PropertyOutput( CssProperty::ZIndex )
-				),
-				new Control( new ControlId( self::OPACITY ), __( 'Opacity', 'fb-editor' ), new NumberInput( min: 0.0, max: 1.0, step: 0.05 ), new PropertyOutput( CssProperty::Opacity ) ),
+		return [
+			new Control( $position, __( 'Position', 'fb-editor' ), new SelectInput( Position::class ), new PropertyOutput( CssProperty::Position ) ),
+			new Control(
+				new ControlId( self::INSET ),
+				__( 'Offsets', 'fb-editor' ),
+				SpacingInput::inset(),
+				new BoxOutput( BoxProperty::Inset ),
+				visibleWhen: new In( $position, Position::Relative, Position::Absolute, Position::Sticky, Position::Fixed )
 			),
-			new Panel( __( 'Position', 'fb-editor' ), $position, new ControlId( self::INSET ), new ControlId( self::Z_INDEX ), new ControlId( self::OPACITY ) )
-		);
+			new Control(
+				new ControlId( self::Z_INDEX ),
+				__( 'Stacking order', 'fb-editor' ),
+				new NumberInput( min: -self::MAX_Z_INDEX, max: self::MAX_Z_INDEX, step: 1.0, integer: true ),
+				new PropertyOutput( CssProperty::ZIndex )
+			),
+			self::opacity(),
+		];
+	}
+
+	public static function opacity(): Control
+	{
+		return new Control( new ControlId( self::OPACITY ), __( 'Opacity', 'fb-editor' ), new NumberInput( min: 0.0, max: 1.0, step: 0.05 ), new PropertyOutput( CssProperty::Opacity ) );
+	}
+
+	/**
+	 * @return list<ControlId>
+	 */
+	public static function ids(): array
+	{
+		return [ new ControlId( self::POSITION ), new ControlId( self::INSET ), new ControlId( self::Z_INDEX ), new ControlId( self::OPACITY ) ];
+	}
+
+	public static function panel(): Panel
+	{
+		return new Panel( __( 'Position', 'fb-editor' ), ...self::ids() );
 	}
 }

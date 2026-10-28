@@ -16,10 +16,11 @@ import { store } from '../../Editor/store';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
 import { LookKey } from '../Looks/look-key';
 import { BlockValues } from '../Values/block-values';
-import type { StatefulValues } from '../Values/stateful-values';
+import { definitionOf, type StatefulValues } from '../Values/stateful-values';
 import { fallbacksFor, lookLabel, type WeakerSource } from './fallbacks';
 import { Inspector } from './inspector';
 import type { ParentContext } from './parent-context';
+import { PartsTree } from './parts-tree';
 import { StateBar, StateBarItem } from './state-bar';
 
 interface StatefulInspectorProps {
@@ -47,26 +48,59 @@ interface StatefulInspectorProps {
 	readonly makeDefault: ( ( control: Control, look: LookKey ) => void ) | null;
 }
 
+/**
+ * Parts added this session are remembered with the added controls (same
+ * store, same lifetime), under the memory key plus this suffix.
+ */
+const PARTS_MEMORY = '#parts';
+
 export function StatefulInspector( props: StatefulInspectorProps ): ReactElement {
 	const { definition, values, weaker, listFallbackControls, allowPlaced, filterable, parent, memoryKey, onChange, makeDefault } = props;
 	const inspectedId = useSelect( ( select ) => select( store ).getInspectedLook( memoryKey ), [ memoryKey ] );
 	const chosenView = useSelect( ( select ) => select( store ).getSidebarView(), [] );
+	const addedParts = useSelect( ( select ) => select( store ).getAddedControls( `${ memoryKey }${ PARTS_MEMORY }` ), [ memoryKey ] );
 	const view = filterable ? chosenView : null;
-	const { inspectLook } = useDispatch( store );
+	const { inspectLook, addControl, forgetControl } = useDispatch( store );
 
 	// A look the block can't have (anymore) is the base; so is everything
-	// in the Settings view.
+	// in the Settings view (parts are styles: hidden there too).
 	const statesApply = view !== 'settings';
 	const inspected = LookKey.fromId( inspectedId );
-	const key = statesApply && inspected.states.every( ( state ) => definition.states.some( ( info ) => info.id === state ) ) ? inspected : LookKey.BASE;
+	const valid =
+		inspected.states.every( ( state ) => definition.states.some( ( info ) => info.id === state ) ) &&
+		( inspected.part === null || definition.part( inspected.part ) !== undefined );
+	const key = statesApply && valid ? inspected : LookKey.BASE;
+	const edited = definitionOf( key, definition );
 	const firstWeaker = weaker[ 0 ]?.values.look( key ) ?? null;
 
-	const items = [ LookKey.BASE, ...definition.states.map( ( info ) => LookKey.ofState( info.id ) ) ].map(
-		( candidate ) => new StateBarItem( candidate.id(), lookLabel( definition, candidate ), ! values.look( candidate ).isEmpty() )
-	);
+	const items = [ LookKey.BASE, ...definition.states.map( ( info ) => LookKey.ofState( info.id ) ) ].map( ( candidate ) => {
+		const onPart = candidate.onPart( key.part );
+		return new StateBarItem( onPart.id(), lookLabel( definition, onPart ), ! values.look( onPart ).isEmpty() );
+	} );
 
 	return (
 		<>
+			{ statesApply && definition.parts.length > 0 && (
+				<PartsTree
+					definition={ definition }
+					values={ values }
+					current={ key.part }
+					added={ addedParts }
+					// The state stays: hovering the block styles its parts too.
+					onSelect={ ( part ) => inspectLook( memoryKey, key.onPart( part ) ) }
+					onAdd={ ( part ) => {
+						addControl( `${ memoryKey }${ PARTS_MEMORY }`, part.id );
+						inspectLook( memoryKey, key.onPart( part.id ) );
+					} }
+					onRemove={ ( part ) => {
+						forgetControl( `${ memoryKey }${ PARTS_MEMORY }`, part.id );
+						if ( key.part === part.id ) {
+							inspectLook( memoryKey, key.onPart( null ) );
+						}
+						onChange( values.withoutPart( part.id ) );
+					} }
+				/>
+			) }
 			{ definition.states.length > 0 && (
 				<StateBar
 					items={ items }
@@ -78,15 +112,15 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 			<Inspector
 				// A fresh panel per look: open panels and edit state don't leak.
 				key={ key.id() }
-				definition={ definition }
+				definition={ edited }
 				values={ values.look( key ) }
 				fallbacks={ fallbacksFor( definition, values, weaker, key ) }
-				fallbackLook={ firstWeaker ?? BlockValues.empty( definition, values.base.breakpoints() ) }
+				fallbackLook={ firstWeaker ?? BlockValues.empty( edited, values.base.breakpoints() ) }
 				listFallbackControls={ listFallbackControls }
 				statefulOnly={ ! key.isBase() }
 				view={ view }
 				filterable={ filterable }
-				allowPlaced={ allowPlaced }
+				allowPlaced={ allowPlaced && key.part === null }
 				parent={ parent }
 				memoryKey={ key.isBase() ? memoryKey : `${ memoryKey }#${ key.id() }` }
 				onChange={ ( look ) => onChange( values.withLook( key, look ) ) }

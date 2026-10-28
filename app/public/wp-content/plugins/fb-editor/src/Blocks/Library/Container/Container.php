@@ -37,6 +37,7 @@ use Fb\Blocks\Options\Justify;
 use Fb\Blocks\Options\JustifyItems;
 use Fb\Blocks\Options\ObjectFit;
 use Fb\Blocks\Rendering\RenderContext;
+use Fb\Blocks\Parts\Part;
 use Fb\Blocks\States\BlockState;
 use Fb\Styles\CssProperty;
 use Fb\Styles\DeclarationSet;
@@ -195,6 +196,7 @@ final class Container extends Block
 			),
 			[ $media, $overlay ],
 			states: [ BlockState::Hover, BlockState::Focus ],
+			parts: [ Part::element( 'media', __( 'Image or video', 'fb-editor' ), $media ) ],
 		);
 	}
 
