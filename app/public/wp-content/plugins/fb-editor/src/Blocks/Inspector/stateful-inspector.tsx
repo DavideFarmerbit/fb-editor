@@ -14,11 +14,10 @@ import type { ReactElement } from 'react';
 
 import { store } from '../../Editor/store';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
-import { LookKey, type MediaCondition } from '../Looks/look-key';
+import { LookKey } from '../Looks/look-key';
 import type { BlockState } from '../States/BlockState.generated';
 import { BlockValues } from '../Values/block-values';
 import { definitionOf, type StatefulValues } from '../Values/stateful-values';
-import { ConditionPicker } from './condition-picker';
 import { fallbacksFor, type WeakerSource } from './fallbacks';
 import { Inspector } from './inspector';
 import type { ParentContext } from './parent-context';
@@ -59,19 +58,23 @@ const PARTS_MEMORY = '#parts';
 export function StatefulInspector( props: StatefulInspectorProps ): ReactElement {
 	const { definition, values, weaker, listFallbackControls, allowPlaced, filterable, parent, memoryKey, onChange, makeDefault } = props;
 	const inspectedId = useSelect( ( select ) => select( store ).getInspectedLook( memoryKey ), [ memoryKey ] );
+	// Like the breakpoint, the media conditions are the page's (View menu):
+	// the edited look requires the ones the canvas is previewed with.
+	const conditions = useSelect( ( select ) => select( store ).getPreviewConditions(), [] );
 	const chosenView = useSelect( ( select ) => select( store ).getSidebarView(), [] );
 	const addedParts = useSelect( ( select ) => select( store ).getAddedControls( `${ memoryKey }${ PARTS_MEMORY }` ), [ memoryKey ] );
 	const view = filterable ? chosenView : null;
 	const { inspectLook, addControl, forgetControl } = useDispatch( store );
 
-	// A look the block can't have (anymore) is the base; so is everything
-	// in the Settings view (parts are styles: hidden there too).
+	// The block remembers its state(s) and part; a look the block can't have
+	// (anymore) is the base, and so is everything in the Settings view
+	// (parts are styles: hidden there too).
 	const statesApply = view !== 'settings';
 	const inspected = LookKey.fromId( inspectedId );
 	const valid =
 		inspected.states.every( ( state ) => definition.states.some( ( info ) => info.id === state ) ) &&
 		( inspected.part === null || definition.part( inspected.part ) !== undefined );
-	const key = statesApply && valid ? inspected : LookKey.BASE;
+	const key = statesApply ? new LookKey( valid ? inspected.states : [], conditions, valid ? inspected.part : null ) : LookKey.BASE;
 	const edited = definitionOf( key, definition );
 	const firstWeaker = weaker[ 0 ]?.values.look( key ) ?? null;
 
@@ -91,10 +94,8 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 		if ( additive && state !== undefined ) {
 			states = key.states.includes( state ) ? key.states.filter( ( candidate ) => candidate !== state ) : [ ...key.states, state ];
 		}
-		inspectLook( memoryKey, new LookKey( states, key.conditions, key.part ) );
+		inspectLook( memoryKey, new LookKey( states, [], key.part ) );
 	};
-	const conditionIsSet = ( condition: MediaCondition ): boolean =>
-		values.looks().some( ( look ) => look.key.part === key.part && look.key.conditions.includes( condition ) );
 
 	return (
 		<>
@@ -105,15 +106,15 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 					current={ key.part }
 					added={ addedParts }
 					// The state stays: hovering the block styles its parts too.
-					onSelect={ ( part ) => inspectLook( memoryKey, key.onPart( part ) ) }
+					onSelect={ ( part ) => inspectLook( memoryKey, new LookKey( key.states, [], part ) ) }
 					onAdd={ ( part ) => {
 						addControl( `${ memoryKey }${ PARTS_MEMORY }`, part.id );
-						inspectLook( memoryKey, key.onPart( part.id ) );
+						inspectLook( memoryKey, new LookKey( key.states, [], part.id ) );
 					} }
 					onRemove={ ( part ) => {
 						forgetControl( `${ memoryKey }${ PARTS_MEMORY }`, part.id );
 						if ( key.part === part.id ) {
-							inspectLook( memoryKey, key.onPart( null ) );
+							inspectLook( memoryKey, new LookKey( key.states ) );
 						}
 						onChange( values.withoutPart( part.id ) );
 					} }
@@ -123,15 +124,6 @@ export function StatefulInspector( props: StatefulInspectorProps ): ReactElement
 				items={ items }
 				disabledReason={ statesApply ? null : __( 'Settings are the same in every state', 'fb-editor' ) }
 				onSelect={ selectState }
-				trailing={
-					<ConditionPicker
-						definition={ definition }
-						current={ key.conditions }
-						isSet={ conditionIsSet }
-						disabled={ ! statesApply }
-						onChange={ ( conditions ) => inspectLook( memoryKey, new LookKey( key.states, conditions, key.part ) ) }
-					/>
-				}
 			/>
 			<Inspector
 				// A fresh panel per look: open panels and edit state don't leak.

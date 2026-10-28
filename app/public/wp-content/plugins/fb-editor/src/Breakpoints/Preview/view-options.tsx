@@ -4,18 +4,19 @@
  * Preview in new tab. Core's device choices (Desktop / Tablet / Mobile)
  * would resize the canvas against the breakpoint switcher.
  *
- * Plus "Preview as": the media conditions the canvas page is shown with
- * (dark mode, touch…), whatever the editing device is: looks requiring them
- * apply in the canvas only while they're checked. A device can't have both
- * of a pair (can hover / touch, portrait / landscape): checking one
- * unchecks the other.
+ * Plus "Preview as": the media conditions the page is shown and edited with
+ * (dark mode, touch…), like the breakpoint: looks requiring them apply in
+ * the canvas only while they're checked, whatever the editing device is,
+ * and the block sidebars edit the looks for exactly these conditions. A
+ * device can't have both of a pair (can hover / touch, portrait /
+ * landscape): checking one unchecks the other.
  */
 import { DropdownMenu, Fill, Icon, MenuGroup, MenuItem } from '@wordpress/components';
 import { store as coreStore } from '@wordpress/core-data';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { PostPreviewButton, store as editorStore } from '@wordpress/editor';
 import { useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { check, external, layout } from '@wordpress/icons';
 import type { ComponentProps, ComponentType, ReactElement, ReactNode } from 'react';
 
@@ -81,8 +82,20 @@ export default function ViewOptions(): ReactElement {
 		<Fill name={ PINNED_ITEMS_SLOT }>
 			<DropdownMenu
 				icon={ layout }
-				label={ __( 'View', 'fb-editor' ) }
-				toggleProps={ { size: 'compact' } }
+				// Like the breakpoint, the previewed conditions decide which
+				// looks the sidebars edit: never out of sight.
+				label={
+					previewed.length === 0
+						? __( 'View', 'fb-editor' )
+						: /* translators: %s: media conditions, e.g. "Dark mode + Touch" */ sprintf(
+								__( 'View · previewed as %s', 'fb-editor' ),
+								settings.conditions
+									.filter( ( info ) => previewed.includes( info.id ) )
+									.map( ( info ) => info.label )
+									.join( ' + ' )
+						  )
+				}
+				toggleProps={ { size: 'compact', className: previewed.length === 0 ? 'fb-view' : 'fb-view has-conditions' } }
 				popoverProps={ { placement: 'bottom-end' } }
 			>
 				{ ( { onClose } ) => (

@@ -92,3 +92,21 @@ body.fb-has-canvas-width {
 #{$core-view-dropdown} {
 	display: none;
 }
+
+// Previewed (and edited) with media conditions: a dot on the View button,
+// as visible as the selected breakpoint.
+.fb-view.has-conditions {
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 3px;
+		right: 3px;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--wp-admin-theme-color, #3858e9);
+		box-shadow: 0 0 0 1.5px #fff;
+	}
+}

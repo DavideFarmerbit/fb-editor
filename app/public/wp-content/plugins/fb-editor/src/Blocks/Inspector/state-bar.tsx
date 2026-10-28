@@ -5,13 +5,12 @@
  * there's more; the current item is scrolled into view.
  *
  * A click picks one item; ⌘/Ctrl-click adds it to (or removes it from) the
- * current ones, for looks combining several states. A trailing slot holds
- * what doesn't scroll (the condition picker).
+ * current ones, for looks combining several states.
  */
 import { Button } from '@wordpress/components';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import type { MouseEvent, PointerEvent, ReactElement, ReactNode } from 'react';
+import type { MouseEvent, PointerEvent, ReactElement } from 'react';
 
 import './state-bar.scss';
 
@@ -38,14 +37,12 @@ interface StateBarProps {
 	readonly disabledReason: string | null;
 	/** `additive`: ⌘/Ctrl-click, toggle the item within the current ones. */
 	readonly onSelect: ( id: string, additive: boolean ) => void;
-	/** After the scrolling row, always visible. */
-	readonly trailing?: ReactNode;
 }
 
 /** A drag shorter than this is still a click. */
 const DRAG_THRESHOLD = 4;
 
-export function StateBar( { items, disabledReason, onSelect, trailing }: StateBarProps ): ReactElement {
+export function StateBar( { items, disabledReason, onSelect }: StateBarProps ): ReactElement {
 	const current = items
 		.filter( ( item ) => item.isCurrent )
 		.map( ( item ) => item.id )
@@ -156,7 +153,6 @@ export function StateBar( { items, disabledReason, onSelect, trailing }: StateBa
 				} ) }
 			</div>
 			</div>
-			{ trailing }
 		</div>
 	);
 }
