@@ -4,7 +4,6 @@
 .fb-parts {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
 	padding: 12px 16px 0;
 }
 
@@ -14,6 +13,9 @@
 	display: flex;
 	align-items: center;
 	gap: 2px;
+	// The space between rows is their own padding, not a gap: the guide line
+	// runs through it, unbroken from part to part.
+	padding-block: 2px;
 
 	// Parts hang from the block: indented, on a guide line.
 	&.is-part {
@@ -26,8 +28,8 @@
 .fb-parts .fb-parts__item {
 	flex: 1;
 	min-width: 0;
-	height: 32px;
-	padding: 0 8px;
+	height: 28px;
+	padding: 0 6px;
 	justify-content: flex-start;
 	border-radius: 2px;
 	color: #1e1e1e;
@@ -60,10 +62,22 @@
 		font-weight: 600;
 	}
 
+	// A plain text link, not a row like the others: no background, no focus
+	// ring; only its color darkens on hover and focus.
 	&.is-add {
+		// Clickable where the text is, not across the row.
+		flex: none;
 		gap: 4px;
-		color: #757575;
+		color: #949494;
 		font-size: 12px;
+
+		&:hover,
+		&:focus,
+		&[aria-expanded="true"] {
+			background: none;
+			color: #1e1e1e;
+			outline: none;
+		}
 
 		svg {
 			width: 20px;
