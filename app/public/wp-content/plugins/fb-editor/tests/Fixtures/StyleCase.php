@@ -7,7 +7,7 @@ namespace Fb\Tests\Fixtures;
 use Fb\Blocks\Definition\BlockDefinition;
 
 /**
- * One PHP ↔ JS parity case: a definition plus raw base and state values
+ * One PHP ↔ JS parity case: a definition plus raw base, state and other looks
  * (as WordPress would hand them over) compiled for a fixed root class, with
  * the block type's defaults in the same shape.
  */
@@ -23,7 +23,8 @@ final readonly class StyleCase
 	 * @param array<string, mixed> $defaults      The type defaults' base look.
 	 * @param array<string, mixed> $states        Raw state looks, keyed by state.
 	 * @param array<string, mixed> $defaultStates The type defaults' state looks.
-	 * @param array<string, mixed>|null $variant  A variant's raw values (base + states) the block uses.
+	 * @param \stdClass|null       $variant       A variant's raw values the block uses (see looks()).
+	 * @param list<array<string, mixed>> $looks   More raw looks of the block (combined states, conditions).
 	 */
 	public function __construct(
 		public string $name,
@@ -32,7 +33,8 @@ final readonly class StyleCase
 		public array $defaults = [],
 		public array $states = [],
 		public array $defaultStates = [],
-		public ?array $variant = null,
+		public ?\stdClass $variant = null,
+		public array $looks = [],
 	) {
 	}
 
@@ -41,26 +43,35 @@ final readonly class StyleCase
 	 */
 	public function attribute(): \stdClass
 	{
-		return self::stateful( $this->base, $this->states );
+		return self::looks( $this->base, $this->states, $this->looks );
 	}
 
 	public function defaultsAttribute(): \stdClass
 	{
-		return self::stateful( $this->defaults, $this->defaultStates );
+		return self::looks( $this->defaults, $this->defaultStates );
 	}
 
 	/**
-	 * @param array<string, mixed> $base
-	 * @param array<string, mixed> $states
+	 * Raw `{"looks": […]}` values: the base, one look per state, then any
+	 * other looks as given.
+	 *
+	 * @param array<string, mixed>       $base
+	 * @param array<string, mixed>       $states Keyed by state.
+	 * @param list<array<string, mixed>> $more
 	 */
-	private static function stateful( array $base, array $states ): \stdClass
+	public static function looks( array $base, array $states = [], array $more = [] ): \stdClass
 	{
-		$json = new \stdClass();
+		$looks = [];
 		if ( [] !== $base ) {
-			$json->base = $base;
+			$looks[] = [ 'values' => $base ];
 		}
-		if ( [] !== $states ) {
-			$json->states = $states;
+		foreach ( $states as $state => $values ) {
+			$looks[] = [ 'states' => [ $state ], 'values' => $values ];
+		}
+
+		$json = new \stdClass();
+		if ( [] !== $looks || [] !== $more ) {
+			$json->looks = [ ...$looks, ...$more ];
 		}
 
 		return $json;

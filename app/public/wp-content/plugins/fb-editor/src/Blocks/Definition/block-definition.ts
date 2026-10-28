@@ -4,6 +4,7 @@
  * class name: nothing about a block is re-derived here.
  */
 import { ControlKind } from './ControlKind.generated';
+import { MediaCondition } from '../Looks/MediaCondition.generated';
 import { InvalidJson, type JsonValue } from '../../Json/json';
 import { outputFromJson, type StyleOutput } from '../../Styles/Output/outputs';
 import { KeywordValue } from '../../Values/keyword';
@@ -90,6 +91,16 @@ export class StateInfo {
 	) {}
 }
 
+/** A media condition looks can require, as PHP describes it. */
+export class ConditionInfo {
+	constructor(
+		public readonly id: MediaCondition,
+		public readonly label: string,
+		/** e.g. "(prefers-color-scheme: dark)". */
+		public readonly mediaQuery: string
+	) {}
+}
+
 export class BlockDefinition implements ConditionLabels {
 	constructor(
 		/** e.g. "fb/section" */
@@ -103,7 +114,9 @@ export class BlockDefinition implements ConditionLabels {
 		public readonly layout: readonly Panel[],
 		public readonly elements: readonly Element[],
 		/** In cascade order. */
-		public readonly states: readonly StateInfo[]
+		public readonly states: readonly StateInfo[],
+		/** Every condition, in cascade order. */
+		public readonly conditions: readonly ConditionInfo[]
 	) {
 		for ( const control of controls ) {
 			for ( const reference of control.visibleWhen?.references() ?? [] ) {
@@ -248,6 +261,13 @@ export function blockDefinitionFromJson( json: JsonValue ): BlockDefinition {
 						state.get( 'editorPseudoClass' ).string(),
 						state.get( 'previewClass' ).string()
 					)
+			),
+		json
+			.get( 'conditions' )
+			.list()
+			.map(
+				( condition ) =>
+					new ConditionInfo( condition.get( 'id' ).oneOf( MediaCondition ), condition.get( 'label' ).string(), condition.get( 'mediaQuery' ).string() )
 			)
 	);
 }

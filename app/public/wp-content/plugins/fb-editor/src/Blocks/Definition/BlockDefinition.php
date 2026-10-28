@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Definition;
 
+use Fb\Blocks\Looks\MediaCondition;
 use Fb\Blocks\States\BlockState;
 
 /**
@@ -119,7 +120,7 @@ final readonly class BlockDefinition implements \JsonSerializable
 	 *
 	 * Class names are computed here, so the editor never re-derives them.
 	 *
-	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string, editorPseudoClass: string, previewClass: string}>}
+	 * @return array{name: BlockName, title: string, isCore: bool, className: string, controls: ControlSet, layout: Layout, elements: list<array{id: ElementId, className: string, editorClassName: string}>, states: list<array{id: BlockState, label: string, pseudoClass: string, editorPseudoClass: string, previewClass: string}>, conditions: list<array{id: MediaCondition, label: string, mediaQuery: string}>}
 	 */
 	public function jsonSerialize(): array
 	{
@@ -147,6 +148,16 @@ final readonly class BlockDefinition implements \JsonSerializable
 					'previewClass'      => $state->previewClass(),
 				],
 				$this->states
+			),
+			// Every block can have looks for any condition: listed here so the
+			// editor gets labels and queries from PHP.
+			'conditions' => array_map(
+				static fn ( MediaCondition $condition ): array => [
+					'id'         => $condition,
+					'label'      => $condition->label(),
+					'mediaQuery' => $condition->mediaQuery(),
+				],
+				MediaCondition::cases()
 			),
 		];
 	}

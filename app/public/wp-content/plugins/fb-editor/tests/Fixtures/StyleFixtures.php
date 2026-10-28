@@ -49,7 +49,7 @@ final class StyleFixtures
 				'rootClass'   => StyleCase::ROOT_CLASS,
 				'variantClass' => StyleCase::VARIANT_CLASS,
 				'values'      => $values,
-				'variant'     => null === $case->variant ? null : (object) $case->variant,
+				'variant'     => $case->variant,
 				'defaultsCss' => $styles->forSource( $case->definition, $defaults, Selector::forClass( $case->definition->name->cssClass() ) )->css( $compiler, CssLayer::Defaults ),
 				'variantCss'  => null === $variant ? '' : $styles->forSource( $case->definition, $variant, Selector::forClass( StyleCase::VARIANT_CLASS ), $defaults )->css( $compiler, CssLayer::Variants ),
 				'css'         => $styles->forSource( $case->definition, $values, Selector::forClass( StyleCase::ROOT_CLASS ), ...$weaker )->css( $compiler, CssLayer::Instances ),
@@ -219,9 +219,29 @@ final class StyleFixtures
 				[ 'display' => [ 'desktop' => 'flex' ] ],
 				[ 'hover' => [ 'gap' => [ 'desktop' => [ 'top' => self::px( 2 ) ] ] ] ],
 				[],
+				StyleCase::looks(
+					[ 'display' => [ 'tablet' => 'block' ], 'padding' => [ 'desktop' => [ 'top' => self::px( 20 ) ] ] ],
+					[ 'hover' => [ 'display' => [ 'desktop' => 'grid' ] ], 'focus' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 1 ) ] ] ] ]
+				)
+			),
+			new StyleCase(
+				'combined states and media conditions, in cascade order',
+				$fixture,
+				[ 'display' => [ 'desktop' => 'flex' ] ],
+				[ 'padding' => [ 'desktop' => [ 'top' => self::px( 3 ) ] ] ],
+				[ 'hover' => [ 'gap' => [ 'desktop' => [ 'top' => self::px( 2 ) ] ] ] ],
+				[],
+				null,
 				[
-					'base'   => [ 'display' => [ 'tablet' => 'block' ], 'padding' => [ 'desktop' => [ 'top' => self::px( 20 ) ] ] ],
-					'states' => [ 'hover' => [ 'display' => [ 'desktop' => 'grid' ] ], 'focus' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 1 ) ] ] ] ],
+					// Given out of order: compiled in cascade order.
+					[ 'states' => [ 'active', 'hover' ], 'values' => [ 'gap' => [ 'desktop' => [ 'top' => self::px( 6 ) ] ] ] ],
+					[ 'states' => [ 'hover' ], 'when' => [ 'dark' ], 'values' => [ 'gap' => [ 'tablet' => [ 'top' => self::px( 5 ) ] ] ] ],
+					[ 'when' => [ 'reduced-motion', 'dark' ], 'values' => [ 'display' => [ 'mobile' => 'grid' ] ] ],
+					[ 'when' => [ 'dark' ], 'values' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 7 ) ] ] ] ],
+					// Dropped: unknown condition, unsupported state, repeated look.
+					[ 'when' => [ 'sunny' ], 'values' => [ 'display' => [ 'desktop' => 'grid' ] ] ],
+					[ 'states' => [ 'visited' ], 'values' => [ 'display' => [ 'desktop' => 'grid' ] ] ],
+					[ 'when' => [ 'dark' ], 'values' => [ 'display' => [ 'desktop' => 'grid' ] ] ],
 				]
 			),
 			new StyleCase( 'grid columns, numbers and spans', $container, [
@@ -244,7 +264,7 @@ final class StyleFixtures
 				[ 'itemGrow' => [ 'desktop' => 1 ], 'padding' => [ 'desktop' => [ 'top' => self::px( 4 ) ] ] ],
 				[ 'hover' => [ 'itemGrow' => [ 'desktop' => 3 ] ] ],
 				[],
-				[ 'base' => [ 'itemOrder' => [ 'desktop' => 1 ], 'maxWidth' => [ 'desktop' => self::px( 600 ) ] ] ]
+				StyleCase::looks( [ 'itemOrder' => [ 'desktop' => 1 ], 'maxWidth' => [ 'desktop' => self::px( 600 ) ] ] )
 			),
 			new StyleCase( 'button border, radius, shadow, gradient, typography', $button, [
 				'border'        => [

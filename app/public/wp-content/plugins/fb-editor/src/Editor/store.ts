@@ -6,7 +6,7 @@ import { createReduxStore, register } from '@wordpress/data';
 
 import type { SpacingMode } from '../Blocks/Definition/Input/Spacing/spacing-input';
 import type { SidebarView } from '../Blocks/Inspector/inspector';
-import type { BlockState } from '../Blocks/States/BlockState.generated';
+import type { LookKey } from '../Blocks/Looks/look-key';
 import type { Breakpoint, BreakpointId, BreakpointList } from '../Breakpoints/breakpoints';
 import { settings } from './settings';
 
@@ -31,10 +31,10 @@ interface State {
 	 */
 	readonly addedControls: Readonly< Record< string, readonly string[] > >;
 	/**
-	 * The state being edited, per memory key (absent: the base look). A
-	 * selected block in a state also previews it on the canvas.
+	 * The look being edited (its LookKey id), per memory key (absent: the
+	 * base). A selected block in a state also previews it on the canvas.
 	 */
-	readonly inspectedStates: Readonly< Record< string, BlockState > >;
+	readonly inspectedLooks: Readonly< Record< string, string > >;
 	/** "Add setting" also lists settings the block can't use right now. */
 	readonly showUnavailableSettings: boolean;
 	/**
@@ -69,10 +69,11 @@ interface ForgetControlAction {
 	readonly controlId: string;
 }
 
-interface InspectStateAction {
-	readonly type: 'INSPECT_STATE';
+interface InspectLookAction {
+	readonly type: 'INSPECT_LOOK';
 	readonly key: string;
-	readonly state: BlockState | null;
+	/** LookKey id ("" for the base). */
+	readonly look: string;
 }
 
 interface ShowUnavailableSettingsAction {
@@ -90,7 +91,7 @@ interface ShowHiddenBlocksAction {
 	readonly show: boolean;
 }
 
-type Action = SetSidebarViewAction | ShowHiddenBlocksAction | SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectStateAction | ShowUnavailableSettingsAction;
+type Action = SetSidebarViewAction | ShowHiddenBlocksAction | SetBreakpointAction | SetSpacingModeAction | AddControlAction | ForgetControlAction | InspectLookAction | ShowUnavailableSettingsAction;
 
 const NONE: readonly string[] = [];
 
@@ -98,7 +99,7 @@ const DEFAULT_STATE: State = {
 	breakpoint: settings.breakpoints.base.id,
 	spacingModes: {},
 	addedControls: {},
-	inspectedStates: {},
+	inspectedLooks: {},
 	showUnavailableSettings: true,
 	showHiddenBlocks: true,
 	sidebarView: null,
@@ -118,8 +119,8 @@ const actions = {
 		return { type: 'FORGET_CONTROL', key, controlId };
 	},
 	/** null: back to the base look. */
-	inspectState( key: string, state: BlockState | null ): InspectStateAction {
-		return { type: 'INSPECT_STATE', key, state };
+	inspectLook( key: string, look: LookKey ): InspectLookAction {
+		return { type: 'INSPECT_LOOK', key, look: look.id() };
 	},
 	showUnavailableSettings( show: boolean ): ShowUnavailableSettingsAction {
 		return { type: 'SHOW_UNAVAILABLE_SETTINGS', show };
@@ -147,8 +148,9 @@ const selectors = {
 	getAddedControls( state: State, key: string ): readonly string[] {
 		return state.addedControls[ key ] ?? NONE;
 	},
-	getInspectedState( state: State, key: string ): BlockState | null {
-		return state.inspectedStates[ key ] ?? null;
+	/** The inspected look's LookKey id ("" for the base): a plain string, so selecting it never re-renders for nothing. */
+	getInspectedLook( state: State, key: string ): string {
+		return state.inspectedLooks[ key ] ?? '';
 	},
 	isShowingUnavailableSettings( state: State ): boolean {
 		return state.showUnavailableSettings;
@@ -180,9 +182,9 @@ export const store = createReduxStore( 'fb/editor', {
 				return { ...state, sidebarView: action.view };
 			case 'SHOW_HIDDEN_BLOCKS':
 				return { ...state, showHiddenBlocks: action.show };
-			case 'INSPECT_STATE': {
-				const { [ action.key ]: _previous, ...others } = state.inspectedStates;
-				return { ...state, inspectedStates: action.state === null ? others : { ...others, [ action.key ]: action.state } };
+			case 'INSPECT_LOOK': {
+				const { [ action.key ]: _previous, ...others } = state.inspectedLooks;
+				return { ...state, inspectedLooks: action.look === '' ? others : { ...others, [ action.key ]: action.look } };
 			}
 			case 'FORGET_CONTROL': {
 				const added = state.addedControls[ action.key ] ?? NONE;

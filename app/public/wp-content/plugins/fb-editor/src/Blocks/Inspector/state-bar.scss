@@ -1,0 +1,59 @@
+// One row, scrolling sideways when it doesn't fit; the buttons keep their
+// natural width. No scrollbar: the faded edges say there's more.
+.fb-state-bar {
+	position: relative;
+	padding: 12px 16px 0;
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		top: 12px;
+		bottom: 0;
+		width: 24px;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 0.15s;
+	}
+
+	&::before {
+		left: 16px;
+		background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+	}
+
+	&::after {
+		right: 16px;
+		background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
+	}
+
+	&.has-more-start::before,
+	&.has-more-end::after {
+		opacity: 1;
+	}
+}
+
+.fb-state-bar__track {
+	display: flex;
+	gap: 4px;
+	// Room for the selection outline, which sits outside the buttons.
+	padding: 1px;
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scrollbar-width: none;
+	cursor: grab;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	&:active {
+		cursor: grabbing;
+	}
+
+	.fb-states__item {
+		flex: 1 0 auto;
+		min-width: 56px;
+		padding: 0 10px;
+	}
+}

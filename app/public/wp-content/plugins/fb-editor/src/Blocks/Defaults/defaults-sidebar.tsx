@@ -29,9 +29,9 @@ function screenPath( definition: BlockDefinition ): string {
 function BlockTypeItem( { definition }: { readonly definition: BlockDefinition } ): ReactElement {
 	const { defaults } = useBlockDefaults( definition );
 	// Every set control, in every look.
-	const count = [ null, ...definition.states.map( ( state ) => state.id ) ]
-		.map( ( look ) => defaults.values.look( look ) )
-		.reduce( ( total, look ) => total + definition.controls.filter( ( control ) => look.has( control.id ) ).length, 0 );
+	const count = defaults.values
+		.looks()
+		.reduce( ( total, look ) => total + definition.controls.filter( ( control ) => look.values.has( control.id ) ).length, 0 );
 
 	return (
 		<Navigator.Button path={ screenPath( definition ) } className="fb-defaults__item">

@@ -1,10 +1,31 @@
 {
 	"defaults": {
 		"fb/container": {
-			"base": {
-				"padding": { "desktop": { "top": { "kind": "custom", "value": 40, "unit": "px" } }, "mobile": { "top": { "kind": "custom", "value": 16, "unit": "px" } } },
-				"display": { "desktop": "flex" }
-			}
+			"looks": [
+				{
+					"values": {
+						"padding": {
+							"desktop": {
+								"top": {
+									"kind": "custom",
+									"value": 40,
+									"unit": "px"
+								}
+							},
+							"mobile": {
+								"top": {
+									"kind": "custom",
+									"value": 16,
+									"unit": "px"
+								}
+							}
+						},
+						"display": {
+							"desktop": "flex"
+						}
+					}
+				}
+			]
 		}
 	}
 }

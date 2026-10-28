@@ -13,6 +13,7 @@ use Fb\Breakpoints\BreakpointConfig;
 use Fb\CoreBlocks\Library\Paragraph\Paragraph;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Tests\Fixtures\TestRendering;
+use Fb\Tests\Fixtures\TestLooks;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,14 +53,12 @@ final class ContainerItemTest extends TestCase
 		$html      = $rendering->render(
 			new Container(),
 			[
-				'fb' => [
-					'base' => [
+				'fb' => TestLooks::of( [
 						'itemGrow'       => [ 'desktop' => 1, 'mobile' => 0 ],
 						'itemBasis'      => [ 'desktop' => [ 'kind' => 'custom', 'value' => 30, 'unit' => '%' ] ],
 						'itemColumnSpan' => [ 'desktop' => 2, 'tablet' => 2.5 ],
 						'itemOrder'      => [ 'desktop' => -1 ],
-					],
-				],
+					] ),
 			],
 			''
 		);
@@ -77,9 +76,9 @@ final class ContainerItemTest extends TestCase
 	public function testDefaultsAndVariantsNeverHoldItemSettings(): void
 	{
 		$definition = BlockExtensions::complete( ( new Paragraph() )->definition() );
-		$json       = [ 'base' => [ 'itemGrow' => [ 'desktop' => 1 ], 'textAlign' => [ 'desktop' => 'center' ] ] ];
+		$json       = TestLooks::of( [ 'itemGrow' => [ 'desktop' => 1 ], 'textAlign' => [ 'desktop' => 'center' ] ] );
 
-		self::assertSame( '{"base":{"textAlign":{"desktop":"center"},"itemGrow":{"desktop":1.0}}}', wp_json_encode( StatefulValues::fromJson( $json, $definition, TestBreakpoints::list() ), JSON_PRESERVE_ZERO_FRACTION ) );
-		self::assertSame( '{"base":{"textAlign":{"desktop":"center"}}}', wp_json_encode( StatefulValues::fromJson( $json, $definition, TestBreakpoints::list(), placed: false ) ) );
+		self::assertSame( '{"looks":[{"values":{"textAlign":{"desktop":"center"},"itemGrow":{"desktop":1.0}}}]}', wp_json_encode( StatefulValues::fromJson( $json, $definition, TestBreakpoints::list() ), JSON_PRESERVE_ZERO_FRACTION ) );
+		self::assertSame( '{"looks":[{"values":{"textAlign":{"desktop":"center"}}}]}', wp_json_encode( StatefulValues::fromJson( $json, $definition, TestBreakpoints::list(), placed: false ) ) );
 	}
 }

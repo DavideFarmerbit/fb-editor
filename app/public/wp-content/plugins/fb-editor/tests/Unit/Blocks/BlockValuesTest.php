@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Unit\Blocks;
 
+use Fb\Blocks\Looks\LookKey;
 use Fb\Blocks\States\BlockState;
 use Fb\Blocks\Values\BlockAttribute;
 use Fb\Blocks\Values\BlockStyles;
@@ -16,6 +17,7 @@ use Fb\Styles\Selector;
 use Fb\Styles\StyleCompiler;
 use Fb\Tests\Fixtures\SectionFixture;
 use Fb\Tests\Fixtures\TestBreakpoints;
+use Fb\Tests\Fixtures\TestLooks;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -41,7 +43,7 @@ final class BlockValuesTest extends TestCase
 	 */
 	private function base( array $base ): StatefulValues
 	{
-		return $this->values( [ 'base' => $base ] );
+		return $this->values( TestLooks::of( $base ) );
 	}
 
 	private static function instance( StatefulValues $values, ?string $variant = null ): InstanceClass
@@ -82,7 +84,7 @@ final class BlockValuesTest extends TestCase
 		);
 
 		self::assertSame(
-			'{"base":{"tag":"div","display":{"desktop":"flex"},"padding":{"desktop":{"top":{"kind":"custom","value":10.0,"unit":"px"}}}}}',
+			'{"looks":[{"values":{"tag":"div","display":{"desktop":"flex"},"padding":{"desktop":{"top":{"kind":"custom","value":10.0,"unit":"px"}}}}}]}',
 			wp_json_encode( $values, JSON_PRESERVE_ZERO_FRACTION )
 		);
 	}
@@ -90,8 +92,9 @@ final class BlockValuesTest extends TestCase
 	public function testSanitizesStates(): void
 	{
 		$values = $this->values(
-			[
-				'states' => [
+			TestLooks::of(
+				[],
+				[
 					'active' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 2 ) ] ] ],
 					'focus'  => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 3 ) ] ] ], // not supported
 					'hover'  => [
@@ -99,23 +102,24 @@ final class BlockValuesTest extends TestCase
 						'display' => [ 'desktop' => 'grid' ],
 					],
 					'nope'   => [ 'display' => [ 'desktop' => 'grid' ] ],
-				],
-			]
+				]
+			)
 		);
 
 		// Cascade order (hover before active), whatever the stored order.
 		self::assertSame(
-			'{"states":{"hover":{"display":{"desktop":"grid"}},"active":{"padding":{"desktop":{"top":{"kind":"custom","value":2,"unit":"px"}}}}}}',
+			'{"looks":[{"states":["hover"],"values":{"display":{"desktop":"grid"}}},{"states":["active"],"values":{"padding":{"desktop":{"top":{"kind":"custom","value":2,"unit":"px"}}}}}]}',
 			wp_json_encode( $values )
 		);
-		self::assertTrue( $values->state( BlockState::Focus )->isEmpty() );
+		self::assertTrue( $values->look( LookKey::ofState( BlockState::Focus ) )->isEmpty() );
 	}
 
 	public function testGarbageAttributeYieldsNoValues(): void
 	{
 		self::assertTrue( $this->values( 'nope' )->isEmpty() );
 		self::assertTrue( $this->values( null )->isEmpty() );
-		self::assertTrue( $this->values( [ 'base' => 'nope', 'states' => [ 'hover' => 'nope' ] ] )->isEmpty() );
+		self::assertTrue( $this->values( [ 'looks' => 'nope' ] )->isEmpty() );
+		self::assertTrue( $this->values( [ 'looks' => [ 'nope', [ 'values' => 'nope' ], [ 'states' => [ 'hover' ], 'values' => 'nope' ] ] ] )->isEmpty() );
 		self::assertSame( '{}', wp_json_encode( $this->base( [] ) ) );
 	}
 
@@ -125,7 +129,7 @@ final class BlockValuesTest extends TestCase
 		// Different key order + junk that gets dropped: same canonical values.
 		$b = self::instance( $this->base( [ 'junk' => 1, 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ], 'tag' => 'div' ] ) );
 		$c = self::instance( $this->base( [ 'tag' => 'div', 'padding' => [ 'desktop' => [ 'top' => self::px( 11 ) ] ] ] ) );
-		$d = self::instance( $this->values( [ 'base' => [ 'tag' => 'div' ], 'states' => [ 'hover' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ] ] ] ] ) );
+		$d = self::instance( $this->values( TestLooks::of( [ 'tag' => 'div' ], [ 'hover' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 10 ) ] ] ] ] ) ) );
 
 		self::assertMatchesRegularExpression( '/^fb-[0-9a-z]{7}$/', (string) $a );
 		self::assertSame( (string) $a, (string) $b );
@@ -161,13 +165,13 @@ final class BlockValuesTest extends TestCase
 	public function testStatesGoInTheStateLayerInCascadeOrder(): void
 	{
 		$values = $this->values(
-			[
-				'base'   => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 8 ) ] ] ],
-				'states' => [
+			TestLooks::of(
+				[ 'padding' => [ 'desktop' => [ 'top' => self::px( 8 ) ] ] ],
+				[
 					'active' => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 6 ) ] ] ],
 					'hover'  => [ 'padding' => [ 'desktop' => [ 'top' => self::px( 12 ) ], 'mobile' => [ 'top' => self::px( 10 ) ] ] ],
-				],
-			]
+				]
+			)
 		);
 		$class = (string) self::instance( $values );
 
@@ -187,15 +191,15 @@ final class BlockValuesTest extends TestCase
 		// The block's gap shows while hovered only where display (hover
 		// first, then base, then the default) is flex or grid.
 		$values   = $this->values(
-			[
-				'base'   => [ 'display' => [ 'tablet' => 'block' ] ],
-				'states' => [
+			TestLooks::of(
+				[ 'display' => [ 'tablet' => 'block' ] ],
+				[
 					'hover' => [
 						'display' => [ 'mobile' => 'grid' ],
 						'gap'     => [ 'desktop' => [ 'top' => self::px( 4 ) ] ],
 					],
-				],
-			]
+				]
+			)
 		);
 		$defaults = $this->base( [ 'display' => [ 'desktop' => 'flex' ] ] );
 		$class    = (string) self::instance( $values );

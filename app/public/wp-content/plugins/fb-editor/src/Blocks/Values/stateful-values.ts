@@ -1,126 +1,155 @@
 /**
- * Mirrors Fb\Blocks\Values\StatefulValues: a source's base look plus a look
- * per state, the shape of a block's `fb` attribute and of type defaults:
+ * Mirrors Fb\Blocks\Values\StatefulValues: a source's looks (see LookKey),
+ * the base first. The shape of a block's `fb` attribute, of type defaults
+ * and of variants:
  *
- *   {"base": {controlId: …}, "states": {"hover": {controlId: …}}}
+ *   {"looks": [{"values": {…}}, {"states": ["hover"], "values": {…}}]}
  */
 import type { BreakpointList } from '../../Breakpoints/breakpoints';
-import { JsonValue } from '../../Json/json';
+import { InvalidJson, JsonValue } from '../../Json/json';
 import type { BlockDefinition } from '../Definition/block-definition';
 import type { ControlId } from '../Definition/control-id';
-import type { BlockState } from '../States/BlockState.generated';
+import { Look, LookKey } from '../Looks/look-key';
 import { BlockValues } from './block-values';
 import { ValueChain } from './value-chain';
+
+function sorted( looks: ReadonlyArray< Look< BlockValues > > ): Array< Look< BlockValues > > {
+	return [ ...looks ].sort( ( a, b ) => LookKey.compare( a.key, b.key ) );
+}
 
 export class StatefulValues {
 	private constructor(
 		private readonly definition: BlockDefinition,
 		public readonly base: BlockValues,
-		/** Supported states only, in cascade order, none empty. */
-		private readonly states: ReadonlyMap< BlockState, BlockValues >
+		/** Not the base; in cascade order, none empty, unique keys. */
+		private readonly others: ReadonlyArray< Look< BlockValues > >
 	) {}
 
 	static empty( definition: BlockDefinition, breakpoints: BreakpointList ): StatefulValues {
-		return new StatefulValues( definition, BlockValues.empty( definition, breakpoints ), new Map() );
+		return new StatefulValues( definition, BlockValues.empty( definition, breakpoints ), [] );
 	}
 
-	/** `placed`: keep controls that belong to the block's place (only a block's own attribute has them). */
+	/** Mirrors StatefulValues::fromJson(). `placed`: keep controls that belong to the block's place. */
 	static fromJson( json: unknown, definition: BlockDefinition, breakpoints: BreakpointList, placed = true ): StatefulValues {
 		const root = JsonValue.of( json, 'fb' );
-		if ( ! root.isObject() ) {
+		if ( ! root.isObject() || ! root.has( 'looks' ) ) {
 			return StatefulValues.empty( definition, breakpoints );
 		}
 
-		const parsed = BlockValues.fromAttribute( root.has( 'base' ) ? root.get( 'base' ).decoded() : null, definition, breakpoints );
-		const base = placed ? parsed : parsed.withoutPlaced();
-		const statesJson = root.has( 'states' ) ? root.get( 'states' ) : null;
+		let items: JsonValue[];
+		try {
+			items = root.get( 'looks' ).list();
+		} catch ( error ) {
+			if ( error instanceof InvalidJson ) {
+				return StatefulValues.empty( definition, breakpoints );
+			}
+			throw error;
+		}
 
-		const states = new Map< BlockState, BlockValues >();
-		for ( const { id } of definition.states ) {
-			if ( statesJson === null || ! statesJson.isObject() || ! statesJson.has( id ) ) {
+		let base: BlockValues | null = null;
+		const looks = new Map< string, Look< BlockValues > >();
+		for ( const item of items ) {
+			const key = LookKey.fromJson( item, definition );
+			if ( key === null || ( key.isBase() ? base !== null : looks.has( key.id() ) ) ) {
 				continue;
 			}
-			const values = BlockValues.fromAttribute( statesJson.get( id ).decoded(), definition, breakpoints ).onlyStateful();
-			if ( ! values.isEmpty() ) {
-				states.set( id, values );
+			const values = BlockValues.fromAttribute( item.has( 'values' ) ? item.get( 'values' ).decoded() : null, definition, breakpoints );
+			if ( key.isBase() ) {
+				base = placed ? values : values.withoutPlaced();
+				continue;
+			}
+			const stateful = values.onlyStateful();
+			if ( ! stateful.isEmpty() ) {
+				looks.set( key.id(), new Look( key, stateful ) );
 			}
 		}
 
-		return new StatefulValues( definition, base, states );
+		return new StatefulValues( definition, base ?? BlockValues.empty( definition, breakpoints ), sorted( [ ...looks.values() ] ) );
 	}
 
-	/** One state's look; empty for states it doesn't set. */
-	state( state: BlockState ): BlockValues {
-		return this.states.get( state ) ?? BlockValues.empty( this.definition, this.base.breakpoints() );
+	/** One look's values; empty for looks it doesn't set. */
+	look( key: LookKey ): BlockValues {
+		if ( key.isBase() ) {
+			return this.base;
+		}
+		return this.others.find( ( look ) => look.key.equals( key ) )?.values ?? BlockValues.empty( this.definition, this.base.breakpoints() );
+	}
+
+	/** Every look, the base first, in cascade order. */
+	looks(): Array< Look< BlockValues > > {
+		return [ new Look( LookKey.BASE, this.base ), ...this.others ];
 	}
 
 	isEmpty(): boolean {
-		return this.base.isEmpty() && this.states.size === 0;
+		return this.base.isEmpty() && this.others.length === 0;
 	}
 
 	/** Mirrors StatefulValues::has(): set in any look, at any breakpoint. */
 	has( id: ControlId ): boolean {
-		return [ this.base, ...this.states.values() ].some( ( look ) => look.has( id ) );
+		return this.looks().some( ( look ) => look.values.has( id ) );
 	}
 
 	/** Without the values that belong to the block's place: a look to share. */
 	withoutPlaced(): StatefulValues {
-		return new StatefulValues( this.definition, this.base.withoutPlaced(), this.states );
+		return new StatefulValues( this.definition, this.base.withoutPlaced(), this.others );
 	}
 
-	/** Only the values that belong to the block's place (no states hold any). */
+	/** Only the values that belong to the block's place (only the base holds any). */
 	onlyPlaced(): StatefulValues {
-		return new StatefulValues( this.definition, this.base.onlyPlaced(), new Map() );
+		return new StatefulValues( this.definition, this.base.onlyPlaced(), [] );
 	}
 
-	/** A copy with another base look (states kept). */
+	/** A copy with another base look (the others kept). */
 	withBase( base: BlockValues ): StatefulValues {
-		return new StatefulValues( this.definition, base, this.states );
-	}
-
-	/** One look: a state's, or the base (null). */
-	look( state: BlockState | null ): BlockValues {
-		return state === null ? this.base : this.state( state );
+		return new StatefulValues( this.definition, base, this.others );
 	}
 
 	/**
-	 * A copy with one look replaced. A state keeps only what can vary per
-	 * state, and disappears when empty (as when parsed).
+	 * A copy with one look replaced. Outside the base a look keeps only what
+	 * can vary per look, and disappears when empty (as when parsed).
 	 */
-	withLook( state: BlockState | null, values: BlockValues ): StatefulValues {
-		if ( state === null ) {
+	withLook( key: LookKey, values: BlockValues ): StatefulValues {
+		if ( key.isBase() ) {
 			return this.withBase( values );
 		}
-		const states = new Map< BlockState, BlockValues >();
-		for ( const { id } of this.definition.states ) {
-			const next = id === state ? values.onlyStateful() : this.states.get( id );
-			if ( next !== undefined && ! next.isEmpty() ) {
-				states.set( id, next );
-			}
-		}
-		return new StatefulValues( this.definition, this.base, states );
+		const others = this.others.filter( ( look ) => ! look.key.equals( key ) );
+		const stateful = values.onlyStateful();
+		return new StatefulValues( this.definition, this.base, stateful.isEmpty() ? others : sorted( [ ...others, new Look( key, stateful ) ] ) );
 	}
 
-	/** Mirrors StatefulValues::chain(): any state beats any base. */
-	chain( state: BlockState | null, ...weaker: StatefulValues[] ): ValueChain {
-		const sources: BlockValues[] = [];
-		if ( state !== null ) {
-			sources.push( this.state( state ), ...weaker.map( ( source ) => source.state( state ) ) );
+	/**
+	 * Mirrors StatefulValues::chain(): every look applying within `key`, in
+	 * CSS cascade order (strongest first). Any state beats any base.
+	 */
+	chain( key: LookKey, ...weaker: StatefulValues[] ): ValueChain {
+		const sources = [ this, ...weaker ];
+		const values: BlockValues[] = [];
+		for ( const withStates of [ true, false ] ) {
+			for ( const source of sources ) {
+				for ( const look of [ ...source.looks() ].reverse() ) {
+					if ( look.key.hasStates() === withStates && look.key.appliesWithin( key ) ) {
+						values.push( look.values );
+					}
+				}
+			}
 		}
-		sources.push( this.base, ...weaker.map( ( source ) => source.base ) );
-		return new ValueChain( this.definition, ...sources );
+		return new ValueChain( this.definition, ...values );
 	}
 
 	/** Mirrors StatefulValues::overlay(). */
 	overlay( over: StatefulValues ): StatefulValues {
-		const states = new Map< BlockState, BlockValues >();
-		for ( const { id } of this.definition.states ) {
-			const merged = this.state( id ).overlay( over.state( id ) );
-			if ( ! merged.isEmpty() ) {
-				states.set( id, merged );
-			}
+		const keys = new Map< string, LookKey >();
+		for ( const look of [ ...this.others, ...over.others ] ) {
+			keys.set( look.key.id(), look.key );
 		}
-		return new StatefulValues( this.definition, this.base.overlay( over.base ), states );
+		const others: Array< Look< BlockValues > > = [];
+		keys.forEach( ( key ) => {
+			const merged = this.look( key ).overlay( over.look( key ) );
+			if ( ! merged.isEmpty() ) {
+				others.push( new Look( key, merged ) );
+			}
+		} );
+		return new StatefulValues( this.definition, this.base.overlay( over.base ), sorted( others ) );
 	}
 
 	/** Plain JSON for setAttributes() / post content. */
@@ -130,13 +159,7 @@ export class StatefulValues {
 
 	/** Canonical form, as PHP serializes it: empty looks left out. */
 	toJSON(): Record< string, unknown > {
-		const json: Record< string, unknown > = {};
-		if ( ! this.base.isEmpty() ) {
-			json.base = this.base;
-		}
-		if ( this.states.size > 0 ) {
-			json.states = Object.fromEntries( this.states );
-		}
-		return json;
+		const looks = this.base.isEmpty() ? this.others : this.looks();
+		return looks.length === 0 ? {} : { looks };
 	}
 }

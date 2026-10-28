@@ -7,9 +7,11 @@ import { fileURLToPath } from 'url';
 
 import { describe, expect, test } from 'vitest';
 
+import { looks } from './looks';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import type { ControlId } from '../src/Blocks/Definition/control-id';
 import { fallbacksFor, WeakerSource } from '../src/Blocks/Inspector/fallbacks';
+import { LookKey, MediaCondition } from '../src/Blocks/Looks/look-key';
 import { BlockState } from '../src/Blocks/States/BlockState.generated';
 import { BlockStyles } from '../src/Blocks/Values/block-styles';
 import { BlockValues } from '../src/Blocks/Values/block-values';
@@ -45,35 +47,32 @@ const desktop = 'desktop' as BreakpointId;
 
 describe( 'editing one look', () => {
 	test( 'replaces only that state', () => {
-		const values = stateful( { base: weight( '400' ), states: { hover: weight( '700' ) } } );
+		const values = stateful( looks( weight( '400' ), { hover: weight( '700' ) } ) );
 
-		expect( json( values.withLook( BlockState.Active, look( weight( '800' ) ) ) ) ).toEqual( {
-			base: weight( '400' ),
-			states: { hover: weight( '700' ), active: weight( '800' ) },
-		} );
+		expect( json( values.withLook( LookKey.ofState( BlockState.Active ), look( weight( '800' ) ) ) ) ).toEqual( looks( weight( '400' ), { hover: weight( '700' ), active: weight( '800' ) } ) );
 	} );
 
 	test( 'an emptied state disappears', () => {
-		const values = stateful( { base: weight( '400' ), states: { hover: weight( '700' ) } } );
+		const values = stateful( looks( weight( '400' ), { hover: weight( '700' ) } ) );
 
-		expect( json( values.withLook( BlockState.Hover, look( {} ) ) ) ).toEqual( { base: weight( '400' ) } );
+		expect( json( values.withLook( LookKey.ofState( BlockState.Hover ), look( {} ) ) ) ).toEqual( looks( weight( '400' ) ) );
 	} );
 } );
 
 describe( 'fallbacks of a state', () => {
-	const defaults = new WeakerSource( stateful( { base: weight( '300' ), states: { hover: weight( '600' ) } } ), 'From Button default' );
+	const defaults = new WeakerSource( stateful( looks( weight( '300' ), { hover: weight( '600' ) } ) ), 'From Button default' );
 
 	test( 'default state, then own base, then default base', () => {
-		const fallbacks = ( values: StatefulValues ) => fallbacksFor( values, [ defaults ], BlockState.Hover, 'Hover' );
+		const fallbacks = ( values: StatefulValues ) => fallbacksFor( button, values, [ defaults ], LookKey.ofState( BlockState.Hover ) );
 		const read = ( values: StatefulValues ) => {
 			const found = fallbacks( values ).resolve( id( 'fontWeight' ), desktop, breakpoints );
 			return found === null ? null : [ json( found.value ), found.status ];
 		};
 
-		expect( read( stateful( { base: weight( '400' ) } ) ) ).toEqual( [ '600', 'From Button default (Hover)' ] );
+		expect( read( stateful( looks( weight( '400' ) ) ) ) ).toEqual( [ '600', 'From Button default (Hover)' ] );
 
-		const noDefaultHover = new WeakerSource( stateful( { base: weight( '300' ) } ), 'From Button default' );
-		const found = fallbacksFor( stateful( { base: weight( '400' ) } ), [ noDefaultHover ], BlockState.Hover, 'Hover' ).resolve(
+		const noDefaultHover = new WeakerSource( stateful( looks( weight( '300' ) ) ), 'From Button default' );
+		const found = fallbacksFor( button, stateful( looks( weight( '400' ) ) ), [ noDefaultHover ], LookKey.ofState( BlockState.Hover ) ).resolve(
 			id( 'fontWeight' ),
 			desktop,
 			breakpoints
@@ -82,15 +81,26 @@ describe( 'fallbacks of a state', () => {
 	} );
 
 	test( 'the base look falls back to the default base only', () => {
-		const found = fallbacksFor( stateful( {} ), [ defaults ], null, '' ).resolve( id( 'fontWeight' ), desktop, breakpoints );
+		const found = fallbacksFor( button, stateful( {} ), [ defaults ], LookKey.BASE ).resolve( id( 'fontWeight' ), desktop, breakpoints );
 		expect( [ json( found?.value ), found?.status ] ).toEqual( [ '300', 'From Button default' ] );
 	} );
+} );
+
+test( 'a hover look in dark mode reads own hover, then weaker hover, then dark, then base', () => {
+	const hoverInDark = new LookKey( [ BlockState.Hover ], [ MediaCondition.Dark ] );
+	const own = stateful( {
+		looks: [ { values: weight( '400' ) }, { when: [ 'dark' ], values: weight( '500' ) }, { states: [ 'hover' ], values: weight( '700' ) } ],
+	} );
+	const defaults = new WeakerSource( stateful( looks( weight( '300' ), { hover: weight( '600' ) } ) ), 'From Button default' );
+	const statuses = fallbacksFor( button, own, [ defaults ], hoverInDark ).sources.map( ( source ) => source.status );
+
+	expect( statuses ).toEqual( [ 'From Hover', 'From Button default (Hover)', 'From Dark mode', 'From base', 'From Button default' ] );
 } );
 
 test( 'the editor previews a state with its preview class', () => {
 	const compiler = new StyleCompiler( breakpoints, new Presets( fixtures.get( 'presets' ).list().map( Preset.fromJson ) ) );
 	const css = new BlockStyles( breakpoints, true )
-		.forSource( button, stateful( { states: { hover: weight( '700' ) } } ), Selector.forClass( 'fb-i-x' ) )
+		.forSource( button, stateful( looks( null, { hover: weight( '700' ) } ) ), Selector.forClass( 'fb-i-x' ) )
 		.css( compiler, CssLayer.Instances );
 
 	expect( css ).toBe( '@layer fb.states.instances{:where(.fb-i-x:is(:hover,.fb-preview-hover)>.wp-block-button__link){font-weight:700;}}' );

@@ -13,7 +13,7 @@ use Fb\Json\JsonValue;
  * A block's whole `fb` attribute: the variant it uses, if any, and its own
  * values on top:
  *
- *   {"variant": "primary", "base": {…}, "states": {…}}
+ *   {"variant": "primary", "looks": […]}
  *
  * The variant is kept even if it doesn't exist (anymore): the block then
  * just has no variant, until one with that slug exists again.

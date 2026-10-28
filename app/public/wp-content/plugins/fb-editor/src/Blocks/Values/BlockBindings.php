@@ -4,48 +4,78 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Values;
 
-use Fb\Blocks\States\BlockState;
+use Fb\Blocks\Looks\LookKey;
 use Fb\Css\CssLayer;
 use Fb\Styles\StyleBinding;
 use Fb\Styles\StyleCompiler;
 
 /**
- * Style bindings of one or more blocks, split by look: the base look goes in
- * a base layer, states in its state layer (above every base layer), one
- * state after the other in cascade order.
+ * Style bindings of one or more blocks, grouped by look. Looks without
+ * states go in a base layer, looks with states in its state layer (above
+ * every base layer); within each, looks in cascade order (LookKey::compare()),
+ * the rules of every block for one look together. A look with conditions is
+ * wrapped in their media query.
  */
 final readonly class BlockBindings
 {
 	/**
-	 * @param list<StyleBinding>               $base
-	 * @param array<string, list<StyleBinding>> $states Keyed by BlockState value. Private storage.
+	 * @param array<string, LookKey>            $keys     Keyed by LookKey id. Private storage.
+	 * @param array<string, list<StyleBinding>> $bindings Same keys. Private storage.
 	 */
 	public function __construct(
-		private array $base = [],
-		private array $states = [],
+		private array $keys = [],
+		private array $bindings = [],
 	) {
+	}
+
+	/** These bindings plus more for one look (after any it already has). */
+	public function with( LookKey $key, StyleBinding ...$bindings ): self
+	{
+		if ( [] === $bindings ) {
+			return $this;
+		}
+
+		$id = $key->id();
+
+		return new self(
+			[ ...$this->keys, $id => $key ],
+			[ ...$this->bindings, $id => [ ...( $this->bindings[ $id ] ?? [] ), ...array_values( $bindings ) ] ]
+		);
 	}
 
 	public function merge( self $other ): self
 	{
-		$states = $this->states;
-		foreach ( $other->states as $state => $bindings ) {
-			$states[ $state ] = [ ...( $states[ $state ] ?? [] ), ...$bindings ];
+		$merged = $this;
+		foreach ( $other->keys as $id => $key ) {
+			$merged = $merged->with( $key, ...( $other->bindings[ $id ] ?? [] ) );
 		}
 
-		return new self( [ ...$this->base, ...$other->base ], $states );
+		return $merged;
 	}
 
 	/**
-	 * @param CssLayer $layer The base layer (defaults or instances).
+	 * @param CssLayer $layer The base layer (defaults, variants or instances).
 	 */
 	public function css( StyleCompiler $compiler, CssLayer $layer ): string
 	{
+		$keys = array_values( $this->keys );
+		usort( $keys, LookKey::compare( ... ) );
+
+		$base   = '';
 		$states = '';
-		foreach ( BlockState::cases() as $state ) {
-			$states .= $compiler->rules( ...( $this->states[ $state->value ] ?? [] ) );
+		foreach ( $keys as $key ) {
+			$rules = $compiler->rules( ...( $this->bindings[ $key->id() ] ?? [] ) );
+			$query = $key->mediaQuery();
+			if ( '' !== $rules && null !== $query ) {
+				$rules = "@media {$query}{{$rules}}";
+			}
+			if ( $key->hasStates() ) {
+				$states .= $rules;
+			} else {
+				$base .= $rules;
+			}
 		}
 
-		return $compiler->compile( $layer, ...$this->base ) . ( '' === $states ? '' : $layer->states()->wrap( $states ) );
+		return ( '' === $base ? '' : $layer->wrap( $base ) ) . ( '' === $states ? '' : $layer->states()->wrap( $states ) );
 	}
 }

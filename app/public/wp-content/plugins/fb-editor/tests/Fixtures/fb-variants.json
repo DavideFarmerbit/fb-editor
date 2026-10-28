@@ -5,13 +5,39 @@
 				"slug": "primary",
 				"name": "Primary",
 				"values": {
-					"base": { "fontWeight": { "desktop": "600" } },
-					"states": { "hover": { "fontWeight": { "desktop": "800" } } }
+					"looks": [
+						{
+							"values": {
+								"fontWeight": {
+									"desktop": "600"
+								}
+							}
+						},
+						{
+							"states": [
+								"hover"
+							],
+							"values": {
+								"fontWeight": {
+									"desktop": "800"
+								}
+							}
+						}
+					]
 				}
 			},
-			{ "slug": "Not A Slug", "name": "Dropped" },
-			{ "slug": "primary", "name": "Duplicate, dropped" },
-			{ "slug": "ghost", "name": "  " }
+			{
+				"slug": "Not A Slug",
+				"name": "Dropped"
+			},
+			{
+				"slug": "primary",
+				"name": "Duplicate, dropped"
+			},
+			{
+				"slug": "ghost",
+				"name": "  "
+			}
 		]
 	}
 }

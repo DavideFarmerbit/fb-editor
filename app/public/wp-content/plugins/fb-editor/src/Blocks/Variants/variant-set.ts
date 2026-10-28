@@ -2,7 +2,7 @@
  * Mirrors Fb\Blocks\Variants\{VariantSlug, Variant, VariantSet}: a block
  * type's named looks, stored as a list:
  *
- *   [{"slug": "primary", "name": "Primary", "values": {"base": …}}]
+ *   [{"slug": "primary", "name": "Primary", "values": {"looks": […]}}]
  */
 import type { BreakpointList } from '../../Breakpoints/breakpoints';
 import { InvalidJson, JsonValue } from '../../Json/json';

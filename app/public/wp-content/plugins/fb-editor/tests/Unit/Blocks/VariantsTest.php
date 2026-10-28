@@ -65,7 +65,7 @@ final class VariantsTest extends TestCase
 	public function testThemeVariantsDropInvalidEntries(): void
 	{
 		self::assertSame(
-			'[{"slug":"primary","name":"Primary","values":{"base":{"fontWeight":{"desktop":"600"}},"states":{"hover":{"fontWeight":{"desktop":"800"}}}}},'
+			'[{"slug":"primary","name":"Primary","values":{"looks":[{"values":{"fontWeight":{"desktop":"600"}}},{"states":["hover"],"values":{"fontWeight":{"desktop":"800"}}}]}},'
 			. '{"slug":"ghost","name":"ghost","values":{}}]',
 			wp_json_encode( $this->rendering()->variants->theme( $this->button->definition() ) )
 		);
@@ -73,20 +73,20 @@ final class VariantsTest extends TestCase
 
 	public function testSavedContentIsSanitized(): void
 	{
-		$this->save( '[{"slug":"big","name":"<b>Big</b>","values":{"base":{"fontSize":{"desktop":{"kind":"custom","value":2,"unit":"rem"}},"evil":1}},"x":1},{"slug":"--"},"nope"]' );
+		$this->save( '[{"slug":"big","name":"<b>Big</b>","values":{"looks":[{"values":{"fontSize":{"desktop":{"kind":"custom","value":2,"unit":"rem"}},"evil":1}}]},"x":1},{"slug":"--"},"nope"]' );
 
 		self::assertSame(
-			'[{"slug":"big","name":"Big","values":{"base":{"fontSize":{"desktop":{"kind":"custom","value":2.0,"unit":"rem"}}}}}]',
+			'[{"slug":"big","name":"Big","values":{"looks":[{"values":{"fontSize":{"desktop":{"kind":"custom","value":2.0,"unit":"rem"}}}}]}}]',
 			get_post_field( 'post_content', $this->postId )
 		);
 	}
 
 	public function testSavedVariantsOverlayThemeOnesBySlug(): void
 	{
-		$this->save( '[{"slug":"big","name":"Big"},{"slug":"primary","name":"Main","values":{"base":{"fontWeight":{"mobile":"700"}}}}]' );
+		$this->save( '[{"slug":"big","name":"Big"},{"slug":"primary","name":"Main","values":{"looks":[{"values":{"fontWeight":{"mobile":"700"}}}]}}]' );
 
 		self::assertSame(
-			'[{"slug":"primary","name":"Main","values":{"base":{"fontWeight":{"desktop":"600","mobile":"700"}},"states":{"hover":{"fontWeight":{"desktop":"800"}}}}},'
+			'[{"slug":"primary","name":"Main","values":{"looks":[{"values":{"fontWeight":{"desktop":"600","mobile":"700"}}},{"states":["hover"],"values":{"fontWeight":{"desktop":"800"}}}]}},'
 			. '{"slug":"ghost","name":"ghost","values":{}},'
 			. '{"slug":"big","name":"Big","values":{}}]',
 			wp_json_encode( $this->rendering()->variants->for( $this->button->definition() ) )

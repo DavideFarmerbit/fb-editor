@@ -12,6 +12,7 @@ use Fb\Json\InvalidJson;
 use Fb\Json\JsonValue;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Tests\Fixtures\TestRendering;
+use Fb\Tests\Fixtures\TestLooks;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,7 +53,7 @@ final class HidingTest extends TestCase
 
 	public function testRootGetsOneClassPerHiddenBreakpointInBreakpointOrder(): void
 	{
-		$html = $this->rendering->render( new Container(), [ 'fb' => [ 'base' => [ 'hideOn' => [ 'mobile', 'gone', 'desktop' ] ] ] ], '' );
+		$html = $this->rendering->render( new Container(), [ 'fb' => TestLooks::of( [ 'hideOn' => [ 'mobile', 'gone', 'desktop' ] ] ) ], '' );
 
 		// Unknown breakpoints are kept in the value but give no class.
 		self::assertSame( '<div class="fb-container fb-hide-desktop fb-hide-mobile"></div>', $html );

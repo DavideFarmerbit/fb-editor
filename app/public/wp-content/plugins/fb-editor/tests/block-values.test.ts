@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 
 import { describe, expect, test } from 'vitest';
 
+import { looks } from './looks';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import type { ControlId } from '../src/Blocks/Definition/control-id';
 import { BlockValues } from '../src/Blocks/Values/block-values';
@@ -131,7 +132,7 @@ describe( 'defaults in the editor', () => {
 
 	test( 'the tag falls back to the variant, the default, then the input fallback', () => {
 		const container = definition( 'fb/container' );
-		const base = ( attribute: unknown ) => StatefulValues.fromJson( { base: attribute }, container, breakpoints );
+		const base = ( attribute: unknown ) => StatefulValues.fromJson( looks( attribute ), container, breakpoints );
 
 		expect( container.option( 'tag', base( {} ), null, base( { tag: 'aside' } ) ) ).toBe( 'aside' );
 		expect( container.option( 'tag', base( {} ), base( { tag: 'header' } ), base( { tag: 'aside' } ) ) ).toBe( 'header' );
@@ -142,11 +143,8 @@ describe( 'defaults in the editor', () => {
 	test( 'editing the base look keeps the states', () => {
 		const button = definition( 'core/button' );
 		const weight = ( value: string ) => ( { fontWeight: { desktop: value } } );
-		const current = StatefulValues.fromJson( { base: weight( '400' ), states: { hover: weight( '700' ) } }, button, breakpoints );
+		const current = StatefulValues.fromJson( looks( weight( '400' ), { hover: weight( '700' ) } ), button, breakpoints );
 
-		expect( json( current.withBase( BlockValues.fromAttribute( weight( '500' ), button, breakpoints ) ) ) ).toEqual( {
-			base: weight( '500' ),
-			states: { hover: weight( '700' ) },
-		} );
+		expect( json( current.withBase( BlockValues.fromAttribute( weight( '500' ), button, breakpoints ) ) ) ).toEqual( looks( weight( '500' ), { hover: weight( '700' ) } ) );
 	} );
 } );

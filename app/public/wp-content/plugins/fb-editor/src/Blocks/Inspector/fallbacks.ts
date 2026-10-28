@@ -4,6 +4,8 @@
  *
  *   Button default (Hover) → the block's base → Button default
  *
+ * (a dark-mode hover look also reads the dark-mode looks, see LookKey).
+ *
  * Same order as the CSS cascade (and ValueChain), so the sidebar shows what
  * the canvas shows.
  */
@@ -12,7 +14,8 @@ import { __, sprintf } from '@wordpress/i18n';
 import type { BreakpointId, BreakpointList } from '../../Breakpoints/breakpoints';
 import type { ResponsiveValue } from '../../Values/value';
 import type { ControlId } from '../Definition/control-id';
-import type { BlockState } from '../States/BlockState.generated';
+import type { BlockDefinition } from '../Definition/block-definition';
+import type { LookKey } from '../Looks/look-key';
 import type { BlockValues } from '../Values/block-values';
 import type { StatefulValues } from '../Values/stateful-values';
 
@@ -59,23 +62,52 @@ export class WeakerSource {
 	) {}
 }
 
+/** "Hover", "Hover + Focus · Dark mode", "Base". */
+export function lookLabel( definition: BlockDefinition, key: LookKey ): string {
+	if ( key.isBase() ) {
+		return __( 'Base', 'fb-editor' );
+	}
+	const states = key.states.map( ( state ) => definition.states.find( ( info ) => info.id === state )?.label ?? state );
+	const conditions = key.conditions.map( ( condition ) => definition.conditions.find( ( info ) => info.id === condition )?.label ?? condition );
+	return [ states.join( ' + ' ), conditions.join( ' + ' ) ].filter( ( part ) => part !== '' ).join( ' · ' );
+}
+
 /** "From Section default (Hover)". */
-function inState( status: string, stateLabel: string ): string {
-	/* translators: 1: where a value comes from, e.g. "From Section default"; 2: state, e.g. "Hover" */
-	return sprintf( __( '%1$s (%2$s)', 'fb-editor' ), status, stateLabel );
+function inLook( status: string, label: string ): string {
+	/* translators: 1: where a value comes from, e.g. "From Section default"; 2: a look, e.g. "Hover" */
+	return sprintf( __( '%1$s (%2$s)', 'fb-editor' ), status, label );
+}
+
+/** "From base", "From Hover". */
+function fromOwn( definition: BlockDefinition, key: LookKey ): string {
+	return key.isBase()
+		? __( 'From base', 'fb-editor' )
+		: /* translators: %s: another look of the same block, e.g. "Hover" */ sprintf( __( 'From %s', 'fb-editor' ), lookLabel( definition, key ) );
 }
 
 /**
- * The fallbacks of one look of `values`: in a state, the weaker sources'
- * same state, then its own base, then the weaker bases. Mirrors
- * StatefulValues.chain().
+ * The fallbacks of one look of `values`: every other look applying within
+ * it, own and weaker, in CSS cascade order (mirrors StatefulValues.chain(),
+ * without the edited look itself).
  */
-export function fallbacksFor( values: StatefulValues, weaker: readonly WeakerSource[], state: BlockState | null, stateLabel: string ): Fallbacks {
+export function fallbacksFor( definition: BlockDefinition, values: StatefulValues, weaker: readonly WeakerSource[], key: LookKey ): Fallbacks {
 	const sources: Fallback[] = [];
-	if ( state !== null ) {
-		sources.push( ...weaker.map( ( source ) => new Fallback( source.values.state( state ), inState( source.status, stateLabel ) ) ) );
-		sources.push( new Fallback( values.base, __( 'From base', 'fb-editor' ) ) );
+	const all = [ new WeakerSource( values, '' ), ...weaker ];
+	for ( const withStates of [ true, false ] ) {
+		all.forEach( ( source, index ) => {
+			for ( const look of [ ...source.values.looks() ].reverse() ) {
+				if ( look.key.hasStates() !== withStates || ! look.key.appliesWithin( key ) || ( index === 0 && look.key.equals( key ) ) ) {
+					continue;
+				}
+				let status: string;
+				if ( index === 0 ) {
+					status = fromOwn( definition, look.key );
+				} else {
+					status = look.key.isBase() ? source.status : inLook( source.status, lookLabel( definition, look.key ) );
+				}
+				sources.push( new Fallback( look.values, status ) );
+			}
+		} );
 	}
-	sources.push( ...weaker.map( ( source ) => new Fallback( source.values.base, source.status ) ) );
 	return new Fallbacks( sources );
 }

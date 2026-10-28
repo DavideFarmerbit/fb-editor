@@ -10,6 +10,7 @@ use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Tests\Fixtures\TestRendering;
+use Fb\Tests\Fixtures\TestLooks;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -41,12 +42,10 @@ final class ContainerRenderTest extends TestCase
 	public function testRendersTagUserClassesAndInstanceClass(): void
 	{
 		$attributes = [
-			'fb'        => [
-				'base' => [
+			'fb'        => TestLooks::of( [
 					'tag'     => 'header',
 					'padding' => [ 'desktop' => [ 'top' => [ 'kind' => 'custom', 'value' => 8, 'unit' => 'px' ] ] ],
-				],
-			],
+				] ),
 			'className' => 'hero "><script>',
 		];
 
@@ -61,7 +60,7 @@ final class ContainerRenderTest extends TestCase
 
 	public function testIdenticalInstancesAreCompiledOnce(): void
 	{
-		$attributes = [ 'fb' => [ 'base' => [ 'margin' => [ 'desktop' => [ 'left' => [ 'kind' => 'auto' ] ] ] ] ] ];
+		$attributes = [ 'fb' => TestLooks::of( [ 'margin' => [ 'desktop' => [ 'left' => [ 'kind' => 'auto' ] ] ] ] ) ];
 
 		$this->rendering->render( new Container(), $attributes, '' );
 		$this->rendering->render( new Container(), $attributes, '' );
@@ -71,7 +70,7 @@ final class ContainerRenderTest extends TestCase
 
 	public function testInvalidTagFallsBackToDiv(): void
 	{
-		self::assertStringStartsWith( '<div class="fb-container">', $this->rendering->render( new Container(), [ 'fb' => [ 'base' => [ 'tag' => 'script' ] ] ], '' ) );
+		self::assertStringStartsWith( '<div class="fb-container">', $this->rendering->render( new Container(), [ 'fb' => TestLooks::of( [ 'tag' => 'script' ] ) ], '' ) );
 	}
 
 	public function testBaseCssComposesPaddingWithTheContentWidth(): void
@@ -94,13 +93,11 @@ final class ContainerRenderTest extends TestCase
 		$html = $this->rendering->render(
 			new Container(),
 			[
-				'fb' => [
-					'base' => [
+				'fb' => TestLooks::of( [
 						'display'      => [ 'desktop' => 'grid' ],
 						'columns'      => [ 'desktop' => [ 'kind' => 'count', 'count' => 3 ], 'mobile' => [ 'kind' => 'fit', 'min' => [ 'kind' => 'custom', 'value' => 240, 'unit' => 'px' ] ] ],
 						'contentWidth' => [ 'desktop' => [ 'kind' => 'custom', 'value' => 72, 'unit' => 'rem' ] ],
-					],
-				],
+					] ),
 			],
 			''
 		);

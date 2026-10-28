@@ -13,7 +13,7 @@ use Fb\Json\JsonValue;
 /**
  * The variants of one block type, in order. Stored as a list:
  *
- *   [{"slug": "primary", "name": "Primary", "values": {"base": …}}]
+ *   [{"slug": "primary", "name": "Primary", "values": {"looks": […]}}]
  *
  * Invalid entries are dropped one by one; a repeated slug keeps the first.
  */

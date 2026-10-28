@@ -14,6 +14,7 @@ use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Tests\Fixtures\TestRendering;
+use Fb\Tests\Fixtures\TestLooks;
 use Fb\Theme\ThemeConfigFile;
 use PHPUnit\Framework\TestCase;
 
@@ -76,18 +77,18 @@ final class DefaultsTest extends TestCase
 
 	public function testSavedContentIsSanitizedThroughTheDefinition(): void
 	{
-		$this->save( '{"base":{"padding":{"desktop":{"top":{"kind":"custom","value":-5,"unit":"px"},"left":{"kind":"auto"},"right":{"kind":"custom","value":8,"unit":"px"}}},"evil":"<script>"},"evil":1}' );
+		$this->save( '{"looks":[{"values":{"padding":{"desktop":{"top":{"kind":"custom","value":-5,"unit":"px"},"left":{"kind":"auto"},"right":{"kind":"custom","value":8,"unit":"px"}}},"evil":"<script>"}}],"evil":1}' );
 
-		self::assertSame( '{"base":{"padding":{"desktop":{"right":{"kind":"custom","value":8.0,"unit":"px"}}}}}', get_post_field( 'post_content', $this->postId ) );
+		self::assertSame( '{"looks":[{"values":{"padding":{"desktop":{"right":{"kind":"custom","value":8.0,"unit":"px"}}}}}]}', get_post_field( 'post_content', $this->postId ) );
 	}
 
 	public function testSavedDefaultsOverlayTheThemeDefaults(): void
 	{
-		$this->save( '{"base":{"padding":{"mobile":{"top":{"kind":"custom","value":24,"unit":"px"}}}}}' );
+		$this->save( '{"looks":[{"values":{"padding":{"mobile":{"top":{"kind":"custom","value":24,"unit":"px"}}}}}]}' );
 
 		self::assertSame(
 			// Theme desktop + saved mobile (beats theme mobile) + theme display.
-			'{"base":{"display":{"desktop":"flex"},"padding":{"desktop":{"top":{"kind":"custom","value":40.0,"unit":"px"}},"mobile":{"top":{"kind":"custom","value":24.0,"unit":"px"}}}}}',
+			'{"looks":[{"values":{"display":{"desktop":"flex"},"padding":{"desktop":{"top":{"kind":"custom","value":40.0,"unit":"px"}},"mobile":{"top":{"kind":"custom","value":24.0,"unit":"px"}}}}}]}',
 			wp_json_encode( $this->repository()->for( $this->container->definition() ), JSON_PRESERVE_ZERO_FRACTION )
 		);
 	}
@@ -112,11 +113,11 @@ final class DefaultsTest extends TestCase
 
 	public function testRenderFallsBackToTheDefaultTag(): void
 	{
-		$this->save( '{"base":{"tag":"aside"}}' );
+		$this->save( '{"looks":[{"values":{"tag":"aside"}}]}' );
 		$rendering = $this->rendering();
 
 		self::assertStringStartsWith( '<aside class="fb-container', $rendering->render( $this->container, [], '' ) );
-		self::assertStringStartsWith( '<main class="fb-container', $rendering->render( $this->container, [ 'fb' => [ 'base' => [ 'tag' => 'main' ] ] ], '' ) );
+		self::assertStringStartsWith( '<main class="fb-container', $rendering->render( $this->container, [ 'fb' => TestLooks::of( [ 'tag' => 'main' ] ) ], '' ) );
 	}
 
 	public function testNoBlocksOnThePageMeansNoDefaultsCss(): void

@@ -2,7 +2,7 @@
  * Mirrors Fb\Blocks\Values\BlockAttribute: a block's whole `fb` attribute,
  * the variant it uses (kept even if it doesn't exist) and its own values.
  *
- *   {"variant": "primary", "base": {…}, "states": {…}}
+ *   {"variant": "primary", "looks": […]}
  */
 import type { BreakpointList } from '../../Breakpoints/breakpoints';
 import { JsonValue } from '../../Json/json';

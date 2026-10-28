@@ -23,8 +23,8 @@ final readonly class BlockStyles
 	}
 
 	/**
-	 * Every look of one source: its base on `$root`, each state on `$root`
-	 * with the state's pseudo-class.
+	 * Every look of one source, each on `$root` with its states'
+	 * pseudo-classes, its conditions read from the look's own chain.
 	 *
 	 * @param Selector       $root   The instance class for a block, the
 	 *     block class for type defaults.
@@ -33,15 +33,13 @@ final readonly class BlockStyles
 	 */
 	public function forSource( BlockDefinition $definition, StatefulValues $values, Selector $root, StatefulValues ...$weaker ): BlockBindings
 	{
-		$states = [];
-		foreach ( $definition->states as $state ) {
-			$bindings = $this->bindings( $definition, $values->state( $state ), $root->withPseudoClass( $state->pseudoClass() ), $values->chain( $state, ...$weaker ) );
-			if ( [] !== $bindings ) {
-				$states[ $state->value ] = $bindings;
-			}
+		$bindings = new BlockBindings();
+		foreach ( $values->looks() as $look ) {
+			$selector = $look->key->hasStates() ? $root->withPseudoClass( $look->key->pseudoClass() ) : $root;
+			$bindings = $bindings->with( $look->key, ...$this->bindings( $definition, $look->values, $selector, $values->chain( $look->key, ...$weaker ) ) );
 		}
 
-		return new BlockBindings( $this->bindings( $definition, $values->base, $root, $values->chain( null, ...$weaker ) ), $states );
+		return $bindings;
 	}
 
 	/**

@@ -11,6 +11,7 @@ use Fb\CoreBlocks\Library\Button\Button;
 use Fb\Styles\Output\MaskIconOutput;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Tests\Fixtures\TestRendering;
+use Fb\Tests\Fixtures\TestLooks;
 use Fb\Values\SvgValue;
 use PHPUnit\Framework\TestCase;
 
@@ -65,7 +66,7 @@ final class CoverAndIconTest extends TestCase
 
 		$html = $this->rendering->render(
 			new Container(),
-			[ 'fb' => [ 'states' => [], 'base' => [ 'overlayColor' => [ 'desktop' => [ 'kind' => 'custom', 'value' => '#000000' ] ] ] ] ],
+			[ 'fb' => TestLooks::of( [ 'overlayColor' => [ 'desktop' => [ 'kind' => 'custom', 'value' => '#000000' ] ] ] ) ],
 			'x'
 		);
 		self::assertMatchesRegularExpression( '#^<div class="fb-container fb-[0-9a-z]{7}"><span class="fb-container__overlay" aria-hidden="true"></span>x</div>$#', $html );
@@ -78,7 +79,7 @@ final class CoverAndIconTest extends TestCase
 			'fb-test/clip.mp4'
 		);
 
-		$html = $this->rendering->render( new Container(), [ 'fb' => [ 'base' => [ 'backgroundMedia' => [ 'id' => $this->attachment, 'kind' => 'video' ] ] ] ], '' );
+		$html = $this->rendering->render( new Container(), [ 'fb' => TestLooks::of( [ 'backgroundMedia' => [ 'id' => $this->attachment, 'kind' => 'video' ] ] ) ], '' );
 		self::assertMatchesRegularExpression(
 			'#^<div class="fb-container"><video class="fb-container__media" src="[^"]+/fb-test/clip\.mp4" autoplay muted loop playsinline aria-hidden="true"></video><span class="fb-container__overlay" aria-hidden="true"></span></div>$#',
 			$html
@@ -87,7 +88,7 @@ final class CoverAndIconTest extends TestCase
 		// Asked for as an image: not one, so nothing (and no overlay).
 		self::assertSame(
 			'<div class="fb-container"></div>',
-			$this->rendering->render( new Container(), [ 'fb' => [ 'base' => [ 'backgroundMedia' => [ 'id' => $this->attachment, 'kind' => 'image' ] ] ] ], '' )
+			$this->rendering->render( new Container(), [ 'fb' => TestLooks::of( [ 'backgroundMedia' => [ 'id' => $this->attachment, 'kind' => 'image' ] ] ) ], '' )
 		);
 	}
 }

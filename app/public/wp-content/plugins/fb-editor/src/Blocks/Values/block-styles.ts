@@ -7,7 +7,6 @@ import type { Selector } from '../../Styles/css';
 import { StyleBinding, Visibility } from '../../Styles/compiler';
 import { BlockBindings } from './block-bindings';
 import type { BlockValues } from './block-values';
-import type { BlockState } from '../States/BlockState.generated';
 import type { StatefulValues } from './stateful-values';
 import type { ValueChain } from './value-chain';
 
@@ -23,14 +22,12 @@ export class BlockStyles {
 	 * sources below it (a block's type defaults), for conditions.
 	 */
 	forSource( definition: BlockDefinition, values: StatefulValues, root: Selector, ...weaker: StatefulValues[] ): BlockBindings {
-		const states = new Map< BlockState, readonly StyleBinding[] >();
-		for ( const state of definition.states ) {
-			const bindings = this.bindings( definition, values.state( state.id ), root.withPseudoClass( this.editor ? state.editorPseudoClass : state.pseudoClass ), values.chain( state.id, ...weaker ) );
-			if ( bindings.length > 0 ) {
-				states.set( state.id, bindings );
-			}
+		let bindings = new BlockBindings();
+		for ( const look of values.looks() ) {
+			const selector = look.key.hasStates() ? root.withPseudoClass( look.key.pseudoClass( definition, this.editor ) ) : root;
+			bindings = bindings.with( look.key, look.key.mediaQuery( definition ), this.bindings( definition, look.values, selector, values.chain( look.key, ...weaker ) ) );
 		}
-		return new BlockBindings( this.bindings( definition, values.base, root, values.chain( null, ...weaker ) ), states );
+		return bindings;
 	}
 
 	/** `context`: what conditions read (starting with `values`). */

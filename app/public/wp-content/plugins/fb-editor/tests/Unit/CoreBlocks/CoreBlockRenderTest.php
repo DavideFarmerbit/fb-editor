@@ -16,6 +16,7 @@ use Fb\Blocks\Variants\VariantsStylesheet;
 use Fb\Output\BlockMarkupCleaner;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Tests\Fixtures\TestRendering;
+use Fb\Tests\Fixtures\TestLooks;
 use Fb\Theme\ThemeConfigFile;
 use PHPUnit\Framework\TestCase;
 
@@ -64,10 +65,7 @@ final class CoreBlockRenderTest extends TestCase
 	{
 		$block = [
 			'attrs' => [
-				'fb'        => [
-					'base'   => [ 'fontWeight' => [ 'desktop' => '700' ] ],
-					'states' => [ 'hover' => [ 'fontWeight' => [ 'desktop' => '800' ] ] ],
-				],
+				'fb'        => TestLooks::of( [ 'fontWeight' => [ 'desktop' => '700' ] ], [ 'hover' => [ 'fontWeight' => [ 'desktop' => '800' ] ] ] ),
 				'className' => 'is-style-outline cta',
 			],
 		];

@@ -9,6 +9,7 @@ use Fb\Blocks\Library\Separator\Separator;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use Fb\Tests\Fixtures\TestRendering;
+use Fb\Tests\Fixtures\TestLooks;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,7 +41,7 @@ final class ContentBlocksTest extends TestCase
 	{
 		self::assertSame(
 			'<span class="fb-icon" aria-hidden="true">' . self::SVG . '</span>',
-			$this->rendering->render( new Icon(), [ 'fb' => [ 'base' => [ 'svg' => self::SVG . '<!-- x -->' ] ] ], '' )
+			$this->rendering->render( new Icon(), [ 'fb' => TestLooks::of( [ 'svg' => self::SVG . '<!-- x -->' ] ) ], '' )
 		);
 	}
 
@@ -49,13 +50,11 @@ final class ContentBlocksTest extends TestCase
 		$html = $this->rendering->render(
 			new Icon(),
 			[
-				'fb' => [
-					'base' => [
+				'fb' => TestLooks::of( [
 						'svg'   => self::SVG,
 						'label' => 'Open <b>menu</b>',
 						'link'  => [ 'url' => 'https://example.test/a?b=1&c=2', 'newTab' => true, 'nofollow' => true ],
-					],
-				],
+					] ),
 			],
 			''
 		);
@@ -68,7 +67,7 @@ final class ContentBlocksTest extends TestCase
 
 	public function testUnsafeLinksAreDropped(): void
 	{
-		$html = $this->rendering->render( new Icon(), [ 'fb' => [ 'base' => [ 'svg' => self::SVG, 'link' => [ 'url' => 'javascript:alert(1)' ] ] ] ], '' );
+		$html = $this->rendering->render( new Icon(), [ 'fb' => TestLooks::of( [ 'svg' => self::SVG, 'link' => [ 'url' => 'javascript:alert(1)' ] ] ) ], '' );
 
 		self::assertStringStartsWith( '<span class="fb-icon"', $html );
 	}
@@ -83,7 +82,7 @@ final class ContentBlocksTest extends TestCase
 			'<div class="fb-separator" role="separator"><span class="fb-separator__line"></span>'
 			. '<span class="fb-separator__icon" aria-hidden="true">' . self::SVG . '</span>'
 			. '<span class="fb-separator__line"></span></div>',
-			$this->rendering->render( new Separator(), [ 'fb' => [ 'base' => [ 'svg' => self::SVG ] ] ], '' )
+			$this->rendering->render( new Separator(), [ 'fb' => TestLooks::of( [ 'svg' => self::SVG ] ) ], '' )
 		);
 	}
 }

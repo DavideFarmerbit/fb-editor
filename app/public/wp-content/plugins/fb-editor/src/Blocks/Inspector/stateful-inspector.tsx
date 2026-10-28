@@ -1,6 +1,6 @@
 /**
- * The sidebar for everything one source styles a block with: a state bar
- * (Base · Hover · …) over the Inspector of the chosen look.
+ * The sidebar for everything one source styles a block with: a look bar
+ * (Base · Hover · …) over the Inspector of the chosen look (see LookKey).
  *
  * Each look has its own list of controls: hover starts empty even when the
  * base has values, and only shows what's set (or added) for hover. Unset
@@ -8,19 +8,19 @@
  *
  *   own hover → Button default (Hover) → own base → Button default
  */
-import { Button } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import type { ReactElement } from 'react';
 
 import { store } from '../../Editor/store';
 import type { BlockDefinition, Control } from '../Definition/block-definition';
-import type { BlockState } from '../States/BlockState.generated';
+import { LookKey } from '../Looks/look-key';
 import { BlockValues } from '../Values/block-values';
 import type { StatefulValues } from '../Values/stateful-values';
-import { fallbacksFor, type WeakerSource } from './fallbacks';
+import { fallbacksFor, lookLabel, type WeakerSource } from './fallbacks';
 import { Inspector } from './inspector';
 import type { ParentContext } from './parent-context';
+import { StateBar, StateBarItem } from './state-bar';
 
 interface StatefulInspectorProps {
 	readonly definition: BlockDefinition;
@@ -44,69 +44,53 @@ interface StatefulInspectorProps {
 	readonly memoryKey: string;
 	readonly onChange: ( values: StatefulValues ) => void;
 	/** Copies a control of a look to the type default; null where not offered. */
-	readonly makeDefault: ( ( control: Control, state: BlockState | null ) => void ) | null;
+	readonly makeDefault: ( ( control: Control, look: LookKey ) => void ) | null;
 }
 
 export function StatefulInspector( props: StatefulInspectorProps ): ReactElement {
 	const { definition, values, weaker, listFallbackControls, allowPlaced, filterable, parent, memoryKey, onChange, makeDefault } = props;
-	const inspected = useSelect( ( select ) => select( store ).getInspectedState( memoryKey ), [ memoryKey ] );
+	const inspectedId = useSelect( ( select ) => select( store ).getInspectedLook( memoryKey ), [ memoryKey ] );
 	const chosenView = useSelect( ( select ) => select( store ).getSidebarView(), [] );
 	const view = filterable ? chosenView : null;
-	const { inspectState } = useDispatch( store );
+	const { inspectLook } = useDispatch( store );
 
-	// A state the block doesn't support (anymore) is the base; so is
-	// everything in the Settings view.
+	// A look the block can't have (anymore) is the base; so is everything
+	// in the Settings view.
 	const statesApply = view !== 'settings';
-	const info = statesApply ? definition.states.find( ( candidate ) => candidate.id === inspected ) : undefined;
-	const state = info?.id ?? null;
-	const firstWeaker = weaker[ 0 ]?.values.look( state ) ?? null;
+	const inspected = LookKey.fromId( inspectedId );
+	const key = statesApply && inspected.states.every( ( state ) => definition.states.some( ( info ) => info.id === state ) ) ? inspected : LookKey.BASE;
+	const firstWeaker = weaker[ 0 ]?.values.look( key ) ?? null;
+
+	const items = [ LookKey.BASE, ...definition.states.map( ( info ) => LookKey.ofState( info.id ) ) ].map(
+		( candidate ) => new StateBarItem( candidate.id(), lookLabel( definition, candidate ), ! values.look( candidate ).isEmpty() )
+	);
 
 	return (
 		<>
 			{ definition.states.length > 0 && (
-				<div className="fb-states" role="group" aria-label={ __( 'State', 'fb-editor' ) }>
-					{ [ null, ...definition.states ].map( ( candidate ) => {
-						const id = candidate?.id ?? null;
-						const classes = [ 'fb-states__item' ];
-						if ( ! values.look( id ).isEmpty() ) {
-							classes.push( 'is-set' );
-						}
-						if ( id === state ) {
-							classes.push( 'is-current' );
-						}
-						return (
-							<Button
-								key={ id ?? 'base' }
-								className={ classes.join( ' ' ) }
-								// Not aria-pressed: core would give it its dark pressed look.
-								{ ...( id === state ? { 'aria-current': true } : {} ) }
-								disabled={ ! statesApply }
-								accessibleWhenDisabled
-								{ ...( statesApply ? {} : { label: __( 'Settings are the same in every state', 'fb-editor' ), showTooltip: true } ) }
-								onClick={ () => inspectState( memoryKey, id ) }
-							>
-								{ candidate?.label ?? __( 'Base', 'fb-editor' ) }
-							</Button>
-						);
-					} ) }
-				</div>
+				<StateBar
+					items={ items }
+					current={ key.id() }
+					disabledReason={ statesApply ? null : __( 'Settings are the same in every state', 'fb-editor' ) }
+					onSelect={ ( id ) => inspectLook( memoryKey, LookKey.fromId( id ) ) }
+				/>
 			) }
 			<Inspector
 				// A fresh panel per look: open panels and edit state don't leak.
-				key={ state ?? 'base' }
+				key={ key.id() }
 				definition={ definition }
-				values={ values.look( state ) }
-				fallbacks={ fallbacksFor( values, weaker, state, info?.label ?? '' ) }
+				values={ values.look( key ) }
+				fallbacks={ fallbacksFor( definition, values, weaker, key ) }
 				fallbackLook={ firstWeaker ?? BlockValues.empty( definition, values.base.breakpoints() ) }
 				listFallbackControls={ listFallbackControls }
-				statefulOnly={ state !== null }
+				statefulOnly={ ! key.isBase() }
 				view={ view }
 				filterable={ filterable }
 				allowPlaced={ allowPlaced }
 				parent={ parent }
-				memoryKey={ state === null ? memoryKey : `${ memoryKey }#${ state }` }
-				onChange={ ( look ) => onChange( values.withLook( state, look ) ) }
-				makeDefault={ makeDefault === null ? null : ( control ) => makeDefault( control, state ) }
+				memoryKey={ key.isBase() ? memoryKey : `${ memoryKey }#${ key.id() }` }
+				onChange={ ( look ) => onChange( values.withLook( key, look ) ) }
+				makeDefault={ makeDefault === null ? null : ( control ) => makeDefault( control, key ) }
 			/>
 		</>
 	);

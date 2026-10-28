@@ -20,7 +20,7 @@ import { ATTRIBUTE } from './BlockRegistry.generated';
 import { DefaultsStyles } from './Defaults/defaults-styles';
 import { useBlockDefaults, type BlockDefaults } from './Defaults/use-block-defaults';
 import type { BlockDefinition, Control } from './Definition/block-definition';
-import type { BlockState } from './States/BlockState.generated';
+import { LookKey } from './Looks/look-key';
 import { fromDefault } from './Inspector/control-reading';
 import { WeakerSource } from './Inspector/fallbacks';
 import { ParentContext } from './Inspector/parent-context';
@@ -68,15 +68,17 @@ export class FbBlockState {
 }
 
 /**
- * Editor only: the class that previews the state inspected in this block's
- * sidebar (memory key: its clientId), while the block is selected.
+ * Editor only: the classes that preview the states of the look inspected
+ * in this block's sidebar (memory key: its clientId), while the block is
+ * selected.
  */
 export function usePreviewClass( definition: BlockDefinition, clientId: string, isSelected: boolean ): string | null {
-	const inspected = useSelect( ( select ) => select( store ).getInspectedState( clientId ), [ clientId ] );
-	if ( ! isSelected || inspected === null ) {
+	const inspected = useSelect( ( select ) => select( store ).getInspectedLook( clientId ), [ clientId ] );
+	if ( ! isSelected ) {
 		return null;
 	}
-	return definition.states.find( ( state ) => state.id === inspected )?.previewClass ?? null;
+	const classes = LookKey.fromId( inspected ).states.flatMap( ( state ) => definition.states.find( ( info ) => info.id === state )?.previewClass ?? [] );
+	return classes.length === 0 ? null : classes.join( ' ' );
 }
 
 /** The variant class, when the block's variant exists (as on the frontend). */
@@ -135,7 +137,7 @@ function useParentContext( clientId: string, fallback: BlockDefinition ): Parent
 		const parsed = BlockAttribute.fromJson( attribute, parent, settings.breakpoints );
 		const variant = parsed.variant === null ? null : variants.all.get( parsed.variant );
 		const weaker = variant === null ? [ defaults.values ] : [ variant.values, defaults.values ];
-		return new ParentContext( parent, parsed.values.chain( null, ...weaker ) );
+		return new ParentContext( parent, parsed.values.chain( LookKey.BASE, ...weaker ) );
 	}, [ parent, attribute, defaults, variants ] );
 }
 
@@ -190,7 +192,7 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 	const parent = useParentContext( clientId, definition );
 	const weaker = variant === null ? [ defaultsSource ] : [ new WeakerSource( variant.values, fromVariant( variant.name ) ), defaultsSource ];
 	const makeDefault = defaults.canEdit
-		? ( control: Control, look: BlockState | null ) =>
+		? ( control: Control, look: LookKey ) =>
 				state.saveDefaults( defaults.saved.withLook( look, defaults.saved.look( look ).withControlFrom( control, values.look( look ) ) ) )
 		: null;
 

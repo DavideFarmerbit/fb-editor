@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 
 import { describe, expect, test } from 'vitest';
 
+import { looks } from './looks';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import { BlockAttribute } from '../src/Blocks/Values/block-attribute';
 import { StatefulValues } from '../src/Blocks/Values/stateful-values';
@@ -38,7 +39,7 @@ describe( 'variant sets', () => {
 			{
 				slug: 'primary',
 				name: 'Primary',
-				values: { base: { fontWeight: { desktop: '600' } }, states: { hover: { fontWeight: { desktop: '800' } } } },
+				values: looks( { fontWeight: { desktop: '600' } }, { hover: { fontWeight: { desktop: '800' } } } ),
 			},
 			{ slug: 'ghost', name: 'ghost', values: {} },
 		] );
@@ -49,7 +50,7 @@ describe( 'variant sets', () => {
 		const saved = VariantSet.fromJson(
 			[
 				{ slug: 'big', name: 'Big' },
-				{ slug: 'primary', name: 'Main', values: { base: { fontWeight: { mobile: '700' } } } },
+				{ slug: 'primary', name: 'Main', values: looks( { fontWeight: { mobile: '700' } } ) },
 			],
 			button,
 			breakpoints
@@ -59,7 +60,7 @@ describe( 'variant sets', () => {
 			{
 				slug: 'primary',
 				name: 'Main',
-				values: { base: { fontWeight: { desktop: '600', mobile: '700' } }, states: { hover: { fontWeight: { desktop: '800' } } } },
+				values: looks( { fontWeight: { desktop: '600', mobile: '700' } }, { hover: { fontWeight: { desktop: '800' } } } ),
 			},
 			{ slug: 'ghost', name: 'ghost', values: {} },
 			{ slug: 'big', name: 'Big', values: {} },
@@ -76,12 +77,12 @@ describe( 'variant sets', () => {
 
 describe( 'block attribute', () => {
 	test( 'keeps the variant next to the values', () => {
-		const attribute = BlockAttribute.fromJson( { variant: 'primary', base: { fontWeight: { desktop: '700' } }, junk: 1 }, button, breakpoints );
-		expect( json( attribute ) ).toEqual( { variant: 'primary', base: { fontWeight: { desktop: '700' } } } );
-		expect( json( attribute.withVariant( null ) ) ).toEqual( { base: { fontWeight: { desktop: '700' } } } );
+		const attribute = BlockAttribute.fromJson( { variant: 'primary', junk: 1, ...looks( { fontWeight: { desktop: '700' } } ) }, button, breakpoints );
+		expect( json( attribute ) ).toEqual( { variant: 'primary', ...looks( { fontWeight: { desktop: '700' } } ) } );
+		expect( json( attribute.withVariant( null ) ) ).toEqual( looks( { fontWeight: { desktop: '700' } } ) );
 		expect(
-			json( attribute.withValues( StatefulValues.fromJson( { states: { hover: { fontWeight: { desktop: '800' } } } }, button, breakpoints ) ) )
-		).toEqual( { variant: 'primary', states: { hover: { fontWeight: { desktop: '800' } } } } );
+			json( attribute.withValues( StatefulValues.fromJson( looks( null, { hover: { fontWeight: { desktop: '800' } } } ), button, breakpoints ) ) )
+		).toEqual( { variant: 'primary', ...looks( null, { hover: { fontWeight: { desktop: '800' } } } ) } );
 	} );
 
 	test( 'an invalid variant is dropped', () => {

@@ -12,7 +12,7 @@ use Fb\TypeScript\ExportToTypeScript;
 
 /**
  * Saved block type defaults: one post per block type and theme, content
- * shaped like a block's own values (`{"base": …, "states": …}`).
+ * shaped like a block's own values (`{"looks": […]}`).
  */
 final readonly class BlockDefaultsPostType extends ThemeDesignPostType
 {

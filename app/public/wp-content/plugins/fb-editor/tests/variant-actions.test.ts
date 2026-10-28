@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 
 import { describe, expect, test } from 'vitest';
 
+import { looks } from './looks';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import { BlockAttribute } from '../src/Blocks/Values/block-attribute';
 import { materialize, saveAsNewVariant, updateVariant } from '../src/Blocks/Variants/variant-actions';
@@ -35,10 +36,10 @@ const set = ( value: unknown ) => VariantSet.fromJson( value, button, breakpoint
 const attribute = ( value: unknown ) => BlockAttribute.fromJson( value, button, breakpoints );
 
 // Theme: "primary"; saved: an override of it plus "ghost".
-const theme = set( [ { slug: 'primary', name: 'Primary', values: { base: weight( '600' ) } } ] );
+const theme = set( [ { slug: 'primary', name: 'Primary', values: looks( weight( '600' ) ) } ] );
 const saved = set( [
-	{ slug: 'primary', name: 'Primary', values: { states: { hover: weight( '800' ) } } },
-	{ slug: 'ghost', name: 'Ghost', values: { base: weight( '300' ) } },
+	{ slug: 'primary', name: 'Primary', values: looks( null, { hover: weight( '800' ) } ) },
+	{ slug: 'ghost', name: 'Ghost', values: looks( weight( '300' ) ) },
 ] );
 const all = theme.overlay( saved );
 const primary = all.get( 'primary' as never );
@@ -48,34 +49,34 @@ if ( primary === null ) {
 
 describe( 'variant actions', () => {
 	test( 'save as new: the block’s whole look becomes the variant', () => {
-		const block = attribute( { variant: 'primary', base: weight( '700', '400' ) } );
+		const block = attribute( { variant: 'primary', ...looks( weight( '700', '400' ) ) } );
 		const change = saveAsNewVariant( block, primary, all, saved, ' Big & Bold ' );
 
 		expect( json( change.attribute ) ).toEqual( { variant: 'big-bold' } );
 		expect( json( change.saved?.get( 'big-bold' as never ) ) ).toEqual( {
 			slug: 'big-bold',
 			name: 'Big & Bold',
-			values: { base: weight( '700', '400' ), states: { hover: weight( '800' ) } },
+			values: looks( weight( '700', '400' ), { hover: weight( '800' ) } ),
 		} );
 	} );
 
 	test( 'update: own values go into the saved part of the variant', () => {
-		const change = updateVariant( button, breakpoints, attribute( { variant: 'primary', base: weight( '700' ) } ), primary, saved );
+		const change = updateVariant( button, breakpoints, attribute( { variant: 'primary', ...looks( weight( '700' ) ) } ), primary, saved );
 
 		expect( json( change.attribute ) ).toEqual( { variant: 'primary' } );
 		// Saved only: the theme's values stay underneath.
 		expect( json( change.saved?.get( 'primary' as never ) ) ).toEqual( {
 			slug: 'primary',
 			name: 'Primary',
-			values: { base: weight( '700' ), states: { hover: weight( '800' ) } },
+			values: looks( weight( '700' ), { hover: weight( '800' ) } ),
 		} );
 		expect( json( change.saved?.get( 'ghost' as never ) ) ).toEqual( json( saved.get( 'ghost' as never ) ) );
 	} );
 
 	test( 'materialize: the variant’s values become the block’s own', () => {
-		const change = materialize( attribute( { variant: 'primary', base: weight( '700' ) } ), primary );
+		const change = materialize( attribute( { variant: 'primary', ...looks( weight( '700' ) ) } ), primary );
 
-		expect( json( change.attribute ) ).toEqual( { base: weight( '700' ), states: { hover: weight( '800' ) } } );
+		expect( json( change.attribute ) ).toEqual( looks( weight( '700' ), { hover: weight( '800' ) } ) );
 		expect( change.saved ).toBeNull();
 	} );
 
