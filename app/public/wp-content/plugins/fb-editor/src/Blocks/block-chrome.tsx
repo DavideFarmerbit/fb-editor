@@ -14,7 +14,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import { useMemo } from '@wordpress/element';
 import type { ReactElement } from 'react';
 
-import { ActionCatalog } from '../Actions/action-catalog';
+import { ActionCatalog } from '../Actions/Catalog/action-catalog';
 import { ActionsPanel } from '../Actions/Panel/actions-panel';
 import { settings } from '../Editor/settings';
 import { store } from '../Editor/store';

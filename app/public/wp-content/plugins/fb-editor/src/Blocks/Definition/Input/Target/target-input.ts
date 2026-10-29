@@ -5,7 +5,7 @@
  *   "self"  |  {"block": "a7k2b9"}
  */
 import { InvalidJson, type JsonValue } from '../../../../Json/json';
-import { PATTERN } from '../../../../Actions/BlockAnchor.generated';
+import { PATTERN } from '../../../../Actions/Anchor/BlockAnchor.generated';
 import type { ResponsiveValue } from '../../../../Values/value';
 
 export class TargetValue implements ResponsiveValue {

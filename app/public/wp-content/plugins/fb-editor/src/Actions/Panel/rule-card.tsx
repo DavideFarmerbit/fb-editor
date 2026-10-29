@@ -11,8 +11,8 @@ import type { ReactElement } from 'react';
 import { describeBreakpoint } from '../../Breakpoints/Preview/preview';
 import { settings } from '../../Editor/settings';
 import { BreakpointSet } from '../../Values/breakpoint-set';
-import { ActionKind, type ActionCatalog } from '../action-catalog';
-import { Undo, type ActionRule } from '../block-actions';
+import { ActionKind, type ActionCatalog } from '../Catalog/action-catalog';
+import { Undo, type ActionRule } from '../Rules/block-actions';
 import { StepList } from './step-list';
 
 const UNDO_OPTIONS: ReadonlyArray< { readonly value: Undo; readonly label: () => string } > = [

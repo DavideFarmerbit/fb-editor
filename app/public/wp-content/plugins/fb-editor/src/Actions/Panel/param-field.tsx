@@ -14,6 +14,7 @@ import { LengthInput } from '../../Blocks/Definition/Input/Length/length-input';
 import { UnitInput } from '../../Blocks/Definition/Input/Length/unit-input';
 import { isAllowedUrl, LinkInput } from '../../Blocks/Definition/Input/Link/link-input';
 import { SelectInput } from '../../Blocks/Definition/Input/Select/select-input';
+import { TargetField } from '../../Blocks/Definition/Input/Target/target-control';
 import { TargetInput, TargetValue } from '../../Blocks/Definition/Input/Target/target-input';
 import { TextInput } from '../../Blocks/Definition/Input/Text/text-input';
 import { ToggleInput } from '../../Blocks/Definition/Input/Toggle/toggle-input';
@@ -23,8 +24,7 @@ import { LinkValue, TextValue } from '../../Values/content';
 import { KeywordValue } from '../../Values/keyword';
 import { AutoLength, CustomLength } from '../../Values/length';
 import type { ResponsiveValue } from '../../Values/value';
-import type { Param } from '../action-catalog';
-import { TargetField } from './target-field';
+import type { Param } from '../Catalog/action-catalog';
 
 interface ParamFieldProps {
 	readonly param: Param;

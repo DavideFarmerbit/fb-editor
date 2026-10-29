@@ -9,9 +9,9 @@ import { __ } from '@wordpress/i18n';
 import { closeSmall } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
-import { ActionKind, type ActionCatalog } from '../action-catalog';
-import { MAX_STEPS } from '../ActionRule.generated';
-import { Step } from '../block-actions';
+import { ActionKind, type ActionCatalog } from '../Catalog/action-catalog';
+import { MAX_STEPS } from '../Rules/ActionRule.generated';
+import { Step } from '../Rules/block-actions';
 import { ParamField } from './param-field';
 
 const JOINS: Readonly< Record< ActionKind, () => string > > = {

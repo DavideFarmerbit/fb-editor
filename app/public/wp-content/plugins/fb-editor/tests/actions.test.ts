@@ -7,8 +7,8 @@ import { fileURLToPath } from 'url';
 
 import { describe, expect, test } from 'vitest';
 
-import { ActionCatalog, ActionKind, type ActionType } from '../src/Actions/action-catalog';
-import { ActionRule, BlockActions, Step } from '../src/Actions/block-actions';
+import { ActionCatalog, ActionKind, type ActionType } from '../src/Actions/Catalog/action-catalog';
+import { ActionRule, BlockActions, Step } from '../src/Actions/Rules/block-actions';
 import { JsonValue } from '../src/Json/json';
 import { KeywordValue } from '../src/Values/keyword';
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Definition\Input\Target;
 
-use Fb\Actions\BlockAnchor;
+use Fb\Actions\Anchor\BlockAnchor;
 use Fb\Values\ResponsiveValue;
 
 /**

@@ -2,7 +2,7 @@
  * Boundary for `window.fbEditorSettings` (Fb\Editor\EditorSettings in PHP):
  * unknown JSON in, typed objects out. Anything malformed throws.
  */
-import { ActionCatalog } from '../Actions/action-catalog';
+import { ActionCatalog } from '../Actions/Catalog/action-catalog';
 import { breakpointListFromJson, type BreakpointList } from '../Breakpoints/breakpoints';
 import { BlockDesignInfo } from '../Blocks/Storage/block-design-info';
 import { blockDefinitionFromJson, ConditionInfo, type BlockDefinition } from '../Blocks/Definition/block-definition';

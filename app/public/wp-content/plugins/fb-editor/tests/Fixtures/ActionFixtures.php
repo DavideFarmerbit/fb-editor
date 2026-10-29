@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Fixtures;
 
-use Fb\Actions\BlockActions;
 use Fb\Actions\Library\Library;
+use Fb\Actions\Rules\BlockActions;
 
 /**
  * Builds tests/Fixtures/actions.json: the action catalog (as the editor

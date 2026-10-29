@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Rendering;
 
-use Fb\Actions\BlockAnchor;
+use Fb\Actions\Anchor\BlockAnchor;
 use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Definition\ControlId;

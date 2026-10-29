@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Unit\Actions;
 
-use Fb\Actions\ActionCatalog;
-use Fb\Actions\ActionsOnPage;
-use Fb\Actions\BlockActions;
-use Fb\Actions\BlockAnchor;
+use Fb\Actions\Anchor\BlockAnchor;
+use Fb\Actions\Catalog\ActionCatalog;
 use Fb\Actions\Library\Library;
-use Fb\Actions\TargetHiding;
+use Fb\Actions\Rendering\ActionsOnPage;
+use Fb\Actions\Rendering\TargetHiding;
+use Fb\Actions\Rules\BlockActions;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use PHPUnit\Framework\TestCase;
 

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { looks } from './looks';
-import { ActionCatalog } from '../src/Actions/action-catalog';
+import { ActionCatalog } from '../src/Actions/Catalog/action-catalog';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import { BlockAttribute } from '../src/Blocks/Values/block-attribute';
 import { materialize, saveAsNewVariant, updateVariant } from '../src/Blocks/Variants/variant-actions';

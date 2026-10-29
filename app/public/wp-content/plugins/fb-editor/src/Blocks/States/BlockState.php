@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\States;
 
-use Fb\Actions\Library\OpenClose;
+use Fb\Actions\Library\OpenClose\OpenClose;
 use Fb\TypeScript\ExportToTypeScript;
 
 /**

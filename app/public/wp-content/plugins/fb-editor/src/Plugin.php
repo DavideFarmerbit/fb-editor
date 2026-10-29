@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Fb;
 
-use Fb\Actions\ActionRenderer;
-use Fb\Actions\ActionsOnPage;
 use Fb\Actions\Library\Library;
+use Fb\Actions\Rendering\ActionRenderer;
+use Fb\Actions\Rendering\ActionsOnPage;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\BlockDefaultsPostType;
 use Fb\Blocks\Defaults\DefaultsRepository;

@@ -9,7 +9,7 @@ use Fb\Blocks\Variants\VariantsStylesheet;
 use Fb\Blocks\Rendering\InstanceStyleCollector;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\BaseStyles\BaseStylesheet;
-use Fb\Actions\ActionsOnPage;
+use Fb\Actions\Rendering\ActionsOnPage;
 use Fb\Blocks\Hiding\Hiding;
 use Fb\Breakpoints\BreakpointConfig;
 use Fb\Hookable;

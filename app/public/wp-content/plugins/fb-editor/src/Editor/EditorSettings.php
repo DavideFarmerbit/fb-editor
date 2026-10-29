@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Editor;
 
-use Fb\Actions\ActionCatalog;
+use Fb\Actions\Catalog\ActionCatalog;
 use Fb\Blocks\Storage\BlockDesignInfo;
 use Fb\Blocks\Definition\BlockDefinition;
 use Fb\Blocks\Looks\MediaCondition;

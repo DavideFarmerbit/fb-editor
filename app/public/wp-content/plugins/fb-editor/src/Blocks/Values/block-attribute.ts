@@ -6,8 +6,8 @@
  *
  *   {"variant": "primary", "looks": […], "anchor": "a7k2b9", "actions": […]}
  */
-import type { ActionCatalog } from '../../Actions/action-catalog';
-import { BlockActions } from '../../Actions/block-actions';
+import type { ActionCatalog } from '../../Actions/Catalog/action-catalog';
+import { BlockActions } from '../../Actions/Rules/block-actions';
 import type { BreakpointList } from '../../Breakpoints/breakpoints';
 import { JsonValue } from '../../Json/json';
 import type { BlockDefinition } from '../Definition/block-definition';

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Blocks\Definition\Input\Target;
 
-use Fb\Actions\BlockAnchor;
+use Fb\Actions\Anchor\BlockAnchor;
 use Fb\Blocks\Definition\Input\Input;
 use Fb\Json\InvalidJson;
 use Fb\Json\JsonValue;

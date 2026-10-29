@@ -21,7 +21,7 @@ import { useBlockDefaults } from '../Blocks/Defaults/use-block-defaults';
 import type { BlockDefinition } from '../Blocks/Definition/block-definition';
 import { useHidingClasses } from '../Blocks/Hiding/hiding';
 import { BlockAttribute } from '../Blocks/Values/block-attribute';
-import { ActionCatalog } from '../Actions/action-catalog';
+import { ActionCatalog } from '../Actions/Catalog/action-catalog';
 import { settings } from '../Editor/settings';
 import './core-block-controls.scss';
 

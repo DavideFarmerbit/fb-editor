@@ -13,9 +13,9 @@ import { __ } from '@wordpress/i18n';
 import { plus } from '@wordpress/icons';
 import type { ReactElement } from 'react';
 
-import { ActionKind, type ActionCatalog } from '../action-catalog';
-import { MAX_RULES } from '../BlockActions.generated';
-import { ActionRule, Step, type BlockActions } from '../block-actions';
+import { ActionKind, type ActionCatalog } from '../Catalog/action-catalog';
+import { MAX_RULES } from '../Rules/BlockActions.generated';
+import { ActionRule, Step, type BlockActions } from '../Rules/block-actions';
 import { RuleCard } from './rule-card';
 import './actions-panel.scss';
 
