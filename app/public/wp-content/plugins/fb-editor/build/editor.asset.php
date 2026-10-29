@@ -12,7 +12,8 @@
 		'wp-hooks',
 		'wp-i18n',
 		'wp-plugins',
+		'wp-preferences',
 		'wp-primitives'
 	),
-	'version' => 'a51f3e4d452db9f5831c'
+	'version' => '0e19fad580552ce7d546'
 );

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Tests\Unit;
 
+use Fb\Tests\Fixtures\ActionFixtures;
 use Fb\Tests\Fixtures\StyleFixtures;
 use Fb\Tests\Tools\TypeScriptExporter;
 use PHPUnit\Framework\TestCase;
@@ -29,5 +30,11 @@ final class GeneratedFilesTest extends TestCase
 	{
 		self::assertFileExists( StyleFixtures::FILE, 'Run `composer generate`.' );
 		self::assertSame( StyleFixtures::json(), (string) file_get_contents( StyleFixtures::FILE ), 'styles.json is stale: run `composer generate`.' );
+	}
+
+	public function testActionFixturesAreUpToDate(): void
+	{
+		self::assertFileExists( ActionFixtures::FILE, 'Run `composer generate`.' );
+		self::assertSame( ActionFixtures::json(), (string) file_get_contents( ActionFixtures::FILE ), 'actions.json is stale: run `composer generate`.' );
 	}
 }

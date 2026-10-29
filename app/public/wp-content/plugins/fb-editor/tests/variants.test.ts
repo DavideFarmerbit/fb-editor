@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { looks } from './looks';
+import { ActionCatalog } from '../src/Actions/action-catalog';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import { BlockAttribute } from '../src/Blocks/Values/block-attribute';
 import { StatefulValues } from '../src/Blocks/Values/stateful-values';
@@ -77,7 +78,7 @@ describe( 'variant sets', () => {
 
 describe( 'block attribute', () => {
 	test( 'keeps the variant next to the values', () => {
-		const attribute = BlockAttribute.fromJson( { variant: 'primary', junk: 1, ...looks( { fontWeight: { desktop: '700' } } ) }, button, breakpoints );
+		const attribute = BlockAttribute.fromJson( { variant: 'primary', junk: 1, ...looks( { fontWeight: { desktop: '700' } } ) }, button, breakpoints, ActionCatalog.EMPTY );
 		expect( json( attribute ) ).toEqual( { variant: 'primary', ...looks( { fontWeight: { desktop: '700' } } ) } );
 		expect( json( attribute.withVariant( null ) ) ).toEqual( looks( { fontWeight: { desktop: '700' } } ) );
 		expect(
@@ -86,6 +87,6 @@ describe( 'block attribute', () => {
 	} );
 
 	test( 'an invalid variant is dropped', () => {
-		expect( BlockAttribute.fromJson( { variant: 'Not ok' }, button, breakpoints ).variant ).toBeNull();
+		expect( BlockAttribute.fromJson( { variant: 'Not ok' }, button, breakpoints, ActionCatalog.EMPTY ).variant ).toBeNull();
 	} );
 } );

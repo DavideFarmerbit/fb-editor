@@ -36,7 +36,7 @@ export function saveAsNewVariant(
 ): VariantChange {
 	const slug = slugFromName( name, all );
 	return new VariantChange(
-		new BlockAttribute( slug, attribute.values.onlyPlaced() ),
+		attribute.withVariant( slug ).withValues( attribute.values.onlyPlaced() ),
 		saved.with( new Variant( slug, name.trim() === '' ? slug : name.trim(), lookOf( attribute, variant ).withoutPlaced() ) )
 	);
 }
@@ -54,12 +54,12 @@ export function updateVariant(
 ): VariantChange {
 	const current = saved.get( variant.slug ) ?? new Variant( variant.slug, variant.name, StatefulValues.empty( definition, breakpoints ) );
 	return new VariantChange(
-		new BlockAttribute( variant.slug, attribute.values.onlyPlaced() ),
+		attribute.withVariant( variant.slug ).withValues( attribute.values.onlyPlaced() ),
 		saved.with( current.withValues( current.values.overlay( attribute.values.withoutPlaced() ) ) )
 	);
 }
 
 /** The variant's values become the block's own; the link is dropped. */
 export function materialize( attribute: BlockAttribute, variant: Variant ): VariantChange {
-	return new VariantChange( new BlockAttribute( null, lookOf( attribute, variant ) ), null );
+	return new VariantChange( attribute.withVariant( null ).withValues( lookOf( attribute, variant ) ), null );
 }

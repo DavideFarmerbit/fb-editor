@@ -33,7 +33,7 @@ final class HasClass extends Condition
 		return [
 			Param::target(),
 			new Param( self::CLASS_NAME, __( 'Class', 'fb-editor' ), new ClassNameInput(), required: true ),
-			new Param( self::HAS, __( 'Has it', 'fb-editor' ), new ToggleInput() ),
+			new Param( self::HAS, __( 'Has it', 'fb-editor' ), new ToggleInput( fallback: true ) ),
 		];
 	}
 }

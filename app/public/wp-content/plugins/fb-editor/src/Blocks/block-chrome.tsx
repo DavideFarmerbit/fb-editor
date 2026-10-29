@@ -14,6 +14,8 @@ import { __, sprintf } from '@wordpress/i18n';
 import { useMemo } from '@wordpress/element';
 import type { ReactElement } from 'react';
 
+import { ActionCatalog } from '../Actions/action-catalog';
+import { ActionsPanel } from '../Actions/Panel/actions-panel';
 import { settings } from '../Editor/settings';
 import { store } from '../Editor/store';
 import { ATTRIBUTE } from './BlockRegistry.generated';
@@ -135,7 +137,8 @@ function useParentContext( clientId: string, fallback: BlockDefinition ): Parent
 		if ( parent === undefined ) {
 			return null;
 		}
-		const parsed = BlockAttribute.fromJson( attribute, parent, settings.breakpoints );
+		// Read only: the parent's actions aren't needed.
+		const parsed = BlockAttribute.fromJson( attribute, parent, settings.breakpoints, ActionCatalog.EMPTY );
 		const variant = parsed.variant === null ? null : variants.all.get( parsed.variant );
 		const weaker = variant === null ? [ defaults.values ] : [ variant.values, defaults.values ];
 		return new ParentContext( parent, parsed.values.chain( LookKey.BASE, ...weaker ) );
@@ -163,7 +166,8 @@ export function useFbBlock(
 	clientId: string
 ): FbBlockState {
 	const raw = attributes[ ATTRIBUTE ];
-	const attribute = useMemo( () => BlockAttribute.fromJson( raw, definition, settings.breakpoints ), [ raw, definition ] );
+	// Written back on every edit: its actions must survive.
+	const attribute = useMemo( () => BlockAttribute.fromJson( raw, definition, settings.breakpoints, settings.actions ), [ raw, definition ] );
 	const { defaults, save } = useBlockDefaults( definition );
 	const { variants, save: saveVariants } = useBlockVariants( definition );
 
@@ -191,6 +195,8 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 	const { values, defaults, variant } = state;
 	const defaultsSource = new WeakerSource( defaults.values, fromDefault( definition.title ) );
 	const parent = useParentContext( clientId, definition );
+	// Actions are settings: hidden while only styles are shown.
+	const view = useSelect( ( select ) => select( store ).getSidebarView(), [] );
 	const weaker = variant === null ? [ defaultsSource ] : [ new WeakerSource( variant.values, fromVariant( variant.name ) ), defaultsSource ];
 	const makeDefault = defaults.canEdit
 		? ( control: Control, look: LookKey ) =>
@@ -213,6 +219,14 @@ export function FbBlockChrome( { definition, state, clientId, root }: FbBlockChr
 					onChange={ ( next ) => state.setValues( next ) }
 					makeDefault={ makeDefault }
 				/>
+				{ view !== 'styles' && (
+					<ActionsPanel
+						catalog={ settings.actions }
+						actions={ state.attribute.actions }
+						clientId={ clientId }
+						onChange={ ( actions ) => state.setAttribute( state.attribute.withActions( actions ) ) }
+					/>
+				) }
 			</InspectorControls>
 			<DefaultsStyles definition={ definition } defaults={ defaults.values } root={ root } />
 			{ variant !== null && <VariantStyles definition={ definition } variant={ variant } defaults={ defaults.values } root={ root } /> }

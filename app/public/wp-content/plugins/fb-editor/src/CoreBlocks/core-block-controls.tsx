@@ -21,6 +21,7 @@ import { useBlockDefaults } from '../Blocks/Defaults/use-block-defaults';
 import type { BlockDefinition } from '../Blocks/Definition/block-definition';
 import { useHidingClasses } from '../Blocks/Hiding/hiding';
 import { BlockAttribute } from '../Blocks/Values/block-attribute';
+import { ActionCatalog } from '../Actions/action-catalog';
 import { settings } from '../Editor/settings';
 import './core-block-controls.scss';
 
@@ -108,7 +109,8 @@ function CoreBlockListBlock( {
 	const raw = props.attributes[ ATTRIBUTE ];
 	const variant = useVariantOf( definition, raw );
 	const { defaults } = useBlockDefaults( definition );
-	const own = useMemo( () => BlockAttribute.fromJson( raw, definition, settings.breakpoints ).values, [ raw, definition ] );
+	// Read only (values, for the hide classes): actions aren't needed.
+	const own = useMemo( () => BlockAttribute.fromJson( raw, definition, settings.breakpoints, ActionCatalog.EMPTY ).values, [ raw, definition ] );
 	const hiding = useHidingClasses( definition, variant === null ? [ own, defaults.values ] : [ own, variant.values, defaults.values ] );
 	const className = [ props.className, definition.className, variantClass( definition, variant ), editorInstanceClass( props.clientId ), preview, ...hiding ]
 		.filter( Boolean )

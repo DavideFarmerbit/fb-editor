@@ -7,11 +7,16 @@ import { BooleanValue } from '../../../../Values/boolean';
 export class ToggleInput {
 	readonly kind = 'toggle';
 
+	constructor(
+		/** What applies while nothing is stored. */
+		public readonly fallback: boolean = false
+	) {}
+
 	parse( json: JsonValue ): BooleanValue {
 		return new BooleanValue( json.boolean() );
 	}
 
-	static fromJson(): ToggleInput {
-		return new ToggleInput();
+	static fromJson( json: JsonValue ): ToggleInput {
+		return new ToggleInput( json.get( 'fallback' ).boolean() );
 	}
 }

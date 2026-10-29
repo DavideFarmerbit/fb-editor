@@ -2,6 +2,7 @@
  * Boundary for `window.fbEditorSettings` (Fb\Editor\EditorSettings in PHP):
  * unknown JSON in, typed objects out. Anything malformed throws.
  */
+import { ActionCatalog } from '../Actions/action-catalog';
 import { breakpointListFromJson, type BreakpointList } from '../Breakpoints/breakpoints';
 import { BlockDesignInfo } from '../Blocks/Storage/block-design-info';
 import { blockDefinitionFromJson, ConditionInfo, type BlockDefinition } from '../Blocks/Definition/block-definition';
@@ -17,7 +18,9 @@ export class EditorSettings {
 		public readonly blocks: readonly BlockDefinition[],
 		private readonly designs: readonly BlockDesignInfo[],
 		/** Every media condition, for the canvas preview (View menu). */
-		public readonly conditions: readonly ConditionInfo[]
+		public readonly conditions: readonly ConditionInfo[],
+		/** Triggers, conditions and effects for the Actions panel. */
+		public readonly actions: ActionCatalog
 	) {}
 
 	designFor( definition: BlockDefinition ): BlockDesignInfo {
@@ -71,7 +74,8 @@ export function parseEditorSettings( raw: unknown ): EditorSettings {
 		new Presets( json.get( 'presets' ).list().map( Preset.fromJson ) ),
 		blocks,
 		designs,
-		json.get( 'conditions' ).list().map( ConditionInfo.fromJson )
+		json.get( 'conditions' ).list().map( ConditionInfo.fromJson ),
+		ActionCatalog.fromJson( json.get( 'actions' ) )
 	);
 }
 

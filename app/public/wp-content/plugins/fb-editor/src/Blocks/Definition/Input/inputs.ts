@@ -36,7 +36,7 @@ export function inputFromJson( json: JsonValue ): Input {
 		case 'length':
 			return LengthInput.fromJson( json );
 		case 'toggle':
-			return ToggleInput.fromJson();
+			return ToggleInput.fromJson( json );
 		case 'preset':
 			return PresetInput.fromJson( json );
 		case 'number':

@@ -1,0 +1,1456 @@
+{
+    "catalog": [
+        {
+            "kind": "trigger",
+            "name": "click",
+            "label": "Click",
+            "params": []
+        },
+        {
+            "kind": "trigger",
+            "name": "hover",
+            "label": "Hover",
+            "params": []
+        },
+        {
+            "kind": "trigger",
+            "name": "enters-view",
+            "label": "Enters view",
+            "params": [
+                {
+                    "id": "everyTime",
+                    "label": "Every time",
+                    "input": {
+                        "kind": "toggle",
+                        "fallback": false
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "kind": "trigger",
+            "name": "page-load",
+            "label": "Page load",
+            "params": []
+        },
+        {
+            "kind": "condition",
+            "name": "is-open",
+            "label": "Is open",
+            "params": [
+                {
+                    "id": "target",
+                    "label": "Target",
+                    "input": {
+                        "kind": "target"
+                    },
+                    "required": false
+                },
+                {
+                    "id": "open",
+                    "label": "Open",
+                    "input": {
+                        "kind": "toggle",
+                        "fallback": true
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "kind": "condition",
+            "name": "has-class",
+            "label": "Has class",
+            "params": [
+                {
+                    "id": "target",
+                    "label": "Target",
+                    "input": {
+                        "kind": "target"
+                    },
+                    "required": false
+                },
+                {
+                    "id": "className",
+                    "label": "Class",
+                    "input": {
+                        "kind": "class-name"
+                    },
+                    "required": true
+                },
+                {
+                    "id": "has",
+                    "label": "Has it",
+                    "input": {
+                        "kind": "toggle",
+                        "fallback": true
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "kind": "effect",
+            "name": "link",
+            "label": "Link",
+            "params": [
+                {
+                    "id": "link",
+                    "label": "Link",
+                    "input": {
+                        "kind": "link"
+                    },
+                    "required": true
+                },
+                {
+                    "id": "label",
+                    "label": "Accessible label",
+                    "input": {
+                        "kind": "text"
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "kind": "effect",
+            "name": "open-close",
+            "label": "Open / close",
+            "params": [
+                {
+                    "id": "mode",
+                    "label": "Do",
+                    "input": {
+                        "kind": "select",
+                        "options": [
+                            {
+                                "value": "toggle",
+                                "label": "Toggle"
+                            },
+                            {
+                                "value": "open",
+                                "label": "Open"
+                            },
+                            {
+                                "value": "close",
+                                "label": "Close"
+                            }
+                        ],
+                        "fallback": "toggle"
+                    },
+                    "required": false
+                },
+                {
+                    "id": "target",
+                    "label": "Target",
+                    "input": {
+                        "kind": "target"
+                    },
+                    "required": false
+                },
+                {
+                    "id": "startOpen",
+                    "label": "Starts open",
+                    "input": {
+                        "kind": "toggle",
+                        "fallback": false
+                    },
+                    "required": false
+                },
+                {
+                    "id": "keepLayout",
+                    "label": "Keep its space when closed",
+                    "input": {
+                        "kind": "toggle",
+                        "fallback": false
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "kind": "effect",
+            "name": "class",
+            "label": "Class",
+            "params": [
+                {
+                    "id": "mode",
+                    "label": "Do",
+                    "input": {
+                        "kind": "select",
+                        "options": [
+                            {
+                                "value": "toggle",
+                                "label": "Toggle"
+                            },
+                            {
+                                "value": "add",
+                                "label": "Add"
+                            },
+                            {
+                                "value": "remove",
+                                "label": "Remove"
+                            }
+                        ],
+                        "fallback": "toggle"
+                    },
+                    "required": false
+                },
+                {
+                    "id": "className",
+                    "label": "Class",
+                    "input": {
+                        "kind": "class-name"
+                    },
+                    "required": true
+                },
+                {
+                    "id": "target",
+                    "label": "Target",
+                    "input": {
+                        "kind": "target"
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "kind": "effect",
+            "name": "scroll-to",
+            "label": "Scroll to",
+            "params": [
+                {
+                    "id": "target",
+                    "label": "Target",
+                    "input": {
+                        "kind": "target"
+                    },
+                    "required": false
+                },
+                {
+                    "id": "offset",
+                    "label": "Offset",
+                    "input": {
+                        "kind": "length",
+                        "allowAuto": false,
+                        "allowNegative": true,
+                        "scale": null,
+                        "zeroStep": false
+                    },
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "cases": [
+        {
+            "name": "every type, with its parameters",
+            "attribute": {
+                "anchor": "card01",
+                "actions": [
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "hover"
+                            },
+                            {
+                                "type": "enters-view",
+                                "params": {
+                                    "everyTime": true
+                                }
+                            },
+                            {
+                                "type": "page-load"
+                            }
+                        ],
+                        "if": [
+                            {
+                                "type": "is-open",
+                                "params": {
+                                    "target": "self",
+                                    "open": false
+                                }
+                            },
+                            {
+                                "type": "has-class",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    },
+                                    "className": "is-active",
+                                    "has": true
+                                }
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "link",
+                                "params": {
+                                    "link": {
+                                        "url": "/about#team",
+                                        "newTab": true
+                                    },
+                                    "label": "About us"
+                                }
+                            },
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "mode": "close",
+                                    "target": {
+                                        "block": "pnl001"
+                                    },
+                                    "startOpen": true,
+                                    "keepLayout": false
+                                }
+                            },
+                            {
+                                "type": "class",
+                                "params": {
+                                    "mode": "remove",
+                                    "className": "is-active",
+                                    "target": "self"
+                                }
+                            },
+                            {
+                                "type": "scroll-to",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    },
+                                    "offset": {
+                                        "kind": "custom",
+                                        "value": -4.5,
+                                        "unit": "rem"
+                                    }
+                                }
+                            }
+                        ],
+                        "off": [
+                            "mobile",
+                            "mobile",
+                            "tablet"
+                        ],
+                        "undo": "leave"
+                    }
+                ]
+            },
+            "anchor": "card01",
+            "rules": [
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "hover",
+                            "params": {}
+                        },
+                        {
+                            "type": "enters-view",
+                            "params": {
+                                "everyTime": true
+                            }
+                        },
+                        {
+                            "type": "page-load",
+                            "params": {}
+                        }
+                    ],
+                    "if": [
+                        {
+                            "type": "is-open",
+                            "params": {
+                                "target": "self",
+                                "open": false
+                            }
+                        },
+                        {
+                            "type": "has-class",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                },
+                                "className": "is-active",
+                                "has": true
+                            }
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "link",
+                            "params": {
+                                "link": {
+                                    "url": "/about#team",
+                                    "newTab": true,
+                                    "nofollow": false
+                                },
+                                "label": "About us"
+                            }
+                        },
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "mode": "close",
+                                "target": {
+                                    "block": "pnl001"
+                                },
+                                "startOpen": true,
+                                "keepLayout": false
+                            }
+                        },
+                        {
+                            "type": "class",
+                            "params": {
+                                "mode": "remove",
+                                "className": "is-active",
+                                "target": "self"
+                            }
+                        },
+                        {
+                            "type": "scroll-to",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                },
+                                "offset": {
+                                    "kind": "custom",
+                                    "value": -4.5,
+                                    "unit": "rem"
+                                }
+                            }
+                        }
+                    ],
+                    "off": [
+                        "mobile",
+                        "tablet"
+                    ],
+                    "undo": "leave"
+                }
+            ]
+        },
+        {
+            "name": "invalid parts dropped one by one",
+            "attribute": {
+                "actions": [
+                    {
+                        "on": [
+                            {
+                                "type": "click",
+                                "params": {
+                                    "junk": 1
+                                }
+                            },
+                            {
+                                "type": "nope"
+                            },
+                            "garbage",
+                            {
+                                "params": []
+                            }
+                        ],
+                        "if": [
+                            {
+                                "type": "has-class"
+                            },
+                            {
+                                "type": "is-open",
+                                "params": {
+                                    "open": "yes"
+                                }
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "class",
+                                "params": {
+                                    "className": "Not A Class"
+                                }
+                            },
+                            {
+                                "type": "scroll-to",
+                                "params": {
+                                    "target": {
+                                        "block": "../evil"
+                                    },
+                                    "offset": {
+                                        "kind": "auto"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "mode": "explode"
+                                }
+                            }
+                        ],
+                        "off": "xs",
+                        "undo": "sometimes"
+                    }
+                ]
+            },
+            "anchor": null,
+            "rules": [
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "if": [
+                        {
+                            "type": "is-open",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        },
+                        {
+                            "type": "scroll-to",
+                            "params": {}
+                        },
+                        {
+                            "type": "open-close",
+                            "params": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "rules without a trigger or effect dropped",
+            "attribute": {
+                "anchor": "Not-An-Anchor",
+                "actions": [
+                    {
+                        "on": [
+                            {
+                                "type": "nope"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "link",
+                                "params": {
+                                    "link": {
+                                        "url": "javascript:alert(1)"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            }
+                        ]
+                    },
+                    "garbage"
+                ]
+            },
+            "anchor": null,
+            "rules": []
+        },
+        {
+            "name": "too many steps and rules are cut",
+            "attribute": {
+                "actions": [
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "on": [
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            },
+                            {
+                                "type": "click"
+                            }
+                        ],
+                        "do": [
+                            {
+                                "type": "open-close",
+                                "params": {
+                                    "target": {
+                                        "block": "pnl001"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "anchor": null,
+            "rules": [
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "on": [
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        },
+                        {
+                            "type": "click",
+                            "params": {}
+                        }
+                    ],
+                    "do": [
+                        {
+                            "type": "open-close",
+                            "params": {
+                                "target": {
+                                    "block": "pnl001"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "actions not a list",
+            "attribute": {
+                "anchor": "abc123",
+                "actions": {
+                    "on": [
+                        {
+                            "type": "click"
+                        }
+                    ]
+                }
+            },
+            "anchor": "abc123",
+            "rules": []
+        }
+    ]
+}

@@ -7,6 +7,7 @@ namespace Fb\Actions;
 use Fb\Blocks\Definition\Input\Breakpoints\BreakpointsInput;
 use Fb\Json\InvalidJson;
 use Fb\Json\JsonValue;
+use Fb\TypeScript\ExportToTypeScript;
 use Fb\Values\BreakpointSet;
 
 /**
@@ -21,6 +22,7 @@ use Fb\Values\BreakpointSet;
 final readonly class ActionRule implements \JsonSerializable
 {
 	/** Steps of each kind kept per rule: more is a sign of a mistake. */
+	#[ExportToTypeScript]
 	public const int MAX_STEPS = 6;
 
 	/**

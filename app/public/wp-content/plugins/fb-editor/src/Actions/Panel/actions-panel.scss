@@ -1,0 +1,169 @@
+// The Actions panel: one card per rule, its sections (On / If / Do) as
+// labelled lists of steps, each step a light box with its type and values.
+.fb-actions {
+	.fb-actions__empty {
+		margin: 0 0 12px;
+		color: #757575;
+		font-size: 12px;
+	}
+
+	.fb-actions__add {
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+.fb-rule {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 12px;
+	padding: 12px;
+	border: 1px solid #e0e0e0;
+	border-radius: 2px;
+
+	&.is-pending {
+		border-style: dashed;
+	}
+}
+
+.fb-rule__head {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+
+.fb-rule__title {
+	flex: 1;
+	font-size: 11px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.fb-rule__note {
+	margin: 0;
+	color: #b26200;
+	font-size: 12px;
+}
+
+.fb-rule__off {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.fb-steps,
+.fb-step {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.fb-steps__label,
+.fb-rule__off-label,
+.fb-target__label,
+.fb-param-length__label {
+	font-size: 11px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+// "or" / "and" / "then" between steps.
+.fb-steps__join {
+	color: #757575;
+	font-size: 11px;
+	text-align: center;
+}
+
+.fb-step {
+	padding: 8px;
+	border-radius: 2px;
+	background: #f6f7f7;
+
+	&.is-incomplete {
+		box-shadow: inset 2px 0 0 #b26200;
+	}
+}
+
+.fb-step__head {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	> :first-child {
+		flex: 1;
+		min-width: 0;
+	}
+}
+
+// Plain clickable text, like "Add part": only its color changes.
+.fb-steps .fb-steps__add-toggle {
+	height: auto;
+	padding: 0;
+	color: #949494;
+	font-size: 12px;
+
+	&:hover,
+	&:focus,
+	&[aria-expanded="true"] {
+		color: #1e1e1e;
+		box-shadow: none;
+	}
+}
+
+.fb-target {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+
+	.fb-target__label {
+		flex-basis: 100%;
+	}
+}
+
+.fb-target__chip {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	padding: 4px 8px;
+	border: 1px solid #e0e0e0;
+	border-radius: 2px;
+	background: #fff;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&.is-missing {
+		border-color: #cc1818;
+		color: #cc1818;
+	}
+}
+
+.fb-param-link {
+	display: flex;
+	align-items: flex-end;
+	gap: 4px;
+
+	> :first-child {
+		flex: 1;
+		min-width: 0;
+	}
+}
+
+.fb-param-length {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+// A value typed but not valid yet (kept, not saved).
+.fb-step .is-invalid input {
+	border-color: #cc1818;
+}
+
+.fb-param-unsupported {
+	margin: 0;
+	color: #757575;
+	font-size: 12px;
+}

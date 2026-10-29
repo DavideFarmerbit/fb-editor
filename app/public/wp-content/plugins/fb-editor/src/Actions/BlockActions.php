@@ -6,6 +6,7 @@ namespace Fb\Actions;
 
 use Fb\Json\InvalidJson;
 use Fb\Json\JsonValue;
+use Fb\TypeScript\ExportToTypeScript;
 
 /**
  * A block's own actions: its rules, and its anchor (if other blocks' rules
@@ -20,6 +21,7 @@ use Fb\Json\JsonValue;
 final readonly class BlockActions
 {
 	/** Rules kept per block. */
+	#[ExportToTypeScript]
 	public const int MAX_RULES = 10;
 
 	/**

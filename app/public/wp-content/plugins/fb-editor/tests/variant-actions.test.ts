@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import { describe, expect, test } from 'vitest';
 
 import { looks } from './looks';
+import { ActionCatalog } from '../src/Actions/action-catalog';
 import { blockDefinitionFromJson } from '../src/Blocks/Definition/block-definition';
 import { BlockAttribute } from '../src/Blocks/Values/block-attribute';
 import { materialize, saveAsNewVariant, updateVariant } from '../src/Blocks/Variants/variant-actions';
@@ -33,7 +34,7 @@ const button = blockDefinitionFromJson(
 const json = ( value: unknown ): unknown => JSON.parse( JSON.stringify( value ) ) as unknown;
 const weight = ( desktop: string, mobile?: string ) => ( { fontWeight: mobile === undefined ? { desktop } : { desktop, mobile } } );
 const set = ( value: unknown ) => VariantSet.fromJson( value, button, breakpoints );
-const attribute = ( value: unknown ) => BlockAttribute.fromJson( value, button, breakpoints );
+const attribute = ( value: unknown ) => BlockAttribute.fromJson( value, button, breakpoints, ActionCatalog.EMPTY );
 
 // Theme: "primary"; saved: an override of it plus "ghost".
 const theme = set( [ { slug: 'primary', name: 'Primary', values: looks( weight( '600' ) ) } ] );

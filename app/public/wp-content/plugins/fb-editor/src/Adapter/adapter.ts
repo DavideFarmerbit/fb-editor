@@ -39,6 +39,20 @@ export function canvasBlockElement( clientId: string ): HTMLElement | null {
 	return canvas.querySelector< HTMLElement >( `[data-block="${ CSS.escape( clientId ) }"]` );
 }
 
+/** The canvas page's document, once loaded; null otherwise. */
+export function canvasDocument(): Document | null {
+	const canvas = document.querySelector< HTMLIFrameElement >( CANVAS_IFRAME )?.contentDocument ?? null;
+	return canvas?.body?.classList.contains( 'editor-styles-wrapper' ) === true ? canvas : null;
+}
+
+/**
+ * The clientId of the block an element of the canvas belongs to (core's
+ * `data-block` on every block wrapper), or null.
+ */
+export function blockClientIdOf( element: Element | null ): string | null {
+	return element?.closest< HTMLElement >( '[data-block]' )?.dataset.block ?? null;
+}
+
 /**
  * Calls `onDocument` with the canvas page's document, now and whenever core
  * replaces the iframe (mode or device switches), or null while there's
@@ -134,14 +148,40 @@ const HEADER_TOOLBAR = '.editor-header__toolbar';
  * cleanup function that also removes the node.
  */
 export function observeHeaderToolbar( className: string, onNode: ( node: HTMLElement | null ) => void ): () => void {
+	return observeMountPoint( HEADER_TOOLBAR, className, onNode );
+}
+
+/**
+ * The editor's right sidebar (block inspector, document settings, plugin
+ * sidebars), in the post and site editors; same class as `$sidebar` in
+ * adapter.scss. Core gives it a fixed width (CORE_SIDEBAR_WIDTH) and no way
+ * to change it.
+ */
+const SIDEBAR = '.interface-interface-skeleton__sidebar';
+
+/** Core's sidebar width, in px (SIDEBAR_WIDTH in ComplementaryAreaFill). */
+export const CORE_SIDEBAR_WIDTH = 280;
+
+/**
+ * Calls `onNode` with an element of ours appended to the sidebar (for a
+ * portal), or null while there's none. Core destroys and re-creates the
+ * sidebar as it's closed and opened: the node follows. Returns a cleanup
+ * function that also removes the node.
+ */
+export function observeSidebar( className: string, onNode: ( node: HTMLElement | null ) => void ): () => void {
+	return observeMountPoint( SIDEBAR, className, onNode );
+}
+
+/** See observeHeaderToolbar and observeSidebar. */
+function observeMountPoint( containerSelector: string, className: string, onNode: ( node: HTMLElement | null ) => void ): () => void {
 	let node: HTMLElement | null = null;
 
 	const attach = (): void => {
 		if ( node !== null && node.isConnected ) {
 			return;
 		}
-		const toolbar = document.querySelector( HEADER_TOOLBAR );
-		if ( toolbar === null ) {
+		const container = document.querySelector( containerSelector );
+		if ( container === null ) {
 			if ( node !== null ) {
 				node = null;
 				onNode( null );
@@ -150,7 +190,7 @@ export function observeHeaderToolbar( className: string, onNode: ( node: HTMLEle
 		}
 		node = document.createElement( 'div' );
 		node.className = className;
-		toolbar.appendChild( node );
+		container.appendChild( node );
 		onNode( node );
 	};
 

@@ -1,0 +1,64 @@
+@use "../../Adapter/adapter" as *;
+
+// Editor-only CSS. Below this width core opens the sidebar full screen:
+// nothing to resize.
+@media (min-width: $sidebar-min-viewport) {
+	// `!important` beats core's inline widths. The fill's is the one core
+	// animates: a resized sidebar opens at once, and stays until the end of
+	// core's closing animation (0.3s) instead of sliding out.
+	body.fb-sidebar-sized #{$sidebar} {
+		#{$sidebar-fill},
+		#{$sidebar-area} {
+			width: min(var(--fb-sidebar-width), var(--fb-sidebar-max-width)) !important;
+		}
+	}
+
+	// Inside the sidebar's inner edge: it clips anything sticking out.
+	.fb-sidebar-width {
+		position: absolute;
+		// Above the panels' sticky headers (z-index 1).
+		z-index: 2;
+		inset-block: 0;
+		inset-inline-start: 0;
+		width: 6px;
+	}
+
+	.fb-sidebar-width__handle {
+		height: 100%;
+		cursor: col-resize;
+		touch-action: none;
+		outline: none;
+
+		&:hover,
+		&:focus-visible,
+		.fb-sidebar-resizing & {
+			box-shadow: inset 2px 0 0 var(--wp-admin-theme-color, #3858e9);
+		}
+	}
+
+	[dir="rtl"] .fb-sidebar-width__handle {
+		&:hover,
+		&:focus-visible,
+		.fb-sidebar-resizing & {
+			box-shadow: inset -2px 0 0 var(--wp-admin-theme-color, #3858e9);
+		}
+	}
+
+	// The pointer is captured by the handle; this keeps the canvas iframe
+	// out of the way in browsers that don't capture across it, and the
+	// resize cursor over everything.
+	body.fb-sidebar-resizing {
+		cursor: col-resize;
+		user-select: none;
+
+		iframe {
+			pointer-events: none;
+		}
+	}
+}
+
+@media (max-width: #{$sidebar-min-viewport - 1px}) {
+	.fb-sidebar-width {
+		display: none;
+	}
+}

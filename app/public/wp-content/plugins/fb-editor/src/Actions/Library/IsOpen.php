@@ -28,6 +28,6 @@ final class IsOpen extends Condition
 
 	public function params(): array
 	{
-		return [ Param::target(), new Param( self::OPEN, __( 'Open', 'fb-editor' ), new ToggleInput() ) ];
+		return [ Param::target(), new Param( self::OPEN, __( 'Open', 'fb-editor' ), new ToggleInput( fallback: true ) ) ];
 	}
 }

@@ -4,19 +4,9 @@ declare(strict_types=1);
 
 namespace Fb;
 
-use Fb\Actions\ActionCatalog;
 use Fb\Actions\ActionRenderer;
 use Fb\Actions\ActionsOnPage;
-use Fb\Actions\Library\ClassChange;
-use Fb\Actions\Library\Click;
-use Fb\Actions\Library\EntersView;
-use Fb\Actions\Library\HasClass;
-use Fb\Actions\Library\Hover;
-use Fb\Actions\Library\IsOpen;
-use Fb\Actions\Library\Link;
-use Fb\Actions\Library\OpenClose;
-use Fb\Actions\Library\PageLoad;
-use Fb\Actions\Library\ScrollTo;
+use Fb\Actions\Library\Library;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\BlockDefaultsPostType;
 use Fb\Blocks\Defaults\DefaultsRepository;
@@ -76,18 +66,7 @@ final readonly class Plugin
 		);
 		// Triggers, conditions and effects rules can use: a class each (plus
 		// its runner in TypeScript), like blocks.
-		$actions = new ActionCatalog(
-			new Click(),
-			new Hover(),
-			new EntersView(),
-			new PageLoad(),
-			new IsOpen(),
-			new HasClass(),
-			new Link(),
-			new OpenClose(),
-			new ClassChange(),
-			new ScrollTo(),
-		);
+		$actions       = Library::catalog();
 		$actionsOnPage = new ActionsOnPage();
 
 		$services = [
@@ -95,7 +74,7 @@ final readonly class Plugin
 			$blocks,
 			new BlockDefaultsPostType( $blocks, $breakpoints ),
 			new BlockVariantsPostType( $blocks, $breakpoints ),
-			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets, $defaults, $variants ),
+			new EditorAssets( $this->paths, $breakpoints, $blocks, $presets, $defaults, $variants, $actions ),
 			new CanvasStyles( $tokens, $blocks, $breakpoints ),
 			new FrontendStyles(
 				$tokens,

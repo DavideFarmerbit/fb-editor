@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fb\Editor;
 
+use Fb\Actions\ActionCatalog;
 use Fb\Blocks\BlockRegistry;
 use Fb\Blocks\Defaults\DefaultsRepository;
 use Fb\Blocks\Definition\BlockDefinition;
@@ -29,6 +30,7 @@ final readonly class EditorAssets implements Hookable
 		private PresetRepository $presets,
 		private DefaultsRepository $defaults,
 		private VariantsRepository $variants,
+		private ActionCatalog $actions,
 	) {
 	}
 
@@ -61,7 +63,8 @@ final readonly class EditorAssets implements Hookable
 					$this->variants->theme( $definition )
 				),
 				$definitions
-			)
+			),
+			$this->actions
 		);
 
 		wp_add_inline_script( self::HANDLE, 'window.fbEditorSettings = ' . wp_json_encode( $settings ) . ';', 'before' );

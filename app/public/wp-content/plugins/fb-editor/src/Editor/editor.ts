@@ -10,6 +10,7 @@ import { DefaultsSidebar } from '../Blocks/Defaults/defaults-sidebar';
 import BreakpointPreview from '../Breakpoints/Preview/preview';
 import ViewOptions from '../Breakpoints/Preview/view-options';
 import PostTitleField from './PostTitle/post-title-field';
+import SidebarWidth from './SidebarWidth/sidebar-width';
 
 registerPlugin( 'fb-breakpoint-preview', {
 	render: BreakpointPreview,
@@ -21,6 +22,10 @@ registerPlugin( 'fb-view-options', {
 
 registerPlugin( 'fb-post-title', {
 	render: PostTitleField,
+} );
+
+registerPlugin( 'fb-sidebar-width', {
+	render: SidebarWidth,
 } );
 
 registerPlugin( 'fb-block-defaults', {

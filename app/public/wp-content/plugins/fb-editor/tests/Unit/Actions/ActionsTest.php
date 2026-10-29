@@ -8,16 +8,7 @@ use Fb\Actions\ActionCatalog;
 use Fb\Actions\ActionsOnPage;
 use Fb\Actions\BlockActions;
 use Fb\Actions\BlockAnchor;
-use Fb\Actions\Library\ClassChange;
-use Fb\Actions\Library\Click;
-use Fb\Actions\Library\EntersView;
-use Fb\Actions\Library\HasClass;
-use Fb\Actions\Library\Hover;
-use Fb\Actions\Library\IsOpen;
-use Fb\Actions\Library\Link;
-use Fb\Actions\Library\OpenClose;
-use Fb\Actions\Library\PageLoad;
-use Fb\Actions\Library\ScrollTo;
+use Fb\Actions\Library\Library;
 use Fb\Actions\TargetHiding;
 use Fb\Tests\Fixtures\TestBreakpoints;
 use PHPUnit\Framework\TestCase;
@@ -34,18 +25,7 @@ final class ActionsTest extends TestCase
 		// Rendering goes through the plugin's own services: same test
 		// breakpoints as every other test (the plugin resolves them once).
 		add_filter( 'fb_breakpoints', TestBreakpoints::list( ... ) );
-		$this->catalog = new ActionCatalog(
-			new Click(),
-			new Hover(),
-			new EntersView(),
-			new PageLoad(),
-			new IsOpen(),
-			new HasClass(),
-			new Link(),
-			new OpenClose(),
-			new ClassChange(),
-			new ScrollTo(),
-		);
+		$this->catalog = Library::catalog();
 	}
 
 	protected function tearDown(): void
